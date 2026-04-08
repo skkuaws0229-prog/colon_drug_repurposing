@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Drug Discovery Pipeline Dashboard</title>
+<title>약물 재창출 파이프라인 대시보드</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
@@ -46,46 +46,46 @@
 </head>
 <body>
 <div class="header">
-  <h1>Drug Discovery Pipeline - Team 4 (biso)</h1>
-  <p>Protocol Execution Dashboard | Started: 2026-04-08</p>
+  <h1>약물 재창출 파이프라인 - 팀 4 (biso)</h1>
+  <p>프로토콜 실행 대시보드 | 시작일: 2026-04-08</p>
 </div>
 <div class="container">
   <div class="progress-bar">
     <div class="progress-label">
-      <span>Overall Progress</span>
-      <span id="progress-pct">4 / 7 Steps</span>
+      <span>전체 진행률</span>
+      <span id="progress-pct">7 / 7 단계</span>
     </div>
-    <div class="bar-bg"><div class="bar-fill" id="bar-fill" style="width:57.1%"></div></div>
+    <div class="bar-bg"><div class="bar-fill" id="bar-fill" style="width:100%"></div></div>
   </div>
   <div class="steps">
     <div class="step completed" id="step-1">
-      <div class="step-header"><div class="step-num">1</div><div class="step-title">Environment Setup</div></div>
+      <div class="step-header"><div class="step-num">1</div><div class="step-title">환경 설정</div></div>
       <div class="metrics" id="metrics-1">
         <div class="metric"><span class="label">Python:</span><span class="value">3.10.20</span></div>
         <div class="metric"><span class="label">conda:</span><span class="value">drug4</span></div>
         <div class="metric"><span class="label">AWS:</span><span class="value">OK (say2-4team)</span></div>
-        <div class="metric"><span class="label">Git:</span><span class="value">cloned</span></div>
+        <div class="metric"><span class="label">Git:</span><span class="value">복제됨</span></div>
         <div class="metric"><span class="label">LightGBM:</span><span class="value">4.6.0</span></div>
         <div class="metric"><span class="label">XGBoost:</span><span class="value">3.2.0</span></div>
         <div class="metric"><span class="label">CatBoost:</span><span class="value">1.2.10</span></div>
         <div class="metric"><span class="label">PyTorch:</span><span class="value">2.11.0</span></div>
         <div class="metric"><span class="label">PyG:</span><span class="value">2.7.0</span></div>
       </div>
-      <div class="timestamp" id="ts-1">Completed: 2026-04-08</div>
+      <div class="timestamp" id="ts-1">완료: 2026-04-08</div>
     </div>
     <div class="step completed" id="step-2">
-      <div class="step-header"><div class="step-num">2</div><div class="step-title">Data Preparation</div></div>
+      <div class="step-header"><div class="step-num">2</div><div class="step-title">데이터 준비</div></div>
       <div class="metrics" id="metrics-2">
         <div class="metric"><span class="label">총 파일 수:</span><span class="value">159 (curated 157 + generated 2)</span></div>
         <div class="metric"><span class="label">S3:</span><span class="value">s3://say2-4team/20260408_new_pre_project_biso/.../data/</span></div>
-        <div class="metric"><span class="label">binary rule:</span><span class="value">ln_IC50 &lt;= quantile(0.3) = sensitive</span></div>
-        <div class="metric"><span class="label">config:</span><span class="value">data_paths.yaml</span></div>
+        <div class="metric"><span class="label">이진화 규칙:</span><span class="value">ln_IC50 &lt;= quantile(0.3) = sensitive</span></div>
+        <div class="metric"><span class="label">설정:</span><span class="value">data_paths.yaml</span></div>
       </div>
-      <!-- ── Full Dataset Inventory ── -->
-      <div class="inv-header">Dataset Inventory (11 folders + root)</div>
+      <!-- ── 전체 데이터셋 목록 ── -->
+      <div class="inv-header">데이터셋 목록 (11개 폴더 + 루트)</div>
       <table class="data-inventory">
         <thead>
-          <tr><th>Folder</th><th style="text-align:center">Files</th><th>주요 데이터셋</th><th>출처</th></tr>
+          <tr><th>폴더</th><th style="text-align:center">파일 수</th><th>주요 데이터셋</th><th>출처</th></tr>
         </thead>
         <tbody>
           <!-- ADMET -->
@@ -93,8 +93,8 @@
             <td class="folder">admet/</td>
             <td class="cnt">48</td>
             <td class="desc">
-              ADMET 22개 assay (train_val + test split) &mdash; Ames, BBB, Caco-2, CYP2C9/2D6/3A4, DILI, hERG, HIA 등
-              <div class="files-detail">admet_task_inventory, 각 assay별 train_val_basic_clean + test_basic_clean (22 assay &times; 2 = 44), QC json/md 4건</div>
+              ADMET 22개 분석 (train_val + test 분할) &mdash; Ames, BBB, Caco-2, CYP2C9/2D6/3A4, DILI, hERG, HIA 등
+              <div class="files-detail">admet_task_inventory, 각 분석별 train_val_basic_clean + test_basic_clean (22개 &times; 2 = 44), QC json/md 4건</div>
             </td>
             <td class="src">curated_date/admet/</td>
           </tr>
@@ -103,8 +103,8 @@
             <td class="folder">chembl/</td>
             <td class="cnt">9</td>
             <td class="desc">
-              ChEMBL compound/target/activity/assay/mechanism &mdash; 약물-타겟 매핑, SMILES
-              <div class="files-detail">compound_master (2.8M cpds), target_master, activity, assay, drug_mechanism, uniprot_target_mapping, QC 3건</div>
+              ChEMBL 화합물/타겟/활성/분석/기전 &mdash; 약물-타겟 매핑, SMILES
+              <div class="files-detail">compound_master (280만 화합물), target_master, activity, assay, drug_mechanism, uniprot_target_mapping, QC 3건</div>
             </td>
             <td class="src">curated_date/chembl/</td>
           </tr>
@@ -113,7 +113,7 @@
             <td class="folder">depmap/</td>
             <td class="cnt">24</td>
             <td class="desc">
-              DepMap CRISPR gene dependency/effect matrix, cell line model metadata, repurposing screen
+              DepMap CRISPR 유전자 의존성/효과 행렬, 세포주 모델 메타데이터, 재창출 스크린
               <div class="files-detail">crispr_gene_dependency + matrix (1,150 &times; 18,444), crispr_gene_effect + matrix, model_basic_clean, model_condition, model_identity, repurposing 6건, QC 4건</div>
             </td>
             <td class="src">curated_date/depmap/</td>
@@ -123,7 +123,7 @@
             <td class="folder">drugbank/</td>
             <td class="cnt">8</td>
             <td class="desc">
-              DrugBank drug master (19,842 drugs), 타겟/synonym/group/external_id 테이블
+              DrugBank 약물 마스터 (19,842개 약물), 타겟/동의어/그룹/외부ID 테이블
               <div class="files-detail">drug_master (SMILES, InChI), target_table, synonym_table, group_table, external_identifier_table, QC 3건</div>
             </td>
             <td class="src">curated_date/drugbank/</td>
@@ -133,8 +133,8 @@
             <td class="folder">gsdc/</td>
             <td class="cnt">19</td>
             <td class="desc">
-              GDSC2 drug response &mdash; basic_clean, annotation (drug/cellline), label table, value maps
-              <div class="files-detail">gdsc2_basic_clean (IC50), annotation_normalized, drug_annotation_master/table, cellline_annotation, label_table, pathway/target value maps, QC 5건</div>
+              GDSC2 약물 반응 &mdash; basic_clean, 어노테이션 (약물/세포주), 레이블 테이블, 값 매핑
+              <div class="files-detail">gdsc2_basic_clean (IC50), annotation_normalized, drug_annotation_master/table, cellline_annotation, label_table, pathway/target 값 매핑, QC 5건</div>
             </td>
             <td class="src">curated_date/gsdc/</td>
           </tr>
@@ -143,8 +143,8 @@
             <td class="folder">lincs/</td>
             <td class="cnt">11</td>
             <td class="desc">
-              LINCS L1000 metadata &mdash; sig_info, cell_info, gene_info, pert_info, inst_info, metrics
-              <div class="files-detail">sig_info (473K sigs), cell_info, gene_info (12,328 genes), pert_info, pert_metrics, inst_info, sig_metrics, special_file_inventory, QC 3건</div>
+              LINCS L1000 메타데이터 &mdash; sig_info, cell_info, gene_info, pert_info, inst_info, metrics
+              <div class="files-detail">sig_info (47.3만 시그니처), cell_info, gene_info (12,328 유전자), pert_info, pert_metrics, inst_info, sig_metrics, special_file_inventory, QC 3건</div>
             </td>
             <td class="src">curated_date/lincs/</td>
           </tr>
@@ -153,7 +153,7 @@
             <td class="folder">metabric/</td>
             <td class="cnt">6</td>
             <td class="desc">
-              METABRIC BRCA expression + clinical (patient/sample) &mdash; 외부 검증용
+              METABRIC BRCA 발현 + 임상 (환자/샘플) &mdash; 외부 검증용
               <div class="files-detail">expression_basic_clean, clinical_patient_basic_clean, clinical_sample_basic_clean, QC 3건</div>
             </td>
             <td class="src">curated_date/metabric/</td>
@@ -163,7 +163,7 @@
             <td class="folder">msigdb/</td>
             <td class="cnt">5</td>
             <td class="desc">
-              MSigDB gene set (Hallmark 등) &mdash; pathway feature용
+              MSigDB 유전자 세트 (Hallmark 등) &mdash; 경로 특성용
               <div class="files-detail">gene_set_master, gene_set_membership, QC 3건</div>
             </td>
             <td class="src">curated_date/msigdb/</td>
@@ -173,7 +173,7 @@
             <td class="folder">opentargets/</td>
             <td class="cnt">7</td>
             <td class="desc">
-              Open Targets disease-target association (direct/indirect), disease/target master
+              Open Targets 질병-타겟 연관성 (직접/간접), 질병/타겟 마스터
               <div class="files-detail">association_overall_direct, association_by_overall_indirect, disease_basic, target_basic, QC 3건</div>
             </td>
             <td class="src">curated_date/opentargets/</td>
@@ -183,8 +183,8 @@
             <td class="folder">string/</td>
             <td class="cnt">6</td>
             <td class="desc">
-              STRING PPI network &mdash; protein links, aliases, info
-              <div class="files-detail">links_basic (PPI edges), protein_aliases, protein_info, QC 3건</div>
+              STRING PPI 네트워크 &mdash; 단백질 상호작용, 별칭, 정보
+              <div class="files-detail">links_basic (PPI 엣지), protein_aliases, protein_info, QC 3건</div>
             </td>
             <td class="src">curated_date/string/</td>
           </tr>
@@ -193,18 +193,18 @@
             <td class="folder">tcga/</td>
             <td class="cnt">14</td>
             <td class="desc">
-              TCGA BRCA biospecimen (aliquot/analyte/portion/sample/slide) + clinical + RNA file inventory
+              TCGA BRCA 생체시료 (aliquot/analyte/portion/sample/slide) + 임상 + RNA 파일 목록
               <div class="files-detail">clinical_clinical, clinical_exposure, clinical_family_history, clinical_follow_up, clinical_pathology_detail, biospecimen 5건, rna_file_inventory, QC 3건</div>
             </td>
             <td class="src">curated_date/tcga/</td>
           </tr>
           <!-- Root generated -->
           <tr style="background:rgba(251,191,36,0.06)">
-            <td class="folder">root (generated)</td>
+            <td class="folder">루트 (생성됨)</td>
             <td class="cnt">2</td>
             <td class="desc">
-              <b>gdsc_ic50.parquet</b> &mdash; GDSC2 only, BRCA 필터링 (13,388 rows, 52 cells, 295 drugs)<br>
-              <b>lincs_mcf7.parquet</b> &mdash; MCF7 Level5 z-score matrix (63,367 sigs &times; 12,328 genes, 4.63GB)
+              <b>gdsc_ic50.parquet</b> &mdash; GDSC2만, BRCA 필터링 (13,388행, 52 세포주, 295 약물)<br>
+              <b>lincs_mcf7.parquet</b> &mdash; MCF7 Level5 z-score 행렬 (63,367 시그니처 &times; 12,328 유전자, 4.63GB)
             </td>
             <td class="src-gen">
               gdsc: curated gsdc/gdsc2_basic_clean 기반 생성<br>
@@ -214,65 +214,71 @@
         </tbody>
       </table>
       <div class="timestamp" style="font-size:0.65rem; color:#f59e0b; margin-top:8px;">
-        POLICY: gdsc_ic50 = GDSC2만 사용 (295 drugs). 사유: GDSC2가 GDSC1 대비 품질 우수, ADMET 필터링으로 후보군 축소되므로 품질 우선 결정.<br>
+        정책: gdsc_ic50 = GDSC2만 사용 (295 약물). 사유: GDSC2가 GDSC1 대비 품질 우수, ADMET 필터링으로 후보군 축소되므로 품질 우선 결정.<br>
         lincs_mcf7 = curated_date/lincs/ sig_info+cell_info MCF7 필터 &rarr; oringinal_raw Level5 GCTx에서 extract.<br>
-        glue/ 폴더 접근 금지. curated_date/ 원본 read-only.
+        glue/ 폴더 접근 금지. curated_date/ 원본 읽기 전용.
       </div>
-      <div class="timestamp" id="ts-2">Updated: 2026-04-08 (full dataset inventory, GDSC2 only, LINCS MCF7 re-extract)</div>
+      <div class="timestamp" id="ts-2">업데이트: 2026-04-08 (전체 데이터셋 목록, GDSC2만, LINCS MCF7 재추출)</div>
     </div>
     <div class="step completed" id="step-3">
-      <div class="step-header"><div class="step-num">3</div><div class="step-title">Feature Engineering</div></div>
+      <div class="step-header"><div class="step-num">3</div><div class="step-title">특성 공학</div></div>
       <div class="metrics" id="metrics-3">
-        <div class="metric"><span class="label">Pipeline:</span><span class="value">Nextflow on AWS Batch (4 processes, 5m 31s)</span></div>
-        <div class="metric"><span class="label">Feature Matrix:</span><span class="value">7,730 pairs x 18,316 features</span></div>
-        <div class="metric"><span class="label">Labels:</span><span class="value">7,730 pairs (regression ln_IC50 + binary)</span></div>
-        <div class="metric"><span class="label">Drug SMILES:</span><span class="value">243/295 (82.4%) | 52 all-zero</span></div>
-        <div class="metric"><span class="label">LINCS:</span><span class="value">101 drugs matched (cosine/pearson/spearman/reverse)</span></div>
-        <div class="metric"><span class="label">Drug-Target:</span><span class="value">295 drugs, 235 targets (GDSC PUTATIVE_TARGET)</span></div>
-        <div class="metric"><span class="label">Pair Features v2:</span><span class="value">pathway + Morgan/descriptor + LINCS + target</span></div>
-        <div class="metric"><span class="label">Imputation:</span><span class="value">median (CRISPR) | zero-fill (drug fingerprints)</span></div>
-        <div class="metric"><span class="label">S3 Output:</span><span class="value">fe_output/20260408_fe_v1/ (features/ + pair_features/)</span></div>
+        <div class="metric"><span class="label">파이프라인:</span><span class="value">Nextflow on AWS Batch (4개 프로세스, 5분 31초)</span></div>
+        <div class="metric"><span class="label">특성 행렬:</span><span class="value">7,730 쌍 x 18,316 특성</span></div>
+        <div class="metric"><span class="label">레이블:</span><span class="value">7,730 쌍 (회귀 ln_IC50 + 이진)</span></div>
+        <div class="metric"><span class="label">Drug SMILES:</span><span class="value">243/295 (82.4%) | 52 전체 0</span></div>
+        <div class="metric"><span class="label">LINCS:</span><span class="value">101 약물 매칭 (cosine/pearson/spearman/reverse)</span></div>
+        <div class="metric"><span class="label">약물-타겟:</span><span class="value">295 약물, 235 타겟 (GDSC PUTATIVE_TARGET)</span></div>
+        <div class="metric"><span class="label">쌍 특성 v2:</span><span class="value">pathway + Morgan/descriptor + LINCS + target</span></div>
+        <div class="metric"><span class="label">결측치 처리:</span><span class="value">중앙값 (CRISPR) | 0 채움 (약물 fingerprints)</span></div>
+        <div class="metric"><span class="label">S3 출력:</span><span class="value">fe_output/20260408_fe_v1/ (features/ + pair_features/)</span></div>
       </div>
-      <div class="timestamp" id="ts-3">Completed: 2026-04-08 15:36 KST</div>
+      <div class="timestamp" id="ts-3">완료: 2026-04-08 15:36 KST</div>
     </div>
     <div class="step completed" id="step-4">
-      <div class="step-header"><div class="step-num">4</div><div class="step-title">Model Training (15 Models)</div></div>
+      <div class="step-header"><div class="step-num">4</div><div class="step-title">모델 학습 (15개 모델)</div></div>
       <div class="metrics" id="metrics-4">
-        <div class="metric"><span class="label">ML (8):</span><span class="value" style="color:#4ade80">DONE | Top: CatBoost(0.801), LightGBM(0.791), XGBoost(0.790)</span></div>
-        <div class="metric"><span class="label">DL (5):</span><span class="value" style="color:#4ade80">DONE | Top: FlatMLP(0.794), ResidualMLP(0.786), Cross-Attn(0.785)</span></div>
-        <div class="metric"><span class="label">Graph (2):</span><span class="value" style="color:#f87171">GraphSAGE(P@20=0.94, METABRIC), GAT(FAIL)</span></div>
-        <div class="metric"><span class="label">Ensemble PASS:</span><span class="value" style="color:#4ade80">6/15 models (CatBoost, FlatMLP, LightGBM, XGBoost, ResidualMLP, Cross-Attn)</span></div>
+        <div class="metric"><span class="label">ML (8):</span><span class="value" style="color:#4ade80">완료 | 최고: CatBoost(0.801), LightGBM(0.791), XGBoost(0.790)</span></div>
+        <div class="metric"><span class="label">DL (5):</span><span class="value" style="color:#4ade80">완료 | 최고: FlatMLP(0.794), ResidualMLP(0.786), Cross-Attn(0.785)</span></div>
+        <div class="metric"><span class="label">그래프 (2):</span><span class="value" style="color:#f87171">GraphSAGE(P@20=0.94, METABRIC), GAT(실패)</span></div>
+        <div class="metric"><span class="label">앙상블 통과:</span><span class="value" style="color:#4ade80">6/15 모델 (CatBoost, FlatMLP, LightGBM, XGBoost, ResidualMLP, Cross-Attn)</span></div>
       </div>
-      <a href="step4_detail.html" target="_blank" style="display:inline-block;margin-top:10px;padding:6px 16px;background:#22c55e;color:#fff;border-radius:6px;text-decoration:none;font-size:0.8rem;font-weight:600;">View Detailed Results &rarr;</a>
-      <div class="timestamp" id="ts-4">Completed: 2026-04-08</div>
+      <a href="step4_detail.html" target="_blank" style="display:inline-block;margin-top:10px;padding:6px 16px;background:#22c55e;color:#fff;border-radius:6px;text-decoration:none;font-size:0.8rem;font-weight:600;">상세 결과 보기 &rarr;</a>
+      <div class="timestamp" id="ts-4">완료: 2026-04-08</div>
     </div>
-    <div class="step active" id="step-5">
-      <div class="step-header"><div class="step-num">5</div><div class="step-title">Ensemble Track2 (Spearman-weighted)</div></div>
+    <div class="step completed" id="step-5">
+      <div class="step-header"><div class="step-num">5</div><div class="step-title">앙상블 Track2 (Spearman 가중 평균)</div></div>
       <div class="metrics" id="metrics-5">
-        <div class="metric"><span class="label">Method:</span><span class="value">Spearman-weighted average (6 models)</span></div>
-        <div class="metric"><span class="label">Status:</span><span class="value" style="color:#3b82f6">Training in progress...</span></div>
+        <div class="metric"><span class="label">방법:</span><span class="value">Spearman 가중 평균 (6개 모델)</span></div>
+        <div class="metric"><span class="label">검증 Spearman:</span><span class="value" style="color:#4ade80">0.8055 &plusmn; 0.0101 (통과)</span></div>
+        <div class="metric"><span class="label">RMSE:</span><span class="value" style="color:#4ade80">1.3008 &plusmn; 0.0227 (통과)</span></div>
+        <div class="metric"><span class="label">Gap(Sp):</span><span class="value" style="color:#fbbf24">0.0004 (과적합 없음)</span></div>
+        <div class="metric"><span class="label">최상위 약물:</span><span class="value">Bortezomib (IC50=-4.84)</span></div>
       </div>
-      <a href="step5_detail.html" target="_blank" style="display:inline-block;margin-top:10px;padding:6px 16px;background:#3b82f6;color:#fff;border-radius:6px;text-decoration:none;font-size:0.8rem;font-weight:600;">View Detailed Results &rarr;</a>
-      <div class="timestamp" id="ts-5">In progress: 2026-04-08</div>
+      <a href="step5_detail.html" target="_blank" style="display:inline-block;margin-top:10px;padding:6px 16px;background:#22c55e;color:#fff;border-radius:6px;text-decoration:none;font-size:0.8rem;font-weight:600;">상세 결과 보기 &rarr;</a>
+      <div class="timestamp" id="ts-5">완료: 2026-04-08</div>
     </div>
-    <div class="step pending" id="step-6">
-      <div class="step-header"><div class="step-num">6</div><div class="step-title">METABRIC External Validation (A+B+C)</div></div>
+    <div class="step completed" id="step-6">
+      <div class="step-header"><div class="step-num">6</div><div class="step-title">METABRIC 외부 검증 (A+B+C)</div></div>
       <div class="metrics" id="metrics-6">
-        <div class="metric"><span class="label">Method A:</span><span class="value">Ensemble IC50 prediction</span></div>
-        <div class="metric"><span class="label">Method B:</span><span class="value">RSF Survival (C-idx=0.821)</span></div>
-        <div class="metric"><span class="label">Method C:</span><span class="value">GraphSAGE P@20 (0.94)</span></div>
+        <div class="metric"><span class="label">방법 A:</span><span class="value" style="color:#4ade80">29/30 BRCA 발현 타겟, 22/30 BRCA 관련 경로</span></div>
+        <div class="metric"><span class="label">방법 B:</span><span class="value" style="color:#4ade80">28/30 생존 유의 | RSF C-idx=0.821</span></div>
+        <div class="metric"><span class="label">방법 C:</span><span class="value" style="color:#4ade80">P@15=93.3% | GraphSAGE P@20=0.94</span></div>
+        <div class="metric"><span class="label">선별:</span><span class="value">상위 30 &rarr; 상위 15 검증 완료</span></div>
       </div>
-      <a href="step6_detail.html" target="_blank" style="display:inline-block;margin-top:10px;padding:6px 16px;background:#64748b;color:#fff;border-radius:6px;text-decoration:none;font-size:0.8rem;font-weight:600;opacity:0.5;pointer-events:none;">View Detailed Results &rarr;</a>
-      <div class="timestamp" id="ts-6">Pending (after Step 5)</div>
+      <a href="step6_detail.html" target="_blank" style="display:inline-block;margin-top:10px;padding:6px 16px;background:#22c55e;color:#fff;border-radius:6px;text-decoration:none;font-size:0.8rem;font-weight:600;">상세 결과 보기 &rarr;</a>
+      <div class="timestamp" id="ts-6">완료: 2026-04-08</div>
     </div>
-    <div class="step pending" id="step-7">
-      <div class="step-header"><div class="step-num">7</div><div class="step-title">ADMET Gate - Final Drug Selection</div></div>
+    <div class="step completed" id="step-7">
+      <div class="step-header"><div class="step-num">7</div><div class="step-title">ADMET 게이트 - 최종 약물 선정</div></div>
       <div class="metrics" id="metrics-7">
-        <div class="metric"><span class="label">Assays:</span><span class="value">22 ADMET filters</span></div>
-        <div class="metric"><span class="label">Output:</span><span class="value">Final drug candidates + safety profiles</span></div>
+        <div class="metric"><span class="label">분석 항목:</span><span class="value">22개 ADMET 필터 (TDC 벤치마크)</span></div>
+        <div class="metric"><span class="label">결과:</span><span class="value" style="color:#4ade80">유방암 현재 사용: 6 | 적응증 확장/연구 중: 5 | 유방암 미사용(신약 후보): 4</span></div>
+        <div class="metric"><span class="label">상위 3개:</span><span class="value">Dactinomycin, Docetaxel, Vinblastine</span></div>
+        <div class="metric"><span class="label">산출물:</span><span class="value">ADMET 프로파일 + 유방암 적응증 분류 적용 15개 최종 후보</span></div>
       </div>
-      <a href="step7_detail.html" target="_blank" style="display:inline-block;margin-top:10px;padding:6px 16px;background:#64748b;color:#fff;border-radius:6px;text-decoration:none;font-size:0.8rem;font-weight:600;opacity:0.5;pointer-events:none;">View Detailed Results &rarr;</a>
-      <div class="timestamp" id="ts-7">Pending (after Step 6)</div>
+      <a href="step7_detail.html" target="_blank" style="display:inline-block;margin-top:10px;padding:6px 16px;background:#22c55e;color:#fff;border-radius:6px;text-decoration:none;font-size:0.8rem;font-weight:600;">상세 결과 보기 &rarr;</a>
+      <div class="timestamp" id="ts-7">완료: 2026-04-08</div>
     </div>
   </div>
 </div>
@@ -282,10 +288,10 @@ function updateStep(completedSteps, activeStep, metrics) {
     const el = document.getElementById('step-' + i);
     el.className = 'step ' + (i <= completedSteps ? 'completed' : i === activeStep ? 'active' : 'pending');
   }
-  document.getElementById('progress-pct').textContent = completedSteps + ' / 7 Steps';
+  document.getElementById('progress-pct').textContent = completedSteps + ' / 7 단계';
   document.getElementById('bar-fill').style.width = (completedSteps / 7 * 100).toFixed(1) + '%';
   if (metrics && activeStep) {
-    const target = completedSteps; // metrics go on the just-completed step
+    const target = completedSteps;
     const mc = document.getElementById('metrics-' + target);
     if (mc) {
       mc.innerHTML = '';
@@ -293,15 +299,13 @@ function updateStep(completedSteps, activeStep, metrics) {
         mc.innerHTML += '<div class="metric"><span class="label">' + k + ':</span><span class="value">' + v + '</span></div>';
       }
     }
-    document.getElementById('ts-' + target).textContent = 'Completed: ' + new Date().toLocaleString();
+    document.getElementById('ts-' + target).textContent = '완료: ' + new Date().toLocaleString();
   }
-  // persist
   localStorage.setItem('pipeline_state', JSON.stringify({completedSteps, activeStep, ts: new Date().toISOString()}));
 }
-// restore
 try {
   const s = JSON.parse(localStorage.getItem('pipeline_state'));
-  if (s) { for (let i = 1; i <= 7; i++) { const el = document.getElementById('step-'+i); el.className = 'step '+(i<=s.completedSteps?'completed':i===s.activeStep?'active':'pending'); } document.getElementById('progress-pct').textContent = s.completedSteps+' / 7 Steps'; document.getElementById('bar-fill').style.width = (s.completedSteps/7*100).toFixed(1)+'%'; }
+  if (s) { for (let i = 1; i <= 7; i++) { const el = document.getElementById('step-'+i); el.className = 'step '+(i<=s.completedSteps?'completed':i===s.activeStep?'active':'pending'); } document.getElementById('progress-pct').textContent = s.completedSteps+' / 7 단계'; document.getElementById('bar-fill').style.width = (s.completedSteps/7*100).toFixed(1)+'%'; }
 } catch(e) {}
 </script>
 </body>
