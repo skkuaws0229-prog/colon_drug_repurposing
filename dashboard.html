@@ -53,9 +53,9 @@
   <div class="progress-bar">
     <div class="progress-label">
       <span>Overall Progress</span>
-      <span id="progress-pct">2 / 7 Steps</span>
+      <span id="progress-pct">3 / 7 Steps</span>
     </div>
-    <div class="bar-bg"><div class="bar-fill" id="bar-fill" style="width:28.6%"></div></div>
+    <div class="bar-bg"><div class="bar-fill" id="bar-fill" style="width:42.9%"></div></div>
   </div>
   <div class="steps">
     <div class="step completed" id="step-1">
@@ -220,22 +220,31 @@
       </div>
       <div class="timestamp" id="ts-2">Updated: 2026-04-08 (full dataset inventory, GDSC2 only, LINCS MCF7 re-extract)</div>
     </div>
-    <div class="step active" id="step-3">
+    <div class="step completed" id="step-3">
       <div class="step-header"><div class="step-num">3</div><div class="step-title">Feature Engineering</div></div>
       <div class="metrics" id="metrics-3">
-        <div class="metric"><span class="label">Drug SMILES 매칭:</span><span class="value">243/295 (82.4%)</span></div>
-        <div class="metric"><span class="label">매칭 소스:</span><span class="value">ChEMBL 130 + DrugBank 18 + PubChem 95</span></div>
-        <div class="metric"><span class="label">미매칭:</span><span class="value">52 (내부코드, SMILES=NA 처리)</span></div>
-        <div class="metric"><span class="label">DepMap 변환:</span><span class="value">wide→long 완료 (20.4M rows, 1150 cells, 18443 genes)</span></div>
-        <div class="metric"><span class="label">스크립트 리팩토링:</span><span class="value">2/2 완료 (argparse CLI 추가)</span></div>
-        <div class="metric"><span class="label">Nextflow:</span><span class="value">main.nf + nextflow.config + Dockerfile 작성 완료</span></div>
+        <div class="metric"><span class="label">Pipeline:</span><span class="value">Nextflow on AWS Batch (4 processes, 5m 31s)</span></div>
+        <div class="metric"><span class="label">Feature Matrix:</span><span class="value">7,730 pairs x 18,316 features</span></div>
+        <div class="metric"><span class="label">Labels:</span><span class="value">7,730 pairs (regression ln_IC50 + binary)</span></div>
+        <div class="metric"><span class="label">Drug SMILES:</span><span class="value">243/295 (82.4%) | 52 all-zero</span></div>
+        <div class="metric"><span class="label">LINCS:</span><span class="value">101 drugs matched (cosine/pearson/spearman/reverse)</span></div>
+        <div class="metric"><span class="label">Drug-Target:</span><span class="value">295 drugs, 235 targets (GDSC PUTATIVE_TARGET)</span></div>
+        <div class="metric"><span class="label">Pair Features v2:</span><span class="value">pathway + Morgan/descriptor + LINCS + target</span></div>
+        <div class="metric"><span class="label">Imputation:</span><span class="value">median (CRISPR) | zero-fill (drug fingerprints)</span></div>
+        <div class="metric"><span class="label">S3 Output:</span><span class="value">fe_output/20260408_fe_v1/ (features/ + pair_features/)</span></div>
       </div>
-      <div class="timestamp" id="ts-3">In progress: 2026-04-08</div>
+      <div class="timestamp" id="ts-3">Completed: 2026-04-08 15:36 KST</div>
     </div>
-    <div class="step pending" id="step-4">
-      <div class="step-header"><div class="step-num">4</div><div class="step-title">Model Training (13 Models)</div></div>
-      <div class="metrics" id="metrics-4"></div>
-      <div class="timestamp" id="ts-4"></div>
+    <div class="step active" id="step-4">
+      <div class="step-header"><div class="step-num">4</div><div class="step-title">Model Training (15 Models)</div></div>
+      <div class="metrics" id="metrics-4">
+        <div class="metric"><span class="label">ML (8):</span><span class="value">LightGBM, LGBM-DART, XGBoost, CatBoost, RF, ExtraTrees, Stacking, RSF</span></div>
+        <div class="metric"><span class="label">DL (5):</span><span class="value">ResidualMLP, FlatMLP, TabNet, FT-Transformer, Cross-Attention</span></div>
+        <div class="metric"><span class="label">Graph (2):</span><span class="value">GraphSAGE, GAT (drug-split)</span></div>
+        <div class="metric"><span class="label">Target:</span><span class="value">Spearman >= 0.713, RMSE <= 1.385</span></div>
+        <div class="metric"><span class="label">Eval:</span><span class="value">5-fold CV | Spearman, RMSE, Pearson, R2, fold-std, Train-Val gap</span></div>
+      </div>
+      <div class="timestamp" id="ts-4">In progress: 2026-04-08</div>
     </div>
     <div class="step pending" id="step-5">
       <div class="step-header"><div class="step-num">5</div><div class="step-title">Ensemble Track2</div></div>
