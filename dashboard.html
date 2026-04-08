@@ -53,9 +53,9 @@
   <div class="progress-bar">
     <div class="progress-label">
       <span>Overall Progress</span>
-      <span id="progress-pct">3 / 7 Steps</span>
+      <span id="progress-pct">4 / 7 Steps</span>
     </div>
-    <div class="bar-bg"><div class="bar-fill" id="bar-fill" style="width:42.9%"></div></div>
+    <div class="bar-bg"><div class="bar-fill" id="bar-fill" style="width:57.1%"></div></div>
   </div>
   <div class="steps">
     <div class="step completed" id="step-1">
@@ -235,31 +235,44 @@
       </div>
       <div class="timestamp" id="ts-3">Completed: 2026-04-08 15:36 KST</div>
     </div>
-    <div class="step active" id="step-4">
+    <div class="step completed" id="step-4">
       <div class="step-header"><div class="step-num">4</div><div class="step-title">Model Training (15 Models)</div></div>
       <div class="metrics" id="metrics-4">
-        <div class="metric"><span class="label">ML (8):</span><span class="value">LightGBM, LGBM-DART, XGBoost, CatBoost, RF, ExtraTrees, Stacking, RSF</span></div>
-        <div class="metric"><span class="label">DL (5):</span><span class="value">ResidualMLP, FlatMLP, TabNet, FT-Transformer, Cross-Attention</span></div>
-        <div class="metric"><span class="label">Graph (2):</span><span class="value">GraphSAGE, GAT (drug-split)</span></div>
-        <div class="metric"><span class="label">Target:</span><span class="value">Spearman >= 0.713, RMSE <= 1.385</span></div>
-        <div class="metric"><span class="label">Eval:</span><span class="value">5-fold CV | Spearman, RMSE, Pearson, R2, fold-std, Train-Val gap</span></div>
+        <div class="metric"><span class="label">ML (8):</span><span class="value" style="color:#4ade80">DONE | Top: CatBoost(0.801), LightGBM(0.791), XGBoost(0.790)</span></div>
+        <div class="metric"><span class="label">DL (5):</span><span class="value" style="color:#4ade80">DONE | Top: FlatMLP(0.794), ResidualMLP(0.786), Cross-Attn(0.785)</span></div>
+        <div class="metric"><span class="label">Graph (2):</span><span class="value" style="color:#f87171">GraphSAGE(P@20=0.94, METABRIC), GAT(FAIL)</span></div>
+        <div class="metric"><span class="label">Ensemble PASS:</span><span class="value" style="color:#4ade80">6/15 models (CatBoost, FlatMLP, LightGBM, XGBoost, ResidualMLP, Cross-Attn)</span></div>
       </div>
-      <div class="timestamp" id="ts-4">In progress: 2026-04-08</div>
+      <a href="step4_detail.html" target="_blank" style="display:inline-block;margin-top:10px;padding:6px 16px;background:#22c55e;color:#fff;border-radius:6px;text-decoration:none;font-size:0.8rem;font-weight:600;">View Detailed Results &rarr;</a>
+      <div class="timestamp" id="ts-4">Completed: 2026-04-08</div>
     </div>
-    <div class="step pending" id="step-5">
-      <div class="step-header"><div class="step-num">5</div><div class="step-title">Ensemble Track2</div></div>
-      <div class="metrics" id="metrics-5"></div>
-      <div class="timestamp" id="ts-5"></div>
+    <div class="step active" id="step-5">
+      <div class="step-header"><div class="step-num">5</div><div class="step-title">Ensemble Track2 (Spearman-weighted)</div></div>
+      <div class="metrics" id="metrics-5">
+        <div class="metric"><span class="label">Method:</span><span class="value">Spearman-weighted average (6 models)</span></div>
+        <div class="metric"><span class="label">Status:</span><span class="value" style="color:#3b82f6">Training in progress...</span></div>
+      </div>
+      <a href="step5_detail.html" target="_blank" style="display:inline-block;margin-top:10px;padding:6px 16px;background:#3b82f6;color:#fff;border-radius:6px;text-decoration:none;font-size:0.8rem;font-weight:600;">View Detailed Results &rarr;</a>
+      <div class="timestamp" id="ts-5">In progress: 2026-04-08</div>
     </div>
     <div class="step pending" id="step-6">
-      <div class="step-header"><div class="step-num">6</div><div class="step-title">METABRIC External Validation</div></div>
-      <div class="metrics" id="metrics-6"></div>
-      <div class="timestamp" id="ts-6"></div>
+      <div class="step-header"><div class="step-num">6</div><div class="step-title">METABRIC External Validation (A+B+C)</div></div>
+      <div class="metrics" id="metrics-6">
+        <div class="metric"><span class="label">Method A:</span><span class="value">Ensemble IC50 prediction</span></div>
+        <div class="metric"><span class="label">Method B:</span><span class="value">RSF Survival (C-idx=0.821)</span></div>
+        <div class="metric"><span class="label">Method C:</span><span class="value">GraphSAGE P@20 (0.94)</span></div>
+      </div>
+      <a href="step6_detail.html" target="_blank" style="display:inline-block;margin-top:10px;padding:6px 16px;background:#64748b;color:#fff;border-radius:6px;text-decoration:none;font-size:0.8rem;font-weight:600;opacity:0.5;pointer-events:none;">View Detailed Results &rarr;</a>
+      <div class="timestamp" id="ts-6">Pending (after Step 5)</div>
     </div>
     <div class="step pending" id="step-7">
-      <div class="step-header"><div class="step-num">7</div><div class="step-title">ADMET Gate</div></div>
-      <div class="metrics" id="metrics-7"></div>
-      <div class="timestamp" id="ts-7"></div>
+      <div class="step-header"><div class="step-num">7</div><div class="step-title">ADMET Gate - Final Drug Selection</div></div>
+      <div class="metrics" id="metrics-7">
+        <div class="metric"><span class="label">Assays:</span><span class="value">22 ADMET filters</span></div>
+        <div class="metric"><span class="label">Output:</span><span class="value">Final drug candidates + safety profiles</span></div>
+      </div>
+      <a href="step7_detail.html" target="_blank" style="display:inline-block;margin-top:10px;padding:6px 16px;background:#64748b;color:#fff;border-radius:6px;text-decoration:none;font-size:0.8rem;font-weight:600;opacity:0.5;pointer-events:none;">View Detailed Results &rarr;</a>
+      <div class="timestamp" id="ts-7">Pending (after Step 6)</div>
     </div>
   </div>
 </div>
