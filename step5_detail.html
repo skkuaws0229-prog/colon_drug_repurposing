@@ -122,7 +122,7 @@
   <!-- 상위 30개 약물 -->
   <div class="section" style="border-color:#fbbf2440;">
     <div class="section-title" style="color:#fbbf24;">상위 30개 선정 약물</div>
-    <div class="section-sub">앙상블 예측 IC50 기준 정렬 (낮을수록 효과적) | 검증됨 = 민감도 &gt; 50% | 추천 = 모델 기반</div>
+    <div class="section-sub">앙상블 예측 IC50 기준 정렬 (낮을수록 효과적) | 검증됨 = 민감도 &gt; 50% | 추천 = 모델 기반 | <span style="color:#f87171;">빨간 표시 = 동일 약물 중복 (Step 7에서 제거)</span></div>
     <table>
       <thead>
         <tr><th>#</th><th>약물</th><th>타겟 / 경로</th><th>예측 IC50</th><th>실제 IC50</th><th>민감도</th><th>N</th><th>범주</th></tr>
@@ -133,11 +133,11 @@
         <tr class="top-drug"><td>3</td><td><span class="drug-name">Sepantronium bromide</span></td><td class="drug-target">BIRC5 / Apoptosis regulation</td><td class="val-good">-3.736</td><td>-3.859</td><td>100%</td><td>28</td><td class="val-good">검증됨</td></tr>
         <tr class="top-drug"><td>4</td><td><span class="drug-name">Dactinomycin</span></td><td class="drug-target">RNA polymerase / Other</td><td class="val-good">-3.226</td><td>-4.040</td><td>100%</td><td>28</td><td class="val-good">검증됨</td></tr>
         <tr class="top-drug"><td>5</td><td><span class="drug-name">Docetaxel</span></td><td class="drug-target">Microtubule stabiliser / Mitosis</td><td class="val-good">-3.130</td><td>-4.118</td><td>100%</td><td>29</td><td class="val-good">검증됨</td></tr>
-        <tr class="top-drug"><td>6</td><td><span class="drug-name">Docetaxel</span></td><td class="drug-target">Microtubule stabiliser / Mitosis</td><td class="val-good">-2.811</td><td>-1.765</td><td>92%</td><td>25</td><td class="val-good">검증됨</td></tr>
+        <tr style="opacity:0.5;"><td>6</td><td><span class="drug-name">Docetaxel</span> <span style="color:#f87171;font-size:0.7rem;">(중복 &rarr; Step 7 제거)</span></td><td class="drug-target">Microtubule stabiliser / Mitosis</td><td class="val-good">-2.811</td><td>-1.765</td><td>92%</td><td>25</td><td style="color:#f87171;">중복</td></tr>
         <tr class="top-drug"><td>7</td><td><span class="drug-name">Vinblastine</span></td><td class="drug-target">Microtubule destabiliser / Mitosis</td><td class="val-good">-2.722</td><td>-2.736</td><td>100%</td><td>27</td><td class="val-good">검증됨</td></tr>
         <tr class="top-drug"><td>8</td><td><span class="drug-name">Paclitaxel</span></td><td class="drug-target">Microtubule stabiliser / Mitosis</td><td class="val-good">-2.671</td><td>-2.780</td><td>100%</td><td>28</td><td class="val-good">검증됨</td></tr>
         <tr class="top-drug"><td>9</td><td><span class="drug-name">Vinorelbine</span></td><td class="drug-target">Microtubule destabiliser / Mitosis</td><td class="val-good">-2.637</td><td>-2.781</td><td>100%</td><td>28</td><td class="val-good">검증됨</td></tr>
-        <tr class="top-drug"><td>10</td><td><span class="drug-name">Dactinomycin</span></td><td class="drug-target">RNA polymerase / Other</td><td class="val-good">-2.595</td><td>-1.815</td><td>100%</td><td>26</td><td class="val-good">검증됨</td></tr>
+        <tr style="opacity:0.5;"><td>10</td><td><span class="drug-name">Dactinomycin</span> <span style="color:#f87171;font-size:0.7rem;">(중복 &rarr; Step 7 제거)</span></td><td class="drug-target">RNA polymerase / Other</td><td class="val-good">-2.595</td><td>-1.815</td><td>100%</td><td>26</td><td style="color:#f87171;">중복</td></tr>
         <tr class="top-drug"><td>11</td><td><span class="drug-name">Rapamycin</span></td><td class="drug-target">MTORC1 / PI3K/MTOR signaling</td><td class="val-good">-2.389</td><td>-2.587</td><td>100%</td><td>28</td><td class="val-good">검증됨</td></tr>
         <tr class="top-drug"><td>12</td><td><span class="drug-name">Staurosporine</span></td><td class="drug-target">Broad kinase / RTK signaling</td><td class="val-good">-2.328</td><td>-2.531</td><td>100%</td><td>29</td><td class="val-good">검증됨</td></tr>
         <tr class="top-drug"><td>13</td><td><span class="drug-name">SN-38</span></td><td class="drug-target">TOP1 / DNA replication</td><td class="val-good">-2.279</td><td>-2.612</td><td>100%</td><td>28</td><td class="val-good">검증됨</td></tr>
