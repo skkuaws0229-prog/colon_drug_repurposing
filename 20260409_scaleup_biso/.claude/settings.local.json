@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(source activate:*)",
+      "Bash(conda activate:*)",
+      "Bash(python:*)",
+      "Bash(python3:*)",
+      "Bash(git -C /Users/skku_aws2_14/20260409_scaleup_biso remote:*)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "notion"
+  ]
+}

@@ -1,0 +1,172 @@
+disease:
+  name: "Breast Cancer"
+  code: "BRCA"
+  pipeline_date: "2026-04-08"
+  ensemble_spearman: 0.8055
+  ensemble_rmse: 1.3008
+
+drugs:
+  - name: "Dactinomycin"
+    rank: 1
+    ic50: -3.226
+    target: "RNA polymerase"
+    brca_status: "BRCA_CANDIDATE"
+    dili_flag: true
+    ames_flag: false
+    safety_score: 7.0
+    overall_score: 14.0
+    repurposing_evidence: "FDA 승인: 윌름스 종양, 융모성 질환. 유방암 적응증 없음"
+
+  - name: "Docetaxel"
+    rank: 2
+    ic50: -3.130
+    target: "Microtubule stabiliser"
+    brca_status: "BRCA_CURRENT"
+    dili_flag: true
+    ames_flag: false
+    safety_score: 6.8
+    overall_score: 13.3
+    repurposing_evidence: "FDA 유방암 적응증 승인 (보조/전이성). NCCN 표준요법"
+
+  - name: "Vinblastine"
+    rank: 3
+    ic50: -2.722
+    target: "Microtubule destabiliser"
+    brca_status: "BRCA_CURRENT"
+    dili_flag: false
+    ames_flag: false
+    safety_score: 7.8
+    overall_score: 13.3
+    repurposing_evidence: "FDA 유방암 적응증 포함 (호르몬 불응성 유방암)"
+
+  - name: "Staurosporine"
+    rank: 4
+    ic50: -2.328
+    target: "Broad kinase inhibitor"
+    brca_status: "BRCA_CANDIDATE"
+    dili_flag: false
+    ames_flag: false
+    safety_score: 10.0
+    overall_score: 13.0
+    repurposing_evidence: "연구용 천연 화합물. FDA 미승인. 임상시험 없음"
+
+  - name: "Docetaxel"
+    rank: 5
+    ic50: -2.811
+    target: "Microtubule stabiliser"
+    brca_status: "BRCA_CURRENT"
+    dili_flag: true
+    ames_flag: false
+    safety_score: 6.8
+    overall_score: 12.8
+    repurposing_evidence: "FDA 유방암 적응증 승인 (보조/전이성). NCCN 표준요법"
+
+  - name: "Bortezomib"
+    rank: 6
+    ic50: -4.840
+    target: "Proteasome"
+    brca_status: "BRCA_RESEARCH"
+    dili_flag: true
+    ames_flag: false
+    safety_score: 5.3
+    overall_score: 12.8
+    repurposing_evidence: "FDA 승인: 다발성 골수종. 유방암 임상시험 진행 (NCT00025246 등)"
+
+  - name: "Vinorelbine"
+    rank: 7
+    ic50: -2.637
+    target: "Microtubule destabiliser"
+    brca_status: "BRCA_CURRENT"
+    dili_flag: false
+    ames_flag: false
+    safety_score: 8.0
+    overall_score: 12.5
+    repurposing_evidence: "전이성 유방암 표준요법. NCCN 가이드라인 포함"
+
+  - name: "SN-38"
+    rank: 8
+    ic50: -2.279
+    target: "TOP1"
+    brca_status: "BRCA_RESEARCH"
+    dili_flag: false
+    ames_flag: false
+    safety_score: 10.0
+    overall_score: 12.5
+    repurposing_evidence: "Sacituzumab govitecan (SN-38 접합체) FDA TNBC 승인. SN-38 자체는 미승인"
+
+  - name: "Dinaciclib"
+    rank: 9
+    ic50: -2.195
+    target: "CDK1/2/5/9"
+    brca_status: "BRCA_RESEARCH"
+    dili_flag: false
+    ames_flag: false
+    safety_score: 10.0
+    overall_score: 12.0
+    repurposing_evidence: "CDK 억제제. 유방암 1/2상 임상시험 진행 (NCT01624441 등)"
+
+  - name: "Paclitaxel"
+    rank: 10
+    ic50: -2.671
+    target: "Microtubule stabiliser"
+    brca_status: "BRCA_CURRENT"
+    dili_flag: true
+    ames_flag: false
+    safety_score: 6.8
+    overall_score: 11.8
+    repurposing_evidence: "FDA 유방암 적응증 승인 (보조/전이성). NCCN 표준요법"
+
+  - name: "Rapamycin"
+    rank: 11
+    ic50: -2.389
+    target: "MTORC1"
+    brca_status: "BRCA_RESEARCH"
+    dili_flag: false
+    ames_flag: false
+    safety_score: 7.7
+    overall_score: 11.2
+    repurposing_evidence: "유도체 Everolimus FDA HR+/HER2- 유방암 승인. Rapamycin 자체는 면역억제제 승인"
+
+  - name: "Dactinomycin"
+    rank: 12
+    ic50: -2.595
+    target: "RNA polymerase"
+    brca_status: "BRCA_CANDIDATE"
+    dili_flag: true
+    ames_flag: false
+    safety_score: 7.0
+    overall_score: 11.0
+    repurposing_evidence: "FDA 승인: 윌름스 종양, 융모성 질환. 유방암 적응증 없음"
+
+  - name: "Camptothecin"
+    rank: 13
+    ic50: -0.743
+    target: "TOP1"
+    brca_status: "BRCA_CANDIDATE"
+    dili_flag: false
+    ames_flag: false
+    safety_score: 10.0
+    overall_score: 11.0
+    repurposing_evidence: "연구용 천연 화합물. Irinotecan/Topotecan의 모 화합물. 직접 임상 사용 없음"
+
+  - name: "Luminespib"
+    rank: 14
+    ic50: -1.868
+    target: "HSP90"
+    brca_status: "BRCA_RESEARCH"
+    dili_flag: false
+    ames_flag: false
+    safety_score: 5.0
+    overall_score: 6.5
+    repurposing_evidence: "HSP90 억제제. 유방암 2상 임상시험 (HER2+, TNBC 대상)"
+
+  - name: "Epirubicin"
+    rank: 15
+    ic50: 0.037
+    target: "Anthracycline"
+    brca_status: "BRCA_CURRENT"
+    dili_flag: true
+    ames_flag: true
+    safety_score: 2.8
+    overall_score: 3.3
+    repurposing_evidence: "FDA 유방암 적응증 승인 (보조요법 FEC 레지멘)"
