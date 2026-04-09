@@ -1,151 +1,164 @@
+#!/usr/bin/env python3
 """
-HIRA 약가·급여 정보 조회 → Neo4j Drug 노드 업데이트
+HIRA 약물 보험 정보 수집 → Neo4j Drug 노드 속성 업데이트
 
 엔드포인트: http://apis.data.go.kr/B551182/msInsu/getNIitemInfoList01
 """
-
+import json
 import os
-import time
-import xml.etree.ElementTree as ET
+import sys
+import urllib.parse
+import urllib.request
 from pathlib import Path
 
-import requests
-from neo4j import GraphDatabase
-from dotenv import load_dotenv
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-load_dotenv(PROJECT_ROOT / ".env")
+ENV_PATH = PROJECT_ROOT / "config" / ".env"
 
-URI = os.getenv("NEO4J_URI")
-USERNAME = os.getenv("NEO4J_USERNAME")
-PASSWORD = os.getenv("NEO4J_PASSWORD")
-DATABASE = os.getenv("NEO4J_DATABASE")
-API_KEY = os.getenv("HIRA_API_KEY") or os.getenv("PUBLIC_DATA_API_KEY")
+ENDPOINT = "http://apis.data.go.kr/B551182/msInsu/getNIitemInfoList01"
 
-BASE_URL = "http://apis.data.go.kr/B551182/msInsu/getNIitemInfoList01"
+DRUG_NAMES = [
+    "Docetaxel", "Paclitaxel", "Vinorelbine", "Vinblastine",
+    "Epirubicin", "Bortezomib", "SN-38", "Dinaciclib",
+    "Rapamycin", "Dactinomycin", "Staurosporine",
+    "Camptothecin", "Luminespib",
+]
+
+# 한글 검색명 매핑
+DRUG_NAME_KR = {
+    "Docetaxel": "도세탁셀",
+    "Paclitaxel": "파클리탁셀",
+    "Vinorelbine": "비노렐빈",
+    "Vinblastine": "빈블라스틴",
+    "Epirubicin": "에피루비신",
+    "Bortezomib": "보르테조밉",
+    "Rapamycin": "라파마이신",
+    "Dactinomycin": "닥티노마이신",
+    "Camptothecin": "캄프토테신",
+}
 
 
-def get_pipeline_drugs(driver) -> list[str]:
-    with driver.session(database=DATABASE) as session:
-        return [
-            r["name"]
-            for r in session.run(
-                'MATCH (d:Drug) WHERE d.disease_code = "BRCA" '
-                "RETURN d.name AS name ORDER BY d.rank"
-            ).data()
-        ]
+def load_api_key() -> str:
+    if not ENV_PATH.exists():
+        raise FileNotFoundError(f"API 키 파일 없음: {ENV_PATH}")
+    with open(ENV_PATH) as f:
+        for line in f:
+            if line.startswith("HIRA_API_KEY="):
+                return line.strip().split("=", 1)[1]
+    raise ValueError("HIRA_API_KEY가 .env에 없습니다.")
 
 
-def parse_response(resp_text: str) -> list[dict]:
-    """XML 또는 JSON 응답 파싱"""
-    items = []
-    # JSON 시도
+def fetch_drug_info(api_key: str, item_name: str) -> list[dict]:
+    params = urllib.parse.urlencode({
+        "serviceKey": api_key,
+        "type": "json",
+        "numOfRows": "10",
+        "itemName": item_name,
+    })
+    url = f"{ENDPOINT}?{params}"
     try:
-        import json
-        data = json.loads(resp_text)
-        body = data.get("response", {}).get("body", {})
-        item_list = body.get("items", {})
-        if isinstance(item_list, dict):
-            item_list = item_list.get("item", [])
+        with urllib.request.urlopen(url, timeout=15) as resp:
+            data = json.loads(resp.read().decode("utf-8", errors="replace"))
+    except Exception as e:
+        return [{"error": str(e)}]
+
+    body = data.get("response", {}).get("body", {})
+    items = body.get("items", {})
+    if isinstance(items, dict):
+        item_list = items.get("item", [])
         if isinstance(item_list, dict):
             item_list = [item_list]
-        for item in item_list:
-            items.append({
-                "item_name": item.get("itemName", ""),
-                "insurance_type": item.get("insrType", ""),
-                "unit_price": item.get("unitPrice", ""),
-                "component_name": item.get("cmpnName", ""),
-            })
-        return items
-    except (json.JSONDecodeError, ValueError):
-        pass
-
-    # XML 시도
-    try:
-        root = ET.fromstring(resp_text)
-        for item in root.iter("item"):
-            items.append({
-                "item_name": (item.findtext("itemName") or "").strip(),
-                "insurance_type": (item.findtext("insrType") or "").strip(),
-                "unit_price": (item.findtext("unitPrice") or "").strip(),
-                "component_name": (item.findtext("cmpnName") or "").strip(),
-            })
-    except ET.ParseError:
-        pass
-
-    return items
+        return item_list
+    return []
 
 
-def fetch_drug_price(drug_name: str) -> list[dict] | None:
-    params = {
-        "serviceKey": API_KEY,
-        "itemName": drug_name,
-        "type": "json",
-        "numOfRows": 10,
-    }
-    try:
-        resp = requests.get(BASE_URL, params=params, timeout=15)
-        resp.raise_for_status()
-        return parse_response(resp.text)
-    except Exception as e:
-        print(f"에러: {e}")
-        return None
+def load_to_neo4j(drug_name: str, items: list[dict]):
+    from dotenv import load_dotenv
+    from neo4j import GraphDatabase
+    load_dotenv(PROJECT_ROOT / ".env")
+
+    driver = GraphDatabase.driver(
+        os.getenv("NEO4J_URI"),
+        auth=(os.getenv("NEO4J_USERNAME"), os.getenv("NEO4J_PASSWORD")),
+    )
+    db = os.getenv("NEO4J_DATABASE")
+
+    with driver.session(database=db) as session:
+        if items:
+            item = items[0]
+            session.run(
+                """
+                MATCH (d:Drug {name: $name})
+                SET d.hira_item_name = $hira_name,
+                    d.insurance_type = $ins_type,
+                    d.unit_price = $price,
+                    d.hira_updated = date()
+                """,
+                name=drug_name,
+                hira_name=item.get("itemName", ""),
+                ins_type=item.get("insuType", item.get("insTypNm", "")),
+                price=item.get("unitPrice", item.get("mdcGrdCd", "")),
+            )
+    driver.close()
 
 
 def main():
-    if not API_KEY:
-        print("HIRA_API_KEY 없음 → 즉시 중단")
-        return
+    print("=" * 60)
+    print("HIRA 약물 보험정보 수집")
+    print(f"엔드포인트: {ENDPOINT}")
+    print("=" * 60)
 
-    driver = GraphDatabase.driver(URI, auth=(USERNAME, PASSWORD))
-    driver.verify_connectivity()
-    print(f"Neo4j 연결: {URI}\n")
+    api_key = load_api_key()
+    print(f"API 키: {api_key[:15]}...")
 
-    drugs = get_pipeline_drugs(driver)
-    print(f"대상 약물: {len(drugs)}개\n")
+    success = 0
+    fail = 0
+    no_data = 0
+    results = {}
 
-    updated = 0
-    for i, drug in enumerate(drugs, 1):
-        print(f"  [{i}/{len(drugs)}] {drug} ... ", end="", flush=True)
+    for i, drug in enumerate(DRUG_NAMES, 1):
+        search_terms = [drug]
+        if drug in DRUG_NAME_KR:
+            search_terms.append(DRUG_NAME_KR[drug])
 
-        items = fetch_drug_price(drug)
-        if not items:
-            # 한글명으로도 시도하지 않음 (영문 약물명이라 HIRA에 없을 수 있음)
-            print("데이터 없음")
-            with driver.session(database=DATABASE) as session:
-                session.run(
-                    """
-                    MATCH (d:Drug {name: $name})
-                    SET d.insurance_type = '해당없음'
-                    """,
-                    name=drug,
-                )
-        else:
-            item = items[0]
-            with driver.session(database=DATABASE) as session:
-                session.run(
-                    """
-                    MATCH (d:Drug {name: $name})
-                    SET d.insurance_type = $insurance_type,
-                        d.unit_price     = $unit_price,
-                        d.hira_item_name = $hira_item_name
-                    """,
-                    name=drug,
-                    insurance_type=item["insurance_type"] or "해당없음",
-                    unit_price=item["unit_price"],
-                    hira_item_name=item["item_name"],
-                )
-            updated += 1
-            print(f"✓ {item['item_name'][:30]} ({item['insurance_type']}, {item['unit_price']}원)")
+        print(f"\n[{i}/{len(DRUG_NAMES)}] {drug}")
+        found_items = []
 
-        if i < len(drugs):
-            time.sleep(1)
+        for term in search_terms:
+            items = fetch_drug_info(api_key, term)
+            if items and "error" in items[0]:
+                print(f"  [{term}] ERROR: {items[0]['error']}")
+                fail += 1
+                break
+            elif items:
+                print(f"  [{term}] {len(items)}건 발견")
+                found_items.extend(items)
+            else:
+                print(f"  [{term}] 결과 없음")
 
-    print(f"\n{'='*50}")
-    print(f"  HIRA 약가 완료: {updated}/{len(drugs)} 업데이트")
-    print(f"{'='*50}")
+        if found_items:
+            results[drug] = found_items
+            success += 1
+            item = found_items[0]
+            print(f"  → {item.get('itemName', 'N/A')[:50]}")
+            try:
+                load_to_neo4j(drug, found_items)
+                print(f"  → Neo4j 업데이트 완료")
+            except Exception as e:
+                print(f"  → Neo4j 에러: {e}")
+        elif not any("error" in (items[0] if items else {}) for _ in [0]):
+            no_data += 1
 
-    driver.close()
+    # JSON 저장
+    out_path = "hira_drug_result.json"
+    with open(out_path, "w", encoding="utf-8") as f:
+        json.dump(results, f, ensure_ascii=False, indent=2)
+    print(f"\n결과 저장: {out_path}")
+
+    print("\n" + "=" * 60)
+    print(f"완료: 성공 {success} / 실패 {fail} / 데이터없음 {no_data} / 총 {len(DRUG_NAMES)}")
+    print("=" * 60)
 
 
 if __name__ == "__main__":

@@ -1,6 +1,13 @@
 # 프론트엔드 개발자 Joe에게
 
-## 백엔드 API 서버 정보
+## API 접속 URL
+
+**ngrok 공개 URL (원격 접속용):**
+- Base URL: `(ngrok URL - 서버 시작 시 공유)`
+- Swagger UI: `{ngrok URL}/docs`
+- 무료 플랜은 서버 재시작 시 URL 변경됨 → 변경 시 카카오톡/슬랙으로 공유
+
+**로컬 접속:**
 - Base URL: `http://localhost:8000`
 - Swagger UI: `http://localhost:8000/docs`
 - 상세 명세: `docs/API_SPEC.md`
@@ -8,12 +15,18 @@
 ## 빠른 시작
 
 ```bash
+# 방법 1: 서버 + ngrok 동시 실행 (추천)
+cd 20260409_scaleup_biso
+./start_server.sh
+
+# 방법 2: 수동 실행
 cd 20260409_scaleup_biso
 conda activate drug4-kg
 uvicorn chat.api_server:app --reload --port 8000
+# 다른 터미널에서: ngrok http 8000
 ```
 
-브라우저에서 http://localhost:8000/docs 접속하면 Swagger UI에서 모든 API 테스트 가능
+ngrok 실행 후 터미널에 표시되는 `https://xxxx.ngrok-free.app` URL이 공개 접속 주소
 
 ## Neo4j 비밀번호
 별도 전달 예정 (보안상 문서 미포함)
