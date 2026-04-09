@@ -256,7 +256,7 @@ def query_s3_metabric_results():
 
 
 def query_repurposing_candidates():
-    """Return the 9 repurposing candidates (5 trial + 4 novel)."""
+    """Return the 10 repurposing candidates (6 trial + 4 novel)."""
     if not ADMET_RESULTS_CSV.exists():
         return {"status": "pending", "message": "약물 재창출 후보 데이터가 아직 없습니다."}
 
@@ -285,7 +285,7 @@ def query_repurposing_candidates():
                 f"{c['pred_ic50']:.3f} | {c['safety']:.1f} | {c['combined']:.1f} | "
                 f"{c['brca_class']} | {c['reason']} |\n")
 
-    text += "\n> 상세 분석: [재창출 후보 9건 대시보드](repurposing_candidates.html)"
+    text += "\n> 상세 분석: [재창출 후보 10건 대시보드](repurposing_candidates.html)"
     return {"status": "ok", "data": text}
 
 

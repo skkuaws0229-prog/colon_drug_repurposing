@@ -112,7 +112,7 @@ if "follow_up" not in st.session_state:
 def classify_query(query: str) -> str:
     """Classify user query into a category for routing."""
     q = query.lower()
-    if any(k in q for k in ["재창출", "repurposing", "후보 9", "신약 후보"]):
+    if any(k in q for k in ["재창출", "repurposing", "후보 10", "후보 9", "신약 후보"]):
         return "repurposing"
     if any(k in q for k in ["약물 후보", "추천", "drug candidate", "top 15", "top15", "top 30"]):
         return "drug_candidates"
@@ -143,7 +143,7 @@ def get_follow_up_questions(category: str) -> list:
     """Return follow-up question suggestions based on category."""
     follow_ups = {
         "drug_candidates": [
-            "재창출 후보 9건 보여줘",
+            "재창출 후보 10건 보여줘",
             "ADMET 결과 알려줘",
             "관련 임상시험 알려줘",
         ],
@@ -160,10 +160,10 @@ def get_follow_up_questions(category: str) -> list:
         "metabric": [
             "약물 후보 추천해줘",
             "ADMET 결과 알려줘",
-            "재창출 후보 9건 보여줘",
+            "재창출 후보 10건 보여줘",
         ],
         "adverse_events": [
-            "재창출 후보 9건 보여줘",
+            "재창출 후보 10건 보여줘",
             "관련 논문 검색해줘",
             "ADMET 프로파일 보여줘",
         ],
@@ -173,22 +173,22 @@ def get_follow_up_questions(category: str) -> list:
             "ADMET 결과 알려줘",
         ],
         "clinical_trials": [
-            "재창출 후보 9건 보여줘",
+            "재창출 후보 10건 보여줘",
             "최신 논문 검색해줘",
             "부작용 데이터 알려줘",
         ],
         "admet": [
-            "재창출 후보 9건 보여줘",
+            "재창출 후보 10건 보여줘",
             "약물 후보 목록 보여줘",
             "관련 논문 검색해줘",
         ],
         "pipeline_status": [
             "모델 결과 보여줘",
-            "재창출 후보 9건 보여줘",
+            "재창출 후보 10건 보여줘",
             "ADMET 결과 알려줘",
         ],
     }
-    return follow_ups.get(category, ["재창출 후보 9건 보여줘", "모델 결과 보여줘", "최신 논문 검색해줘"])
+    return follow_ups.get(category, ["재창출 후보 10건 보여줘", "모델 결과 보여줘", "최신 논문 검색해줘"])
 
 
 def process_query(query: str) -> tuple:
@@ -214,7 +214,7 @@ def process_query(query: str) -> tuple:
                 text += (f"| {d.get('final_rank', d.get('rank', '-'))} | {d.get('drug_name', d.get('drug_id', '-'))} | "
                         f"{d.get('pred_ic50', d.get('mean_pred_ic50', 0)):.3f} | "
                         f"{d.get('safety_score', '-')} | {cls} |\n")
-            text += f"\n> 유방암 현재 사용: 6 | 적응증 확장/연구 중: 5 | 유방암 미사용(신약 후보): 4"
+            text += f"\n> 유방암 현재 사용: 5 | 적응증 확장/연구 중: 6 | 유방암 미사용(신약 후보): 4"
         else:
             text = f"아직 약물 후보 데이터가 준비되지 않았습니다.\n\n상태: {result['message']}"
 
@@ -314,7 +314,7 @@ def process_query(query: str) -> tuple:
                 "| 6 | METABRIC 외부 검증 | ✅ 완료 (P@15=93.3%) |\n"
                 "| 7 | ADMET 게이트 | ✅ 완료 (15개 최종 후보) |\n\n"
                 "> **7/7 단계 완료 (100%)**\n\n"
-                "**최종 결과**: 15개 약물 후보 (유방암 현재 사용 6 | 연구 중 5 | 신약 후보 4)")
+                "**최종 결과**: 15개 약물 후보 (유방암 현재 사용 5 | 연구 중 6 | 신약 후보 4)")
 
     else:
         text = ("질문을 이해했습니다. 현재 Bedrock 연동 전이라 자연어 대화는 제한적입니다.\n\n"
@@ -336,7 +336,7 @@ with st.sidebar:
     st.markdown("#### 빠른 질문")
     quick_questions = [
         ("약물 후보 추천해줘", "drug"),
-        ("재창출 후보 9건 보여줘", "repurpose"),
+        ("재창출 후보 10건 보여줘", "repurpose"),  # 6 trial + 4 novel
         ("모델 결과 보여줘", "model"),
         ("ADMET 결과 알려줘", "admet"),
         ("METABRIC 검증 결과", "metabric"),
@@ -401,7 +401,7 @@ if st.session_state.follow_up and st.session_state.messages:
                 st.rerun()
 
 # Chat input
-if prompt := st.chat_input("질문을 입력하세요 (예: 재창출 후보 9건 보여줘)"):
+if prompt := st.chat_input("질문을 입력하세요 (예: 재창출 후보 10건 보여줘)"):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
