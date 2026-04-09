@@ -28,16 +28,6 @@ uvicorn chat.api_server:app --reload --port 8000
 
 ngrok 실행 후 터미널에 표시되는 `https://xxxx.ngrok-free.app` URL이 공개 접속 주소
 
-## Neo4j 비밀번호
-별도 전달 예정 (보안상 문서 미포함)
-`.env` 파일에 아래 형식으로 저장:
-```
-NEO4J_URI=neo4j+s://108928fe.databases.neo4j.io
-NEO4J_USERNAME=108928fe
-NEO4J_DATABASE=108928fe
-NEO4J_PASSWORD=(별도 전달)
-```
-
 ## 주요 사용 시나리오
 
 ### 환자/보호자 화면
