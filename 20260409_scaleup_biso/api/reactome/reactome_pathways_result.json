@@ -1,0 +1,716 @@
+{
+  "target_pathways": [
+    {
+      "reactome_id": "R-HSA-3214858",
+      "display_name": "RMTs methylate histone arginines",
+      "species": "Homo sapiens",
+      "description": "Arginine methylation is a common post-translational modification; around 2% of arginine residues are methylated in rat liver nuclei (Boffa et al. 1977). Arginine can be methylated in 3 different ways: monomethylarginine (MMA); NG,NG-asymmetric dimethylarginine (ADMA) and NG,N'G-symmetric dimethylarginine (SDMA). The formation of MMA, ADMA and SDMA in mammalian cells is carried out by members of a family of nine protein arginine methyltransferases (PRMTs) (Bedford & Clarke 2009). <br><br>Type I, "
+    },
+    {
+      "reactome_id": "R-HSA-109581",
+      "display_name": "Apoptosis",
+      "species": "Homo sapiens",
+      "description": "Apoptosis is a distinct form of cell death that is functionally and morphologically different from necrosis. Nuclear chromatin condensation, cytoplasmic shrinking, dilated endoplasmic reticulum, and membrane blebbing characterize apoptosis in general. Mitochondria remain morphologically unchanged. In 1972 Kerr et al introduced the concept of apoptosis as a distinct form of \"cell-death\", and the mechanisms of various apoptotic pathways are still being revealed today. <BR>The two principal  pathwa"
+    },
+    {
+      "reactome_id": "R-HSA-8953897",
+      "display_name": "Cellular responses to stimuli",
+      "species": "Homo sapiens",
+      "description": "Individual cells detect and respond to diverse external molecular and physical signals. Appropriate responses to these signals are essential for normal development, maintenance of homeostasis in mature tissues, and effective defensive responses to potentially noxious agents (Kultz 2005). It is convenient, if somewhat arbitrary, to distinguish responses to signals involved in development and homeostasis from ones involved in stress responses, and that classification is followed here, with <b>macr"
+    },
+    {
+      "reactome_id": "R-HSA-1640170",
+      "display_name": "Cell Cycle",
+      "species": "Homo sapiens",
+      "description": "The replication of the genome and the subsequent segregation of chromosomes into daughter cells are controlled by a series of events collectively known as the <b>cell cycle</b>. DNA replication is carried out during a discrete temporal period known as the S (synthesis)-phase, and chromosome segregation occurs during a massive reorganization to cellular architecture at mitosis. Two gap-phases separate these major cell cycle events: G1 between mitosis and S-phase, and G2 between S-phase and mitosi"
+    },
+    {
+      "reactome_id": "R-HSA-73857",
+      "display_name": "RNA Polymerase II Transcription",
+      "species": "Homo sapiens",
+      "description": "RNA polymerase II (Pol II) is the central enzyme that catalyses DNA- directed mRNA synthesis during the transcription of protein-coding genes. Pol II consists of a 10-subunit catalytic core, which alone is capable of elongating the RNA transcript, and a complex of two subunits, Rpb4/7, that is required for transcription initiation. <BR>  The transcription cycle is divided in three major phases: initiation, elongation, and termination. Transcription initiation include promoter DNA binding, DNA me"
+    },
+    {
+      "reactome_id": "R-HSA-2500257",
+      "display_name": "Resolution of Sister Chromatid Cohesion",
+      "species": "Homo sapiens",
+      "description": "The resolution of sister chromatids in mitotic prometaphase involves removal of cohesin complexes from chromosomal arms, with preservation of cohesion at centromeres (Losada et al. 1998, Hauf et al. 2001, Hauf et al. 2005).<br><br>CDK1-mediated phosphorylation of cohesin-bound CDCA5 (Sororin) at threonine T159 provides a docking site for PLK1, enabling PLK1-mediated phosphorylation of cohesin subunits STAG2 (SA2) and RAD21 (Hauf et al. 2005, Dreier et al. 2011, Zhang et al. 2011). Further phosph"
+    },
+    {
+      "reactome_id": "R-HSA-5357801",
+      "display_name": "Programmed Cell Death",
+      "species": "Homo sapiens",
+      "description": "Cell death is a fundamental cellular response that has a crucial role in shaping our bodies during development and in regulating tissue homeostasis by eliminating unwanted cells. There are a number of different forms of cell death, each with a corresponding number of complex subprocesses. The first form of regulated or programmed cell death to be characterized was apoptosis. Evidence has emerged for a number of regulated non-apoptotic cell death pathways, including some with morphological featur"
+    },
+    {
+      "reactome_id": "R-HSA-199418",
+      "display_name": "Negative regulation of the PI3K/AKT network",
+      "species": "Homo sapiens",
+      "description": "The PI3K/AKT network is negatively regulated by phosphatases that dephosphorylate PIP3, thus hampering AKT activation."
+    }
+  ],
+  "brca_pathways": [
+    {
+      "reactome_id": "R-HSA-1221632",
+      "display_name": "Meiotic synapsis",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_BRCA1"
+    },
+    {
+      "reactome_id": "R-HSA-3108214",
+      "display_name": "SUMOylation of DNA damage response and repair proteins",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_BRCA1"
+    },
+    {
+      "reactome_id": "R-HSA-5685938",
+      "display_name": "HDR through Single Strand Annealing (SSA)",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_BRCA1"
+    },
+    {
+      "reactome_id": "R-HSA-5685942",
+      "display_name": "HDR through Homologous Recombination (HRR)",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_BRCA1"
+    },
+    {
+      "reactome_id": "R-HSA-5689901",
+      "display_name": "Metalloprotease DUBs",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_BRCA1"
+    },
+    {
+      "reactome_id": "R-HSA-5693554",
+      "display_name": "Resolution of D-loop Structures through Synthesis-Dependent Strand Annealing (SDSA)",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_BRCA1"
+    },
+    {
+      "reactome_id": "R-HSA-5693565",
+      "display_name": "Recruitment and ATM-mediated phosphorylation of repair and signaling proteins at DNA double strand breaks",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_BRCA1"
+    },
+    {
+      "reactome_id": "R-HSA-5693568",
+      "display_name": "Resolution of D-loop Structures through Holliday Junction Intermediates",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_BRCA1"
+    },
+    {
+      "reactome_id": "R-HSA-5693571",
+      "display_name": "Nonhomologous End-Joining (NHEJ)",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_BRCA1"
+    },
+    {
+      "reactome_id": "R-HSA-5693579",
+      "display_name": "Homologous DNA Pairing and Strand Exchange",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_BRCA1"
+    },
+    {
+      "reactome_id": "R-HSA-5693607",
+      "display_name": "Processing of DNA double-strand break ends",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_BRCA1"
+    },
+    {
+      "reactome_id": "R-HSA-5693616",
+      "display_name": "Presynaptic phase of homologous DNA pairing and strand exchange",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_BRCA1"
+    },
+    {
+      "reactome_id": "R-HSA-6796648",
+      "display_name": "TP53 Regulates Transcription of DNA Repair Genes",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_BRCA1"
+    },
+    {
+      "reactome_id": "R-HSA-6804756",
+      "display_name": "Regulation of TP53 Activity through Phosphorylation",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_BRCA1"
+    },
+    {
+      "reactome_id": "R-HSA-69473",
+      "display_name": "G2/M DNA damage checkpoint",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_BRCA1"
+    },
+    {
+      "reactome_id": "R-HSA-8951664",
+      "display_name": "Neddylation",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_BRCA1"
+    },
+    {
+      "reactome_id": "R-HSA-8953750",
+      "display_name": "Transcriptional Regulation by E2F6",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_BRCA1"
+    },
+    {
+      "reactome_id": "R-HSA-912446",
+      "display_name": "Meiotic recombination",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_BRCA1"
+    },
+    {
+      "reactome_id": "R-HSA-9663199",
+      "display_name": "Defective DNA double strand break response due to BRCA1 loss of function",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_BRCA1"
+    },
+    {
+      "reactome_id": "R-HSA-9699150",
+      "display_name": "Defective DNA double strand break response due to BARD1 loss of function",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_BRCA1"
+    },
+    {
+      "reactome_id": "R-HSA-9701192",
+      "display_name": "Defective homologous recombination repair (HRR) due to BRCA1 loss of function",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_BRCA1"
+    },
+    {
+      "reactome_id": "R-HSA-9704331",
+      "display_name": "Defective HDR through Homologous Recombination Repair (HRR) due to PALB2 loss of BRCA1 binding function",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_BRCA1"
+    },
+    {
+      "reactome_id": "R-HSA-9704646",
+      "display_name": "Defective HDR through Homologous Recombination Repair (HRR) due to PALB2 loss of BRCA2/RAD51/RAD51C binding function",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_BRCA1"
+    },
+    {
+      "reactome_id": "R-HSA-9709570",
+      "display_name": "Impaired BRCA2 binding to RAD51",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_BRCA1"
+    },
+    {
+      "reactome_id": "R-HSA-9709603",
+      "display_name": "Impaired BRCA2 binding to PALB2",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_BRCA1"
+    },
+    {
+      "reactome_id": "R-HSA-9755511",
+      "display_name": "KEAP1-NFE2L2 pathway",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_BRCA1"
+    },
+    {
+      "reactome_id": "R-HSA-9825895",
+      "display_name": "Regulation of MITF-M-dependent genes involved in DNA replication, damage repair and senescence",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_BRCA1"
+    },
+    {
+      "reactome_id": "R-HSA-5685939",
+      "display_name": "HDR through MMEJ (alt-NHEJ)",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_BRCA2"
+    },
+    {
+      "reactome_id": "R-HSA-9709275",
+      "display_name": "Impaired BRCA2 translocation to the nucleus",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_BRCA2"
+    },
+    {
+      "reactome_id": "R-HSA-9763198",
+      "display_name": "Impaired BRCA2 binding to SEM1 (DSS1)",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_BRCA2"
+    },
+    {
+      "reactome_id": "R-HSA-111448",
+      "display_name": "Activation of NOXA and translocation to mitochondria",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-139915",
+      "display_name": "Activation of PUMA and translocation to mitochondria",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-1912408",
+      "display_name": "Pre-NOTCH Transcription and Translation",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-2559580",
+      "display_name": "Oxidative Stress Induced Senescence",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-2559584",
+      "display_name": "Formation of Senescence-Associated Heterochromatin Foci (SAHF)",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-2559585",
+      "display_name": "Oncogene Induced Senescence",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-2559586",
+      "display_name": "DNA Damage/Telomere Stress Induced Senescence",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-3232118",
+      "display_name": "SUMOylation of transcription factors",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-349425",
+      "display_name": "Autodegradation of the E3 ubiquitin ligase COP1",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-390471",
+      "display_name": "Association of TriC/CCT with target proteins during biosynthesis",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-5620971",
+      "display_name": "Pyroptosis",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-5628897",
+      "display_name": "TP53 Regulates Metabolic Genes",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-5689880",
+      "display_name": "Ub-specific processing proteases",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-5689896",
+      "display_name": "Ovarian tumor domain proteases",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-6785807",
+      "display_name": "Interleukin-4 and Interleukin-13 signaling",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-6803204",
+      "display_name": "TP53 Regulates Transcription of Genes Involved in Cytochrome C Release",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-6803205",
+      "display_name": "TP53 regulates transcription of several additional cell death genes whose specific roles in p53-dependent apoptosis remain uncertain",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-6803207",
+      "display_name": "TP53 Regulates Transcription of Caspase Activators and Caspases",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-6803211",
+      "display_name": "TP53 Regulates Transcription of Death Receptors and Ligands",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-6804114",
+      "display_name": "TP53 Regulates Transcription of Genes Involved in G2 Cell Cycle Arrest",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-6804115",
+      "display_name": "TP53 regulates transcription of additional cell cycle genes whose exact role in the p53 pathway remain uncertain",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-6804116",
+      "display_name": "TP53 Regulates Transcription of Genes Involved in G1 Cell Cycle Arrest",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-6804754",
+      "display_name": "Regulation of TP53 Expression",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-6804757",
+      "display_name": "Regulation of TP53 Degradation",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-6804758",
+      "display_name": "Regulation of TP53 Activity through Acetylation",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-6804759",
+      "display_name": "Regulation of TP53 Activity through Association with Co-factors",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-6804760",
+      "display_name": "Regulation of TP53 Activity through Methylation",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-6811555",
+      "display_name": "PI5P Regulates TP53 Acetylation",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-69481",
+      "display_name": "G2/M Checkpoints",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-69541",
+      "display_name": "Stabilization of p53",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-69895",
+      "display_name": "Transcriptional  activation of  cell cycle inhibitor p21 ",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-70635",
+      "display_name": "Urea cycle",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-8852276",
+      "display_name": "The role of GTSE1 in G2/M progression after G2 checkpoint",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-8853884",
+      "display_name": "Transcriptional Regulation by VENTX",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-8941855",
+      "display_name": "RUNX3 regulates CDKN1A transcription",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-8943724",
+      "display_name": "Regulation of PTEN gene transcription",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-9723905",
+      "display_name": "Loss of function of TP53 in cancer due to loss of tetramerization ability",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-9725370",
+      "display_name": "Signaling by ALK fusions and activated point mutants",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-9758274",
+      "display_name": "Regulation of NF-kappa B signaling",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-9819196",
+      "display_name": "Zygotic genome activation (ZGA)",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-983231",
+      "display_name": "Factors involved in megakaryocyte development and platelet production",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-9833482",
+      "display_name": "PKR-mediated signaling",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_TP53"
+    },
+    {
+      "reactome_id": "R-HSA-187577",
+      "display_name": "SCF(Skp2)-mediated degradation of p27/p21",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_CDKN1A (p21)"
+    },
+    {
+      "reactome_id": "R-HSA-198323",
+      "display_name": "AKT phosphorylates targets in the cytosol",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_CDKN1A (p21)"
+    },
+    {
+      "reactome_id": "R-HSA-2559582",
+      "display_name": "Senescence-Associated Secretory Phenotype (SASP)",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_CDKN1A (p21)"
+    },
+    {
+      "reactome_id": "R-HSA-5674400",
+      "display_name": "Constitutive Signaling by AKT1 E17K in Cancer",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_CDKN1A (p21)"
+    },
+    {
+      "reactome_id": "R-HSA-69202",
+      "display_name": "Cyclin E associated events during G1/S transition ",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_CDKN1A (p21)"
+    },
+    {
+      "reactome_id": "R-HSA-69231",
+      "display_name": "Cyclin D associated events in G1",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_CDKN1A (p21)"
+    },
+    {
+      "reactome_id": "R-HSA-69563",
+      "display_name": "p53-Dependent G1 DNA Damage Response",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_CDKN1A (p21)"
+    },
+    {
+      "reactome_id": "R-HSA-69656",
+      "display_name": "Cyclin A:Cdk2-associated events at S phase entry",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_CDKN1A (p21)"
+    },
+    {
+      "reactome_id": "R-HSA-8866911",
+      "display_name": "TFAP2 (AP-2) family regulates transcription of cell cycle factors",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_CDKN1A (p21)"
+    },
+    {
+      "reactome_id": "R-HSA-8878166",
+      "display_name": "Transcriptional regulation by RUNX2",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_CDKN1A (p21)"
+    },
+    {
+      "reactome_id": "R-HSA-9616222",
+      "display_name": "Transcriptional regulation of granulopoiesis",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_CDKN1A (p21)"
+    },
+    {
+      "reactome_id": "R-HSA-9617828",
+      "display_name": "FOXO-mediated transcription of cell cycle genes",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_CDKN1A (p21)"
+    },
+    {
+      "reactome_id": "R-HSA-9661069",
+      "display_name": "Defective binding of RB1 mutants to E2F1,(E2F2, E2F3)",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_CDKN1A (p21)"
+    },
+    {
+      "reactome_id": "R-HSA-9702518",
+      "display_name": "STAT5 activation downstream of FLT3 ITD mutants",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_CDKN1A (p21)"
+    },
+    {
+      "reactome_id": "R-HSA-9703465",
+      "display_name": "Signaling by FLT3 fusion proteins",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_CDKN1A (p21)"
+    },
+    {
+      "reactome_id": "R-HSA-9825892",
+      "display_name": "Regulation of MITF-M-dependent genes involved in cell cycle and proliferation",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_CDKN1A (p21)"
+    },
+    {
+      "reactome_id": "R-HSA-111453",
+      "display_name": "BH3-only proteins associate with and inactivate anti-apoptotic BCL-2 members",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_BCL2L1 (BCL-XL)"
+    },
+    {
+      "reactome_id": "R-HSA-844455",
+      "display_name": "The NLRP1 inflammasome",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_BCL2L1 (BCL-XL)"
+    },
+    {
+      "reactome_id": "R-HSA-9648002",
+      "display_name": "RAS processing",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_BCL2L1 (BCL-XL)"
+    },
+    {
+      "reactome_id": "R-HSA-9692913",
+      "display_name": "SARS-CoV-1-mediated effects on programmed cell death",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_BCL2L1 (BCL-XL)"
+    },
+    {
+      "reactome_id": "R-HSA-9818030",
+      "display_name": "NFE2L2 regulating tumorigenic genes",
+      "species": "Homo sapiens",
+      "description": "",
+      "source": "Reactome_BCL2L1 (BCL-XL)"
+    }
+  ],
+  "stats": {
+    "target_pathway_count": 8,
+    "brca_pathway_count": 93,
+    "brca_proteins_queried": [
+      "P38398",
+      "P51587",
+      "P04637",
+      "P38936",
+      "Q07817"
+    ]
+  }
+}
