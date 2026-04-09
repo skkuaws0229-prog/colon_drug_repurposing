@@ -74,4 +74,4 @@ python neo4j/loaders/load_pipeline_results.py --disease LUAD
 ## 👥 프론트엔드 (Joe)
 - 노션 가이드: https://www.notion.so/33dc603002ec81e990bbe2742e9ee1f3
 - API 명세서: docs/API_SPEC.md
-- 구현 가이드: docs/FOR_JOE_FRONTEND.md
+- 구현 가이드: docs/FOR_JOE.md
