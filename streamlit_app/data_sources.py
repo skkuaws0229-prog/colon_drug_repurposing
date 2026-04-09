@@ -40,6 +40,8 @@ DRUG_BRCA_CLASS = {
     "Camptothecin": {"class": "유방암 미사용", "color": "novel", "reason": "연구용, Irinotecan/Topotecan 모 화합물"},
     "Luminespib": {"class": "적응증 확장/연구 중", "color": "trial", "reason": "HSP90 억제제, 유방암 2상 임상시험"},
     "Epirubicin": {"class": "유방암 현재 사용", "color": "current", "reason": "FDA 유방암 보조요법 승인"},
+    "Romidepsin": {"class": "적응증 확장/연구 중", "color": "trial", "reason": "FDA CTCL/PTCL 승인, 유방암 TNBC 임상시험 (NCT02393794)"},
+    "Sepantronium bromide": {"class": "유방암 미사용", "color": "novel", "reason": "연구용 Survivin(BIRC5) 억제제, 유방암 적응증 없음"},
 }
 
 # ── Data Source Status ──

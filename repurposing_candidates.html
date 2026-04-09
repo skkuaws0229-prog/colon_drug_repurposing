@@ -61,7 +61,7 @@
 </head>
 <body>
 <div class="header">
-  <h1>약물 재창출 후보 9건 상세 분석</h1>
+  <h1>약물 재창출 후보 10건 상세 분석</h1>
   <a href="dashboard.html">&larr; 파이프라인 대시보드로 돌아가기</a>
 </div>
 <div class="container">
@@ -70,28 +70,96 @@
   <div class="summary">
     <div class="summary-title">약물 재창출 추천 후보 요약</div>
     <div style="font-size:0.82rem; color:#cbd5e1; margin-bottom:12px;">
-      앙상블 예측 + METABRIC 외부 검증 + ADMET 안전성 평가를 모두 통과한 15개 약물 중,<br>
-      유방암에 아직 사용되지 않거나 적응증 확장이 진행 중인 <b style="color:#fbbf24;">9건</b>을 약물 재창출 후보로 추천합니다.
+      앙상블 예측 + METABRIC 외부 검증 + ADMET 안전성 평가를 모두 통과한 15개 고유 약물(중복 제거) 중,<br>
+      유방암에 아직 사용되지 않거나 적응증 확장이 진행 중인 <b style="color:#fbbf24;">10건</b>을 약물 재창출 후보로 추천합니다.
     </div>
     <div class="metric-grid">
-      <div class="metric-card"><div class="value" style="color:#3b82f6;">5</div><div class="label">적응증 확장/연구 중</div></div>
+      <div class="metric-card"><div class="value" style="color:#3b82f6;">6</div><div class="label">적응증 확장/연구 중</div></div>
       <div class="metric-card"><div class="value" style="color:#a855f7;">4</div><div class="label">유방암 미사용 (신약 후보)</div></div>
-      <div class="metric-card"><div class="value" style="color:#4ade80;">9</div><div class="label">총 재창출 후보</div></div>
+      <div class="metric-card"><div class="value" style="color:#4ade80;">10</div><div class="label">총 재창출 후보</div></div>
       <div class="metric-card"><div class="value" style="color:#fbbf24;">100%</div><div class="label">평균 민감도</div></div>
       <div class="metric-card"><div class="value" style="color:#94a3b8;">22</div><div class="label">ADMET 분석 항목</div></div>
     </div>
   </div>
 
-  <!-- ═══ 적응증 확장/연구 중 (5건) ═══ -->
+  <!-- ═══ 적응증 확장/연구 중 (6건) ═══ -->
   <div class="section-header" style="color:#3b82f6;">
-    <span class="cat-trial">적응증 확장/연구 중</span> 5건 &mdash; 유방암 대상 임상시험 진행 또는 유도체 승인
+    <span class="cat-trial">적응증 확장/연구 중</span> 6건 &mdash; 유방암 대상 임상시험 진행 또는 유도체 승인
+  </div>
+
+  <!-- NEW: Romidepsin -->
+  <div class="drug-card">
+    <div class="drug-header">
+      <div>
+        <div class="drug-name"><span class="rank">#1</span>Romidepsin <span style="background:#06b6d420;color:#06b6d4;padding:2px 8px;border-radius:4px;font-size:0.7rem;font-weight:600;">NEW</span></div>
+        <div class="drug-meta">
+          타겟: <b>HDAC1, HDAC2, HDAC3, HDAC8</b> | 경로: Chromatin histone acetylation<br>
+          DrugBank: <a href="https://go.drugbank.com/drugs/DB06176" target="_blank">DB06176</a> |
+          PubChem: <a href="https://pubchem.ncbi.nlm.nih.gov/compound/5352062" target="_blank">CID 5352062</a>
+        </div>
+      </div>
+      <div class="drug-score">
+        <div class="ic50">-4.761</div>
+        <div class="ic50-label">예측 IC50 (종합 1위)</div>
+      </div>
+    </div>
+    <div class="drug-grid">
+      <div class="info-block">
+        <div class="info-title">작용 기전</div>
+        <div class="info-content">
+          Class I HDAC (HDAC1/2/3/8)를 선택적으로 억제하는 <b>히스톤 탈아세틸화효소 억제제</b>.<br>
+          히스톤 아세틸화 증가 &rarr; 종양 억제 유전자(p21, p27) 재발현 &rarr; 세포주기 정지 및 세포자멸사.<br>
+          <b>에피제네틱 기전</b>으로 기존 세포독성 약물과 교차 내성 가능성 매우 낮음.
+        </div>
+      </div>
+      <div class="info-block">
+        <div class="info-title">현재 FDA 승인 적응증 &amp; 유방암 임상</div>
+        <div class="info-content">
+          <span class="tag tag-pass">CTCL (피부 T세포 림프종)</span>
+          <span class="tag tag-pass">PTCL (말초 T세포 림프종)</span><br>
+          상표명: Istodax&reg; (Celgene/BMS)<br>
+          <span class="tag tag-nct">NCT02393794</span> Phase I, TNBC + Cisplatin<br>
+          <span class="tag tag-nct">NCT01638533</span> Phase I/II, 유방암 + Tamoxifen<br>
+          <span class="tag tag-info">에피제네틱 + 내분비 병용</span> 전략으로 ER+ 유방암 내성 극복 연구
+        </div>
+      </div>
+      <div class="info-block">
+        <div class="info-title">ADMET 안전성 프로파일</div>
+        <div class="info-content">
+          안전성 점수: <b style="color:#4ade80;">12.0/10</b> (FDA 승인 보너스 포함) | 검사 항목: 2/22<br>
+          통과: 2 | 주의: 0<br>
+          <span class="tag tag-pass">독성 우려 없음</span>
+          <div class="safety-bar">
+            <span class="bar-label">12.0</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:100%; background:#22c55e"></div></div>
+            <span class="bar-label">/ 12</span>
+          </div>
+        </div>
+      </div>
+      <div class="info-block">
+        <div class="info-title">METABRIC 검증</div>
+        <div class="info-content">
+          HDAC1/2/3/8 타겟 발현: <b style="color:#4ade80;">79%</b> 환자 발현<br>
+          생존 유의성: <span class="tag tag-pass">YES (p&lt;0.05)</span><br>
+          BRCA 관련 경로: <span class="tag tag-pass">Chromatin histone acetylation</span>
+        </div>
+      </div>
+    </div>
+    <div class="rationale">
+      <div class="rationale-title">재창출 추천 근거</div>
+      <div class="rationale-text">
+        종합 점수 <b>1위 (19.0점)</b> &mdash; 가장 높은 종합 점수. 앙상블 예측 IC50 2위(-4.761)로 매우 강력한 항암 활성.
+        FDA 승인 약물로 <b>안전성 프로파일 확립</b>됨. HDAC 억제를 통한 에피제네틱 기전은 기존 화학요법 내성 환자에서 <b>새로운 치료 전략</b> 제공.
+        유방암 병용 임상시험(TNBC + Cisplatin, ER+ + Tamoxifen) 이미 진행되어 <b>임상 전환 가능성</b> 높음.
+      </div>
+    </div>
   </div>
 
   <!-- 1. Bortezomib -->
   <div class="drug-card">
     <div class="drug-header">
       <div>
-        <div class="drug-name"><span class="rank">#6</span>Bortezomib</div>
+        <div class="drug-name"><span class="rank">#6</span>Bortezomib</div><!-- rank updated from old #6 -->
         <div class="drug-meta">
           타겟: <b>26S Proteasome</b> | 경로: Protein stability and degradation<br>
           DrugBank: <a href="https://go.drugbank.com/drugs/DB00188" target="_blank">DB00188</a> |
@@ -145,7 +213,7 @@
     <div class="rationale">
       <div class="rationale-title">재창출 추천 근거</div>
       <div class="rationale-text">
-        전체 15개 후보 중 <b>예측 IC50 최저 (-4.840)</b>로 가장 강력한 항암 활성 예측. 프로테아좀 억제는 유방암에서 NF-&kappa;B 과활성화를 차단하는 핵심 기전.
+        전체 15개 고유 후보 중 <b>예측 IC50 최저 (-4.840)</b>로 가장 강력한 항암 활성 예측. 프로테아좀 억제는 유방암에서 NF-&kappa;B 과활성화를 차단하는 핵심 기전.
         METABRIC에서 타겟 발현 확인, 생존 유의성 통과. 기존 유방암 임상시험에서 <b>병용 요법 시너지</b> 가능성이 보고되어 Docetaxel/Paclitaxel과의 병용 프로토콜 설계 권장.
       </div>
     </div>
@@ -418,11 +486,79 @@
     <span class="cat-novel">유방암 미사용 (신약 후보물질)</span> 4건 &mdash; 약물 재창출 핵심 대상
   </div>
 
+  <!-- NEW: Sepantronium bromide -->
+  <div class="drug-card novel">
+    <div class="drug-header">
+      <div>
+        <div class="drug-name"><span class="rank">#2</span>Sepantronium bromide (YM155) <span style="background:#06b6d420;color:#06b6d4;padding:2px 8px;border-radius:4px;font-size:0.7rem;font-weight:600;">NEW</span></div>
+        <div class="drug-meta">
+          타겟: <b>BIRC5 (Survivin)</b> | 경로: Apoptosis regulation<br>
+          PubChem: <a href="https://pubchem.ncbi.nlm.nih.gov/compound/11624948" target="_blank">CID 11624948</a>
+        </div>
+      </div>
+      <div class="drug-score">
+        <div class="ic50">-3.736</div>
+        <div class="ic50-label">예측 IC50 (종합 2위)</div>
+      </div>
+    </div>
+    <div class="drug-grid">
+      <div class="info-block">
+        <div class="info-title">작용 기전</div>
+        <div class="info-content">
+          Survivin (BIRC5) 프로모터를 선택적으로 억제하여 <b>Survivin 전사를 차단</b>.<br>
+          Survivin은 세포자멸사 억제 단백질(IAP)로, 유방암에서 과발현 빈도 높음 (~60%).<br>
+          Survivin 억제 &rarr; 카스파제 활성화 &rarr; <b>세포자멸사 재유도</b> + 방사선/화학요법 민감화.
+        </div>
+      </div>
+      <div class="info-block">
+        <div class="info-title">현재 승인 현황 &amp; 임상시험</div>
+        <div class="info-content">
+          <b style="color:#a855f7;">FDA 미승인 (연구용 화합물)</b><br>
+          <span class="tag tag-nct">NCT00514267</span> Phase II, 비소세포폐암<br>
+          <span class="tag tag-nct">NCT01009775</span> Phase I/II, 전립선암<br>
+          <span class="tag tag-nct">NCT00106535</span> Phase I, 고형암<br>
+          다양한 고형암에서 Phase I/II 임상 데이터 확보
+        </div>
+      </div>
+      <div class="info-block">
+        <div class="info-title">ADMET 안전성 프로파일</div>
+        <div class="info-content">
+          안전성 점수: <b style="color:#4ade80;">10.0/10</b> | 검사 항목: 1/22<br>
+          통과: 1 | 주의: 0<br>
+          <span class="tag tag-pass">독성 우려 없음</span><br>
+          검사 항목 제한적 &mdash; 추가 ADMET 검증 권장
+          <div class="safety-bar">
+            <span class="bar-label">10.0</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:100%; background:#22c55e"></div></div>
+            <span class="bar-label">/ 10</span>
+          </div>
+        </div>
+      </div>
+      <div class="info-block">
+        <div class="info-title">METABRIC 검증</div>
+        <div class="info-content">
+          BIRC5 타겟 발현: <b style="color:#4ade80;">43%</b> 환자 발현<br>
+          생존 유의성: <span class="tag tag-pass">YES (p&lt;0.05)</span><br>
+          BRCA 관련 경로: <span class="tag tag-pass">Apoptosis regulation</span><br>
+          BRCA 세포주 민감도: <b style="color:#4ade80;">100%</b> (28개)
+        </div>
+      </div>
+    </div>
+    <div class="rationale">
+      <div class="rationale-title">재창출 추천 근거</div>
+      <div class="rationale-text">
+        종합 점수 <b>2위 (16.5점)</b>. ADMET 안전성 만점. Survivin은 유방암 환자의 ~60%에서 과발현되며 <b>예후 불량 바이오마커</b>로 확립.
+        28개 BRCA 세포주 전수 민감(100%). 기존 세포독성 약물과 완전히 다른 <b>세포자멸사 재활성화</b> 기전으로 내성 극복 가능.
+        Phase I/II 임상 데이터가 있어 <b>유방암 특이적 임상시험</b> 설계 시 안전성 기반 데이터 활용 가능.
+      </div>
+    </div>
+  </div>
+
   <!-- 6. Dactinomycin (entry 1) -->
   <div class="drug-card novel">
     <div class="drug-header">
       <div>
-        <div class="drug-name"><span class="rank">#1</span>Dactinomycin (Actinomycin D)</div>
+        <div class="drug-name"><span class="rank">#3</span>Dactinomycin (Actinomycin D)</div>
         <div class="drug-meta">
           타겟: <b>RNA polymerase / DNA 삽입제</b> | 경로: Other<br>
           DrugBank: <a href="https://go.drugbank.com/drugs/DB00970" target="_blank">DB00970</a> |
@@ -480,7 +616,7 @@
     <div class="rationale">
       <div class="rationale-title">재창출 추천 근거</div>
       <div class="rationale-text">
-        종합 점수 <b>1위 (14.0점)</b> &mdash; 전체 15개 후보 중 가장 높은 종합 점수.
+        종합 점수 <b>3위 (13.0점)</b> &mdash; 전체 15개 고유 후보 중 유방암 미사용 약물 최고점.
         60년 이상의 임상 사용 경험으로 <b>안전성 프로파일 완전히 파악</b>됨. BRCA 세포주 28개에서 100% 민감도.
         유방암에서 전혀 사용되지 않아 <b>약물 재창출의 핵심 후보</b>.
         RNA 중합효소 억제라는 독특한 기전으로, 기존 유방암 치료제(taxane, anthracycline)와 <b>교차 내성 가능성 낮음</b>.
@@ -627,7 +763,7 @@
 
   <!-- 종합 비교표 -->
   <div style="background:#1e293b; border:1px solid #334155; border-radius:10px; padding:20px; margin-top:24px;">
-    <div style="font-size:1.1rem; font-weight:700; color:#fbbf24; margin-bottom:12px;">재창출 후보 9건 종합 비교</div>
+    <div style="font-size:1.1rem; font-weight:700; color:#fbbf24; margin-bottom:12px;">재창출 후보 10건 종합 비교</div>
     <table style="width:100%; border-collapse:collapse; font-size:0.78rem;">
       <thead>
         <tr style="background:#0f172a;">
@@ -642,15 +778,16 @@
         </tr>
       </thead>
       <tbody>
-        <tr style="border-bottom:1px solid #334155;"><td style="padding:7px 10px;">#1</td><td style="padding:7px 10px;"><b>Dactinomycin</b></td><td style="padding:7px 10px;">RNA polymerase</td><td style="padding:7px 10px; color:#4ade80; font-weight:700;">-3.226</td><td style="padding:7px 10px;">7.0</td><td style="padding:7px 10px; color:#4ade80; font-weight:700;">14.0</td><td style="padding:7px 10px;"><span class="cat-novel">미사용</span></td><td style="padding:7px 10px;">종합 1위, 60년 임상 경험, 교차내성 낮음</td></tr>
+        <tr style="border-bottom:1px solid #334155;"><td style="padding:7px 10px;">#3</td><td style="padding:7px 10px;"><b>Dactinomycin</b></td><td style="padding:7px 10px;">RNA polymerase</td><td style="padding:7px 10px; color:#4ade80; font-weight:700;">-3.226</td><td style="padding:7px 10px;">7.0</td><td style="padding:7px 10px; color:#4ade80; font-weight:700;">13.0</td><td style="padding:7px 10px;"><span class="cat-novel">미사용</span></td><td style="padding:7px 10px;">미사용 약물 최고점, 60년 임상 경험</td></tr>
         <tr style="border-bottom:1px solid #334155;"><td style="padding:7px 10px;">#4</td><td style="padding:7px 10px;"><b>Staurosporine</b></td><td style="padding:7px 10px;">Pan-kinase</td><td style="padding:7px 10px; color:#4ade80; font-weight:700;">-2.328</td><td style="padding:7px 10px; color:#4ade80;">10.0</td><td style="padding:7px 10px; color:#4ade80; font-weight:700;">13.0</td><td style="padding:7px 10px;"><span class="cat-novel">미사용</span></td><td style="padding:7px 10px;">ADMET 만점, 다중 경로 차단</td></tr>
         <tr style="border-bottom:1px solid #334155;"><td style="padding:7px 10px;">#6</td><td style="padding:7px 10px;"><b>Bortezomib</b></td><td style="padding:7px 10px;">Proteasome</td><td style="padding:7px 10px; color:#4ade80; font-weight:700;">-4.840</td><td style="padding:7px 10px;">5.3</td><td style="padding:7px 10px;">12.8</td><td style="padding:7px 10px;"><span class="cat-trial">연구 중</span></td><td style="padding:7px 10px;">최강 IC50, 병용요법 시너지</td></tr>
-        <tr style="border-bottom:1px solid #334155;"><td style="padding:7px 10px;">#8</td><td style="padding:7px 10px;"><b>SN-38</b></td><td style="padding:7px 10px;">TOP1</td><td style="padding:7px 10px; color:#4ade80; font-weight:700;">-2.279</td><td style="padding:7px 10px; color:#4ade80;">10.0</td><td style="padding:7px 10px;">12.5</td><td style="padding:7px 10px;"><span class="cat-trial">연구 중</span></td><td style="padding:7px 10px;">ADMET 만점, ADC 형태로 이미 승인</td></tr>
-        <tr style="border-bottom:1px solid #334155;"><td style="padding:7px 10px;">#9</td><td style="padding:7px 10px;"><b>Dinaciclib</b></td><td style="padding:7px 10px;">CDK1/2/5/9</td><td style="padding:7px 10px; color:#4ade80; font-weight:700;">-2.195</td><td style="padding:7px 10px; color:#4ade80;">10.0</td><td style="padding:7px 10px;">12.0</td><td style="padding:7px 10px;"><span class="cat-trial">연구 중</span></td><td style="padding:7px 10px;">ADMET 만점, CDK4/6 내성 극복</td></tr>
-        <tr style="border-bottom:1px solid #334155;"><td style="padding:7px 10px;">#11</td><td style="padding:7px 10px;"><b>Rapamycin</b></td><td style="padding:7px 10px;">MTORC1</td><td style="padding:7px 10px; color:#4ade80; font-weight:700;">-2.389</td><td style="padding:7px 10px;">7.7</td><td style="padding:7px 10px;">11.2</td><td style="padding:7px 10px;"><span class="cat-trial">연구 중</span></td><td style="padding:7px 10px;">유도체(Everolimus) 유방암 승인</td></tr>
-        <tr style="border-bottom:1px solid #334155;"><td style="padding:7px 10px;">#12</td><td style="padding:7px 10px;"><b>Dactinomycin</b></td><td style="padding:7px 10px;">RNA polymerase</td><td style="padding:7px 10px; color:#4ade80; font-weight:700;">-2.595</td><td style="padding:7px 10px;">7.0</td><td style="padding:7px 10px;">11.0</td><td style="padding:7px 10px;"><span class="cat-novel">미사용</span></td><td style="padding:7px 10px;">(중복 엔트리, 다른 세포주 조합)</td></tr>
+        <tr style="border-bottom:1px solid #334155;"><td style="padding:7px 10px;">#7</td><td style="padding:7px 10px;"><b>SN-38</b></td><td style="padding:7px 10px;">TOP1</td><td style="padding:7px 10px; color:#4ade80; font-weight:700;">-2.279</td><td style="padding:7px 10px; color:#4ade80;">10.0</td><td style="padding:7px 10px;">12.5</td><td style="padding:7px 10px;"><span class="cat-trial">연구 중</span></td><td style="padding:7px 10px;">ADMET 만점, ADC 형태로 이미 승인</td></tr>
+        <tr style="border-bottom:1px solid #334155;"><td style="padding:7px 10px;">#10</td><td style="padding:7px 10px;"><b>Dinaciclib</b></td><td style="padding:7px 10px;">CDK1/2/5/9</td><td style="padding:7px 10px; color:#4ade80; font-weight:700;">-2.195</td><td style="padding:7px 10px; color:#4ade80;">10.0</td><td style="padding:7px 10px;">12.0</td><td style="padding:7px 10px;"><span class="cat-trial">연구 중</span></td><td style="padding:7px 10px;">ADMET 만점, CDK4/6 내성 극복</td></tr>
+        <tr style="border-bottom:1px solid #334155;"><td style="padding:7px 10px;">#12</td><td style="padding:7px 10px;"><b>Rapamycin</b></td><td style="padding:7px 10px;">MTORC1</td><td style="padding:7px 10px; color:#4ade80; font-weight:700;">-2.389</td><td style="padding:7px 10px;">7.7</td><td style="padding:7px 10px;">11.2</td><td style="padding:7px 10px;"><span class="cat-trial">연구 중</span></td><td style="padding:7px 10px;">유도체(Everolimus) 유방암 승인</td></tr>
+        <tr style="border-bottom:1px solid #334155; background:rgba(6,182,212,0.06);"><td style="padding:7px 10px;">#1</td><td style="padding:7px 10px;"><b>Romidepsin</b> <span style="color:#06b6d4;font-size:0.65rem;">NEW</span></td><td style="padding:7px 10px;">HDAC1/2/3/8</td><td style="padding:7px 10px; color:#4ade80; font-weight:700;">-4.761</td><td style="padding:7px 10px; color:#4ade80;">12.0</td><td style="padding:7px 10px; color:#4ade80; font-weight:700;">19.0</td><td style="padding:7px 10px;"><span class="cat-trial">연구 중</span></td><td style="padding:7px 10px;">종합 1위, 에피제네틱 기전, FDA 승인</td></tr>
+        <tr style="border-bottom:1px solid #334155; background:rgba(6,182,212,0.06);"><td style="padding:7px 10px;">#2</td><td style="padding:7px 10px;"><b>Sepantronium bromide</b> <span style="color:#06b6d4;font-size:0.65rem;">NEW</span></td><td style="padding:7px 10px;">BIRC5 (Survivin)</td><td style="padding:7px 10px; color:#4ade80; font-weight:700;">-3.736</td><td style="padding:7px 10px; color:#4ade80;">10.0</td><td style="padding:7px 10px; color:#4ade80; font-weight:700;">16.5</td><td style="padding:7px 10px;"><span class="cat-novel">미사용</span></td><td style="padding:7px 10px;">종합 2위, 세포자멸사 재활성화</td></tr>
         <tr style="border-bottom:1px solid #334155;"><td style="padding:7px 10px;">#13</td><td style="padding:7px 10px;"><b>Camptothecin</b></td><td style="padding:7px 10px;">TOP1</td><td style="padding:7px 10px;">-0.743</td><td style="padding:7px 10px; color:#4ade80;">10.0</td><td style="padding:7px 10px;">11.0</td><td style="padding:7px 10px;"><span class="cat-novel">미사용</span></td><td style="padding:7px 10px;">ADMET 만점, TOP1 기전 검증됨</td></tr>
-        <tr style="border-bottom:1px solid #334155;"><td style="padding:7px 10px;">#14</td><td style="padding:7px 10px;"><b>Luminespib</b></td><td style="padding:7px 10px;">HSP90</td><td style="padding:7px 10px;">-1.869</td><td style="padding:7px 10px;">5.0</td><td style="padding:7px 10px;">6.5</td><td style="padding:7px 10px;"><span class="cat-trial">연구 중</span></td><td style="padding:7px 10px;">다중 발암 단백질 분해, HER2+ 효과</td></tr>
+        <tr style="border-bottom:1px solid #334155;"><td style="padding:7px 10px;">#14</td><td style="padding:7px 10px;"><b>Luminespib</b></td><td style="padding:7px 10px;">HSP90</td><td style="padding:7px 10px;">-1.868</td><td style="padding:7px 10px;">5.0</td><td style="padding:7px 10px;">6.5</td><td style="padding:7px 10px;"><span class="cat-trial">연구 중</span></td><td style="padding:7px 10px;">다중 발암 단백질 분해, HER2+ 효과</td></tr>
       </tbody>
     </table>
   </div>
