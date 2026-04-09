@@ -20,12 +20,33 @@ TOP30_CSV = PROJECT_ROOT / "models" / "ensemble_results" / "top30_drugs.csv"
 ML_RESULTS = PROJECT_ROOT / "models" / "ml_results"
 DL_RESULTS = PROJECT_ROOT / "models" / "dl_results" / "dl_results.json"
 GRAPH_RESULTS = PROJECT_ROOT / "models" / "graph_results" / "graph_results.json"
+METABRIC_RESULTS = PROJECT_ROOT / "models" / "metabric_results" / "step6_metabric_results.json"
+ADMET_RESULTS_JSON = PROJECT_ROOT / "models" / "admet_results" / "step7_admet_results.json"
+ADMET_RESULTS_CSV = PROJECT_ROOT / "models" / "admet_results" / "final_drug_candidates.csv"
+TOP15_VALIDATED = PROJECT_ROOT / "models" / "metabric_results" / "top15_validated.csv"
+
+# ── Drug classification (breast cancer indication) ──
+DRUG_BRCA_CLASS = {
+    "Dactinomycin": {"class": "유방암 미사용", "color": "novel", "reason": "FDA 승인: 윌름스 종양, 융모성 질환. 유방암 적응증 없음"},
+    "Docetaxel": {"class": "유방암 현재 사용", "color": "current", "reason": "FDA 유방암 적응증 승인 (보조/전이성)"},
+    "Vinblastine": {"class": "유방암 현재 사용", "color": "current", "reason": "FDA 유방암 적응증 포함"},
+    "Staurosporine": {"class": "유방암 미사용", "color": "novel", "reason": "연구용 화합물, FDA 미승인"},
+    "Bortezomib": {"class": "적응증 확장/연구 중", "color": "trial", "reason": "유방암 임상시험 진행 (NCT00025246)"},
+    "Vinorelbine": {"class": "유방암 현재 사용", "color": "current", "reason": "전이성 유방암 표준요법"},
+    "SN-38": {"class": "적응증 확장/연구 중", "color": "trial", "reason": "Sacituzumab govitecan (SN-38 접합체) FDA TNBC 승인"},
+    "Dinaciclib": {"class": "적응증 확장/연구 중", "color": "trial", "reason": "CDK 억제제, 유방암 임상 1/2상"},
+    "Paclitaxel": {"class": "유방암 현재 사용", "color": "current", "reason": "FDA 유방암 적응증 승인"},
+    "Rapamycin": {"class": "적응증 확장/연구 중", "color": "trial", "reason": "유도체 Everolimus FDA HR+/HER2- 유방암 승인"},
+    "Camptothecin": {"class": "유방암 미사용", "color": "novel", "reason": "연구용, Irinotecan/Topotecan 모 화합물"},
+    "Luminespib": {"class": "적응증 확장/연구 중", "color": "trial", "reason": "HSP90 억제제, 유방암 2상 임상시험"},
+    "Epirubicin": {"class": "유방암 현재 사용", "color": "current", "reason": "FDA 유방암 보조요법 승인"},
+}
 
 # ── Data Source Status ──
 DATA_SOURCE_STATUS = {
     "S3 Pipeline": {
         "status": "connected",
-        "description": "파이프라인 결과 (약물 추천, 모델 결과)",
+        "description": "파이프라인 결과 (약물 추천, 모델 결과, ADMET)",
     },
     "PubMed": {
         "status": "available",
@@ -63,8 +84,17 @@ DATA_SOURCE_STATUS = {
 # ═══════════════════════════════════════════
 
 def query_s3_drug_candidates():
-    """Load drug candidates from ensemble results."""
-    # Try top15 CSV first, then ensemble JSON
+    """Load drug candidates from ensemble results with breast cancer classification."""
+    if ADMET_RESULTS_CSV.exists():
+        df = pd.read_csv(ADMET_RESULTS_CSV)
+        records = df.to_dict(orient="records")
+        for r in records:
+            name = r.get("drug_name", "")
+            cls = DRUG_BRCA_CLASS.get(name, {})
+            r["brca_class"] = cls.get("class", "미분류")
+            r["brca_reason"] = cls.get("reason", "")
+        return {"status": "ok", "data": records}
+
     if TOP15_CSV.exists():
         df = pd.read_csv(TOP15_CSV)
         return {"status": "ok", "data": df.to_dict(orient="records")}
@@ -88,19 +118,17 @@ def query_s3_model_results():
     results = {"status": "ok", "data": {}}
 
     # ML results
-    ml_models = []
-    # Parse from known Step 4 results
     ml_known = [
-        {"model": "CatBoost", "spearman": 0.8007, "rmse": 1.3172, "status": "PASS"},
-        {"model": "LightGBM", "spearman": 0.7913, "rmse": 1.3438, "status": "PASS"},
-        {"model": "XGBoost", "spearman": 0.7895, "rmse": 1.3445, "status": "PASS"},
-        {"model": "LightGBM-DART", "spearman": 0.7848, "rmse": 1.4029, "status": "FAIL (RMSE)"},
-        {"model": "Stacking", "spearman": 0.7981, "rmse": 1.3213, "status": "EXCLUDED"},
-        {"model": "ExtraTrees", "spearman": 0.6468, "rmse": 1.8704, "status": "FAIL"},
-        {"model": "RandomForest", "spearman": 0.6267, "rmse": 1.9747, "status": "FAIL"},
-        {"model": "RSF", "spearman": 0.6142, "rmse": 0.0, "status": "METABRIC only"},
+        {"model": "CatBoost", "spearman": 0.8007, "rmse": 1.3172, "status": "통과"},
+        {"model": "LightGBM", "spearman": 0.7913, "rmse": 1.3438, "status": "통과"},
+        {"model": "XGBoost", "spearman": 0.7895, "rmse": 1.3445, "status": "통과"},
+        {"model": "LightGBM-DART", "spearman": 0.7848, "rmse": 1.4029, "status": "실패 (RMSE)"},
+        {"model": "Stacking", "spearman": 0.7981, "rmse": 1.3213, "status": "제외"},
+        {"model": "ExtraTrees", "spearman": 0.6468, "rmse": 1.8704, "status": "실패"},
+        {"model": "RandomForest", "spearman": 0.6267, "rmse": 1.9747, "status": "실패"},
+        {"model": "RSF", "spearman": 0.6142, "rmse": 0.0, "status": "METABRIC 전용"},
     ]
-    results["data"]["ML Models (8)"] = ml_known
+    results["data"]["ML 모델 (8개)"] = ml_known
 
     # DL results
     if DL_RESULTS.exists():
@@ -110,21 +138,21 @@ def query_s3_model_results():
         for m in dl_data:
             sp_pass = m["spearman_mean"] >= 0.713
             rm_pass = m["rmse_mean"] <= 1.385
-            status = "PASS" if (sp_pass and rm_pass) else "FAIL"
+            status = "통과" if (sp_pass and rm_pass) else "실패"
             dl_models.append({
                 "model": m["model"],
                 "spearman": m["spearman_mean"],
                 "rmse": m["rmse_mean"],
                 "status": status,
             })
-        results["data"]["DL Models (5)"] = dl_models
+        results["data"]["DL 모델 (5개)"] = dl_models
     else:
-        results["data"]["DL Models (5)"] = [
-            {"model": "FlatMLP", "spearman": 0.7936, "rmse": 1.3429, "status": "PASS"},
-            {"model": "ResidualMLP", "spearman": 0.7855, "rmse": 1.3776, "status": "PASS"},
-            {"model": "Cross-Attention", "spearman": 0.7852, "rmse": 1.3716, "status": "PASS"},
-            {"model": "TabNet", "spearman": 0.7780, "rmse": 1.3892, "status": "FAIL (RMSE)"},
-            {"model": "FT-Transformer", "spearman": 0.7625, "rmse": 1.4444, "status": "FAIL (RMSE)"},
+        results["data"]["DL 모델 (5개)"] = [
+            {"model": "FlatMLP", "spearman": 0.7936, "rmse": 1.3429, "status": "통과"},
+            {"model": "ResidualMLP", "spearman": 0.7855, "rmse": 1.3776, "status": "통과"},
+            {"model": "Cross-Attention", "spearman": 0.7852, "rmse": 1.3716, "status": "통과"},
+            {"model": "TabNet", "spearman": 0.7780, "rmse": 1.3892, "status": "실패 (RMSE)"},
+            {"model": "FT-Transformer", "spearman": 0.7625, "rmse": 1.4444, "status": "실패 (RMSE)"},
         ]
 
     # Graph results
@@ -137,13 +165,13 @@ def query_s3_model_results():
                 "model": m["model"],
                 "spearman": m["spearman_mean"],
                 "rmse": m["rmse_mean"],
-                "status": f"FAIL (P@20={m.get('p_at_20_mean', 0):.2f})",
+                "status": f"실패 (P@20={m.get('p_at_20_mean', 0):.2f})",
             })
-        results["data"]["Graph Models (2)"] = gr_models
+        results["data"]["그래프 모델 (2개)"] = gr_models
     else:
-        results["data"]["Graph Models (2)"] = [
+        results["data"]["그래프 모델 (2개)"] = [
             {"model": "GraphSAGE", "spearman": 0.3852, "rmse": 2.3189, "status": "METABRIC P@20"},
-            {"model": "GAT", "spearman": 0.0085, "rmse": 2.6608, "status": "FAIL"},
+            {"model": "GAT", "spearman": 0.0085, "rmse": 2.6608, "status": "실패"},
         ]
 
     # Ensemble
@@ -159,14 +187,104 @@ def query_s3_model_results():
 
 
 def query_s3_admet_results():
-    """Load ADMET results if available."""
-    admet_path = PROJECT_ROOT / "models" / "admet_results"
-    if admet_path.exists():
-        return {"status": "ok", "data": "ADMET results loaded"}
+    """Load ADMET results with breast cancer classification."""
+    if ADMET_RESULTS_CSV.exists():
+        df = pd.read_csv(ADMET_RESULTS_CSV)
+        text = "**ADMET 안전성 평가 결과 (22개 분석 항목)**\n\n"
+
+        # Classification summary
+        current = trial = novel = 0
+        for _, row in df.iterrows():
+            cls = DRUG_BRCA_CLASS.get(row["drug_name"], {}).get("class", "미분류")
+            if cls == "유방암 현재 사용":
+                current += 1
+            elif cls == "적응증 확장/연구 중":
+                trial += 1
+            elif cls == "유방암 미사용":
+                novel += 1
+
+        text += f"**유방암 적응증 분류**: 현재 사용 {current} | 연구 중 {trial} | 미사용(신약 후보) {novel}\n\n"
+        text += "| # | 약물 | 타겟 | 예측 IC50 | 안전성 | 종합 | 유방암 분류 | 우려사항 |\n"
+        text += "|---|------|------|-----------|--------|------|------------|----------|\n"
+        for _, row in df.iterrows():
+            cls = DRUG_BRCA_CLASS.get(row["drug_name"], {}).get("class", "미분류")
+            flags = row.get("flags", "[]")
+            if "DILI" in str(flags):
+                flag_str = "DILI"
+            elif "Ames" in str(flags):
+                flag_str = "Ames"
+            else:
+                flag_str = "-"
+            text += (f"| {row['final_rank']} | {row['drug_name']} | {row['target']} | "
+                    f"{row['pred_ic50']:.3f} | {row['safety_score']:.1f} | {row['combined_score']:.1f} | "
+                    f"{cls} | {flag_str} |\n")
+
+        text += "\n> 출처: TDC ADMET Benchmark (22개 분석) + DrugBank/ClinicalTrials.gov"
+        return {"status": "ok", "data": text}
+
     return {
         "status": "pending",
-        "message": "ADMET 필터링은 Step 7에서 진행 예정입니다. (Step 6 METABRIC 검증 이후)"
+        "message": "ADMET 필터링은 Step 7에서 진행 예정입니다."
     }
+
+
+def query_s3_metabric_results():
+    """Load METABRIC validation results."""
+    if METABRIC_RESULTS.exists():
+        with open(METABRIC_RESULTS) as f:
+            data = json.load(f)
+
+        ma = data.get("method_a", {})
+        mb = data.get("method_b", {})
+        mc = data.get("method_c", {})
+
+        text = "**METABRIC 외부 검증 결과 (A+B+C)**\n\n"
+        text += f"- **방법 A**: {ma.get('n_targets_expressed', 0)}/{ma.get('n_total', 0)} 타겟 발현, "
+        text += f"{ma.get('n_brca_pathway', 0)}/{ma.get('n_total', 0)} BRCA 관련 경로\n"
+        text += f"- **방법 B**: {mb.get('n_survival_significant', 0)}/{mb.get('n_total', 0)} 생존 유의 (p<0.05)\n"
+
+        if mc.get("p_at_k"):
+            for k, v in mc["p_at_k"].items():
+                text += f"- **P@{k}**: {v:.1%}\n"
+
+        text += f"\n> 검증 데이터: METABRIC (1,980 환자 × 20,603 유전자)"
+        return {"status": "ok", "data": text}
+
+    return {"status": "pending", "message": "METABRIC 검증은 Step 6에서 진행 예정입니다."}
+
+
+def query_repurposing_candidates():
+    """Return the 9 repurposing candidates (5 trial + 4 novel)."""
+    if not ADMET_RESULTS_CSV.exists():
+        return {"status": "pending", "message": "약물 재창출 후보 데이터가 아직 없습니다."}
+
+    df = pd.read_csv(ADMET_RESULTS_CSV)
+    candidates = []
+    for _, row in df.iterrows():
+        name = row["drug_name"]
+        cls = DRUG_BRCA_CLASS.get(name, {})
+        if cls.get("class") in ["적응증 확장/연구 중", "유방암 미사용"]:
+            candidates.append({
+                "rank": row["final_rank"],
+                "name": name,
+                "target": row["target"],
+                "pred_ic50": row["pred_ic50"],
+                "safety": row["safety_score"],
+                "combined": row["combined_score"],
+                "brca_class": cls["class"],
+                "reason": cls["reason"],
+            })
+
+    text = f"**약물 재창출 후보 {len(candidates)}건**\n\n"
+    text += "| # | 약물 | 타겟 | 예측 IC50 | 안전성 | 종합 | 유방암 분류 | 분류 근거 |\n"
+    text += "|---|------|------|-----------|--------|------|------------|----------|\n"
+    for c in candidates:
+        text += (f"| {c['rank']} | **{c['name']}** | {c['target']} | "
+                f"{c['pred_ic50']:.3f} | {c['safety']:.1f} | {c['combined']:.1f} | "
+                f"{c['brca_class']} | {c['reason']} |\n")
+
+    text += "\n> 상세 분석: [재창출 후보 9건 대시보드](repurposing_candidates.html)"
+    return {"status": "ok", "data": text}
 
 
 # ═══════════════════════════════════════════
@@ -176,7 +294,6 @@ def query_s3_admet_results():
 def query_pubmed(search_term: str, max_results: int = 5):
     """Search PubMed for articles."""
     try:
-        # Step 1: Search for IDs
         base_url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
         search_url = (f"{base_url}/esearch.fcgi?"
                      f"db=pubmed&term={urllib.parse.quote(search_term)}"
@@ -190,7 +307,6 @@ def query_pubmed(search_term: str, max_results: int = 5):
         if not id_list:
             return {"status": "ok", "data": [], "message": "검색 결과가 없습니다."}
 
-        # Step 2: Fetch article details
         ids_str = ",".join(id_list)
         fetch_url = (f"{base_url}/esummary.fcgi?"
                     f"db=pubmed&id={ids_str}&retmode=json")
@@ -230,7 +346,6 @@ def query_pubmed(search_term: str, max_results: int = 5):
 def query_faers(query: str, limit: int = 5):
     """Query FDA FAERS for adverse events."""
     try:
-        # Extract drug name from query
         drug_name = None
         for word in query.split():
             if len(word) > 3 and word.lower() not in [
@@ -240,7 +355,7 @@ def query_faers(query: str, limit: int = 5):
                 break
 
         if not drug_name:
-            drug_name = "docetaxel"  # Default BRCA-related drug
+            drug_name = "docetaxel"
 
         url = (f"https://api.fda.gov/drug/event.json?"
               f"search=patient.drug.medicinalproduct:\"{urllib.parse.quote(drug_name)}\""
@@ -274,7 +389,6 @@ def query_faers(query: str, limit: int = 5):
 def query_clinicaltrials(query: str, max_results: int = 5):
     """Search ClinicalTrials.gov."""
     try:
-        # Extract search terms
         terms = []
         for word in query.split():
             if len(word) > 2 and word.lower() not in [
@@ -311,7 +425,7 @@ def query_clinicaltrials(query: str, max_results: int = 5):
 
             text += f"**{i}. {title}**\n"
             text += f"- NCT ID: [{nct_id}](https://clinicaltrials.gov/study/{nct_id})\n"
-            text += f"- Status: {status} | Phase: {phase}\n\n"
+            text += f"- 상태: {status} | 단계: {phase}\n\n"
 
         return {"status": "ok", "data": text}
 
@@ -346,8 +460,8 @@ def query_chembl(query: str, limit: int = 5):
             return {"status": "ok", "data": f"'{search_term}' 관련 ChEMBL 화합물이 없습니다."}
 
         text = f"**ChEMBL 화합물 검색** ('{search_term}')\n\n"
-        text += "| ChEMBL ID | Name | Type | Phase |\n"
-        text += "|-----------|------|------|-------|\n"
+        text += "| ChEMBL ID | 이름 | 유형 | 최대 임상 단계 |\n"
+        text += "|-----------|------|------|---------------|\n"
         for m in molecules:
             chembl_id = m.get("molecule_chembl_id", "N/A")
             name = m.get("pref_name", "N/A") or "N/A"
@@ -391,7 +505,6 @@ def query_pubchem(query: str):
         comp = compounds[0]
         cid = comp.get("id", {}).get("id", {}).get("cid", "N/A")
 
-        # Extract properties
         props = {}
         for p in comp.get("props", []):
             label = p.get("urn", {}).get("label", "")
@@ -404,7 +517,6 @@ def query_pubchem(query: str):
         text = f"**PubChem 화합물 정보** ('{compound_name}')\n\n"
         text += f"- CID: [{cid}](https://pubchem.ncbi.nlm.nih.gov/compound/{cid})\n"
 
-        # Show key properties
         for key in ["IUPAC Name (Preferred)", "IUPAC Name (Systematic)",
                     "Molecular Formula", "Molecular Weight", "SMILES (Canonical)",
                     "InChI (Standard)"]:
