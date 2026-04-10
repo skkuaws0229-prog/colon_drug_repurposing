@@ -1,0 +1,68 @@
+{
+  "model": "MultiModalFusionNet",
+  "architecture": "5-encoder cross-attention fusion",
+  "config": {
+    "d_model": 128,
+    "nhead": 4,
+    "dropout": 0.2,
+    "epochs": 50,
+    "batch_size": 256,
+    "lr": 0.0001,
+    "weight_decay": 1e-05,
+    "patience": 10,
+    "val_ratio": 0.2
+  },
+  "modality_dims": {
+    "crispr": 18310,
+    "morgan_fp": 2048,
+    "lincs": 5,
+    "target": 10,
+    "drug_desc": 9
+  },
+  "total_params": 10127041,
+  "device": "mps",
+  "metrics": {
+    "rmse": 1.3822666966076183,
+    "mae": 1.0224579572677612,
+    "r2": 0.7210209369659424,
+    "spearman": 0.80240812694578,
+    "pearson": 0.8608582019805908
+  },
+  "overfitting_diagnostics": {
+    "final_train_loss": 1.886471430460612,
+    "final_val_loss": 1.926413355407246,
+    "best_val_loss": 1.9106612614178873,
+    "best_epoch": 23,
+    "gap_val_minus_train": 0.0399,
+    "overfitting_ratio": 0.9617,
+    "overfitting_label": "NORMAL",
+    "stability": {
+      "last_n_epochs": 5,
+      "train_delta": -0.0684,
+      "val_delta": 0.0038,
+      "train_std": 0.0255,
+      "val_std": 0.0287,
+      "converged": true,
+      "early_stop_epoch": 33
+    },
+    "pred_distribution": {
+      "mean": 3.36665678024292,
+      "std": 2.4514317512512207,
+      "min": -5.302024841308594,
+      "max": 10.531242370605469
+    },
+    "actual_distribution": {
+      "mean": 3.0537116527557373,
+      "std": 2.617013931274414,
+      "min": -6.155138969421387,
+      "max": 11.61996841430664
+    }
+  },
+  "benchmark": {
+    "spearman": 0.713,
+    "rmse": 1.385
+  },
+  "training_epochs": 33,
+  "best_val_loss": 1.9106612614178873,
+  "elapsed_min": 0.5
+}

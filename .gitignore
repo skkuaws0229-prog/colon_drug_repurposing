@@ -16,3 +16,7 @@ __pycache__/
 *.parquet
 *.csv
 tmp/
+
+# 모델 바이너리
+results/*.pt
+results/*.pkl
