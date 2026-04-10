@@ -2,13 +2,13 @@
 """
 HIRA 약물 보험 정보 수집 → Neo4j Drug 노드 속성 업데이트
 
-엔드포인트: http://apis.data.go.kr/B551182/msInsu/getNIitemInfoList01
+엔드포인트: http://apis.data.go.kr/B551182/dgamtCrtrInfoService1.2/getDgamtList
 """
 import json
 import os
 import sys
-import urllib.parse
-import urllib.request
+import requests
+import xmltodict
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
@@ -16,7 +16,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 ENV_PATH = PROJECT_ROOT / "config" / ".env"
 
-ENDPOINT = "http://apis.data.go.kr/B551182/msInsu/getNIitemInfoList01"
+ENDPOINT = "http://apis.data.go.kr/B551182/dgamtCrtrInfoService1.2/getDgamtList"
 
 DRUG_NAMES = [
     "Docetaxel", "Paclitaxel", "Vinorelbine", "Vinblastine",
@@ -50,16 +50,15 @@ def load_api_key() -> str:
 
 
 def fetch_drug_info(api_key: str, item_name: str) -> list[dict]:
-    params = urllib.parse.urlencode({
+    params = {
         "serviceKey": api_key,
-        "type": "json",
         "numOfRows": "10",
-        "itemName": item_name,
-    })
-    url = f"{ENDPOINT}?{params}"
+        "itmNm": item_name,
+    }
     try:
-        with urllib.request.urlopen(url, timeout=15) as resp:
-            data = json.loads(resp.read().decode("utf-8", errors="replace"))
+        resp = requests.get(ENDPOINT, params=params, timeout=15)
+        resp.raise_for_status()
+        data = xmltodict.parse(resp.text)
     except Exception as e:
         return [{"error": str(e)}]
 
@@ -69,7 +68,9 @@ def fetch_drug_info(api_key: str, item_name: str) -> list[dict]:
         item_list = items.get("item", [])
         if isinstance(item_list, dict):
             item_list = [item_list]
-        return item_list
+        # 급여 항목 우선 정렬
+        insured = [it for it in item_list if it.get("payTpNm") == "급여"]
+        return insured if insured else item_list
     return []
 
 
@@ -96,9 +97,9 @@ def load_to_neo4j(drug_name: str, items: list[dict]):
                     d.hira_updated = date()
                 """,
                 name=drug_name,
-                hira_name=item.get("itemName", ""),
-                ins_type=item.get("insuType", item.get("insTypNm", "")),
-                price=item.get("unitPrice", item.get("mdcGrdCd", "")),
+                hira_name=item.get("itmNm", ""),
+                ins_type=item.get("payTpNm", ""),
+                price=item.get("mxCprc", ""),
             )
     driver.close()
 
@@ -141,7 +142,7 @@ def main():
             results[drug] = found_items
             success += 1
             item = found_items[0]
-            print(f"  → {item.get('itemName', 'N/A')[:50]}")
+            print(f"  → {item.get('itmNm', 'N/A')[:50]} | {item.get('payTpNm','')} | {item.get('mxCprc','')}원")
             try:
                 load_to_neo4j(drug, found_items)
                 print(f"  → Neo4j 업데이트 완료")

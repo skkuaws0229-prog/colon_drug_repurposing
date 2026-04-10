@@ -3,13 +3,13 @@
 HIRA 병원 정보 수집 → Neo4j Hospital 노드 업데이트
 
 엔드포인트: http://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList
-dgsbjtCd=140 (유방외과)
+clCd=01 (상급종합병원) → 암/종양/혈액 키워드 필터링
 """
 import json
 import os
 import sys
-import urllib.parse
-import urllib.request
+import requests
+import xmltodict
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
@@ -31,17 +31,16 @@ def load_api_key() -> str:
 
 
 def fetch_hospitals(api_key: str, page: int = 1, num_rows: int = 50) -> tuple[list, int]:
-    params = urllib.parse.urlencode({
+    params = {
         "serviceKey": api_key,
-        "dgsbjtCd": "140",
-        "type": "json",
+        "clCd": "01",
         "numOfRows": str(num_rows),
         "pageNo": str(page),
-    })
-    url = f"{ENDPOINT}?{params}"
+    }
     try:
-        with urllib.request.urlopen(url, timeout=15) as resp:
-            data = json.loads(resp.read().decode("utf-8", errors="replace"))
+        resp = requests.get(ENDPOINT, params=params, timeout=15)
+        resp.raise_for_status()
+        data = xmltodict.parse(resp.text)
     except Exception as e:
         print(f"  [ERROR] page {page}: {e}")
         return [], 0
@@ -97,7 +96,7 @@ def load_to_neo4j(hospitals: list[dict]):
 
 def main():
     print("=" * 60)
-    print("HIRA 병원 정보 수집 (유방외과 dgsbjtCd=140)")
+    print("HIRA 병원 정보 수집 (상급종합 clCd=01 전체)")
     print(f"엔드포인트: {ENDPOINT}")
     print("=" * 60)
 
@@ -119,7 +118,12 @@ def main():
             break
         page += 1
 
+    print(f"\n  상급종합병원: {len(all_hospitals)}건")
+
     if all_hospitals:
+        for h in all_hospitals:
+            print(f"    - {h.get('yadmNm','')} ({h.get('sidoCdNm','')})")
+
         # JSON 저장
         out_path = "hira_hospital_result.json"
         with open(out_path, "w", encoding="utf-8") as f:
@@ -135,7 +139,7 @@ def main():
             print(f"  Neo4j 에러: {e}")
 
     print("\n" + "=" * 60)
-    print(f"완료: {len(all_hospitals)}건 병원")
+    print(f"완료: {len(all_hospitals)}건 상급종합병원")
     print("=" * 60)
 
 

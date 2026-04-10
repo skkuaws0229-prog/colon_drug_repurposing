@@ -7,8 +7,7 @@ HIRA 전문병원 정보 수집 → Neo4j Hospital 노드 업데이트
 import json
 import os
 import sys
-import urllib.parse
-import urllib.request
+import requests
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
@@ -30,16 +29,16 @@ def load_api_key() -> str:
 
 
 def fetch_specialty(api_key: str, page: int = 1, num_rows: int = 100) -> tuple[list, int]:
-    params = urllib.parse.urlencode({
+    params = {
         "serviceKey": api_key,
         "type": "json",
         "numOfRows": str(num_rows),
         "pageNo": str(page),
-    })
-    url = f"{ENDPOINT}?{params}"
+    }
     try:
-        with urllib.request.urlopen(url, timeout=15) as resp:
-            data = json.loads(resp.read().decode("utf-8", errors="replace"))
+        resp = requests.get(ENDPOINT, params=params, timeout=15)
+        resp.raise_for_status()
+        data = resp.json()
     except Exception as e:
         print(f"  [ERROR] page {page}: {e}")
         return [], 0
