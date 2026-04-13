@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mechanism Engine 대시보드 - 2026.04.13</title>
+<style>
+  :root {
+    --bg: #0f172a; --surface: #1e293b; --surface2: #334155;
+    --border: #475569; --text: #f1f5f9; --text2: #94a3b8;
+    --accent: #38bdf8; --accent2: #818cf8; --green: #4ade80;
+    --yellow: #facc15; --red: #f87171; --orange: #fb923c;
+    --pink: #f472b6; --radius: 12px;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f1f5f9; --surface: #ffffff; --surface2: #e2e8f0;
+      --border: #cbd5e1; --text: #0f172a; --text2: #475569;
+    }
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: -apple-system, 'Segoe UI', Roboto, monospace;
+    background: var(--bg); color: var(--text);
+    line-height: 1.6; padding: 24px; max-width: 1400px; margin: 0 auto;
+  }
+  h1 { font-size: 1.5rem; color: var(--accent); margin-bottom: 2px; }
+  .subtitle { color: var(--text2); font-size: 0.82rem; margin-bottom: 28px; }
+  h2 {
+    font-size: 1.05rem; color: var(--accent2); margin-bottom: 14px;
+    border-bottom: 1px solid var(--border); padding-bottom: 6px;
+  }
+  .section { margin-bottom: 36px; }
+
+  /* ── Cards ── */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 20px 16px; text-align: center; position: relative;
+  }
+  .card .label { font-size: 0.72rem; color: var(--text2); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px; }
+  .card .value { font-size: 2.2rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .card .sub { font-size: 0.68rem; color: var(--text2); margin-top: 4px; }
+  .badge {
+    position: absolute; top: 8px; right: 10px; font-size: 0.58rem;
+    padding: 2px 7px; border-radius: 4px; font-weight: 700; letter-spacing: .3px;
+  }
+  .badge-warn { background: rgba(250,204,21,.18); color: var(--yellow); }
+  .badge-ok   { background: rgba(74,222,128,.18); color: var(--green); }
+  .badge-info { background: rgba(56,189,248,.18); color: var(--accent); }
+
+  /* ── Grid ── */
+  .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 820px) { .g2 { grid-template-columns: 1fr; } }
+  .panel {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 18px; overflow-x: auto;
+  }
+
+  /* ── Tables ── */
+  table { width: 100%; border-collapse: collapse; font-size: .78rem; }
+  th, td { padding: 7px 10px; text-align: left; border-bottom: 1px solid var(--border); }
+  th { color: var(--text2); font-weight: 700; text-transform: uppercase; font-size: .68rem; letter-spacing: .3px; }
+  td { font-variant-numeric: tabular-nums; }
+  tr:hover td { background: var(--surface2); }
+  .up { color: var(--green); } .dn { color: var(--red); }
+
+  /* ── CSS Bar Chart ── */
+  .bar-chart { display: flex; flex-direction: column; gap: 10px; }
+  .bar-row { display: flex; align-items: center; gap: 8px; }
+  .bar-label { width: 150px; font-size: .72rem; color: var(--text2); text-align: right; flex-shrink: 0; }
+  .bar-track { flex: 1; height: 28px; background: var(--surface2); border-radius: 6px; position: relative; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 6px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: .7rem; font-weight: 700; color: #fff; transition: width .5s ease; min-width: 50px; }
+
+  /* ── Grouped Bar ── */
+  .gb-group { margin-bottom: 12px; }
+  .gb-title { font-size: .72rem; color: var(--text2); margin-bottom: 4px; }
+  .gb-bars { display: flex; gap: 4px; }
+  .gb-bar { height: 22px; border-radius: 4px; display: flex; align-items: center; padding: 0 6px; font-size: .65rem; font-weight: 700; color: #fff; min-width: 40px; }
+
+  /* ── Feature blocks ── */
+  .feat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+  .fb { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; }
+  .fb-t { font-size: .74rem; font-weight: 700; color: var(--accent); margin-bottom: 6px; }
+  .fb-r { display: flex; justify-content: space-between; font-size: .7rem; color: var(--text2); margin-bottom: 2px; }
+  .fb-r span:last-child { color: var(--text); font-weight: 600; }
+  .prog-bg { height: 5px; background: var(--surface2); border-radius: 3px; margin-top: 6px; overflow: hidden; }
+  .prog-fill { height: 100%; border-radius: 3px; }
+
+  /* ── Checklist ── */
+  .ck { list-style: none; }
+  .ck li { padding: 5px 0; font-size: .8rem; display: flex; align-items: center; gap: 8px; }
+  .ck-d { color: var(--green); } .ck-w { color: var(--yellow); } .ck-t { color: var(--text2); }
+  .ck-i { width: 20px; text-align: center; font-weight: 700; font-size: .85rem; }
+
+  /* ── Timeline ── */
+  .tl { position: relative; padding-left: 30px; }
+  .tl::before { content:''; position:absolute; left:9px; top:0; bottom:0; width:2px; background:var(--border); }
+  .tl-i { position: relative; margin-bottom: 12px; font-size: .78rem; }
+  .tl-i::before {
+    content:''; position:absolute; left:-25px; top:5px;
+    width:10px; height:10px; border-radius:50%; border:2px solid var(--accent); background:var(--bg);
+  }
+  .tl-i.done::before { background:var(--green); border-color:var(--green); }
+  .tl-i.wip::before  { background:var(--yellow); border-color:var(--yellow); }
+  .tl-t { font-size: .65rem; color: var(--text2); }
+
+  /* ── Pie (CSS) ── */
+  .pie-wrap { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .pie {
+    width: 160px; height: 160px; border-radius: 50%; position: relative;
+    background: conic-gradient(
+      var(--accent) 0deg 354.5deg,
+      var(--accent2) 354.5deg 355.3deg,
+      var(--green) 355.3deg 356.9deg,
+      var(--orange) 356.9deg 360deg
+    );
+  }
+  .pie-hole {
+    position:absolute; top:20%; left:20%; width:60%; height:60%;
+    background:var(--surface); border-radius:50%; display:flex;
+    align-items:center; justify-content:center; flex-direction:column;
+  }
+  .pie-hole .big { font-size: 1.3rem; font-weight: 800; }
+  .pie-hole .sm { font-size: .65rem; color: var(--text2); }
+  .legend { font-size: .72rem; }
+  .legend div { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+  .legend .dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+
+  .note { font-size: .72rem; color: var(--text2); margin-top: 8px; line-height: 1.5; }
+  .note strong { color: var(--text); }
+  .highlight { background: rgba(74,222,128,.1); border-left: 3px solid var(--green); padding: 10px 14px; margin: 10px 0; border-radius: 0 8px 8px 0; }
+  .warning { background: rgba(250,204,21,.1); border-left: 3px solid var(--yellow); padding: 10px 14px; margin: 10px 0; border-radius: 0 8px 8px 0; }
+</style>
+</head>
+<body>
+
+<h1>BRCA 약물 재창출 &mdash; Mechanism Engine 대시보드</h1>
+<p class="subtitle">2026.04.13 &nbsp;|&nbsp; GroupKFold CV (약물 단위 분리) &nbsp;|&nbsp; IC50 예측 파이프라인 &nbsp;|&nbsp; 외부 의존성 없음</p>
+
+<!-- ══════════ Top 30 링크 ══════════ -->
+<div class="section" style="margin-bottom:18px;">
+  <div class="panel" style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:linear-gradient(90deg,var(--surface),rgba(56,189,248,.08));">
+    <div>
+      <span style="font-size:.82rem;font-weight:700;color:var(--accent);">Top 30 Drug 상세 분석</span>
+      <span style="font-size:.7rem;color:var(--text2);margin-left:8px;">카테고리 분류 (A/B/C) + METABRIC 검증 + 기존 후보 재평가</span>
+    </div>
+    <a href="dashboard_top30_20260413.html" style="color:var(--accent);font-size:.82rem;font-weight:700;text-decoration:none;padding:6px 14px;border:1px solid var(--accent);border-radius:6px;">
+      상세 보기 &rarr;
+    </a>
+  </div>
+</div>
+
+<!-- ══════════ 섹션 1: 핵심 지표 ══════════ -->
+<div class="section">
+  <h2>1. 핵심 지표 요약</h2>
+  <p class="note">KFold는 같은 약물이 학습/검증에 동시 등장하여 정보 누수 발생. GroupKFold로 약물 단위 분리 후 실제 성능 측정.</p>
+  <div class="cards" style="margin-top:10px;">
+    <div class="card">
+      <span class="badge badge-warn">누수</span>
+      <div class="label">KFold Spearman (v1)</div>
+      <div class="value" style="color:var(--red)">0.8055</div>
+      <div class="sub">6모델 앙상블 / KFold / RMSE 1.301<br>같은 약물이 학습+검증에 동시 등장 &rarr; 과적합</div>
+    </div>
+    <div class="card">
+      <span class="badge badge-ok">실제</span>
+      <div class="label">GroupKFold 기준선</div>
+      <div class="value" style="color:var(--yellow)">0.4964</div>
+      <div class="sub">7모델 앙상블 / GroupKFold / RMSE 2.186<br>약물 단위 분리 후 실제 일반화 성능</div>
+    </div>
+    <div class="card">
+      <span class="badge badge-ok">최고</span>
+      <div class="label">현재 최고 Spearman</div>
+      <div class="value" style="color:var(--green)">0.5190</div>
+      <div class="sub">Ensemble Grid (St0.2/Cb0.4/RF0.3/XG0.1)<br>기준선 대비 +0.0226 개선</div>
+    </div>
+    <div class="card">
+      <span class="badge badge-info">순위</span>
+      <div class="label">NDCG@10 (랭킹 성능)</div>
+      <div class="value" style="color:var(--accent)">0.8167</div>
+      <div class="sub">LightGBM Ranker / NDCG@20: 0.7915<br>상위 10개 약물 추천 정확도</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ 섹션 2: 성능 개선 흐름 ══════════ -->
+<div class="section">
+  <h2>2. Spearman 개선 흐름 (GroupKFold)</h2>
+  <p class="note">각 단계별 Stacking_Ridge 모델의 Spearman 상관계수 변화. Mechanism v2까지 지속적으로 개선.</p>
+  <div class="panel" style="margin-top:10px;">
+    <div class="bar-chart">
+      <div class="bar-row">
+        <div class="bar-label">GKF 기준선</div>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:33%; background:linear-gradient(90deg,#f87171,#fb923c);">0.4964</div>
+        </div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">피처 재구성</div>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:44%; background:linear-gradient(90deg,#fb923c,#facc15);">0.4990 <span style="font-size:.6rem;opacity:.7">(+0.003)</span></div>
+        </div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">+ Mech v1 (타겟/경로)</div>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:56%; background:linear-gradient(90deg,#facc15,#a3e635);">0.5050 <span style="font-size:.6rem;opacity:.7">(+0.006)</span></div>
+        </div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">+ Mech v2 (상호작용)</div>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:83%; background:linear-gradient(90deg,#a3e635,#4ade80);">0.5182 <span style="font-size:.6rem;opacity:.7">(+0.013)</span></div>
+        </div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">앙상블 v2 (Grid)</div>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:85%; background:linear-gradient(90deg,#4ade80,#38bdf8);">0.5190 <span style="font-size:.6rem;opacity:.7">(+0.001)</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="note" style="margin-top:12px;">
+      <strong>해석:</strong> Mechanism v2 (발현 가중치 + 질병 상호작용) 추가 시 가장 큰 폭(+0.013)으로 개선.
+      v3 PPI 피처는 별도 성능 개선 없이 v2 수준 유지 (아래 상세 비교 참조).
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ 섹션 3: 모델별 비교 ══════════ -->
+<div class="section">
+  <h2>3. Top4 모델 비교: 기본 &rarr; v1 &rarr; v2</h2>
+  <p class="note">4개 모델에 Mechanism 피처를 단계적으로 추가한 결과. 모든 모델에서 v2가 최고 성능.</p>
+  <div class="g2" style="margin-top:10px;">
+    <div class="panel">
+      <div style="font-size:.78rem;font-weight:700;margin-bottom:12px;color:var(--accent)">OOF Spearman (단계별 비교)</div>
+
+      <div class="gb-group">
+        <div class="gb-title">Stacking_Ridge &mdash; 가장 안정적, 최고 성능</div>
+        <div class="gb-bars">
+          <div class="gb-bar" style="width:30%; background:var(--text2);">0.499</div>
+          <div class="gb-bar" style="width:33%; background:var(--accent2);">0.505</div>
+          <div class="gb-bar" style="width:40%; background:var(--green);">0.518</div>
+        </div>
+      </div>
+      <div class="gb-group">
+        <div class="gb-title">CatBoost &mdash; v2에서 급상승 (+0.040)</div>
+        <div class="gb-bars">
+          <div class="gb-bar" style="width:28%; background:var(--text2);">0.486</div>
+          <div class="gb-bar" style="width:24%; background:var(--accent2);">0.474</div>
+          <div class="gb-bar" style="width:38%; background:var(--green);">0.514</div>
+        </div>
+      </div>
+      <div class="gb-group">
+        <div class="gb-title">RandomForest &mdash; 점진적 개선</div>
+        <div class="gb-bars">
+          <div class="gb-bar" style="width:27%; background:var(--text2);">0.482</div>
+          <div class="gb-bar" style="width:30%; background:var(--accent2);">0.493</div>
+          <div class="gb-bar" style="width:35%; background:var(--green);">0.506</div>
+        </div>
+      </div>
+      <div class="gb-group">
+        <div class="gb-title">XGBoost &mdash; 개선 폭 최소</div>
+        <div class="gb-bars">
+          <div class="gb-bar" style="width:27%; background:var(--text2);">0.481</div>
+          <div class="gb-bar" style="width:26%; background:var(--accent2);">0.480</div>
+          <div class="gb-bar" style="width:32%; background:var(--green);">0.491</div>
+        </div>
+      </div>
+      <div style="margin-top:10px;font-size:.65rem;color:var(--text2);display:flex;gap:12px;">
+        <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--text2);vertical-align:middle"></span> 기본</span>
+        <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--accent2);vertical-align:middle"></span> +v1</span>
+        <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--green);vertical-align:middle"></span> +v2</span>
+      </div>
+    </div>
+
+    <div class="panel">
+      <table>
+        <thead>
+          <tr><th>모델</th><th>기본</th><th>+v1</th><th>+v2</th><th>v1&Delta;</th><th>v2&Delta;</th><th>Gap</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Stacking_Ridge</td><td>0.4990</td><td>0.5050</td><td><strong>0.5182</strong></td>
+            <td class="up">+0.006</td><td class="up">+0.013</td><td>0.386</td>
+          </tr>
+          <tr>
+            <td>CatBoost</td><td>0.4860</td><td>0.4740</td><td><strong>0.5140</strong></td>
+            <td class="dn">-0.012</td><td class="up">+0.040</td><td>0.331</td>
+          </tr>
+          <tr>
+            <td>RandomForest</td><td>0.4824</td><td>0.4930</td><td><strong>0.5064</strong></td>
+            <td class="up">+0.011</td><td class="up">+0.013</td><td>0.352</td>
+          </tr>
+          <tr>
+            <td>XGBoost</td><td>0.4809</td><td>0.4803</td><td><strong>0.4908</strong></td>
+            <td class="dn">-0.001</td><td class="up">+0.011</td><td>0.387</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="highlight">
+        <strong>앙상블 v2 (Grid Search 최적)</strong><br>
+        Equal: 0.5146 | Sp비례: 0.5184 | Grid: <strong style="color:var(--green)">0.5190</strong><br>
+        최적 가중치: St=0.2 / Cb=0.4 / RF=0.3 / XG=0.1<br>
+        <span style="font-size:.68rem;color:var(--text2)">CatBoost가 가장 높은 가중치 (0.4) &rarr; v2 피처를 가장 잘 활용</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ 섹션 4: v3 PPI 피처 분석 ══════════ -->
+<div class="section">
+  <h2>4. Mechanism v3 PPI 피처 분석</h2>
+  <p class="note">STRING PPI 그래프 기반 피처. 약물 타겟의 단백질 상호작용 네트워크를 활용하여 질병 연관성을 포착.</p>
+
+  <div class="g2" style="margin-top:10px;">
+    <div class="panel">
+      <div style="font-size:.78rem;font-weight:700;color:var(--accent);margin-bottom:8px;">v3 Raw (원본) 피처</div>
+      <table>
+        <thead><tr><th>피처</th><th>평균</th><th>표준편차</th><th>최대</th><th>비영 약물</th></tr></thead>
+        <tbody>
+          <tr><td>ppi_neighbor_disease_score</td><td>12.52</td><td>19.60</td><td>150.74</td><td>154/295 (52.2%)</td></tr>
+          <tr><td>pathway_propagation_score</td><td>0.019</td><td>0.030</td><td>0.134</td><td>154/295 (52.2%)</td></tr>
+          <tr><td>target_diffusion_score</td><td>556.7</td><td>575.4</td><td>1554.9</td><td>154/295 (52.2%)</td></tr>
+        </tbody>
+      </table>
+      <div class="note">STRING PPI: 126/196 유전자 매핑 (64.3%) | 16,201 노드, 236,930 엣지 (score&ge;700)</div>
+    </div>
+
+    <div class="panel">
+      <div style="font-size:.78rem;font-weight:700;color:var(--orange);margin-bottom:8px;">v3 Refined (개선) 피처</div>
+      <table>
+        <thead><tr><th>피처</th><th>평균</th><th>표준편차</th><th>비영 샘플</th></tr></thead>
+        <tbody>
+          <tr><td>ppi_neighbor_disease_score_log1p</td><td>1.710</td><td>1.625</td><td>4,477/7,730 (57.9%)</td></tr>
+          <tr><td>pathway_propagation_score</td><td>0.022</td><td>0.031</td><td>4,477/7,730 (57.9%)</td></tr>
+          <tr><td>has_ppi_feature (0/1)</td><td>0.579</td><td>0.494</td><td>4,477/7,730 (57.9%)</td></tr>
+          <tr><td>target_pathway_x_propagation</td><td>0.0005</td><td>0.0017</td><td>3,023/7,730 (39.1%)</td></tr>
+        </tbody>
+      </table>
+      <div class="note">유전자 alias 적용: 136/194 매핑 (70.1%) | 비영 약물: 172/295 (58.3%, +18개)</div>
+    </div>
+  </div>
+
+  <!-- v3 raw vs refined 비교 -->
+  <div class="panel" style="margin-top:12px;">
+    <div style="font-size:.78rem;font-weight:700;color:var(--accent);margin-bottom:8px;">v3 Raw vs Refined 학습 결과 비교</div>
+    <table>
+      <thead>
+        <tr><th>모델</th><th>v2 기준</th><th>v2+v3 Raw</th><th>&Delta;</th><th>v2+v3 Refined</th><th>&Delta;</th><th>Raw vs Refined</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Stacking_Ridge</td><td>0.5182</td>
+          <td class="dn">0.5127</td><td class="dn">-0.006</td>
+          <td class="dn">0.5132</td><td class="dn">-0.005</td>
+          <td class="up">+0.0005</td>
+        </tr>
+        <tr>
+          <td>CatBoost</td><td>0.5140</td>
+          <td class="dn">0.5045</td><td class="dn">-0.010</td>
+          <td class="dn">0.5063</td><td class="dn">-0.008</td>
+          <td class="up">+0.0018</td>
+        </tr>
+        <tr>
+          <td>RandomForest</td><td>0.5064</td>
+          <td class="dn">0.4999</td><td class="dn">-0.007</td>
+          <td class="dn">0.5030</td><td class="dn">-0.003</td>
+          <td class="up">+0.0031</td>
+        </tr>
+        <tr>
+          <td>XGBoost</td><td>0.4908</td>
+          <td class="up">0.4963</td><td class="up">+0.005</td>
+          <td>0.4961</td><td class="up">+0.005</td>
+          <td class="dn">-0.0001</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="warning">
+      <strong>v3 PPI 피처 진단:</strong> v2 기준 대비 3/4 모델에서 성능 하락. 47.8% 제로 패딩이 노이즈 유발.<br>
+      Refined가 Raw보다 3/4 모델에서 개선 (log1p + alias + interaction이 노이즈 감소 효과).<br>
+      <strong>결론:</strong> PPI 피처 자체는 유효하나, 제로 패딩 비율(~42%)이 전체 성능에 부정적 영향.
+    </div>
+  </div>
+
+  <!-- Feature Importance -->
+  <div class="panel" style="margin-top:12px;">
+    <div style="font-size:.78rem;font-weight:700;color:var(--accent);margin-bottom:8px;">v3 Refined 피처 중요도 순위 (Top 20 진입 여부)</div>
+    <table>
+      <thead><tr><th>피처</th><th>XGBoost</th><th>CatBoost</th><th>RandomForest</th><th>비고</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>target_pathway_x_propagation</strong></td>
+          <td>210위 (0.11%)</td>
+          <td style="color:var(--green)"><strong>18위 (0.97%)</strong></td>
+          <td style="color:var(--green)"><strong>10위 (0.85%)</strong></td>
+          <td style="color:var(--green)">Top 20 진입! 가장 유용</td>
+        </tr>
+        <tr>
+          <td>pathway_propagation_score</td>
+          <td>112위 (0.20%)</td>
+          <td style="color:var(--accent)">30위 (0.75%)</td>
+          <td style="color:var(--accent)">21위 (0.57%)</td>
+          <td>준수한 순위</td>
+        </tr>
+        <tr>
+          <td>ppi_neighbor_disease_score_log1p</td>
+          <td>252위 (0.09%)</td>
+          <td>42위 (0.48%)</td>
+          <td>33위 (0.42%)</td>
+          <td>중위권</td>
+        </tr>
+        <tr>
+          <td>has_ppi_feature</td>
+          <td>197위 (0.12%)</td>
+          <td>153위 (0.10%)</td>
+          <td>189위 (0.14%)</td>
+          <td>기여도 낮음</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="note">
+      <strong>핵심 발견:</strong> target_pathway_x_propagation (v2의 target_x_pathway &times; pathway_propagation_score 상호작용)이
+      CatBoost에서 18위, RandomForest에서 10위로 Top 20 진입. 단독 PPI 피처보다 기존 v2 피처와의 상호작용이 더 강한 신호.
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ 섹션 5: 피처 구성 ══════════ -->
+<div class="section">
+  <h2>5. 전체 피처 구성</h2>
+  <div class="g2">
+    <div class="panel">
+      <div class="pie-wrap">
+        <div class="pie">
+          <div class="pie-hole">
+            <div class="big">2,186</div>
+            <div class="sm">전체 피처 수</div>
+          </div>
+        </div>
+        <div class="legend">
+          <div><span class="dot" style="background:var(--accent)"></span> 기본 피처: 2,167 (99.1%)</div>
+          <div><span class="dot" style="background:var(--accent2)"></span> Mechanism v1: 5 (0.2%)</div>
+          <div><span class="dot" style="background:var(--green)"></span> Mechanism v2: 10 (0.5%)</div>
+          <div><span class="dot" style="background:var(--orange)"></span> Mechanism v3r: 4 (0.2%)</div>
+        </div>
+      </div>
+      <div class="note" style="margin-top:12px;">
+        <strong>피처 구성 설명:</strong><br>
+        - <strong>기본 (2,167):</strong> 약물 Morgan FP, 물리화학적 특성, 유전자 발현, CRISPR, 세포주 특성<br>
+        - <strong>v1 (5):</strong> 타겟 질병 점수, 경로 매칭, LINCS 유사도 (약물 단위)<br>
+        - <strong>v2 (10):</strong> 발현 가중 점수, 질병 상호작용, 역전 점수 (샘플 단위)<br>
+        - <strong>v3r (4):</strong> PPI 이웃 질병 점수, 경로 전파, 상호작용 (샘플 단위)
+      </div>
+    </div>
+    <div>
+      <div class="feat-grid">
+        <div class="fb">
+          <div class="fb-t">기본 피처</div>
+          <div class="fb-r"><span>개수</span><span>2,167</span></div>
+          <div class="fb-r"><span>단위</span><span>샘플별 (7,730행)</span></div>
+          <div class="fb-r"><span>출처</span><span>GDSC/TCGA/STRING</span></div>
+          <div class="prog-bg"><div class="prog-fill" style="width:100%;background:var(--accent)"></div></div>
+        </div>
+        <div class="fb">
+          <div class="fb-t">Mechanism v1</div>
+          <div class="fb-r"><span>개수</span><span>5</span></div>
+          <div class="fb-r"><span>단위</span><span>약물별 (295개)</span></div>
+          <div class="fb-r"><span>커버리지</span><span>295/295 (100%)</span></div>
+          <div class="prog-bg"><div class="prog-fill" style="width:100%;background:var(--accent2)"></div></div>
+        </div>
+        <div class="fb">
+          <div class="fb-t">Mechanism v2</div>
+          <div class="fb-r"><span>개수</span><span>10</span></div>
+          <div class="fb-r"><span>단위</span><span>샘플별 (7,730행)</span></div>
+          <div class="fb-r"><span>핵심</span><span>target_x_pathway</span></div>
+          <div class="prog-bg"><div class="prog-fill" style="width:100%;background:var(--green)"></div></div>
+        </div>
+        <div class="fb">
+          <div class="fb-t">Mechanism v3 Refined</div>
+          <div class="fb-r"><span>개수</span><span>4</span></div>
+          <div class="fb-r"><span>단위</span><span>샘플별 (7,730행)</span></div>
+          <div class="fb-r"><span>비영</span><span>57.9% (alias적용)</span></div>
+          <div class="prog-bg"><div class="prog-fill" style="width:57.9%;background:var(--orange)"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ 섹션 6: Validation Top 15 ══════════ -->
+<div class="section">
+  <h2>6. Validation Top 15 (모델 검증용)</h2>
+  <p class="note">앙상블 예측 IC50 기반 상위 15개 약물 (dedup 후 28개 중). ADMET 안전성 + METABRIC 외부검증 점수 통합.</p>
+  <div class="panel" style="margin-top:10px;overflow-x:auto;">
+    <table>
+      <thead>
+        <tr><th>V#</th><th>Drug</th><th>Cat</th><th>pred IC50</th><th>Sens%</th><th>ADMET</th><th>METABRIC</th><th>Known</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td><td><strong>Docetaxel</strong></td>
+          <td style="color:var(--text2);font-weight:700">A</td>
+          <td>-4.082</td><td>100%</td>
+          <td><span style="color:var(--green)">PASS</span></td>
+          <td><strong>9.45</strong></td>
+          <td style="color:var(--green)">&#10003;</td>
+        </tr>
+        <tr>
+          <td>2</td><td><strong>Dactinomycin</strong></td>
+          <td style="color:var(--text2);font-weight:700">A</td>
+          <td>-2.288</td><td>100%</td>
+          <td><span style="color:var(--green)">PASS</span></td>
+          <td>7.90</td>
+          <td style="color:var(--green)">&#10003;</td>
+        </tr>
+        <tr>
+          <td>3</td><td><strong>Paclitaxel</strong></td>
+          <td style="color:var(--text2);font-weight:700">A</td>
+          <td>-2.157</td><td>100%</td>
+          <td><span style="color:var(--green)">PASS</span></td>
+          <td><strong>9.35</strong></td>
+          <td style="color:var(--green)">&#10003;</td>
+        </tr>
+        <tr>
+          <td>4</td><td><strong>Vinblastine</strong></td>
+          <td style="color:var(--text2);font-weight:700">A</td>
+          <td>-1.284</td><td>100%</td>
+          <td><span style="color:var(--green)">PASS</span></td>
+          <td><strong>9.25</strong></td>
+          <td style="color:var(--green)">&#10003;</td>
+        </tr>
+        <tr>
+          <td>5</td><td><strong>Vinorelbine</strong></td>
+          <td style="color:var(--text2);font-weight:700">A</td>
+          <td>-1.178</td><td>96%</td>
+          <td><span style="color:var(--green)">PASS</span></td>
+          <td><strong>9.20</strong></td>
+          <td style="color:var(--green)">&#10003;</td>
+        </tr>
+        <tr>
+          <td>6</td><td>Temsirolimus</td>
+          <td style="color:var(--accent);font-weight:700">B</td>
+          <td>-1.068</td><td>96%</td>
+          <td><span style="color:var(--green)">PASS</span></td>
+          <td>4.65</td>
+          <td style="color:var(--text2)">&mdash;</td>
+        </tr>
+        <tr>
+          <td>7</td><td><strong>Topotecan</strong></td>
+          <td style="color:var(--text2);font-weight:700">A</td>
+          <td>-0.496</td><td>73%</td>
+          <td><span style="color:var(--green)">PASS</span></td>
+          <td>7.55</td>
+          <td style="color:var(--green)">&#10003;</td>
+        </tr>
+        <tr>
+          <td>8</td><td>CDK9_5576</td>
+          <td style="color:var(--accent);font-weight:700">B</td>
+          <td>-0.456</td><td>65%</td>
+          <td><span style="color:var(--green)">PASS</span></td>
+          <td>3.00</td>
+          <td style="color:var(--text2)">&mdash;</td>
+        </tr>
+        <tr>
+          <td>9</td><td>SL0101</td>
+          <td style="color:var(--accent);font-weight:700">B</td>
+          <td>-0.272</td><td>100%</td>
+          <td><span style="color:var(--green)">PASS</span></td>
+          <td>5.45</td>
+          <td style="color:var(--text2)">&mdash;</td>
+        </tr>
+        <tr style="background:rgba(250,204,21,.06)">
+          <td>10</td><td>Teniposide <span class="badge badge-warn" style="position:static;display:inline-block;font-size:.55rem">CAUTION</span></td>
+          <td style="color:var(--accent);font-weight:700">B</td>
+          <td>-0.173</td><td>69%</td>
+          <td><span style="color:var(--yellow)">CAUTION</span></td>
+          <td>5.40</td>
+          <td style="color:var(--text2)">&mdash;</td>
+        </tr>
+        <tr>
+          <td>11</td><td><strong>Epirubicin</strong> <span style="color:var(--red);font-size:.75rem" title="Anthracycline 심장독성 경고">&#9829;</span></td>
+          <td style="color:var(--text2);font-weight:700">A</td>
+          <td>0.439</td><td>29%</td>
+          <td><span style="color:var(--green)">PASS</span> <span style="font-size:.55rem;color:var(--red)" title="Ames(+), DILI(+), Cardiotoxicity">*</span></td>
+          <td>7.35</td>
+          <td style="color:var(--green)">&#10003;</td>
+        </tr>
+        <tr style="background:rgba(250,204,21,.06)">
+          <td>12</td><td>Mitoxantrone <span class="badge badge-warn" style="position:static;display:inline-block;font-size:.55rem">CAUTION</span></td>
+          <td style="color:var(--accent);font-weight:700">B</td>
+          <td>0.863</td><td>8%</td>
+          <td><span style="color:var(--yellow)">CAUTION</span></td>
+          <td>5.30</td>
+          <td style="color:var(--text2)">&mdash;</td>
+        </tr>
+        <tr>
+          <td>13</td><td>TW 37</td>
+          <td style="color:var(--accent);font-weight:700">B</td>
+          <td>1.194</td><td>0%</td>
+          <td><span style="color:var(--green)">PASS</span></td>
+          <td>2.75</td>
+          <td style="color:var(--text2)">&mdash;</td>
+        </tr>
+        <tr>
+          <td>14</td><td>CDK9_5038</td>
+          <td style="color:var(--accent);font-weight:700">B</td>
+          <td>1.204</td><td>4%</td>
+          <td><span style="color:var(--green)">PASS</span></td>
+          <td>2.70</td>
+          <td style="color:var(--text2)">&mdash;</td>
+        </tr>
+        <tr>
+          <td>15</td><td>AZD2014</td>
+          <td style="color:var(--accent);font-weight:700">B</td>
+          <td>1.381</td><td>0%</td>
+          <td><span style="color:var(--green)">PASS</span></td>
+          <td>5.15</td>
+          <td style="color:var(--text2)">&mdash;</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="note" style="margin-top:10px;">
+      <strong>범례:</strong> Cat A <span style="color:var(--text2);font-weight:700">(회색)</span> = Known BRCA |
+      Cat B <span style="color:var(--accent);font-weight:700">(파란색)</span> = BRCA Research |
+      &#10003; = 기존 BRCA 치료제 |
+      <span style="color:var(--red)">&#9829;</span> = Epirubicin 심장독성 경고 (anthracycline 누적용량 의존 심근병증) |
+      * = Ames(+), DILI(+), Cardiotoxicity flag 있으나 기승인 약물로 PASS
+    </div>
+    <div class="warning" style="margin-top:8px;">
+      <strong>ADMET CAUTION (2건):</strong>
+      Teniposide &mdash; Ames Mutagenicity(+), DILI(+) |
+      Mitoxantrone &mdash; Ames Mutagenicity(+), DILI(+).
+      Category B 약물로서 추가 안전성 연구 필요.
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ 섹션 7: Discovery Top 15 ══════════ -->
+<div class="section">
+  <h2>7. Discovery Top 15 (재창출 후보용)</h2>
+  <p class="note">
+    Discovery Ranking v2: <code>score = 0.5 &times; base_norm + 0.5 &times; (novelty &times; (1 - penalty))</code>.
+    2-stage 구조: base_norm Top 20 필터 &rarr; discovery score 정렬. 신규 기전 후보 발굴 목적.
+  </p>
+  <div class="panel" style="margin-top:10px;overflow-x:auto;">
+    <table>
+      <thead>
+        <tr><th>D#</th><th>V#</th><th>&Delta;</th><th>Drug</th><th>Cat</th><th>D-Score</th><th>base_norm</th><th>novelty</th></tr>
+      </thead>
+      <tbody>
+        <tr style="background:rgba(56,189,248,.08)">
+          <td><strong>1</strong></td><td>9</td>
+          <td class="up">+8</td>
+          <td><strong>SL0101</strong> <span class="badge badge-info" style="position:static;display:inline-block;font-size:.5rem">KEY</span></td>
+          <td style="color:var(--accent);font-weight:700">B</td>
+          <td><strong>0.807</strong></td><td>0.714</td><td>1.000</td>
+        </tr>
+        <tr style="background:rgba(56,189,248,.08)">
+          <td><strong>2</strong></td><td>8</td>
+          <td class="up">+6</td>
+          <td><strong>CDK9_5576</strong> <span class="badge badge-info" style="position:static;display:inline-block;font-size:.5rem">KEY</span></td>
+          <td style="color:var(--accent);font-weight:700">B</td>
+          <td><strong>0.735</strong></td><td>0.750</td><td>0.800</td>
+        </tr>
+        <tr style="background:rgba(74,222,128,.08)">
+          <td><strong>3</strong></td><td>19</td>
+          <td class="up"><strong>+16</strong></td>
+          <td><strong>Avagacestat</strong> <span class="badge badge-ok" style="position:static;display:inline-block;font-size:.5rem">REPURPOSE</span></td>
+          <td style="color:var(--green);font-weight:700">C</td>
+          <td><strong>0.679</strong></td><td>0.357</td><td>1.000</td>
+        </tr>
+        <tr>
+          <td>4</td><td>13</td>
+          <td class="up">+9</td>
+          <td>TW 37</td>
+          <td style="color:var(--accent);font-weight:700">B</td>
+          <td>0.646</td><td>0.571</td><td>0.800</td>
+        </tr>
+        <tr>
+          <td>5</td><td>14</td>
+          <td class="up">+9</td>
+          <td>CDK9_5038</td>
+          <td style="color:var(--accent);font-weight:700">B</td>
+          <td>0.628</td><td>0.536</td><td>0.800</td>
+        </tr>
+        <tr>
+          <td>6</td><td>10</td>
+          <td class="up">+4</td>
+          <td>Teniposide</td>
+          <td style="color:var(--accent);font-weight:700">B</td>
+          <td>0.609</td><td>0.679</td><td>0.600</td>
+        </tr>
+        <tr>
+          <td>7</td><td>2</td>
+          <td class="dn">-5</td>
+          <td>Dactinomycin</td>
+          <td style="color:var(--text2);font-weight:700">A</td>
+          <td>0.595</td><td>0.964</td><td>0.750</td>
+        </tr>
+        <tr>
+          <td>8</td><td>1</td>
+          <td class="dn">-7</td>
+          <td>Docetaxel</td>
+          <td style="color:var(--text2);font-weight:700">A</td>
+          <td>0.530</td><td>1.000</td><td>0.200</td>
+        </tr>
+        <tr>
+          <td>9</td><td>6</td>
+          <td class="dn">-3</td>
+          <td>Temsirolimus</td>
+          <td style="color:var(--accent);font-weight:700">B</td>
+          <td>0.516</td><td>0.821</td><td>0.350</td>
+        </tr>
+        <tr>
+          <td>10</td><td>3</td>
+          <td class="dn">-7</td>
+          <td>Paclitaxel</td>
+          <td style="color:var(--text2);font-weight:700">A</td>
+          <td>0.494</td><td>0.929</td><td>0.200</td>
+        </tr>
+        <tr>
+          <td>11</td><td>4</td>
+          <td class="dn">-7</td>
+          <td>Vinblastine</td>
+          <td style="color:var(--text2);font-weight:700">A</td>
+          <td>0.476</td><td>0.893</td><td>0.200</td>
+        </tr>
+        <tr>
+          <td>12</td><td>5</td>
+          <td class="dn">-7</td>
+          <td>Vinorelbine</td>
+          <td style="color:var(--text2);font-weight:700">A</td>
+          <td>0.459</td><td>0.857</td><td>0.200</td>
+        </tr>
+        <tr>
+          <td>13</td><td>16</td>
+          <td class="up">+3</td>
+          <td>Tanespimycin</td>
+          <td style="color:var(--accent);font-weight:700">B</td>
+          <td>0.457</td><td>0.464</td><td>0.750</td>
+        </tr>
+        <tr>
+          <td>14</td><td>7</td>
+          <td class="dn">-7</td>
+          <td>Topotecan</td>
+          <td style="color:var(--text2);font-weight:700">A</td>
+          <td>0.423</td><td>0.786</td><td>0.200</td>
+        </tr>
+        <tr>
+          <td>15</td><td>15</td>
+          <td>0</td>
+          <td>AZD2014</td>
+          <td style="color:var(--accent);font-weight:700">B</td>
+          <td>0.400</td><td>0.500</td><td>0.500</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="note" style="margin-top:10px;">
+      <strong>범례:</strong> &Delta; = V# &minus; D# (양수=discovery에서 상승) |
+      Cat A <span style="color:var(--text2);font-weight:700">(회색)</span> |
+      Cat B <span style="color:var(--accent);font-weight:700">(파란색)</span> |
+      Cat C <span style="color:var(--green);font-weight:700">(초록색)</span> |
+      <span class="badge badge-info" style="position:static;display:inline-block;font-size:.55rem">KEY</span> 핵심 후보 |
+      <span class="badge badge-ok" style="position:static;display:inline-block;font-size:.55rem">REPURPOSE</span> 완전 재창출
+    </div>
+    <div class="highlight" style="margin-top:8px;">
+      <strong>핵심 발견:</strong><br>
+      &bull; <strong>SL0101</strong> (D#1): RSK/AURKB/PIM 다중 kinase 억제. 신규 기전 + 높은 base (V#9). 최고 discovery score.<br>
+      &bull; <strong>CDK9_5576</strong> (D#2): CDK9 전사 억제. TNBC MYC-driven 취약성 표적. 유의미한 전임상 근거.<br>
+      &bull; <strong>Avagacestat</strong> (D#3): Amyloid beta 표적 &rarr; 유방암 완전 재창출. V#19에서 +16 상승. base_norm 낮으나 novelty 최고(1.0).
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ 섹션 8: Validation vs Discovery 비교 ══════════ -->
+<div class="section">
+  <h2>8. Validation vs Discovery 비교</h2>
+  <p class="note">모델 효능(Validation) 기반 순위와 재창출 가능성(Discovery) 기반 순위의 차이 분석.</p>
+  <div class="g2" style="margin-top:10px;">
+    <div class="panel">
+      <div style="font-size:.78rem;font-weight:700;color:var(--accent);margin-bottom:10px;">순위 변동 Top 5 (Discovery에서 상승)</div>
+      <table>
+        <thead>
+          <tr><th>Drug</th><th>Cat</th><th>V#</th><th>D#</th><th>&Delta;</th><th>사유</th></tr>
+        </thead>
+        <tbody>
+          <tr style="background:rgba(74,222,128,.06)">
+            <td><strong>Avagacestat</strong></td>
+            <td style="color:var(--green);font-weight:700">C</td>
+            <td>19</td><td>3</td><td class="up"><strong>+16</strong></td>
+            <td style="font-size:.68rem">완전 재창출 (novelty=1.0, penalty=0)</td>
+          </tr>
+          <tr>
+            <td>TW 37</td>
+            <td style="color:var(--accent);font-weight:700">B</td>
+            <td>13</td><td>4</td><td class="up">+9</td>
+            <td style="font-size:.68rem">BCL2 신규 기전 (novel target)</td>
+          </tr>
+          <tr>
+            <td>CDK9_5038</td>
+            <td style="color:var(--accent);font-weight:700">B</td>
+            <td>14</td><td>5</td><td class="up">+9</td>
+            <td style="font-size:.68rem">CDK9 전사 억제 (novel target)</td>
+          </tr>
+          <tr>
+            <td><strong>SL0101</strong></td>
+            <td style="color:var(--accent);font-weight:700">B</td>
+            <td>9</td><td>1</td><td class="up">+8</td>
+            <td style="font-size:.68rem">RSK 다중 kinase (novel, novelty=1.0)</td>
+          </tr>
+          <tr>
+            <td><strong>CDK9_5576</strong></td>
+            <td style="color:var(--accent);font-weight:700">B</td>
+            <td>8</td><td>2</td><td class="up">+6</td>
+            <td style="font-size:.68rem">CDK9 전사 억제 (novel target)</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note" style="margin-top:8px;">
+        <strong>리스트 변동:</strong><br>
+        &bull; Discovery 진입: <strong>Avagacestat</strong> (V#19&rarr;D#3), <strong>Tanespimycin</strong> (V#16&rarr;D#13)<br>
+        &bull; Discovery 이탈: <strong>Epirubicin</strong> (V#11&rarr;D#17), <strong>Mitoxantrone</strong> (V#12&rarr;D#16)
+      </div>
+    </div>
+
+    <div class="panel">
+      <div style="font-size:.78rem;font-weight:700;color:var(--accent2);margin-bottom:10px;">Category 분포 변화</div>
+      <div style="margin-bottom:16px;">
+        <div style="font-size:.7rem;color:var(--text2);margin-bottom:6px;">Validation Top 15</div>
+        <div style="display:flex;gap:2px;height:30px;">
+          <div style="width:47%;background:var(--text2);border-radius:4px 0 0 4px;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:#fff;">A: 7 (47%)</div>
+          <div style="width:53%;background:var(--accent);border-radius:0 4px 4px 0;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:#fff;">B: 8 (53%)</div>
+        </div>
+      </div>
+      <div style="margin-bottom:16px;">
+        <div style="font-size:.7rem;color:var(--text2);margin-bottom:6px;">Discovery Top 15</div>
+        <div style="display:flex;gap:2px;height:30px;">
+          <div style="width:40%;background:var(--text2);border-radius:4px 0 0 4px;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:#fff;">A: 6 (40%)</div>
+          <div style="width:53%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:#fff;">B: 8 (53%)</div>
+          <div style="width:7%;background:var(--green);border-radius:0 4px 4px 0;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;color:#fff;">C</div>
+        </div>
+      </div>
+      <div class="highlight">
+        <strong>핵심 변화:</strong><br>
+        &bull; Cat A 비율: 47% &rarr; 40% (기존 치료제 비중 감소)<br>
+        &bull; Cat C 신규 진입: Avagacestat (완전 재창출 후보)<br>
+        &bull; Cat B 유지: 53%로 동일 (연구 약물 풀 안정적)<br>
+        &bull; Discovery 랭킹은 novelty 가중으로 신규 기전 약물을 상위로 재배치
+      </div>
+      <div class="note" style="margin-top:8px;">
+        <strong>해석 주의:</strong> Discovery ranking은 validation ranking을 대체하지 않음.
+        효능(validation)과 신규성(discovery)은 상호 보완적 관점이며,
+        최종 후보 선정 시 두 리스트를 교차 참조하여 판단.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ 섹션 9: 3개 실험 최종 비교 ══════════ -->
+<div class="section">
+  <h2>9. 3개 실험 최종 비교 (Feature → 성능 → 약물 도출)</h2>
+  <p class="note">20260410 Multimodal Fusion, Pipeline A (Mechanism Engine), Pipeline B (Drug Chemistry Only) — 동일 BRCA 데이터, 서로 다른 설계.</p>
+
+  <!-- ── 9-1: 실험 설계 카드 ── -->
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px;">
+    <!-- 20260410 -->
+    <div class="panel" style="border-top:3px solid var(--red);">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+        <span style="font-size:.82rem;font-weight:800;color:var(--red);">20260410</span>
+        <span style="font-size:.58rem;padding:2px 7px;border-radius:4px;font-weight:700;background:rgba(248,113,113,.18);color:var(--red);">LEAKAGE</span>
+      </div>
+      <div style="font-size:.72rem;color:var(--text2);margin-bottom:8px;">Multimodal Fusion</div>
+      <div style="font-size:.68rem;line-height:1.8;">
+        <div style="display:flex;justify-content:space-between;"><span style="color:var(--text2)">CV</span><span style="color:var(--red);font-weight:700">KFold (random)</span></div>
+        <div style="display:flex;justify-content:space-between;"><span style="color:var(--text2)">모델</span><span>7개 (GB3 + DL4)</span></div>
+        <div style="display:flex;justify-content:space-between;"><span style="color:var(--text2)">Feature</span><span>~20,000+</span></div>
+        <div style="display:flex;justify-content:space-between;"><span style="color:var(--text2)">Spearman</span><span style="color:var(--red);font-weight:700;text-decoration:line-through;">0.805</span></div>
+        <div style="display:flex;justify-content:space-between;"><span style="color:var(--text2)">실제 성능</span><span style="font-weight:700;">0.496</span></div>
+        <div style="display:flex;justify-content:space-between;"><span style="color:var(--text2)">추천 약물</span><span>Top 15</span></div>
+      </div>
+    </div>
+    <!-- Pipeline A -->
+    <div class="panel" style="border-top:3px solid var(--green);">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+        <span style="font-size:.82rem;font-weight:800;color:var(--green);">Pipeline A</span>
+        <span style="font-size:.58rem;padding:2px 7px;border-radius:4px;font-weight:700;background:rgba(74,222,128,.18);color:var(--green);">BEST</span>
+      </div>
+      <div style="font-size:.72rem;color:var(--text2);margin-bottom:8px;">Mechanism Engine (v2)</div>
+      <div style="font-size:.68rem;line-height:1.8;">
+        <div style="display:flex;justify-content:space-between;"><span style="color:var(--text2)">CV</span><span style="color:var(--green);font-weight:700">GroupKFold (drug)</span></div>
+        <div style="display:flex;justify-content:space-between;"><span style="color:var(--text2)">모델</span><span>4개 (St/CB/RF/XG)</span></div>
+        <div style="display:flex;justify-content:space-between;"><span style="color:var(--text2)">Feature</span><span>2,182</span></div>
+        <div style="display:flex;justify-content:space-between;"><span style="color:var(--text2)">Spearman</span><span style="color:var(--green);font-weight:700;">0.5182</span></div>
+        <div style="display:flex;justify-content:space-between;"><span style="color:var(--text2)">Gap</span><span>0.386</span></div>
+        <div style="display:flex;justify-content:space-between;"><span style="color:var(--text2)">추천 약물</span><span>Top 28 (dedup)</span></div>
+      </div>
+    </div>
+    <!-- Pipeline B -->
+    <div class="panel" style="border-top:3px solid var(--accent);">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+        <span style="font-size:.82rem;font-weight:800;color:var(--accent);">Pipeline B</span>
+        <span style="font-size:.58rem;padding:2px 7px;border-radius:4px;font-weight:700;background:rgba(56,189,248,.18);color:var(--accent);">ABLATION</span>
+      </div>
+      <div style="font-size:.72rem;color:var(--text2);margin-bottom:8px;">Drug Chemistry Only</div>
+      <div style="font-size:.68rem;line-height:1.8;">
+        <div style="display:flex;justify-content:space-between;"><span style="color:var(--text2)">CV</span><span style="color:var(--green);font-weight:700">GroupKFold (drug)</span></div>
+        <div style="display:flex;justify-content:space-between;"><span style="color:var(--text2)">모델</span><span>4개 (St/CB/RF/XG)</span></div>
+        <div style="display:flex;justify-content:space-between;"><span style="color:var(--text2)">Feature</span><span>2,059</span></div>
+        <div style="display:flex;justify-content:space-between;"><span style="color:var(--text2)">Spearman</span><span style="color:var(--accent);font-weight:700;">0.3323</span></div>
+        <div style="display:flex;justify-content:space-between;"><span style="color:var(--text2)">Gap</span><span>0.357</span></div>
+        <div style="display:flex;justify-content:space-between;"><span style="color:var(--text2)">추천 약물</span><span>Top 30</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 9-2: Feature 구성 비교 ── -->
+  <div class="panel" style="margin-top:14px;">
+    <div style="font-size:.78rem;font-weight:700;color:var(--accent2);margin-bottom:12px;">Feature 구성 비교</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Feature Group</th><th>개수</th>
+          <th style="text-align:center">20260410</th>
+          <th style="text-align:center">Pipeline A</th>
+          <th style="text-align:center">Pipeline B</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>CRISPR (유전자 의존성)</td><td style="color:var(--text2)">18,310</td>
+          <td style="text-align:center;color:var(--green);font-weight:700">O</td>
+          <td style="text-align:center;color:var(--green);font-weight:700">O</td>
+          <td style="text-align:center;color:var(--red);font-weight:700">&mdash;</td>
+        </tr>
+        <tr>
+          <td>Morgan Fingerprint (화학 구조)</td><td style="color:var(--text2)">2,048</td>
+          <td style="text-align:center;color:var(--green);font-weight:700">O</td>
+          <td style="text-align:center;color:var(--green);font-weight:700">O</td>
+          <td style="text-align:center;color:var(--green);font-weight:700">O</td>
+        </tr>
+        <tr>
+          <td>Drug Descriptors (물리화학적)</td><td style="color:var(--text2)">9</td>
+          <td style="text-align:center;color:var(--green);font-weight:700">O</td>
+          <td style="text-align:center;color:var(--green);font-weight:700">O</td>
+          <td style="text-align:center;color:var(--green);font-weight:700">O</td>
+        </tr>
+        <tr>
+          <td>LINCS (약물 유전자 발현)</td><td style="color:var(--text2)">5</td>
+          <td style="text-align:center;color:var(--green);font-weight:700">O</td>
+          <td style="text-align:center;color:var(--green);font-weight:700">O</td>
+          <td style="text-align:center;color:var(--red);font-weight:700">&mdash;</td>
+        </tr>
+        <tr>
+          <td>Target Gene (타겟 유전자)</td><td style="color:var(--text2)">10</td>
+          <td style="text-align:center;color:var(--green);font-weight:700">O</td>
+          <td style="text-align:center;color:var(--green);font-weight:700">O</td>
+          <td style="text-align:center;color:var(--red);font-weight:700">&mdash;</td>
+        </tr>
+        <tr>
+          <td>Mechanism v1 (타겟/경로 매칭)</td><td style="color:var(--text2)">5</td>
+          <td style="text-align:center;color:var(--red);font-weight:700">&mdash;</td>
+          <td style="text-align:center;color:var(--green);font-weight:700">O</td>
+          <td style="text-align:center;color:var(--red);font-weight:700">&mdash;</td>
+        </tr>
+        <tr>
+          <td>Mechanism v2 (발현 가중 상호작용)</td><td style="color:var(--text2)">10</td>
+          <td style="text-align:center;color:var(--red);font-weight:700">&mdash;</td>
+          <td style="text-align:center;color:var(--green);font-weight:700">O</td>
+          <td style="text-align:center;color:var(--red);font-weight:700">&mdash;</td>
+        </tr>
+        <tr>
+          <td>SMILES Flags</td><td style="color:var(--text2)">2</td>
+          <td style="text-align:center;color:var(--red);font-weight:700">&mdash;</td>
+          <td style="text-align:center;color:var(--red);font-weight:700">&mdash;</td>
+          <td style="text-align:center;color:var(--green);font-weight:700">O</td>
+        </tr>
+        <tr style="background:var(--surface2);">
+          <td><strong>합계</strong></td><td></td>
+          <td style="text-align:center;font-weight:700">~20,000+</td>
+          <td style="text-align:center;font-weight:700;color:var(--green)">2,182</td>
+          <td style="text-align:center;font-weight:700;color:var(--accent)">2,059</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="note" style="margin-top:8px;">
+      Pipeline B = Pipeline A에서 <strong>생물학적 features 전부 제거</strong> (CRISPR, LINCS, Target, Mechanism, Pathway).
+      약물 화학 구조만의 예측력을 측정하는 ablation study.
+    </div>
+  </div>
+
+  <!-- ── 9-3: 성능 비교 바 차트 ── -->
+  <div class="g2" style="margin-top:14px;">
+    <div class="panel">
+      <div style="font-size:.78rem;font-weight:700;color:var(--accent2);margin-bottom:12px;">Spearman 비교 (공정 기준)</div>
+      <div class="bar-chart">
+        <div class="bar-row">
+          <div class="bar-label" style="width:120px">20260410 (CV)</div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:80%;background:linear-gradient(90deg,var(--red),#fb923c);opacity:.4;">
+              <span style="font-size:.6rem;text-decoration:line-through;">0.805</span>
+            </div>
+          </div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label" style="width:120px">20260410 (Drug)</div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:50%;background:linear-gradient(90deg,var(--red),var(--orange));">0.496</div>
+          </div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label" style="width:120px"><strong>Pipeline A</strong></div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:52%;background:linear-gradient(90deg,#22c55e,#4ade80);">0.518</div>
+          </div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label" style="width:120px">Pipeline B</div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:33%;background:linear-gradient(90deg,#0ea5e9,#38bdf8);">0.332</div>
+          </div>
+        </div>
+      </div>
+      <div class="note" style="margin-top:10px;">
+        20260410 CV 0.805는 <strong>leakage</strong>로 과대평가. Drug Group Test 0.496이 실제 성능.<br>
+        Pipeline A가 공정 비교 기준 <strong>최고 성능 (0.518)</strong>.
+      </div>
+    </div>
+
+    <div class="panel">
+      <div style="font-size:.78rem;font-weight:700;color:var(--accent2);margin-bottom:12px;">Feature 기여도 분석 (A vs B)</div>
+      <!-- Stacked bar: drug chem vs bio -->
+      <div style="margin-bottom:14px;">
+        <div style="font-size:.7rem;color:var(--text2);margin-bottom:6px;">Pipeline A 성능 구성 (Spearman 0.518)</div>
+        <div style="display:flex;gap:0;height:36px;border-radius:6px;overflow:hidden;">
+          <div style="width:64.1%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:#fff;">Drug Chem: 64.1%</div>
+          <div style="width:35.9%;background:var(--green);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:#fff;">Bio: 35.9%</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div style="text-align:center;padding:10px;background:var(--surface2);border-radius:8px;">
+          <div style="font-size:.65rem;color:var(--text2);">약물 화학 구조</div>
+          <div style="font-size:1.4rem;font-weight:800;color:var(--accent);">0.332</div>
+          <div style="font-size:.6rem;color:var(--text2);">Morgan FP + Desc</div>
+        </div>
+        <div style="text-align:center;padding:10px;background:var(--surface2);border-radius:8px;">
+          <div style="font-size:.65rem;color:var(--text2);">생물학적 features</div>
+          <div style="font-size:1.4rem;font-weight:800;color:var(--green);">+0.186</div>
+          <div style="font-size:.6rem;color:var(--text2);">CRISPR+LINCS+Target+Mech</div>
+        </div>
+      </div>
+      <div class="note" style="margin-top:10px;">
+        약물 구조가 <strong>기본 예측력 64%</strong>를 제공하지만,<br>
+        생물학적 context가 <strong>추가 36%</strong>를 기여 &rarr; 두 정보 모두 필수.
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 9-4: 모델별 상세 비교 ── -->
+  <div class="panel" style="margin-top:14px;">
+    <div style="font-size:.78rem;font-weight:700;color:var(--accent2);margin-bottom:12px;">모델별 상세 비교 (Pipeline A vs B)</div>
+    <table>
+      <thead>
+        <tr><th>모델</th><th>A Spearman</th><th>B Spearman</th><th>&Delta;</th><th>A RMSE</th><th>B RMSE</th><th>B Train Sp</th><th>B Gap</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Stacking_Ridge</strong></td>
+          <td style="color:var(--green);font-weight:700">0.5182</td>
+          <td>0.3275</td>
+          <td class="dn">-0.1907</td>
+          <td>2.194</td><td>2.366</td>
+          <td style="color:var(--text2)">0.732</td>
+          <td style="color:var(--yellow)">0.405</td>
+        </tr>
+        <tr>
+          <td><strong>CatBoost</strong></td>
+          <td style="color:var(--green);font-weight:700">0.5140</td>
+          <td>0.3319</td>
+          <td class="dn">-0.1821</td>
+          <td>2.216</td><td>2.340</td>
+          <td style="color:var(--text2)">0.689</td>
+          <td style="color:var(--yellow)">0.357</td>
+        </tr>
+        <tr>
+          <td><strong>RandomForest</strong></td>
+          <td style="color:var(--green);font-weight:700">0.5064</td>
+          <td>0.2929</td>
+          <td class="dn">-0.2135</td>
+          <td>2.231</td><td>2.354</td>
+          <td style="color:var(--text2)">0.732</td>
+          <td style="color:var(--red)">0.439</td>
+        </tr>
+        <tr>
+          <td><strong>XGBoost</strong></td>
+          <td style="color:var(--green);font-weight:700">0.4908</td>
+          <td>0.3323</td>
+          <td class="dn">-0.1585</td>
+          <td>2.229</td><td>2.376</td>
+          <td style="color:var(--text2)">0.727</td>
+          <td style="color:var(--yellow)">0.395</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="note" style="margin-top:8px;">
+      모든 모델에서 <strong>Spearman -0.16 ~ -0.21 하락</strong>. XGBoost가 하락폭 최소 (-0.16), RandomForest가 최대 (-0.21).
+      Pipeline B의 높은 Gap(0.36~0.44)은 약물 구조만으로는 <strong>일반화가 어려움</strong>을 의미.
+    </div>
+  </div>
+
+  <!-- ── 9-5: 추천 약물 겹침 ── -->
+  <div class="g2" style="margin-top:14px;">
+    <div class="panel">
+      <div style="font-size:.78rem;font-weight:700;color:var(--accent2);margin-bottom:12px;">약물 겹침 현황</div>
+      <!-- Visual overlap boxes -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;">
+        <div style="text-align:center;padding:12px 8px;background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.3);border-radius:8px;">
+          <div style="font-size:.65rem;color:var(--red);">20260410</div>
+          <div style="font-size:1.6rem;font-weight:800;">15</div>
+          <div style="font-size:.6rem;color:var(--text2);">Top 15</div>
+        </div>
+        <div style="text-align:center;padding:12px 8px;background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.3);border-radius:8px;">
+          <div style="font-size:.65rem;color:var(--green);">Pipeline A</div>
+          <div style="font-size:1.6rem;font-weight:800;">28</div>
+          <div style="font-size:.6rem;color:var(--text2);">Top 28 (dedup)</div>
+        </div>
+        <div style="text-align:center;padding:12px 8px;background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.3);border-radius:8px;">
+          <div style="font-size:.65rem;color:var(--accent);">Pipeline B</div>
+          <div style="font-size:1.6rem;font-weight:800;">30</div>
+          <div style="font-size:.6rem;color:var(--text2);">Top 30</div>
+        </div>
+      </div>
+      <table>
+        <thead><tr><th>비교</th><th>약물 수</th></tr></thead>
+        <tbody>
+          <tr style="background:rgba(250,204,21,.08)"><td><strong>3개 실험 공통</strong></td><td style="font-weight:700;color:var(--yellow);">7</td></tr>
+          <tr><td>Pipeline A &cap; B</td><td style="font-weight:700">22</td></tr>
+          <tr><td>20260410 &cap; A</td><td>7</td></tr>
+          <tr><td>20260410 &cap; B</td><td>8</td></tr>
+          <tr><td style="color:var(--text2)">20260410만</td><td style="color:var(--text2)">7</td></tr>
+          <tr><td style="color:var(--text2)">Pipeline A만</td><td style="color:var(--text2)">6</td></tr>
+          <tr><td style="color:var(--text2)">Pipeline B만</td><td style="color:var(--text2)">5</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="panel">
+      <div style="font-size:.78rem;font-weight:700;color:var(--yellow);margin-bottom:12px;">3개 실험 공통 약물 (최고 신뢰도)</div>
+      <table>
+        <thead><tr><th>약물</th><th>20260410</th><th>A Rank</th><th>B Rank</th><th>타겟</th></tr></thead>
+        <tbody>
+          <tr style="background:rgba(250,204,21,.06)">
+            <td><strong>Docetaxel</strong></td><td style="color:var(--green)">Top15</td>
+            <td style="font-weight:700">#1</td><td style="font-weight:700">#1</td>
+            <td style="font-size:.68rem;color:var(--text2)">Microtubule stab.</td>
+          </tr>
+          <tr style="background:rgba(250,204,21,.06)">
+            <td><strong>Dactinomycin</strong></td><td style="color:var(--green)">Top15</td>
+            <td style="font-weight:700">#2</td><td style="font-weight:700">#2</td>
+            <td style="font-size:.68rem;color:var(--text2)">RNA polymerase</td>
+          </tr>
+          <tr style="background:rgba(250,204,21,.06)">
+            <td><strong>Paclitaxel</strong></td><td style="color:var(--green)">Top15</td>
+            <td style="font-weight:700">#3</td><td style="font-weight:700">#3</td>
+            <td style="font-size:.68rem;color:var(--text2)">Microtubule stab.</td>
+          </tr>
+          <tr>
+            <td><strong>Vinblastine</strong></td><td style="color:var(--green)">Top15</td>
+            <td>#4</td><td>#8</td>
+            <td style="font-size:.68rem;color:var(--text2)">Microtubule destab.</td>
+          </tr>
+          <tr>
+            <td><strong>Vinorelbine</strong></td><td style="color:var(--green)">Top15</td>
+            <td>#5</td><td>#6</td>
+            <td style="font-size:.68rem;color:var(--text2)">Microtubule destab.</td>
+          </tr>
+          <tr>
+            <td><strong>Epirubicin</strong></td><td style="color:var(--green)">Top15</td>
+            <td>#11</td><td>#12</td>
+            <td style="font-size:.68rem;color:var(--text2)">Anthracycline</td>
+          </tr>
+          <tr>
+            <td><strong>Rapamycin</strong></td><td style="color:var(--green)">Top15</td>
+            <td>#17</td><td>#17</td>
+            <td style="font-size:.68rem;color:var(--text2)">MTORC1</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="highlight" style="margin-top:10px;">
+        <strong>Top 3 완전 일치:</strong> Docetaxel (#1), Dactinomycin (#2), Paclitaxel (#3)이
+        3개 실험 모두에서 상위권 &mdash; <strong>가장 강건한 추천</strong>.
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 9-6: 각 실험 고유 약물 ── -->
+  <div class="panel" style="margin-top:14px;">
+    <div style="font-size:.78rem;font-weight:700;color:var(--accent2);margin-bottom:12px;">각 실험 고유 약물</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;">
+      <!-- 20260410 only -->
+      <div>
+        <div style="font-size:.7rem;font-weight:700;color:var(--red);margin-bottom:6px;">20260410만 (7개)</div>
+        <div style="font-size:.7rem;line-height:1.8;">
+          <div>Bortezomib <span style="color:var(--text2);font-size:.6rem">Proteasome</span></div>
+          <div>Dinaciclib <span style="color:var(--text2);font-size:.6rem">CDK1/2/5/9</span></div>
+          <div>SN-38 <span style="color:var(--text2);font-size:.6rem">TOP1</span></div>
+          <div>Camptothecin <span style="color:var(--text2);font-size:.6rem">TOP1</span></div>
+          <div>Luminespib <span style="color:var(--text2);font-size:.6rem">HSP90</span></div>
+          <div>Staurosporine <span style="color:var(--text2);font-size:.6rem">Broad kinase</span></div>
+          <div>Sepantronium br. <span style="color:var(--text2);font-size:.6rem">BIRC5</span></div>
+        </div>
+      </div>
+      <!-- Pipeline A only -->
+      <div>
+        <div style="font-size:.7rem;font-weight:700;color:var(--green);margin-bottom:6px;">Pipeline A만 (6개)</div>
+        <div style="font-size:.7rem;line-height:1.8;">
+          <div>CDK9_5576 <span style="color:var(--text2);font-size:.6rem">CDK9</span></div>
+          <div>CDK9_5038 <span style="color:var(--text2);font-size:.6rem">CDK9</span></div>
+          <div>TW 37 <span style="color:var(--text2);font-size:.6rem">BCL2/MCL1</span></div>
+          <div>Irinotecan <span style="color:var(--text2);font-size:.6rem">TOP1</span></div>
+          <div>Tozasertib <span style="color:var(--text2);font-size:.6rem">AURKA/B/C</span></div>
+          <div>Fulvestrant <span style="color:var(--text2);font-size:.6rem">ESR</span></div>
+        </div>
+        <div class="note" style="margin-top:4px;font-size:.62rem;">CDK9, BCL2 등 생물학적 features 의존 약물</div>
+      </div>
+      <!-- Pipeline B only -->
+      <div>
+        <div style="font-size:.7rem;font-weight:700;color:var(--accent);margin-bottom:6px;">Pipeline B만 (5개)</div>
+        <div style="font-size:.7rem;line-height:1.8;">
+          <div>Romidepsin <span style="color:var(--text2);font-size:.6rem">HDAC1/2/3/8</span></div>
+          <div>Bromosporine <span style="color:var(--text2);font-size:.6rem">BRD2/4/9</span></div>
+          <div>Refametinib <span style="color:var(--text2);font-size:.6rem">MEK1/2</span></div>
+          <div>AZD6738 <span style="color:var(--text2);font-size:.6rem">ATR</span></div>
+          <div>EPZ004777 <span style="color:var(--text2);font-size:.6rem">DOT1L</span></div>
+        </div>
+        <div class="note" style="margin-top:4px;font-size:.62rem;">화학 구조 기반으로만 선정, 생물학적 검증 필요</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 9-7: 결론 ── -->
+  <div style="margin-top:14px;display:grid;grid-template-columns:2fr 1fr;gap:14px;">
+    <div class="panel" style="border-left:4px solid var(--green);background:linear-gradient(90deg,var(--surface),rgba(74,222,128,.04));">
+      <div style="font-size:.82rem;font-weight:800;color:var(--green);margin-bottom:10px;">권장: Pipeline A (Mechanism Engine)</div>
+      <div style="font-size:.72rem;line-height:1.7;">
+        <strong>1.</strong> GroupKFold로 약물 수준 leakage <strong>완전 제거</strong> &rarr; 공정한 평가<br>
+        <strong>2.</strong> Spearman <strong>0.518</strong> &mdash; 공정 비교 기준 최고 성능<br>
+        <strong>3.</strong> Mechanism features로 <strong>생물학적 해석</strong> 가능<br>
+        <strong>4.</strong> 새로운 약물에 대한 <strong>일반화 능력</strong> 검증됨
+      </div>
+      <div class="note" style="margin-top:10px;">
+        Pipeline B는 <strong>ablation study</strong>로서 feature 기여도 검증 + 교차검증 역할.<br>
+        A&cap;B 공통 22개 약물은 <strong>화학 구조와 생물학 모두에서 지지</strong>받는 높은 신뢰도 후보.
+      </div>
+    </div>
+
+    <div class="panel" style="text-align:center;">
+      <div style="font-size:.7rem;color:var(--text2);margin-bottom:8px;">Leakage 교훈</div>
+      <div style="font-size:.68rem;line-height:1.6;text-align:left;">
+        <div class="warning" style="margin:0;">
+          <strong>20260410:</strong><br>
+          CV 0.805 (과대평가)<br>
+          실제 0.496 (Drug Test)<br><br>
+          <strong>Pipeline A:</strong><br>
+          CV 0.518 (공정)<br>
+          &rarr; 올바른 CV가 더 나은 모델
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ 섹션 10: 진행 체크리스트 ══════════ -->
+<div class="section">
+  <h2>10. 진행 체크리스트</h2>
+  <div class="g2">
+    <div class="panel">
+      <div style="font-size:.75rem;font-weight:700;color:var(--green);margin-bottom:8px;">완료</div>
+      <ul class="ck">
+        <li class="ck-d"><span class="ck-i">&#10003;</span> 피처 재구성 (2,167 피처, GroupKFold 적용)</li>
+        <li class="ck-d"><span class="ck-i">&#10003;</span> 15모델 벤치마크 (최고: Stacking_Ridge 0.4990)</li>
+        <li class="ck-d"><span class="ck-i">&#10003;</span> Top4 모델 선정 (Stacking/CatBoost/RF/XGBoost)</li>
+        <li class="ck-d"><span class="ck-i">&#10003;</span> Mechanism v1 피처 (5개, +0.006 개선)</li>
+        <li class="ck-d"><span class="ck-i">&#10003;</span> Mechanism v2 피처 (10개, +0.013 개선)</li>
+        <li class="ck-d"><span class="ck-i">&#10003;</span> Top4 앙상블 v2 (Grid: 0.5190)</li>
+        <li class="ck-d"><span class="ck-i">&#10003;</span> LightGBM 랭커 (NDCG@10: 0.8167)</li>
+        <li class="ck-d"><span class="ck-i">&#10003;</span> Mechanism v3 PPI 피처 (3개, 154/295 커버리지)</li>
+        <li class="ck-d"><span class="ck-i">&#10003;</span> v2+v3 통합 학습 (v3가 3/4 모델 하락 확인)</li>
+        <li class="ck-d"><span class="ck-i">&#10003;</span> v3 Refined 피처 (alias+log1p+interaction, 172/295)</li>
+        <li class="ck-d"><span class="ck-i">&#10003;</span> v2+v3 Refined 재학습 (Raw 대비 3/4 모델 개선)</li>
+        <li class="ck-d"><span class="ck-i">&#10003;</span> Top 30 추출 + Dedup (28 약물)</li>
+        <li class="ck-d"><span class="ck-i">&#10003;</span> ADMET 검증 + METABRIC 외부 검증</li>
+        <li class="ck-d"><span class="ck-i">&#10003;</span> Discovery Ranking v2 (Validation + Novelty)</li>
+        <li class="ck-d"><span class="ck-i">&#10003;</span> LLM 설명 생성 (Validation 15 + Discovery 15)</li>
+        <li class="ck-d"><span class="ck-i">&#10003;</span> Pipeline B 학습 (Drug Chem only, Sp=0.332)</li>
+        <li class="ck-d"><span class="ck-i">&#10003;</span> Pipeline B Top 30 + A/B 비교 (공통 22개)</li>
+        <li class="ck-d"><span class="ck-i">&#10003;</span> 3개 실험 최종 비교 보고서</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <div style="font-size:.75rem;font-weight:700;color:var(--yellow);margin-bottom:8px;">진행 중 / 예정</div>
+      <ul class="ck">
+        <li class="ck-t"><span class="ck-i">&#9744;</span> 최종 앙상블 최적화 (목표: 0.525+)</li>
+        <li class="ck-t"><span class="ck-i">&#9744;</span> Streamlit 대시보드 통합</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ 섹션 11: 타임라인 ══════════ -->
+<div class="section">
+  <h2>11. 오늘의 타임라인</h2>
+  <div class="panel">
+    <div class="tl">
+      <div class="tl-i done"><div class="tl-t">1단계</div>피처 재구성 &mdash; GDSC/TCGA/STRING/OpenTargets/MSigDB에서 2,167개 피처 생성</div>
+      <div class="tl-i done"><div class="tl-t">2단계</div>15모델 벤치마크 &mdash; GroupKFold CV, 최고 Stacking_Ridge 0.4990</div>
+      <div class="tl-i done"><div class="tl-t">3단계</div>Top4 선정 &mdash; Stacking_Ridge / CatBoost / RandomForest / XGBoost</div>
+      <div class="tl-i done"><div class="tl-t">4단계</div>Mechanism v1 (5개) &mdash; 타겟 중첩, 경로 매칭, LINCS 점수 등</div>
+      <div class="tl-i done"><div class="tl-t">5단계</div>Mechanism v2 (10개) &mdash; 발현 가중치, 질병 상호작용 피처</div>
+      <div class="tl-i done"><div class="tl-t">6단계</div>앙상블 v2 &mdash; Grid Search 최적: 0.5190 (CatBoost 가중치 0.4)</div>
+      <div class="tl-i done"><div class="tl-t">7단계</div>LightGBM 랭커 &mdash; NDCG@10: 0.8167, NDCG@20: 0.7915</div>
+      <div class="tl-i done"><div class="tl-t">8단계</div>Neo4j 사전분석 &mdash; 구조적 한계 확인 (11/295 약물, 3.7%)</div>
+      <div class="tl-i done"><div class="tl-t">9단계</div>Mechanism v3 PPI 피처 &mdash; STRING PPI 기반 3개 피처, 154/295 약물 커버</div>
+      <div class="tl-i done"><div class="tl-t">10단계</div>v2+v3 통합 학습 &mdash; v3가 노이즈로 3/4 모델 성능 하락 확인</div>
+      <div class="tl-i done"><div class="tl-t">11단계</div>v3 Refined &mdash; alias 매핑(+18약물), log1p, interaction 피처로 개선</div>
+      <div class="tl-i done"><div class="tl-t">12단계</div>v2+v3 Refined 재학습 &mdash; Raw 대비 3/4 모델 개선, CB/RF에서 Top20 진입</div>
+      <div class="tl-i done"><div class="tl-t">13단계</div>Top 30 추출 + Dedup &mdash; Spearman 비례 앙상블, 28 약물 확정</div>
+      <div class="tl-i done"><div class="tl-t">14단계</div>ADMET + METABRIC + Discovery Ranking &mdash; 외부 검증 완료</div>
+      <div class="tl-i done"><div class="tl-t">15단계</div>Pipeline B (Drug Chem Only) &mdash; Ablation study, Sp=0.332</div>
+      <div class="tl-i done"><div class="tl-t">16단계</div>3개 실험 최종 비교 &mdash; 공통 7약물 확인, Pipeline A 권장</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ 부록: 벤치마크 ══════════ -->
+<div class="section">
+  <h2>부록: 8모델 벤치마크 (피처 재구성 단계)</h2>
+  <p class="note">피처 재구성 후 Mechanism 피처 추가 전 기본 성능. 이 중 상위 4개 모델을 선별하여 후속 실험 진행.</p>
+  <div class="panel" style="margin-top:10px;">
+    <table>
+      <thead>
+        <tr><th>#</th><th>모델</th><th>Spearman</th><th>&plusmn;Std</th><th>RMSE</th><th>Pearson</th><th>R&sup2;</th><th>Gap</th></tr>
+      </thead>
+      <tbody>
+        <tr style="background:rgba(74,222,128,.06)"><td>7</td><td><strong>Stacking_Ridge</strong></td><td><strong>0.4990</strong></td><td>0.049</td><td>2.194</td><td>0.546</td><td>0.287</td><td>0.408</td></tr>
+        <tr style="background:rgba(74,222,128,.03)"><td>4</td><td>CatBoost</td><td>0.4860</td><td>0.059</td><td>2.216</td><td>0.529</td><td>0.271</td><td>0.339</td></tr>
+        <tr style="background:rgba(74,222,128,.03)"><td>5</td><td>RandomForest</td><td>0.4824</td><td>0.079</td><td>2.231</td><td>0.529</td><td>0.263</td><td>0.366</td></tr>
+        <tr style="background:rgba(74,222,128,.03)"><td>3</td><td>XGBoost</td><td>0.4809</td><td>0.023</td><td>2.229</td><td>0.529</td><td>0.265</td><td>0.399</td></tr>
+        <tr><td>2</td><td>LightGBM_DART</td><td>0.4775</td><td>0.036</td><td>2.238</td><td>0.518</td><td>0.258</td><td>0.378</td></tr>
+        <tr><td>1</td><td>LightGBM</td><td>0.4700</td><td>0.042</td><td>2.251</td><td>0.510</td><td>0.250</td><td>0.361</td></tr>
+        <tr><td>6</td><td>ExtraTrees</td><td>0.3799</td><td>0.123</td><td>2.313</td><td>0.464</td><td>0.207</td><td>0.442</td></tr>
+        <tr><td>8</td><td>RSF</td><td>0.3432</td><td>0.087</td><td style="color:var(--red)">839.08</td><td>0.389</td><td>&lt;0</td><td>0.356</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div style="text-align:center;color:var(--text2);font-size:.66rem;margin-top:28px;padding-bottom:16px;">
+  생성일: 2026-04-13 &nbsp;|&nbsp; BRCA 약물 재창출 Mechanism Engine &nbsp;|&nbsp; GroupKFold CV (groups=drug_id) &nbsp;|&nbsp; 외부 의존성 없음
+</div>
+
+</body>
+</html>

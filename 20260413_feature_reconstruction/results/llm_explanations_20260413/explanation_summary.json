@@ -1,0 +1,143 @@
+{
+  "description": "LLM Explanation Summary — Top 15 Dedup (구조화된 근거 기반)",
+  "total": 15,
+  "success": 15,
+  "fail": 0,
+  "results": [
+    {
+      "rank": 1,
+      "drug_id": 1819,
+      "drug_name": "Docetaxel",
+      "category": "A",
+      "file": "Docetaxel_explanation.md",
+      "chars": 1790,
+      "status": "success"
+    },
+    {
+      "rank": 2,
+      "drug_id": 1811,
+      "drug_name": "Dactinomycin",
+      "category": "A",
+      "file": "Dactinomycin_explanation.md",
+      "chars": 1795,
+      "status": "success"
+    },
+    {
+      "rank": 3,
+      "drug_id": 1080,
+      "drug_name": "Paclitaxel",
+      "category": "A",
+      "file": "Paclitaxel_explanation.md",
+      "chars": 1779,
+      "status": "success"
+    },
+    {
+      "rank": 4,
+      "drug_id": 1004,
+      "drug_name": "Vinblastine",
+      "category": "A",
+      "file": "Vinblastine_explanation.md",
+      "chars": 1699,
+      "status": "success"
+    },
+    {
+      "rank": 5,
+      "drug_id": 2048,
+      "drug_name": "Vinorelbine",
+      "category": "A",
+      "file": "Vinorelbine_explanation.md",
+      "chars": 1674,
+      "status": "success"
+    },
+    {
+      "rank": 6,
+      "drug_id": 1016,
+      "drug_name": "Temsirolimus",
+      "category": "B",
+      "file": "Temsirolimus_explanation.md",
+      "chars": 1806,
+      "status": "success"
+    },
+    {
+      "rank": 7,
+      "drug_id": 1808,
+      "drug_name": "Topotecan",
+      "category": "A",
+      "file": "Topotecan_explanation.md",
+      "chars": 1854,
+      "status": "success"
+    },
+    {
+      "rank": 8,
+      "drug_id": 1708,
+      "drug_name": "CDK9_5576",
+      "category": "B",
+      "file": "CDK9_5576_explanation.md",
+      "chars": 1775,
+      "status": "success"
+    },
+    {
+      "rank": 9,
+      "drug_id": 1039,
+      "drug_name": "SL0101",
+      "category": "B",
+      "file": "SL0101_explanation.md",
+      "chars": 1954,
+      "status": "success"
+    },
+    {
+      "rank": 10,
+      "drug_id": 1809,
+      "drug_name": "Teniposide",
+      "category": "B",
+      "file": "Teniposide_explanation.md",
+      "chars": 1892,
+      "status": "success"
+    },
+    {
+      "rank": 11,
+      "drug_id": 1511,
+      "drug_name": "Epirubicin",
+      "category": "A",
+      "file": "Epirubicin_explanation.md",
+      "chars": 2327,
+      "status": "success"
+    },
+    {
+      "rank": 12,
+      "drug_id": 1810,
+      "drug_name": "Mitoxantrone",
+      "category": "B",
+      "file": "Mitoxantrone_explanation.md",
+      "chars": 1881,
+      "status": "success"
+    },
+    {
+      "rank": 13,
+      "drug_id": 1149,
+      "drug_name": "TW 37",
+      "category": "B",
+      "file": "TW_37_explanation.md",
+      "chars": 1906,
+      "status": "success"
+    },
+    {
+      "rank": 14,
+      "drug_id": 1709,
+      "drug_name": "CDK9_5038",
+      "category": "B",
+      "file": "CDK9_5038_explanation.md",
+      "chars": 1751,
+      "status": "success"
+    },
+    {
+      "rank": 15,
+      "drug_id": 1441,
+      "drug_name": "AZD2014",
+      "category": "B",
+      "file": "AZD2014_explanation.md",
+      "chars": 1675,
+      "status": "success"
+    }
+  ]
+}

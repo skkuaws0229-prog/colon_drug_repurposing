@@ -1,0 +1,44 @@
+{
+  "description": "Top 30 중복 약물 통합 기록",
+  "original_count": 30,
+  "dedup_count": 28,
+  "removed_count": 2,
+  "rules": {
+    "Docetaxel": {
+      "keep_id": "1819",
+      "remove_id": "1007",
+      "reason": "동일 약물, 1819가 pred IC50 더 낮음 (-4.082 vs -1.731)"
+    },
+    "Dactinomycin": {
+      "keep_id": "1811",
+      "remove_id": "1911",
+      "reason": "동일 약물, 1811이 rank 더 높음 (rank 2 vs rank 8)"
+    }
+  },
+  "removal_log": [
+    {
+      "drug_name": "Docetaxel",
+      "removed_id": "1007",
+      "removed_rank": 4,
+      "removed_ic50": -1.730998601588884,
+      "kept_id": "1819",
+      "kept_rank": 1,
+      "kept_ic50": -4.081985813640771,
+      "reason": "동일 약물, 1819가 pred IC50 더 낮음 (-4.082 vs -1.731)"
+    },
+    {
+      "drug_name": "Dactinomycin",
+      "removed_id": "1911",
+      "removed_rank": 8,
+      "removed_ic50": -0.9872268166681324,
+      "kept_id": "1811",
+      "kept_rank": 2,
+      "kept_ic50": -2.288293931094391,
+      "reason": "동일 약물, 1811이 rank 더 높음 (rank 2 vs rank 8)"
+    }
+  ],
+  "removed_ids": [
+    "1007",
+    "1911"
+  ]
+}

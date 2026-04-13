@@ -1,0 +1,632 @@
+{
+  "description": "Pipeline B: Drug Chemistry Only (Morgan FP + Drug Desc + SMILES flags)",
+  "n_features": 2059,
+  "feature_breakdown": {
+    "drug_morgan": 2048,
+    "drug_desc": 9,
+    "smiles_flags": 2
+  },
+  "pipeline_a_reference": {
+    "Stacking_Ridge": 0.5182,
+    "CatBoost": 0.514,
+    "RandomForest": 0.5064,
+    "XGBoost": 0.4908
+  },
+  "model_results": [
+    {
+      "model": "1_Stacking_Ridge",
+      "spearman_mean": 0.3275090305772189,
+      "spearman_std": 0.07263623395874275,
+      "rmse_mean": 2.366012788539888,
+      "rmse_std": 0.11717045839085408,
+      "pearson_mean": 0.42587563326733,
+      "r2_mean": 0.16973113834318024,
+      "r2_std": 0.06975495879189579,
+      "train_spearman_mean": 0.7322550599242839,
+      "gap_spearman_mean": 0.4047460293470649,
+      "gap_rmse_mean": 0.8639417432976881,
+      "elapsed_sec": 77.29184985160828
+    },
+    {
+      "model": "2_CatBoost",
+      "spearman_mean": 0.3319465204954862,
+      "spearman_std": 0.0790427568202759,
+      "rmse_mean": 2.3404043713929408,
+      "rmse_std": 0.13921739062521007,
+      "pearson_mean": 0.44493608093630294,
+      "r2_mean": 0.1890152554414874,
+      "r2_std": 0.05593788798233767,
+      "train_spearman_mean": 0.6888595809868218,
+      "gap_spearman_mean": 0.35691306049133564,
+      "gap_rmse_mean": 0.6846996118144639,
+      "elapsed_sec": 4.953627347946167
+    },
+    {
+      "model": "3_RandomForest",
+      "spearman_mean": 0.2929405021281476,
+      "spearman_std": 0.14537895676892007,
+      "rmse_mean": 2.3542449995606978,
+      "rmse_std": 0.14964750199528634,
+      "pearson_mean": 0.4365086545841013,
+      "r2_mean": 0.1796700420956755,
+      "r2_std": 0.0570247884181763,
+      "train_spearman_mean": 0.7317492350431604,
+      "gap_spearman_mean": 0.4388087329150127,
+      "gap_rmse_mean": 0.8520502020702496,
+      "elapsed_sec": 14.055307865142822
+    },
+    {
+      "model": "4_XGBoost",
+      "spearman_mean": 0.3323263818537905,
+      "spearman_std": 0.06749057965546928,
+      "rmse_mean": 2.3757363763876125,
+      "rmse_std": 0.11372166513654067,
+      "pearson_mean": 0.4206524805097634,
+      "r2_mean": 0.16233504344618535,
+      "r2_std": 0.07771210221074565,
+      "train_spearman_mean": 0.7271716521559837,
+      "gap_spearman_mean": 0.3948452703021931,
+      "gap_rmse_mean": 0.85939190666829,
+      "elapsed_sec": 3.9364168643951416
+    }
+  ],
+  "model_folds": {
+    "1_Stacking_Ridge": [
+      {
+        "spearman": 0.4479043062445816,
+        "pearson": 0.5069013657829828,
+        "rmse": 2.461323056151941,
+        "r2": 0.23822803430912942,
+        "train_spearman": 0.7236455833810574,
+        "train_rmse": 1.4402925510277516,
+        "gap_spearman": 0.27574127713647584,
+        "gap_rmse": 1.0210305051241895,
+        "fold": 0
+      },
+      {
+        "spearman": 0.28526942119995097,
+        "pearson": 0.39957780719981495,
+        "rmse": 2.4728700792801197,
+        "r2": 0.15618013129863217,
+        "train_spearman": 0.7229165263811392,
+        "train_rmse": 1.5261068207282582,
+        "gap_spearman": 0.43764710518118827,
+        "gap_rmse": 0.9467632585518615,
+        "fold": 1
+      },
+      {
+        "spearman": 0.26536775478039987,
+        "pearson": 0.44333923434192424,
+        "rmse": 2.3303313439841236,
+        "r2": 0.17754966980692366,
+        "train_spearman": 0.744819206088435,
+        "train_rmse": 1.474566034916097,
+        "gap_spearman": 0.4794514513080351,
+        "gap_rmse": 0.8557653090680266,
+        "fold": 2
+      },
+      {
+        "spearman": 0.2990676186538826,
+        "pearson": 0.48578593438408657,
+        "rmse": 2.3809561845064375,
+        "r2": 0.2175851158679437,
+        "train_spearman": 0.7413236483493948,
+        "train_rmse": 1.5137227968536733,
+        "gap_spearman": 0.4422560296955122,
+        "gap_rmse": 0.8672333876527643,
+        "fold": 3
+      },
+      {
+        "spearman": 0.3399360520072796,
+        "pearson": 0.29377382462784163,
+        "rmse": 2.184583278776816,
+        "r2": 0.05911274043327219,
+        "train_spearman": 0.7285703354213925,
+        "train_rmse": 1.5556670226852172,
+        "gap_spearman": 0.3886342834141129,
+        "gap_rmse": 0.6289162560915986,
+        "fold": 4
+      }
+    ],
+    "2_CatBoost": [
+      {
+        "spearman": 0.43728381759473484,
+        "pearson": 0.5338708602322175,
+        "rmse": 2.413502765075328,
+        "r2": 0.2675409530620694,
+        "train_spearman": 0.7239521451628493,
+        "train_rmse": 1.4391103513936645,
+        "gap_spearman": 0.2866683275681145,
+        "gap_rmse": 0.9743924136816633,
+        "fold": 0
+      },
+      {
+        "spearman": 0.37976678708159656,
+        "pearson": 0.41232505734142083,
+        "rmse": 2.4643958819937204,
+        "r2": 0.16195353917688937,
+        "train_spearman": 0.6132130009955798,
+        "train_rmse": 1.879998351216411,
+        "gap_spearman": 0.2334462139139833,
+        "gap_rmse": 0.5843975307773095,
+        "fold": 1
+      },
+      {
+        "spearman": 0.25426529250179103,
+        "pearson": 0.45378428874694565,
+        "rmse": 2.2943404377236716,
+        "r2": 0.20275822900682317,
+        "train_spearman": 0.6852016794501306,
+        "train_rmse": 1.690334415869183,
+        "gap_spearman": 0.4309363869483395,
+        "gap_rmse": 0.6040060218544885,
+        "fold": 2
+      },
+      {
+        "spearman": 0.25729227377387015,
+        "pearson": 0.4792875386359036,
+        "rmse": 2.4120007835848254,
+        "r2": 0.19704873632074582,
+        "train_spearman": 0.7271075220903307,
+        "train_rmse": 1.5576607752536302,
+        "gap_spearman": 0.46981524831646054,
+        "gap_rmse": 0.8543400083311952,
+        "fold": 3
+      },
+      {
+        "spearman": 0.3311244315254382,
+        "pearson": 0.34541265972502716,
+        "rmse": 2.1177819885871596,
+        "r2": 0.11577481964090919,
+        "train_spearman": 0.6948235572352185,
+        "train_rmse": 1.7114199041594957,
+        "gap_spearman": 0.3636991257097803,
+        "gap_rmse": 0.40636208442766386,
+        "fold": 4
+      }
+    ],
+    "3_RandomForest": [
+      {
+        "spearman": 0.5063637696347997,
+        "pearson": 0.531138751004761,
+        "rmse": 2.3996579801267837,
+        "r2": 0.2759201872092001,
+        "train_spearman": 0.7228088319273605,
+        "train_rmse": 1.4409215929247012,
+        "gap_spearman": 0.21644506229256077,
+        "gap_rmse": 0.9587363872020824,
+        "fold": 0
+      },
+      {
+        "spearman": 0.25691376320517456,
+        "pearson": 0.39905821943235054,
+        "rmse": 2.478613272028117,
+        "r2": 0.15225606928073665,
+        "train_spearman": 0.7227763145762797,
+        "train_rmse": 1.5249322997655297,
+        "gap_spearman": 0.4658625513711051,
+        "gap_rmse": 0.9536809722625874,
+        "fold": 1
+      },
+      {
+        "spearman": 0.12116594774471942,
+        "pearson": 0.42968499305138635,
+        "rmse": 2.3348871340748376,
+        "r2": 0.17433075102658246,
+        "train_spearman": 0.7441920229634817,
+        "train_rmse": 1.4749859569762578,
+        "gap_spearman": 0.6230260752187623,
+        "gap_rmse": 0.8599011770985798,
+        "fold": 2
+      },
+      {
+        "spearman": 0.2262137641380474,
+        "pearson": 0.44389696658575317,
+        "rmse": 2.452756316203554,
+        "r2": 0.16968458202842884,
+        "train_spearman": 0.74154360377735,
+        "train_rmse": 1.5135703210589764,
+        "gap_spearman": 0.5153298396393026,
+        "gap_rmse": 0.9391859951445776,
+        "fold": 3
+      },
+      {
+        "spearman": 0.354045265917997,
+        "pearson": 0.3787643428462554,
+        "rmse": 2.1053102953701948,
+        "r2": 0.12615862093342944,
+        "train_spearman": 0.72742540197133,
+        "train_rmse": 1.556563816726774,
+        "gap_spearman": 0.373380136053333,
+        "gap_rmse": 0.5487464786434209,
+        "fold": 4
+      }
+    ],
+    "4_XGBoost": [
+      {
+        "spearman": 0.4320900151263067,
+        "pearson": 0.4974930220350077,
+        "rmse": 2.4838377414224992,
+        "r2": 0.22422784061376533,
+        "train_spearman": 0.7194846113112903,
+        "train_rmse": 1.4538148492610659,
+        "gap_spearman": 0.2873945961849836,
+        "gap_rmse": 1.0300228921614334,
+        "fold": 0
+      },
+      {
+        "spearman": 0.34950235403695223,
+        "pearson": 0.4227740159263862,
+        "rmse": 2.4716102460151412,
+        "r2": 0.15703970055112126,
+        "train_spearman": 0.7194727465572209,
+        "train_rmse": 1.5418967275877271,
+        "gap_spearman": 0.3699703925202687,
+        "gap_rmse": 0.9297135184274141,
+        "fold": 1
+      },
+      {
+        "spearman": 0.26217943275042166,
+        "pearson": 0.45874844411363125,
+        "rmse": 2.3035662772106806,
+        "r2": 0.19633371358197493,
+        "train_spearman": 0.7395325534506105,
+        "train_rmse": 1.4924025738897198,
+        "gap_spearman": 0.47735312070018887,
+        "gap_rmse": 0.8111637033209609,
+        "fold": 2
+      },
+      {
+        "spearman": 0.27765109899567875,
+        "pearson": 0.4625615842389676,
+        "rmse": 2.4019151433456822,
+        "r2": 0.2037496846728022,
+        "train_spearman": 0.7372022610891138,
+        "train_rmse": 1.5160589326085083,
+        "gap_spearman": 0.45955116209343505,
+        "gap_rmse": 0.8858562107371739,
+        "fold": 3
+      },
+      {
+        "spearman": 0.34020900835959333,
+        "pearson": 0.26168533623482404,
+        "rmse": 2.2177524739440577,
+        "r2": 0.030324277811263012,
+        "train_spearman": 0.7201660883716829,
+        "train_rmse": 1.5775492652495897,
+        "gap_spearman": 0.3799570800120896,
+        "gap_rmse": 0.640203208694468,
+        "fold": 4
+      }
+    ]
+  },
+  "feature_importance": {
+    "2_CatBoost": {
+      "top20": [
+        {
+          "rank": 1,
+          "feature": "drug_desc_heavy_atoms",
+          "importance": 0.09987648759522966
+        },
+        {
+          "rank": 2,
+          "feature": "drug_desc_logp",
+          "importance": 0.072169689497342
+        },
+        {
+          "rank": 3,
+          "feature": "drug_desc_tpsa",
+          "importance": 0.05457013667166188
+        },
+        {
+          "rank": 4,
+          "feature": "drug_desc_mol_wt",
+          "importance": 0.0490479994087894
+        },
+        {
+          "rank": 5,
+          "feature": "drug_morgan_1452",
+          "importance": 0.03683144228003153
+        },
+        {
+          "rank": 6,
+          "feature": "drug_desc_hba",
+          "importance": 0.032447114217975456
+        },
+        {
+          "rank": 7,
+          "feature": "drug_morgan_1035",
+          "importance": 0.028173996239246504
+        },
+        {
+          "rank": 8,
+          "feature": "drug_morgan_1154",
+          "importance": 0.026664977589796517
+        },
+        {
+          "rank": 9,
+          "feature": "drug_morgan_0378",
+          "importance": 0.020256928635137384
+        },
+        {
+          "rank": 10,
+          "feature": "drug_morgan_0463",
+          "importance": 0.019100125058103826
+        },
+        {
+          "rank": 11,
+          "feature": "drug_desc_frac_csp3",
+          "importance": 0.017895986389106652
+        },
+        {
+          "rank": 12,
+          "feature": "drug_morgan_0941",
+          "importance": 0.01716168700097702
+        },
+        {
+          "rank": 13,
+          "feature": "drug_morgan_1565",
+          "importance": 0.01556779095956206
+        },
+        {
+          "rank": 14,
+          "feature": "drug_morgan_0267",
+          "importance": 0.01383475229923214
+        },
+        {
+          "rank": 15,
+          "feature": "drug_morgan_0001",
+          "importance": 0.012888371855536644
+        },
+        {
+          "rank": 16,
+          "feature": "drug_morgan_2028",
+          "importance": 0.011426505878516076
+        },
+        {
+          "rank": 17,
+          "feature": "drug_desc_ring_count",
+          "importance": 0.010163555486927357
+        },
+        {
+          "rank": 18,
+          "feature": "drug_desc_hbd",
+          "importance": 0.009970225060158981
+        },
+        {
+          "rank": 19,
+          "feature": "drug_morgan_1847",
+          "importance": 0.009807165415846066
+        },
+        {
+          "rank": 20,
+          "feature": "drug_morgan_0521",
+          "importance": 0.009381762692604254
+        }
+      ],
+      "type_summary": {
+        "morgan_fp_pct": 64.76852065853005,
+        "drug_desc_pct": 35.12552787028563,
+        "smiles_flags_pct": 0.10595147118428407
+      }
+    },
+    "3_RandomForest": {
+      "top20": [
+        {
+          "rank": 1,
+          "feature": "drug_desc_mol_wt",
+          "importance": 0.023021673597686063
+        },
+        {
+          "rank": 2,
+          "feature": "drug_desc_heavy_atoms",
+          "importance": 0.021905568955469072
+        },
+        {
+          "rank": 3,
+          "feature": "drug_desc_tpsa",
+          "importance": 0.01957674194051902
+        },
+        {
+          "rank": 4,
+          "feature": "drug_desc_logp",
+          "importance": 0.01574869643817847
+        },
+        {
+          "rank": 5,
+          "feature": "drug_desc_hba",
+          "importance": 0.01524170967722224
+        },
+        {
+          "rank": 6,
+          "feature": "drug_desc_ring_count",
+          "importance": 0.01158060465602116
+        },
+        {
+          "rank": 7,
+          "feature": "drug_desc_frac_csp3",
+          "importance": 0.009583282284267605
+        },
+        {
+          "rank": 8,
+          "feature": "drug_morgan_1035",
+          "importance": 0.008385956208247227
+        },
+        {
+          "rank": 9,
+          "feature": "drug_desc_hbd",
+          "importance": 0.008062660361013703
+        },
+        {
+          "rank": 10,
+          "feature": "drug_morgan_1154",
+          "importance": 0.008023157670824925
+        },
+        {
+          "rank": 11,
+          "feature": "drug_desc_rot_bonds",
+          "importance": 0.007864011405556317
+        },
+        {
+          "rank": 12,
+          "feature": "drug_morgan_1847",
+          "importance": 0.007274720243090393
+        },
+        {
+          "rank": 13,
+          "feature": "drug_morgan_0521",
+          "importance": 0.006053365375914575
+        },
+        {
+          "rank": 14,
+          "feature": "drug_morgan_0865",
+          "importance": 0.005817885285380129
+        },
+        {
+          "rank": 15,
+          "feature": "drug_morgan_1565",
+          "importance": 0.0057450380698814444
+        },
+        {
+          "rank": 16,
+          "feature": "drug_morgan_0229",
+          "importance": 0.0056297042478000705
+        },
+        {
+          "rank": 17,
+          "feature": "drug_morgan_0463",
+          "importance": 0.0053108960553635625
+        },
+        {
+          "rank": 18,
+          "feature": "drug_morgan_1292",
+          "importance": 0.004701891080395564
+        },
+        {
+          "rank": 19,
+          "feature": "drug_morgan_2028",
+          "importance": 0.004683138858200571
+        },
+        {
+          "rank": 20,
+          "feature": "drug_morgan_0423",
+          "importance": 0.004588251655578233
+        }
+      ],
+      "type_summary": {
+        "morgan_fp_pct": 86.51760330945716,
+        "drug_desc_pct": 13.258494931593365,
+        "smiles_flags_pct": 0.2239017589495439
+      }
+    },
+    "4_XGBoost": {
+      "top20": [
+        {
+          "rank": 1,
+          "feature": "drug_morgan_1035",
+          "importance": 0.02084974859482719
+        },
+        {
+          "rank": 2,
+          "feature": "drug_morgan_1153",
+          "importance": 0.017199108714583335
+        },
+        {
+          "rank": 3,
+          "feature": "drug_morgan_0229",
+          "importance": 0.012594745470461728
+        },
+        {
+          "rank": 4,
+          "feature": "drug_morgan_2028",
+          "importance": 0.012373220310095334
+        },
+        {
+          "rank": 5,
+          "feature": "drug_morgan_1154",
+          "importance": 0.012009208086102757
+        },
+        {
+          "rank": 6,
+          "feature": "drug_morgan_0991",
+          "importance": 0.011923288171784775
+        },
+        {
+          "rank": 7,
+          "feature": "drug_morgan_0463",
+          "importance": 0.010507752695510308
+        },
+        {
+          "rank": 8,
+          "feature": "drug_morgan_1074",
+          "importance": 0.009969324669912063
+        },
+        {
+          "rank": 9,
+          "feature": "drug_morgan_0253",
+          "importance": 0.00991240474840594
+        },
+        {
+          "rank": 10,
+          "feature": "drug_morgan_1452",
+          "importance": 0.009899274574747277
+        },
+        {
+          "rank": 11,
+          "feature": "drug_morgan_0759",
+          "importance": 0.009769198453832173
+        },
+        {
+          "rank": 12,
+          "feature": "drug_morgan_0321",
+          "importance": 0.00922429186565005
+        },
+        {
+          "rank": 13,
+          "feature": "drug_morgan_0423",
+          "importance": 0.009167157016337866
+        },
+        {
+          "rank": 14,
+          "feature": "drug_morgan_1379",
+          "importance": 0.00912228069426806
+        },
+        {
+          "rank": 15,
+          "feature": "drug_desc_heavy_atoms",
+          "importance": 0.009044680811755986
+        },
+        {
+          "rank": 16,
+          "feature": "drug_morgan_0679",
+          "importance": 0.008702812827003829
+        },
+        {
+          "rank": 17,
+          "feature": "drug_morgan_0521",
+          "importance": 0.008696183615053038
+        },
+        {
+          "rank": 18,
+          "feature": "drug_morgan_0941",
+          "importance": 0.008280891210448456
+        },
+        {
+          "rank": 19,
+          "feature": "drug_morgan_1373",
+          "importance": 0.00823411842528262
+        },
+        {
+          "rank": 20,
+          "feature": "drug_morgan_0271",
+          "importance": 0.008155822527658469
+        }
+      ],
+      "type_summary": {
+        "morgan_fp_pct": 95.34029210517525,
+        "drug_desc_pct": 4.659707894824756,
+        "smiles_flags_pct": 0.0
+      }
+    }
+  }
+}

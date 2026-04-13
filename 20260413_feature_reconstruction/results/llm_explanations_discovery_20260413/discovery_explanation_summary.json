@@ -1,0 +1,158 @@
+{
+  "description": "Discovery Top 15 LLM Explanation Summary (v2 ranking 기반)",
+  "total": 15,
+  "success": 15,
+  "fail": 0,
+  "results": [
+    {
+      "discovery_rank": 1,
+      "drug_id": "1039",
+      "drug_name": "SL0101",
+      "category": "B",
+      "discovery_score": 0.8071,
+      "file": "SL0101_discovery_explanation.md",
+      "chars": 3140,
+      "status": "success"
+    },
+    {
+      "discovery_rank": 2,
+      "drug_id": "1708",
+      "drug_name": "CDK9_5576",
+      "category": "B",
+      "discovery_score": 0.735,
+      "file": "CDK9_5576_discovery_explanation.md",
+      "chars": 3121,
+      "status": "success"
+    },
+    {
+      "discovery_rank": 3,
+      "drug_id": "1072",
+      "drug_name": "Avagacestat",
+      "category": "C",
+      "discovery_score": 0.6786,
+      "file": "Avagacestat_discovery_explanation.md",
+      "chars": 3186,
+      "status": "success"
+    },
+    {
+      "discovery_rank": 4,
+      "drug_id": "1149",
+      "drug_name": "TW 37",
+      "category": "B",
+      "discovery_score": 0.6457,
+      "file": "TW_37_discovery_explanation.md",
+      "chars": 3124,
+      "status": "success"
+    },
+    {
+      "discovery_rank": 5,
+      "drug_id": "1709",
+      "drug_name": "CDK9_5038",
+      "category": "B",
+      "discovery_score": 0.6279,
+      "file": "CDK9_5038_discovery_explanation.md",
+      "chars": 3028,
+      "status": "success"
+    },
+    {
+      "discovery_rank": 6,
+      "drug_id": "1809",
+      "drug_name": "Teniposide",
+      "category": "B",
+      "discovery_score": 0.6093,
+      "file": "Teniposide_discovery_explanation.md",
+      "chars": 3282,
+      "status": "success"
+    },
+    {
+      "discovery_rank": 7,
+      "drug_id": "1811",
+      "drug_name": "Dactinomycin",
+      "category": "A",
+      "discovery_score": 0.5946,
+      "file": "Dactinomycin_discovery_explanation.md",
+      "chars": 2961,
+      "status": "success"
+    },
+    {
+      "discovery_rank": 8,
+      "drug_id": "1819",
+      "drug_name": "Docetaxel",
+      "category": "A",
+      "discovery_score": 0.53,
+      "file": "Docetaxel_discovery_explanation.md",
+      "chars": 3010,
+      "status": "success"
+    },
+    {
+      "discovery_rank": 9,
+      "drug_id": "1016",
+      "drug_name": "Temsirolimus",
+      "category": "B",
+      "discovery_score": 0.5157,
+      "file": "Temsirolimus_discovery_explanation.md",
+      "chars": 2969,
+      "status": "success"
+    },
+    {
+      "discovery_rank": 10,
+      "drug_id": "1080",
+      "drug_name": "Paclitaxel",
+      "category": "A",
+      "discovery_score": 0.4943,
+      "file": "Paclitaxel_discovery_explanation.md",
+      "chars": 2956,
+      "status": "success"
+    },
+    {
+      "discovery_rank": 11,
+      "drug_id": "1004",
+      "drug_name": "Vinblastine",
+      "category": "A",
+      "discovery_score": 0.4764,
+      "file": "Vinblastine_discovery_explanation.md",
+      "chars": 2858,
+      "status": "success"
+    },
+    {
+      "discovery_rank": 12,
+      "drug_id": "2048",
+      "drug_name": "Vinorelbine",
+      "category": "A",
+      "discovery_score": 0.4586,
+      "file": "Vinorelbine_discovery_explanation.md",
+      "chars": 2827,
+      "status": "success"
+    },
+    {
+      "discovery_rank": 13,
+      "drug_id": "1026",
+      "drug_name": "Tanespimycin",
+      "category": "B",
+      "discovery_score": 0.4571,
+      "file": "Tanespimycin_discovery_explanation.md",
+      "chars": 2981,
+      "status": "success"
+    },
+    {
+      "discovery_rank": 14,
+      "drug_id": "1808",
+      "drug_name": "Topotecan",
+      "category": "A",
+      "discovery_score": 0.4229,
+      "file": "Topotecan_discovery_explanation.md",
+      "chars": 2955,
+      "status": "success"
+    },
+    {
+      "discovery_rank": 15,
+      "drug_id": "1441",
+      "drug_name": "AZD2014",
+      "category": "B",
+      "discovery_score": 0.4,
+      "file": "AZD2014_discovery_explanation.md",
+      "chars": 2909,
+      "status": "success"
+    }
+  ]
+}

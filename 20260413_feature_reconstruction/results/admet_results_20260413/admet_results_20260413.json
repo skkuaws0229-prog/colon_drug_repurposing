@@ -1,0 +1,4423 @@
+{
+  "description": "ADMET 재검증 결과 (Top 30 dedup 기반, 카테고리별 해석)",
+  "n_assays": 22,
+  "n_drugs": 28,
+  "category_interpretation": {
+    "A": "Known BRCA: 독성 있어도 허용 (이미 임상 사용)",
+    "B": "BRCA 연구: 독성 있으면 주의 (추가 연구 필요)",
+    "C": "완전 재창출: 독성 있으면 탈락 (신규 적응증)"
+  },
+  "epirubicin_note": "Epirubicin: 알려진 심장독성 (anthracycline). 누적용량 의존적 심근병증 위험. LVEF 모니터링 필수, 누적용량 900mg/m² 초과 금지.",
+  "profiles": [
+    {
+      "drug_id": 1808,
+      "drug_name": "Topotecan",
+      "category": "A",
+      "target": "TOP1",
+      "pathway": "DNA replication",
+      "mean_pred_ic50": -0.4961806628481348,
+      "sensitivity_rate": 0.7307692307692307,
+      "rank": 7,
+      "n_assays_tested": 10,
+      "n_pass": 9,
+      "n_caution": 0,
+      "n_nodata": 12,
+      "safety_score": 11.0,
+      "flags": [],
+      "known_approved": true,
+      "tox_interpretation": "양호 (기승인 약물, 주요 독성 플래그 없음)",
+      "admet_decision": "PASS",
+      "epirubicin_note": null,
+      "assay_details": {
+        "caco2_wang": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.684931506849315
+        },
+        "hia_hou": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.19387755102040816
+        },
+        "pgp_broccatelli": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.6571428571428571
+        },
+        "bioavailability_ma": {
+          "value": 1.0,
+          "status": "pass",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "bbb_martins": {
+          "value": 1.0,
+          "status": "info",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "ppbr_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.6575342465753424
+        },
+        "vdss_lombardo": {
+          "value": 1.8,
+          "status": "measured",
+          "match_type": "analog",
+          "similarity": 0.8
+        },
+        "cyp2c9_veith": {
+          "value": 0.0,
+          "status": "pass",
+          "match_type": "close_analog",
+          "similarity": 0.984375
+        },
+        "cyp2d6_veith": {
+          "value": 0.0,
+          "status": "pass",
+          "match_type": "close_analog",
+          "similarity": 0.984375
+        },
+        "cyp3a4_veith": {
+          "value": 0.0,
+          "status": "pass",
+          "match_type": "close_analog",
+          "similarity": 0.984375
+        },
+        "cyp2c9_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.5161290322580645
+        },
+        "cyp2d6_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.5161290322580645
+        },
+        "cyp3a4_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.5161290322580645
+        },
+        "clearance_hepatocyte_az": {
+          "value": 3.24,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "clearance_microsome_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.6575342465753424
+        },
+        "half_life_obach": {
+          "value": 2.3,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "ames": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.23595505617977527
+        },
+        "dili": {
+          "value": 0.0,
+          "status": "pass",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "herg": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3258426966292135
+        },
+        "ld50_zhu": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.6571428571428571
+        },
+        "lipophilicity_astrazeneca": {
+          "value": 0.31,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "solubility_aqsoldb": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.22988505747126436
+        }
+      },
+      "efficacy_rank": 7,
+      "combined_score": 22.0
+    },
+    {
+      "drug_id": 1819,
+      "drug_name": "Docetaxel",
+      "category": "A",
+      "target": "Microtubule stabiliser",
+      "pathway": "Mitosis",
+      "mean_pred_ic50": -4.081985813640771,
+      "sensitivity_rate": 1.0,
+      "rank": 1,
+      "n_assays_tested": 12,
+      "n_pass": 7,
+      "n_caution": 1,
+      "n_nodata": 10,
+      "safety_score": 6.83,
+      "flags": [
+        "DILI (Drug-Induced Liver Injury)(+)"
+      ],
+      "known_approved": true,
+      "tox_interpretation": "허용 (기승인 약물, 관리 가능한 독성: DILI (Drug-Induced Liver Injury)(+))",
+      "admet_decision": "PASS",
+      "epirubicin_note": null,
+      "assay_details": {
+        "caco2_wang": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.18018018018018017
+        },
+        "hia_hou": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.1826086956521739
+        },
+        "pgp_broccatelli": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2076923076923077
+        },
+        "bioavailability_ma": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2
+        },
+        "bbb_martins": {
+          "value": 0.0,
+          "status": "info",
+          "match_type": "close_analog",
+          "similarity": 0.9888888888888889
+        },
+        "ppbr_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.21929824561403508
+        },
+        "vdss_lombardo": {
+          "value": 2.1,
+          "status": "measured",
+          "match_type": "close_analog",
+          "similarity": 0.9888888888888889
+        },
+        "cyp2c9_veith": {
+          "value": 0.0,
+          "status": "pass",
+          "match_type": "analog",
+          "similarity": 0.76
+        },
+        "cyp2d6_veith": {
+          "value": 0.0,
+          "status": "pass",
+          "match_type": "analog",
+          "similarity": 0.76
+        },
+        "cyp3a4_veith": {
+          "value": 0.0,
+          "status": "pass",
+          "match_type": "analog",
+          "similarity": 0.76
+        },
+        "cyp2c9_substrate_carbonmangels": {
+          "value": 0.0,
+          "status": "info",
+          "match_type": "analog",
+          "similarity": 0.76
+        },
+        "cyp2d6_substrate_carbonmangels": {
+          "value": 0.0,
+          "status": "info",
+          "match_type": "analog",
+          "similarity": 0.76
+        },
+        "cyp3a4_substrate_carbonmangels": {
+          "value": 1.0,
+          "status": "info",
+          "match_type": "analog",
+          "similarity": 0.76
+        },
+        "clearance_hepatocyte_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.17266187050359713
+        },
+        "clearance_microsome_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.17266187050359713
+        },
+        "half_life_obach": {
+          "value": 11.0,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "ames": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2
+        },
+        "dili": {
+          "value": 1.0,
+          "status": "caution",
+          "match_type": "close_analog",
+          "similarity": 0.9888888888888889
+        },
+        "herg": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.19469026548672566
+        },
+        "ld50_zhu": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.23076923076923078
+        },
+        "lipophilicity_astrazeneca": {
+          "value": 3.4,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "solubility_aqsoldb": {
+          "value": -6.33,
+          "status": "measured",
+          "match_type": "analog",
+          "similarity": 0.76
+        }
+      },
+      "efficacy_rank": 1,
+      "combined_score": 20.83
+    },
+    {
+      "drug_id": 1811,
+      "drug_name": "Dactinomycin",
+      "category": "A",
+      "target": "RNA polymerase",
+      "pathway": "Other",
+      "mean_pred_ic50": -2.288293931094391,
+      "sensitivity_rate": 1.0,
+      "rank": 2,
+      "n_assays_tested": 5,
+      "n_pass": 3,
+      "n_caution": 1,
+      "n_nodata": 17,
+      "safety_score": 7.0,
+      "flags": [
+        "DILI (Drug-Induced Liver Injury)(+)"
+      ],
+      "known_approved": true,
+      "tox_interpretation": "허용 (기승인 약물, 관리 가능한 독성: DILI (Drug-Induced Liver Injury)(+))",
+      "admet_decision": "PASS",
+      "epirubicin_note": null,
+      "assay_details": {
+        "caco2_wang": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2457627118644068
+        },
+        "hia_hou": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.17567567567567569
+        },
+        "pgp_broccatelli": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.22142857142857142
+        },
+        "bioavailability_ma": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.1891891891891892
+        },
+        "bbb_martins": {
+          "value": 0.0,
+          "status": "info",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "ppbr_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2037037037037037
+        },
+        "vdss_lombardo": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.29936305732484075
+        },
+        "cyp2c9_veith": {
+          "value": 0.0,
+          "status": "pass",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "cyp2d6_veith": {
+          "value": 0.0,
+          "status": "pass",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "cyp3a4_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.23308270676691728
+        },
+        "cyp2c9_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2948717948717949
+        },
+        "cyp2d6_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2948717948717949
+        },
+        "cyp3a4_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2948717948717949
+        },
+        "clearance_hepatocyte_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2037037037037037
+        },
+        "clearance_microsome_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2037037037037037
+        },
+        "half_life_obach": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2948717948717949
+        },
+        "ames": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.19327731092436976
+        },
+        "dili": {
+          "value": 1.0,
+          "status": "caution",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "herg": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.18253968253968253
+        },
+        "ld50_zhu": {
+          "value": 5.2410000000000005,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "lipophilicity_astrazeneca": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2037037037037037
+        },
+        "solubility_aqsoldb": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.27350427350427353
+        }
+      },
+      "efficacy_rank": 2,
+      "combined_score": 20.5
+    },
+    {
+      "drug_id": 1004,
+      "drug_name": "Vinblastine",
+      "category": "A",
+      "target": "Microtubule destabiliser",
+      "pathway": "Mitosis",
+      "mean_pred_ic50": -1.2843070147662718,
+      "sensitivity_rate": 1.0,
+      "rank": 4,
+      "n_assays_tested": 12,
+      "n_pass": 7,
+      "n_caution": 1,
+      "n_nodata": 10,
+      "safety_score": 7.83,
+      "flags": [],
+      "known_approved": true,
+      "tox_interpretation": "양호 (기승인 약물, 주요 독성 플래그 없음)",
+      "admet_decision": "PASS",
+      "epirubicin_note": null,
+      "assay_details": {
+        "caco2_wang": {
+          "value": -5.48,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "hia_hou": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.20491803278688525
+        },
+        "pgp_broccatelli": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2711864406779661
+        },
+        "bioavailability_ma": {
+          "value": 1.0,
+          "status": "pass",
+          "match_type": "analog",
+          "similarity": 0.7387387387387387
+        },
+        "bbb_martins": {
+          "value": 1.0,
+          "status": "info",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "ppbr_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.23684210526315788
+        },
+        "vdss_lombardo": {
+          "value": 28.0,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "cyp2c9_veith": {
+          "value": 0.0,
+          "status": "pass",
+          "match_type": "close_analog",
+          "similarity": 0.883495145631068
+        },
+        "cyp2d6_veith": {
+          "value": 0.0,
+          "status": "pass",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "cyp3a4_veith": {
+          "value": 1.0,
+          "status": "minor",
+          "match_type": "close_analog",
+          "similarity": 0.883495145631068
+        },
+        "cyp2c9_substrate_carbonmangels": {
+          "value": 0.0,
+          "status": "info",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "cyp2d6_substrate_carbonmangels": {
+          "value": 0.0,
+          "status": "info",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "cyp3a4_substrate_carbonmangels": {
+          "value": 1.0,
+          "status": "info",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "clearance_hepatocyte_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.19491525423728814
+        },
+        "clearance_microsome_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.18796992481203006
+        },
+        "half_life_obach": {
+          "value": 67.0,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "ames": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24817518248175183
+        },
+        "dili": {
+          "value": 0.0,
+          "status": "pass",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "herg": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.208
+        },
+        "ld50_zhu": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.26785714285714285
+        },
+        "lipophilicity_astrazeneca": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2711864406779661
+        },
+        "solubility_aqsoldb": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2396694214876033
+        }
+      },
+      "efficacy_rank": 4,
+      "combined_score": 20.33
+    },
+    {
+      "drug_id": 2048,
+      "drug_name": "Vinorelbine",
+      "category": "A",
+      "target": "Microtubule destabiliser",
+      "pathway": "Mitosis",
+      "mean_pred_ic50": -1.1782865319409226,
+      "sensitivity_rate": 0.9642857142857144,
+      "rank": 5,
+      "n_assays_tested": 10,
+      "n_pass": 6,
+      "n_caution": 0,
+      "n_nodata": 12,
+      "safety_score": 8.0,
+      "flags": [],
+      "known_approved": true,
+      "tox_interpretation": "양호 (기승인 약물, 주요 독성 플래그 없음)",
+      "admet_decision": "PASS",
+      "epirubicin_note": null,
+      "assay_details": {
+        "caco2_wang": {
+          "value": -5.48,
+          "status": "measured",
+          "match_type": "analog",
+          "similarity": 0.7387387387387387
+        },
+        "hia_hou": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2032520325203252
+        },
+        "pgp_broccatelli": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.25833333333333336
+        },
+        "bioavailability_ma": {
+          "value": 1.0,
+          "status": "pass",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "bbb_martins": {
+          "value": 1.0,
+          "status": "info",
+          "match_type": "analog",
+          "similarity": 0.7387387387387387
+        },
+        "ppbr_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.22413793103448276
+        },
+        "vdss_lombardo": {
+          "value": 23.0,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "cyp2c9_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.652542372881356
+        },
+        "cyp2d6_veith": {
+          "value": 0.0,
+          "status": "pass",
+          "match_type": "analog",
+          "similarity": 0.7387387387387387
+        },
+        "cyp3a4_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.652542372881356
+        },
+        "cyp2c9_substrate_carbonmangels": {
+          "value": 0.0,
+          "status": "info",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "cyp2d6_substrate_carbonmangels": {
+          "value": 1.0,
+          "status": "info",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "cyp3a4_substrate_carbonmangels": {
+          "value": 1.0,
+          "status": "info",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "clearance_hepatocyte_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.1885245901639344
+        },
+        "clearance_microsome_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.18253968253968253
+        },
+        "half_life_obach": {
+          "value": 18.0,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "ames": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.23741007194244604
+        },
+        "dili": {
+          "value": 0.0,
+          "status": "pass",
+          "match_type": "analog",
+          "similarity": 0.7387387387387387
+        },
+        "herg": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.216
+        },
+        "ld50_zhu": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24347826086956523
+        },
+        "lipophilicity_astrazeneca": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.25833333333333336
+        },
+        "solubility_aqsoldb": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.23770491803278687
+        }
+      },
+      "efficacy_rank": 5,
+      "combined_score": 20.0
+    },
+    {
+      "drug_id": 1080,
+      "drug_name": "Paclitaxel",
+      "category": "A",
+      "target": "Microtubule stabiliser",
+      "pathway": "Mitosis",
+      "mean_pred_ic50": -2.1565074975530885,
+      "sensitivity_rate": 1.0,
+      "rank": 3,
+      "n_assays_tested": 12,
+      "n_pass": 7,
+      "n_caution": 1,
+      "n_nodata": 10,
+      "safety_score": 6.83,
+      "flags": [
+        "DILI (Drug-Induced Liver Injury)(+)"
+      ],
+      "known_approved": true,
+      "tox_interpretation": "허용 (기승인 약물, 관리 가능한 독성: DILI (Drug-Induced Liver Injury)(+))",
+      "admet_decision": "PASS",
+      "epirubicin_note": null,
+      "assay_details": {
+        "caco2_wang": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.19298245614035087
+        },
+        "hia_hou": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.18691588785046728
+        },
+        "pgp_broccatelli": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.224
+        },
+        "bioavailability_ma": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.20754716981132076
+        },
+        "bbb_martins": {
+          "value": 0.0,
+          "status": "info",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "ppbr_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.1941747572815534
+        },
+        "vdss_lombardo": {
+          "value": 3.0,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "cyp2c9_veith": {
+          "value": 0.0,
+          "status": "pass",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "cyp2d6_veith": {
+          "value": 0.0,
+          "status": "pass",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "cyp3a4_veith": {
+          "value": 0.0,
+          "status": "pass",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "cyp2c9_substrate_carbonmangels": {
+          "value": 0.0,
+          "status": "info",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "cyp2d6_substrate_carbonmangels": {
+          "value": 0.0,
+          "status": "info",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "cyp3a4_substrate_carbonmangels": {
+          "value": 1.0,
+          "status": "info",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "clearance_hepatocyte_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.17142857142857143
+        },
+        "clearance_microsome_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.17592592592592593
+        },
+        "half_life_obach": {
+          "value": 11.0,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "ames": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.21323529411764705
+        },
+        "dili": {
+          "value": 1.0,
+          "status": "caution",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "herg": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2018348623853211
+        },
+        "ld50_zhu": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24
+        },
+        "lipophilicity_astrazeneca": {
+          "value": 3.4,
+          "status": "measured",
+          "match_type": "analog",
+          "similarity": 0.76
+        },
+        "solubility_aqsoldb": {
+          "value": -6.33,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        }
+      },
+      "efficacy_rank": 3,
+      "combined_score": 19.83
+    },
+    {
+      "drug_id": 1149,
+      "drug_name": "TW 37",
+      "category": "B",
+      "target": "BCL2, BCL-XL, MCL1",
+      "pathway": "Apoptosis regulation",
+      "mean_pred_ic50": 1.19375696068609,
+      "sensitivity_rate": 0.0,
+      "rank": 13,
+      "n_assays_tested": 2,
+      "n_pass": 2,
+      "n_caution": 0,
+      "n_nodata": 20,
+      "safety_score": 10.0,
+      "flags": [],
+      "known_approved": false,
+      "tox_interpretation": "양호 (주요 독성 플래그 없음)",
+      "admet_decision": "PASS",
+      "epirubicin_note": null,
+      "assay_details": {
+        "caco2_wang": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2717391304347826
+        },
+        "hia_hou": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.26582278481012656
+        },
+        "pgp_broccatelli": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.23684210526315788
+        },
+        "bioavailability_ma": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.25
+        },
+        "bbb_martins": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.23728813559322035
+        },
+        "ppbr_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2702702702702703
+        },
+        "vdss_lombardo": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2682926829268293
+        },
+        "cyp2c9_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3188405797101449
+        },
+        "cyp2d6_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2948717948717949
+        },
+        "cyp3a4_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.31645569620253167
+        },
+        "cyp2c9_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.27631578947368424
+        },
+        "cyp2d6_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.27631578947368424
+        },
+        "cyp3a4_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.27631578947368424
+        },
+        "clearance_hepatocyte_az": {
+          "value": 3.0,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "clearance_microsome_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.26666666666666666
+        },
+        "half_life_obach": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.23728813559322035
+        },
+        "ames": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.29508196721311475
+        },
+        "dili": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24705882352941178
+        },
+        "herg": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.21296296296296297
+        },
+        "ld50_zhu": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3013698630136986
+        },
+        "lipophilicity_astrazeneca": {
+          "value": 3.44,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "solubility_aqsoldb": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3142857142857143
+        }
+      },
+      "efficacy_rank": 13,
+      "combined_score": 18.0
+    },
+    {
+      "drug_id": 1016,
+      "drug_name": "Temsirolimus",
+      "category": "B",
+      "target": "MTOR",
+      "pathway": "PI3K/MTOR signaling",
+      "mean_pred_ic50": -1.067645009072938,
+      "sensitivity_rate": 0.9615384615384616,
+      "rank": 6,
+      "n_assays_tested": 7,
+      "n_pass": 4,
+      "n_caution": 0,
+      "n_nodata": 15,
+      "safety_score": 5.71,
+      "flags": [],
+      "known_approved": false,
+      "tox_interpretation": "양호 (주요 독성 플래그 없음)",
+      "admet_decision": "PASS",
+      "epirubicin_note": null,
+      "assay_details": {
+        "caco2_wang": {
+          "value": -4.96,
+          "status": "measured",
+          "match_type": "analog",
+          "similarity": 0.8421052631578947
+        },
+        "hia_hou": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.22807017543859648
+        },
+        "pgp_broccatelli": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.21604938271604937
+        },
+        "bioavailability_ma": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3310810810810811
+        },
+        "bbb_martins": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3310810810810811
+        },
+        "ppbr_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.17006802721088435
+        },
+        "vdss_lombardo": {
+          "value": 3.0,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "cyp2c9_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24404761904761904
+        },
+        "cyp2d6_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24404761904761904
+        },
+        "cyp3a4_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24404761904761904
+        },
+        "cyp2c9_substrate_carbonmangels": {
+          "value": 0.0,
+          "status": "info",
+          "match_type": "analog",
+          "similarity": 0.8461538461538461
+        },
+        "cyp2d6_substrate_carbonmangels": {
+          "value": 0.0,
+          "status": "info",
+          "match_type": "analog",
+          "similarity": 0.8461538461538461
+        },
+        "cyp3a4_substrate_carbonmangels": {
+          "value": 1.0,
+          "status": "info",
+          "match_type": "analog",
+          "similarity": 0.8461538461538461
+        },
+        "clearance_hepatocyte_az": {
+          "value": 150.0,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "clearance_microsome_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.17006802721088435
+        },
+        "half_life_obach": {
+          "value": 18.0,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "ames": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.1619718309859155
+        },
+        "dili": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.19047619047619047
+        },
+        "herg": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.18604651162790697
+        },
+        "ld50_zhu": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24161073825503357
+        },
+        "lipophilicity_astrazeneca": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.18439716312056736
+        },
+        "solubility_aqsoldb": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.23129251700680273
+        }
+      },
+      "efficacy_rank": 6,
+      "combined_score": 17.21
+    },
+    {
+      "drug_id": 1441,
+      "drug_name": "AZD2014",
+      "category": "B",
+      "target": "mTORC1, mTORC2",
+      "pathway": "PI3K/MTOR signaling",
+      "mean_pred_ic50": 1.380737879252656,
+      "sensitivity_rate": 0.0,
+      "rank": 15,
+      "n_assays_tested": 2,
+      "n_pass": 2,
+      "n_caution": 0,
+      "n_nodata": 20,
+      "safety_score": 10.0,
+      "flags": [],
+      "known_approved": false,
+      "tox_interpretation": "양호 (주요 독성 플래그 없음)",
+      "admet_decision": "PASS",
+      "epirubicin_note": null,
+      "assay_details": {
+        "caco2_wang": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2604166666666667
+        },
+        "hia_hou": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.21333333333333335
+        },
+        "pgp_broccatelli": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2375
+        },
+        "bioavailability_ma": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2235294117647059
+        },
+        "bbb_martins": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24285714285714285
+        },
+        "ppbr_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.27586206896551724
+        },
+        "vdss_lombardo": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.23863636363636365
+        },
+        "cyp2c9_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.30666666666666664
+        },
+        "cyp2d6_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.30666666666666664
+        },
+        "cyp3a4_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.30666666666666664
+        },
+        "cyp2c9_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.225
+        },
+        "cyp2d6_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.225
+        },
+        "cyp3a4_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.225
+        },
+        "clearance_hepatocyte_az": {
+          "value": 10.0,
+          "status": "measured",
+          "match_type": "analog",
+          "similarity": 0.8
+        },
+        "clearance_microsome_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3411764705882353
+        },
+        "half_life_obach": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.22826086956521738
+        },
+        "ames": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2711864406779661
+        },
+        "dili": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.21
+        },
+        "herg": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.22826086956521738
+        },
+        "ld50_zhu": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.265625
+        },
+        "lipophilicity_astrazeneca": {
+          "value": 2.49,
+          "status": "measured",
+          "match_type": "analog",
+          "similarity": 0.8
+        },
+        "solubility_aqsoldb": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2235294117647059
+        }
+      },
+      "efficacy_rank": 15,
+      "combined_score": 17.0
+    },
+    {
+      "drug_id": 1708,
+      "drug_name": "CDK9_5576",
+      "category": "B",
+      "target": "CDK9",
+      "pathway": "Cell cycle",
+      "mean_pred_ic50": -0.4560441985931777,
+      "sensitivity_rate": 0.6538461538461539,
+      "rank": 8,
+      "n_assays_tested": 0,
+      "n_pass": 0,
+      "n_caution": 0,
+      "n_nodata": 22,
+      "safety_score": 5.0,
+      "flags": [],
+      "known_approved": false,
+      "tox_interpretation": "양호 (주요 독성 플래그 없음)",
+      "admet_decision": "PASS",
+      "epirubicin_note": null,
+      "assay_details": {
+        "caco2_wang": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "hia_hou": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "pgp_broccatelli": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "bioavailability_ma": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "bbb_martins": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "ppbr_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "vdss_lombardo": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "cyp2c9_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "cyp2d6_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "cyp3a4_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "cyp2c9_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "cyp2d6_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "cyp3a4_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "clearance_hepatocyte_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "clearance_microsome_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "half_life_obach": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "ames": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "dili": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "herg": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "ld50_zhu": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "lipophilicity_astrazeneca": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "solubility_aqsoldb": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        }
+      },
+      "efficacy_rank": 8,
+      "combined_score": 15.5
+    },
+    {
+      "drug_id": 1039,
+      "drug_name": "SL0101",
+      "category": "B",
+      "target": "RSK, AURKB, PIM1, PIM3",
+      "pathway": "Other kinases",
+      "mean_pred_ic50": -0.2720032339937079,
+      "sensitivity_rate": 1.0,
+      "rank": 9,
+      "n_assays_tested": 0,
+      "n_pass": 0,
+      "n_caution": 0,
+      "n_nodata": 22,
+      "safety_score": 5.0,
+      "flags": [],
+      "known_approved": false,
+      "tox_interpretation": "양호 (주요 독성 플래그 없음)",
+      "admet_decision": "PASS",
+      "epirubicin_note": null,
+      "assay_details": {
+        "caco2_wang": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.6461538461538462
+        },
+        "hia_hou": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.19230769230769232
+        },
+        "pgp_broccatelli": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.38461538461538464
+        },
+        "bioavailability_ma": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.23232323232323232
+        },
+        "bbb_martins": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.5352112676056338
+        },
+        "ppbr_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2463768115942029
+        },
+        "vdss_lombardo": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.29577464788732394
+        },
+        "cyp2c9_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.38461538461538464
+        },
+        "cyp2d6_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.4666666666666667
+        },
+        "cyp3a4_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.38461538461538464
+        },
+        "cyp2c9_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.38461538461538464
+        },
+        "cyp2d6_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.38461538461538464
+        },
+        "cyp3a4_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.38461538461538464
+        },
+        "clearance_hepatocyte_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2463768115942029
+        },
+        "clearance_microsome_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2463768115942029
+        },
+        "half_life_obach": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.38461538461538464
+        },
+        "ames": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.56
+        },
+        "dili": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.21818181818181817
+        },
+        "herg": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.38095238095238093
+        },
+        "ld50_zhu": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.38461538461538464
+        },
+        "lipophilicity_astrazeneca": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.35384615384615387
+        },
+        "solubility_aqsoldb": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.38461538461538464
+        }
+      },
+      "efficacy_rank": 9,
+      "combined_score": 15.0
+    },
+    {
+      "drug_id": 1072,
+      "drug_name": "Avagacestat",
+      "category": "C",
+      "target": "Amyloid beta20, Amyloid beta40",
+      "pathway": "Other",
+      "mean_pred_ic50": 1.564460936552028,
+      "sensitivity_rate": 0.0,
+      "rank": 19,
+      "n_assays_tested": 1,
+      "n_pass": 1,
+      "n_caution": 0,
+      "n_nodata": 21,
+      "safety_score": 10.0,
+      "flags": [],
+      "known_approved": false,
+      "tox_interpretation": "통과 (신규 적응증, 주요 독성 없음)",
+      "admet_decision": "PASS",
+      "epirubicin_note": null,
+      "assay_details": {
+        "caco2_wang": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.23300970873786409
+        },
+        "hia_hou": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2191780821917808
+        },
+        "pgp_broccatelli": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2077922077922078
+        },
+        "bioavailability_ma": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.20270270270270271
+        },
+        "bbb_martins": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2077922077922078
+        },
+        "ppbr_az": {
+          "value": 98.81,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "vdss_lombardo": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2441860465116279
+        },
+        "cyp2c9_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.25316455696202533
+        },
+        "cyp2d6_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.25316455696202533
+        },
+        "cyp3a4_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24324324324324326
+        },
+        "cyp2c9_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.19767441860465115
+        },
+        "cyp2d6_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.19767441860465115
+        },
+        "cyp3a4_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.19767441860465115
+        },
+        "clearance_hepatocyte_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24096385542168675
+        },
+        "clearance_microsome_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24096385542168675
+        },
+        "half_life_obach": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.20512820512820512
+        },
+        "ames": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.21875
+        },
+        "dili": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.20512820512820512
+        },
+        "herg": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.19767441860465115
+        },
+        "ld50_zhu": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.25
+        },
+        "lipophilicity_astrazeneca": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.29213483146067415
+        },
+        "solubility_aqsoldb": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2236842105263158
+        }
+      },
+      "efficacy_rank": 19,
+      "combined_score": 15.0
+    },
+    {
+      "drug_id": 1008,
+      "drug_name": "Methotrexate",
+      "category": "A",
+      "target": "Antimetabolite",
+      "pathway": "DNA replication",
+      "mean_pred_ic50": 1.528190548571793,
+      "sensitivity_rate": 0.0,
+      "rank": 18,
+      "n_assays_tested": 12,
+      "n_pass": 10,
+      "n_caution": 1,
+      "n_nodata": 10,
+      "safety_score": 9.33,
+      "flags": [
+        "DILI (Drug-Induced Liver Injury)(+)"
+      ],
+      "known_approved": true,
+      "tox_interpretation": "허용 (기승인 약물, 관리 가능한 독성: DILI (Drug-Induced Liver Injury)(+))",
+      "admet_decision": "PASS",
+      "epirubicin_note": null,
+      "assay_details": {
+        "caco2_wang": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.33695652173913043
+        },
+        "hia_hou": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2222222222222222
+        },
+        "pgp_broccatelli": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.4805194805194805
+        },
+        "bioavailability_ma": {
+          "value": 1.0,
+          "status": "pass",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "bbb_martins": {
+          "value": 0.0,
+          "status": "info",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "ppbr_az": {
+          "value": 46.55,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "vdss_lombardo": {
+          "value": 0.43,
+          "status": "measured",
+          "match_type": "analog",
+          "similarity": 0.7727272727272727
+        },
+        "cyp2c9_veith": {
+          "value": 0.0,
+          "status": "pass",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "cyp2d6_veith": {
+          "value": 0.0,
+          "status": "pass",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "cyp3a4_veith": {
+          "value": 0.0,
+          "status": "pass",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "cyp2c9_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.29069767441860467
+        },
+        "cyp2d6_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.29069767441860467
+        },
+        "cyp3a4_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.29069767441860467
+        },
+        "clearance_hepatocyte_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2159090909090909
+        },
+        "clearance_microsome_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2631578947368421
+        },
+        "half_life_obach": {
+          "value": 3.9,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "ames": {
+          "value": 0.0,
+          "status": "pass",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "dili": {
+          "value": 1.0,
+          "status": "caution",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "herg": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2647058823529412
+        },
+        "ld50_zhu": {
+          "value": 3.5269999999999997,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "lipophilicity_astrazeneca": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3870967741935484
+        },
+        "solubility_aqsoldb": {
+          "value": -4.0,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        }
+      },
+      "efficacy_rank": 18,
+      "combined_score": 14.83
+    },
+    {
+      "drug_id": 1849,
+      "drug_name": "Sabutoclax",
+      "category": "B",
+      "target": "BCL2, BCL-XL, BFL1, MCL1",
+      "pathway": "Apoptosis regulation",
+      "mean_pred_ic50": 1.699460476981917,
+      "sensitivity_rate": 0.0,
+      "rank": 21,
+      "n_assays_tested": 2,
+      "n_pass": 2,
+      "n_caution": 0,
+      "n_nodata": 20,
+      "safety_score": 10.0,
+      "flags": [],
+      "known_approved": false,
+      "tox_interpretation": "양호 (주요 독성 플래그 없음)",
+      "admet_decision": "PASS",
+      "epirubicin_note": null,
+      "assay_details": {
+        "caco2_wang": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2714285714285714
+        },
+        "hia_hou": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2714285714285714
+        },
+        "pgp_broccatelli": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2714285714285714
+        },
+        "bioavailability_ma": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2714285714285714
+        },
+        "bbb_martins": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3181818181818182
+        },
+        "ppbr_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3181818181818182
+        },
+        "vdss_lombardo": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2698412698412698
+        },
+        "cyp2c9_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3114754098360656
+        },
+        "cyp2d6_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3114754098360656
+        },
+        "cyp3a4_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3114754098360656
+        },
+        "cyp2c9_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2714285714285714
+        },
+        "cyp2d6_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2714285714285714
+        },
+        "cyp3a4_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2714285714285714
+        },
+        "clearance_hepatocyte_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3064516129032258
+        },
+        "clearance_microsome_az": {
+          "value": 34.67,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "half_life_obach": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2714285714285714
+        },
+        "ames": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2909090909090909
+        },
+        "dili": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2698412698412698
+        },
+        "herg": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2698412698412698
+        },
+        "ld50_zhu": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.32075471698113206
+        },
+        "lipophilicity_astrazeneca": {
+          "value": 3.48,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "solubility_aqsoldb": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3541666666666667
+        }
+      },
+      "efficacy_rank": 21,
+      "combined_score": 14.0
+    },
+    {
+      "drug_id": 1511,
+      "drug_name": "Epirubicin",
+      "category": "A",
+      "target": "Anthracycline",
+      "pathway": "DNA replication",
+      "mean_pred_ic50": 0.4393330903253925,
+      "sensitivity_rate": 0.2857142857142857,
+      "rank": 11,
+      "n_assays_tested": 15,
+      "n_pass": 8,
+      "n_caution": 3,
+      "n_nodata": 7,
+      "safety_score": 4.83,
+      "flags": [
+        "Ames Mutagenicity(+)",
+        "DILI (Drug-Induced Liver Injury)(+)",
+        "Clinical Cardiotoxicity (anthracycline)"
+      ],
+      "known_approved": true,
+      "tox_interpretation": "허용 (기승인 약물이나 심장독성 주의). anthracycline 계열 누적용량 의존적 심근병증 위험. LVEF 모니터링 필수.",
+      "admet_decision": "PASS",
+      "epirubicin_note": "Epirubicin: 알려진 심장독성 (anthracycline). 누적용량 의존적 심근병증 위험. LVEF 모니터링 필수, 누적용량 900mg/m² 초과 금지.",
+      "assay_details": {
+        "caco2_wang": {
+          "value": -6.5900002,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "hia_hou": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.21008403361344538
+        },
+        "pgp_broccatelli": {
+          "value": 0.0,
+          "status": "pass",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "bioavailability_ma": {
+          "value": 0.0,
+          "status": "minor",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "bbb_martins": {
+          "value": 0.0,
+          "status": "info",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "ppbr_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.23232323232323232
+        },
+        "vdss_lombardo": {
+          "value": 15.45,
+          "status": "measured",
+          "match_type": "close_analog",
+          "similarity": 0.8961038961038961
+        },
+        "cyp2c9_veith": {
+          "value": 0.0,
+          "status": "pass",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "cyp2d6_veith": {
+          "value": 0.0,
+          "status": "pass",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "cyp3a4_veith": {
+          "value": 0.0,
+          "status": "pass",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "cyp2c9_substrate_carbonmangels": {
+          "value": 0.0,
+          "status": "info",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "cyp2d6_substrate_carbonmangels": {
+          "value": 0.0,
+          "status": "info",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "cyp3a4_substrate_carbonmangels": {
+          "value": 1.0,
+          "status": "info",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "clearance_hepatocyte_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.23232323232323232
+        },
+        "clearance_microsome_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.23232323232323232
+        },
+        "half_life_obach": {
+          "value": 32.0,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "ames": {
+          "value": 1.0,
+          "status": "caution",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "dili": {
+          "value": 1.0,
+          "status": "caution",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "herg": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.20869565217391303
+        },
+        "ld50_zhu": {
+          "value": 3.196,
+          "status": "measured",
+          "match_type": "close_analog",
+          "similarity": 0.8533333333333334
+        },
+        "lipophilicity_astrazeneca": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.23232323232323232
+        },
+        "solubility_aqsoldb": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2708333333333333
+        }
+      },
+      "efficacy_rank": 11,
+      "combined_score": 13.83
+    },
+    {
+      "drug_id": 1084,
+      "drug_name": "Rapamycin",
+      "category": "A",
+      "target": "MTORC1",
+      "pathway": "PI3K/MTOR signaling",
+      "mean_pred_ic50": 1.4855778588591153,
+      "sensitivity_rate": 0.0,
+      "rank": 17,
+      "n_assays_tested": 7,
+      "n_pass": 4,
+      "n_caution": 0,
+      "n_nodata": 15,
+      "safety_score": 7.71,
+      "flags": [],
+      "known_approved": true,
+      "tox_interpretation": "양호 (기승인 약물, 주요 독성 플래그 없음)",
+      "admet_decision": "PASS",
+      "epirubicin_note": null,
+      "assay_details": {
+        "caco2_wang": {
+          "value": -4.96,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "hia_hou": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2422360248447205
+        },
+        "pgp_broccatelli": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2222222222222222
+        },
+        "bioavailability_ma": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.375
+        },
+        "bbb_martins": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.375
+        },
+        "ppbr_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.1346153846153846
+        },
+        "vdss_lombardo": {
+          "value": 3.2,
+          "status": "measured",
+          "match_type": "close_analog",
+          "similarity": 0.8727272727272727
+        },
+        "cyp2c9_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.25949367088607594
+        },
+        "cyp2d6_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.25949367088607594
+        },
+        "cyp3a4_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.25949367088607594
+        },
+        "cyp2c9_substrate_carbonmangels": {
+          "value": 0.0,
+          "status": "info",
+          "match_type": "close_analog",
+          "similarity": 0.8727272727272727
+        },
+        "cyp2d6_substrate_carbonmangels": {
+          "value": 0.0,
+          "status": "info",
+          "match_type": "close_analog",
+          "similarity": 0.8727272727272727
+        },
+        "cyp3a4_substrate_carbonmangels": {
+          "value": 1.0,
+          "status": "info",
+          "match_type": "close_analog",
+          "similarity": 0.8727272727272727
+        },
+        "clearance_hepatocyte_az": {
+          "value": 50.12,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "clearance_microsome_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.13380281690140844
+        },
+        "half_life_obach": {
+          "value": 18.0,
+          "status": "measured",
+          "match_type": "analog",
+          "similarity": 0.8421052631578947
+        },
+        "ames": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.16379310344827586
+        },
+        "dili": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.18012422360248448
+        },
+        "herg": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.17575757575757575
+        },
+        "ld50_zhu": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.25
+        },
+        "lipophilicity_astrazeneca": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.15789473684210525
+        },
+        "solubility_aqsoldb": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2391304347826087
+        }
+      },
+      "efficacy_rank": 17,
+      "combined_score": 13.71
+    },
+    {
+      "drug_id": 1053,
+      "drug_name": "MK-2206",
+      "category": "B",
+      "target": "AKT1, AKT2",
+      "pathway": "PI3K/MTOR signaling",
+      "mean_pred_ic50": 1.714488418421363,
+      "sensitivity_rate": 0.0,
+      "rank": 22,
+      "n_assays_tested": 1,
+      "n_pass": 1,
+      "n_caution": 0,
+      "n_nodata": 21,
+      "safety_score": 10.0,
+      "flags": [],
+      "known_approved": false,
+      "tox_interpretation": "양호 (주요 독성 플래그 없음)",
+      "admet_decision": "PASS",
+      "epirubicin_note": null,
+      "assay_details": {
+        "caco2_wang": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2
+        },
+        "hia_hou": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2361111111111111
+        },
+        "pgp_broccatelli": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2361111111111111
+        },
+        "bioavailability_ma": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2328767123287671
+        },
+        "bbb_martins": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24285714285714285
+        },
+        "ppbr_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24
+        },
+        "vdss_lombardo": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2361111111111111
+        },
+        "cyp2c9_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.28205128205128205
+        },
+        "cyp2d6_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.28205128205128205
+        },
+        "cyp3a4_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2638888888888889
+        },
+        "cyp2c9_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2361111111111111
+        },
+        "cyp2d6_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2361111111111111
+        },
+        "cyp3a4_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2361111111111111
+        },
+        "clearance_hepatocyte_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.5689655172413793
+        },
+        "clearance_microsome_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.23684210526315788
+        },
+        "half_life_obach": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2361111111111111
+        },
+        "ames": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24285714285714285
+        },
+        "dili": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.208955223880597
+        },
+        "herg": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.23376623376623376
+        },
+        "ld50_zhu": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2537313432835821
+        },
+        "lipophilicity_astrazeneca": {
+          "value": 2.5,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "solubility_aqsoldb": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24675324675324675
+        }
+      },
+      "efficacy_rank": 22,
+      "combined_score": 13.5
+    },
+    {
+      "drug_id": 1809,
+      "drug_name": "Teniposide",
+      "category": "B",
+      "target": NaN,
+      "pathway": "DNA replication",
+      "mean_pred_ic50": -0.1726667169681791,
+      "sensitivity_rate": 0.6923076923076923,
+      "rank": 10,
+      "n_assays_tested": 18,
+      "n_pass": 11,
+      "n_caution": 3,
+      "n_nodata": 4,
+      "safety_score": 3.61,
+      "flags": [
+        "Ames Mutagenicity(+)",
+        "DILI (Drug-Induced Liver Injury)(+)"
+      ],
+      "known_approved": false,
+      "tox_interpretation": "주의 (연구 약물, 중대 독성: Ames Mutagenicity(+))",
+      "admet_decision": "CAUTION",
+      "epirubicin_note": null,
+      "assay_details": {
+        "caco2_wang": {
+          "value": -6.0500002,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "hia_hou": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.17699115044247787
+        },
+        "pgp_broccatelli": {
+          "value": 0.0,
+          "status": "pass",
+          "match_type": "analog",
+          "similarity": 0.7530864197530864
+        },
+        "bioavailability_ma": {
+          "value": 1.0,
+          "status": "pass",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "bbb_martins": {
+          "value": 1.0,
+          "status": "info",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "ppbr_az": {
+          "value": 98.17,
+          "status": "measured",
+          "match_type": "analog",
+          "similarity": 0.7530864197530864
+        },
+        "vdss_lombardo": {
+          "value": 0.41,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "cyp2c9_veith": {
+          "value": 1.0,
+          "status": "minor",
+          "match_type": "analog",
+          "similarity": 0.7530864197530864
+        },
+        "cyp2d6_veith": {
+          "value": 0.0,
+          "status": "pass",
+          "match_type": "analog",
+          "similarity": 0.7530864197530864
+        },
+        "cyp3a4_veith": {
+          "value": 0.0,
+          "status": "pass",
+          "match_type": "analog",
+          "similarity": 0.7530864197530864
+        },
+        "cyp2c9_substrate_carbonmangels": {
+          "value": 0.0,
+          "status": "info",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "cyp2d6_substrate_carbonmangels": {
+          "value": 0.0,
+          "status": "info",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "cyp3a4_substrate_carbonmangels": {
+          "value": 1.0,
+          "status": "info",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "clearance_hepatocyte_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.1981981981981982
+        },
+        "clearance_microsome_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.1981981981981982
+        },
+        "half_life_obach": {
+          "value": 16.0,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "ames": {
+          "value": 1.0,
+          "status": "caution",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "dili": {
+          "value": 1.0,
+          "status": "caution",
+          "match_type": "analog",
+          "similarity": 0.7530864197530864
+        },
+        "herg": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.20192307692307693
+        },
+        "ld50_zhu": {
+          "value": 2.898,
+          "status": "measured",
+          "match_type": "analog",
+          "similarity": 0.8148148148148148
+        },
+        "lipophilicity_astrazeneca": {
+          "value": 0.91,
+          "status": "measured",
+          "match_type": "analog",
+          "similarity": 0.7530864197530864
+        },
+        "solubility_aqsoldb": {
+          "value": -3.47,
+          "status": "measured",
+          "match_type": "analog",
+          "similarity": 0.7530864197530864
+        }
+      },
+      "efficacy_rank": 10,
+      "combined_score": 13.11
+    },
+    {
+      "drug_id": 1910,
+      "drug_name": "ABT737",
+      "category": "B",
+      "target": "BCL2, BCL-XL, BCL-W, BCL-B, BFL1",
+      "pathway": "Apoptosis regulation",
+      "mean_pred_ic50": 1.8215276016180084,
+      "sensitivity_rate": 0.0,
+      "rank": 23,
+      "n_assays_tested": 1,
+      "n_pass": 1,
+      "n_caution": 0,
+      "n_nodata": 21,
+      "safety_score": 10.0,
+      "flags": [],
+      "known_approved": false,
+      "tox_interpretation": "양호 (주요 독성 플래그 없음)",
+      "admet_decision": "PASS",
+      "epirubicin_note": null,
+      "assay_details": {
+        "caco2_wang": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.23931623931623933
+        },
+        "hia_hou": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24489795918367346
+        },
+        "pgp_broccatelli": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24752475247524752
+        },
+        "bioavailability_ma": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24489795918367346
+        },
+        "bbb_martins": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24489795918367346
+        },
+        "ppbr_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.25892857142857145
+        },
+        "vdss_lombardo": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24489795918367346
+        },
+        "cyp2c9_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2897196261682243
+        },
+        "cyp2d6_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2897196261682243
+        },
+        "cyp3a4_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2897196261682243
+        },
+        "cyp2c9_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24166666666666667
+        },
+        "cyp2d6_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24489795918367346
+        },
+        "cyp3a4_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24489795918367346
+        },
+        "clearance_hepatocyte_az": {
+          "value": 9.55,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "clearance_microsome_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3897058823529412
+        },
+        "half_life_obach": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24489795918367346
+        },
+        "ames": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.22429906542056074
+        },
+        "dili": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.21428571428571427
+        },
+        "herg": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24489795918367346
+        },
+        "ld50_zhu": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24489795918367346
+        },
+        "lipophilicity_astrazeneca": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.5206611570247934
+        },
+        "solubility_aqsoldb": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2631578947368421
+        }
+      },
+      "efficacy_rank": 23,
+      "combined_score": 13.0
+    },
+    {
+      "drug_id": 1816,
+      "drug_name": "Fulvestrant",
+      "category": "A",
+      "target": "ESR",
+      "pathway": "Hormone-related",
+      "mean_pred_ic50": 1.8688286306816129,
+      "sensitivity_rate": 0.0,
+      "rank": 27,
+      "n_assays_tested": 3,
+      "n_pass": 3,
+      "n_caution": 0,
+      "n_nodata": 19,
+      "safety_score": 12.0,
+      "flags": [],
+      "known_approved": true,
+      "tox_interpretation": "양호 (기승인 약물, 주요 독성 플래그 없음)",
+      "admet_decision": "PASS",
+      "epirubicin_note": null,
+      "assay_details": {
+        "caco2_wang": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.18823529411764706
+        },
+        "hia_hou": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3111111111111111
+        },
+        "pgp_broccatelli": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24390243902439024
+        },
+        "bioavailability_ma": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.43661971830985913
+        },
+        "bbb_martins": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.43661971830985913
+        },
+        "ppbr_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.17204301075268819
+        },
+        "vdss_lombardo": {
+          "value": 4.15,
+          "status": "measured",
+          "match_type": "analog",
+          "similarity": 0.7605633802816901
+        },
+        "cyp2c9_veith": {
+          "value": 0.0,
+          "status": "pass",
+          "match_type": "analog",
+          "similarity": 0.7605633802816901
+        },
+        "cyp2d6_veith": {
+          "value": 0.0,
+          "status": "pass",
+          "match_type": "analog",
+          "similarity": 0.7605633802816901
+        },
+        "cyp3a4_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.43661971830985913
+        },
+        "cyp2c9_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.43661971830985913
+        },
+        "cyp2d6_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.43661971830985913
+        },
+        "cyp3a4_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.43661971830985913
+        },
+        "clearance_hepatocyte_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24390243902439024
+        },
+        "clearance_microsome_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.16831683168316833
+        },
+        "half_life_obach": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.43661971830985913
+        },
+        "ames": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.43661971830985913
+        },
+        "dili": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.43661971830985913
+        },
+        "herg": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.1875
+        },
+        "ld50_zhu": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.30864197530864196
+        },
+        "lipophilicity_astrazeneca": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.43661971830985913
+        },
+        "solubility_aqsoldb": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.43661971830985913
+        }
+      },
+      "efficacy_rank": 27,
+      "combined_score": 13.0
+    },
+    {
+      "drug_id": 1709,
+      "drug_name": "CDK9_5038",
+      "category": "B",
+      "target": "CDK9",
+      "pathway": "Cell cycle",
+      "mean_pred_ic50": 1.2037024196989992,
+      "sensitivity_rate": 0.0384615384615384,
+      "rank": 14,
+      "n_assays_tested": 0,
+      "n_pass": 0,
+      "n_caution": 0,
+      "n_nodata": 22,
+      "safety_score": 5.0,
+      "flags": [],
+      "known_approved": false,
+      "tox_interpretation": "양호 (주요 독성 플래그 없음)",
+      "admet_decision": "PASS",
+      "epirubicin_note": null,
+      "assay_details": {
+        "caco2_wang": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "hia_hou": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "pgp_broccatelli": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "bioavailability_ma": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "bbb_martins": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "ppbr_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "vdss_lombardo": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "cyp2c9_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "cyp2d6_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "cyp3a4_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "cyp2c9_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "cyp2d6_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "cyp3a4_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "clearance_hepatocyte_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "clearance_microsome_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "half_life_obach": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "ames": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "dili": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "herg": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "ld50_zhu": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "lipophilicity_astrazeneca": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        },
+        "solubility_aqsoldb": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_smiles",
+          "similarity": 0.0
+        }
+      },
+      "efficacy_rank": 14,
+      "combined_score": 12.5
+    },
+    {
+      "drug_id": 1058,
+      "drug_name": "Pictilisib",
+      "category": "B",
+      "target": "PI3K (class 1)",
+      "pathway": "PI3K/MTOR signaling",
+      "mean_pred_ic50": 1.836897097447609,
+      "sensitivity_rate": 0.0,
+      "rank": 24,
+      "n_assays_tested": 3,
+      "n_pass": 3,
+      "n_caution": 0,
+      "n_nodata": 19,
+      "safety_score": 10.0,
+      "flags": [],
+      "known_approved": false,
+      "tox_interpretation": "양호 (주요 독성 플래그 없음)",
+      "admet_decision": "PASS",
+      "epirubicin_note": null,
+      "assay_details": {
+        "caco2_wang": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2169811320754717
+        },
+        "hia_hou": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.21348314606741572
+        },
+        "pgp_broccatelli": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.25316455696202533
+        },
+        "bioavailability_ma": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.21348314606741572
+        },
+        "bbb_martins": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.20689655172413793
+        },
+        "ppbr_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.30851063829787234
+        },
+        "vdss_lombardo": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.21348314606741572
+        },
+        "cyp2c9_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3614457831325301
+        },
+        "cyp2d6_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3614457831325301
+        },
+        "cyp3a4_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3614457831325301
+        },
+        "cyp2c9_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.21348314606741572
+        },
+        "cyp2d6_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.21348314606741572
+        },
+        "cyp3a4_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.21348314606741572
+        },
+        "clearance_hepatocyte_az": {
+          "value": 33.11,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "clearance_microsome_az": {
+          "value": 14.79,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "half_life_obach": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.21348314606741572
+        },
+        "ames": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.30952380952380953
+        },
+        "dili": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2
+        },
+        "herg": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.21782178217821782
+        },
+        "ld50_zhu": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.25301204819277107
+        },
+        "lipophilicity_astrazeneca": {
+          "value": 3.3,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "solubility_aqsoldb": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.26136363636363635
+        }
+      },
+      "efficacy_rank": 24,
+      "combined_score": 12.5
+    },
+    {
+      "drug_id": 1088,
+      "drug_name": "Irinotecan",
+      "category": "A",
+      "target": "TOP1",
+      "pathway": "DNA replication",
+      "mean_pred_ic50": 1.6042049086147805,
+      "sensitivity_rate": 0.0,
+      "rank": 20,
+      "n_assays_tested": 9,
+      "n_pass": 5,
+      "n_caution": 1,
+      "n_nodata": 13,
+      "safety_score": 7.56,
+      "flags": [],
+      "known_approved": true,
+      "tox_interpretation": "양호 (기승인 약물, 주요 독성 플래그 없음)",
+      "admet_decision": "PASS",
+      "epirubicin_note": null,
+      "assay_details": {
+        "caco2_wang": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.47191011235955055
+        },
+        "hia_hou": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.1926605504587156
+        },
+        "pgp_broccatelli": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.47191011235955055
+        },
+        "bioavailability_ma": {
+          "value": 0.0,
+          "status": "minor",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "bbb_martins": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.5161290322580645
+        },
+        "ppbr_az": {
+          "value": 57.99,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "vdss_lombardo": {
+          "value": 3.5,
+          "status": "measured",
+          "match_type": "analog",
+          "similarity": 0.8352941176470589
+        },
+        "cyp2c9_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.5106382978723404
+        },
+        "cyp2d6_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.5106382978723404
+        },
+        "cyp3a4_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.5106382978723404
+        },
+        "cyp2c9_substrate_carbonmangels": {
+          "value": 0.0,
+          "status": "info",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "cyp2d6_substrate_carbonmangels": {
+          "value": 0.0,
+          "status": "info",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "cyp3a4_substrate_carbonmangels": {
+          "value": 1.0,
+          "status": "info",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "clearance_hepatocyte_az": {
+          "value": 3.0,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "clearance_microsome_az": {
+          "value": 13.49,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "half_life_obach": {
+          "value": 9.0,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "ames": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.211864406779661
+        },
+        "dili": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.5161290322580645
+        },
+        "herg": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.25471698113207547
+        },
+        "ld50_zhu": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.47191011235955055
+        },
+        "lipophilicity_astrazeneca": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.6385542168674698
+        },
+        "solubility_aqsoldb": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.23333333333333334
+        }
+      },
+      "efficacy_rank": 20,
+      "combined_score": 12.059999999999999
+    },
+    {
+      "drug_id": 1026,
+      "drug_name": "Tanespimycin",
+      "category": "B",
+      "target": "HSP90",
+      "pathway": "Protein stability and degradation",
+      "mean_pred_ic50": 1.4130901024856262,
+      "sensitivity_rate": 0.0,
+      "rank": 16,
+      "n_assays_tested": 2,
+      "n_pass": 1,
+      "n_caution": 1,
+      "n_nodata": 20,
+      "safety_score": 5.0,
+      "flags": [],
+      "known_approved": false,
+      "tox_interpretation": "양호 (주요 독성 플래그 없음)",
+      "admet_decision": "PASS",
+      "epirubicin_note": null,
+      "assay_details": {
+        "caco2_wang": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.25925925925925924
+        },
+        "hia_hou": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.20270270270270271
+        },
+        "pgp_broccatelli": {
+          "value": 1.0,
+          "status": "minor",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "bioavailability_ma": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.23404255319148937
+        },
+        "bbb_martins": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.25925925925925924
+        },
+        "ppbr_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.15833333333333333
+        },
+        "vdss_lombardo": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2323943661971831
+        },
+        "cyp2c9_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24806201550387597
+        },
+        "cyp2d6_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24806201550387597
+        },
+        "cyp3a4_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24806201550387597
+        },
+        "cyp2c9_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24
+        },
+        "cyp2d6_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24
+        },
+        "cyp3a4_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24
+        },
+        "clearance_hepatocyte_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24
+        },
+        "clearance_microsome_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.16216216216216217
+        },
+        "half_life_obach": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.23404255319148937
+        },
+        "ames": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.1941747572815534
+        },
+        "dili": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.25925925925925924
+        },
+        "herg": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.1780821917808219
+        },
+        "ld50_zhu": {
+          "value": 2.351,
+          "status": "measured",
+          "match_type": "analog",
+          "similarity": 0.75
+        },
+        "lipophilicity_astrazeneca": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3050847457627119
+        },
+        "solubility_aqsoldb": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2112676056338028
+        }
+      },
+      "efficacy_rank": 16,
+      "combined_score": 11.5
+    },
+    {
+      "drug_id": 1810,
+      "drug_name": "Mitoxantrone",
+      "category": "B",
+      "target": "TOP2",
+      "pathway": "DNA replication",
+      "mean_pred_ic50": 0.8629846297459606,
+      "sensitivity_rate": 0.0769230769230769,
+      "rank": 12,
+      "n_assays_tested": 12,
+      "n_pass": 6,
+      "n_caution": 3,
+      "n_nodata": 10,
+      "safety_score": 2.5,
+      "flags": [
+        "Ames Mutagenicity(+)",
+        "DILI (Drug-Induced Liver Injury)(+)"
+      ],
+      "known_approved": false,
+      "tox_interpretation": "주의 (연구 약물, 중대 독성: Ames Mutagenicity(+))",
+      "admet_decision": "CAUTION",
+      "epirubicin_note": null,
+      "assay_details": {
+        "caco2_wang": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.1875
+        },
+        "hia_hou": {
+          "value": 0.0,
+          "status": "minor",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "pgp_broccatelli": {
+          "value": 0.0,
+          "status": "pass",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "bioavailability_ma": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.203125
+        },
+        "bbb_martins": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2037037037037037
+        },
+        "ppbr_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2727272727272727
+        },
+        "vdss_lombardo": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.6410256410256411
+        },
+        "cyp2c9_veith": {
+          "value": 0.0,
+          "status": "pass",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "cyp2d6_veith": {
+          "value": 0.0,
+          "status": "pass",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "cyp3a4_veith": {
+          "value": 0.0,
+          "status": "pass",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "cyp2c9_substrate_carbonmangels": {
+          "value": 0.0,
+          "status": "info",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "cyp2d6_substrate_carbonmangels": {
+          "value": 0.0,
+          "status": "info",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "cyp3a4_substrate_carbonmangels": {
+          "value": 0.0,
+          "status": "info",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "clearance_hepatocyte_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.21212121212121213
+        },
+        "clearance_microsome_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.203125
+        },
+        "half_life_obach": {
+          "value": 53.0,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "ames": {
+          "value": 1.0,
+          "status": "caution",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "dili": {
+          "value": 1.0,
+          "status": "caution",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "herg": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.16981132075471697
+        },
+        "ld50_zhu": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3333333333333333
+        },
+        "lipophilicity_astrazeneca": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3055555555555556
+        },
+        "solubility_aqsoldb": {
+          "value": -1.8388,
+          "status": "measured",
+          "match_type": "close_analog",
+          "similarity": 0.9393939393939394
+        }
+      },
+      "efficacy_rank": 12,
+      "combined_score": 11.0
+    },
+    {
+      "drug_id": 1096,
+      "drug_name": "Tozasertib",
+      "category": "C",
+      "target": "AURKA, AURKB, AURKC, others",
+      "pathway": "Mitosis",
+      "mean_pred_ic50": 1.9093774722494912,
+      "sensitivity_rate": 0.0,
+      "rank": 28,
+      "n_assays_tested": 2,
+      "n_pass": 2,
+      "n_caution": 0,
+      "n_nodata": 20,
+      "safety_score": 10.0,
+      "flags": [],
+      "known_approved": false,
+      "tox_interpretation": "통과 (신규 적응증, 주요 독성 없음)",
+      "admet_decision": "PASS",
+      "epirubicin_note": null,
+      "assay_details": {
+        "caco2_wang": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.23863636363636365
+        },
+        "hia_hou": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2376237623762376
+        },
+        "pgp_broccatelli": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2375
+        },
+        "bioavailability_ma": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2376237623762376
+        },
+        "bbb_martins": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2625
+        },
+        "ppbr_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.35294117647058826
+        },
+        "vdss_lombardo": {
+          "value": 5.1,
+          "status": "measured",
+          "match_type": "analog",
+          "similarity": 0.8208955223880597
+        },
+        "cyp2c9_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3380281690140845
+        },
+        "cyp2d6_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3380281690140845
+        },
+        "cyp3a4_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3380281690140845
+        },
+        "cyp2c9_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2376237623762376
+        },
+        "cyp2d6_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2376237623762376
+        },
+        "cyp3a4_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2376237623762376
+        },
+        "clearance_hepatocyte_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.28865979381443296
+        },
+        "clearance_microsome_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.36046511627906974
+        },
+        "half_life_obach": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2376237623762376
+        },
+        "ames": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2463768115942029
+        },
+        "dili": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2376237623762376
+        },
+        "herg": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.28865979381443296
+        },
+        "ld50_zhu": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.29411764705882354
+        },
+        "lipophilicity_astrazeneca": {
+          "value": 3.47,
+          "status": "measured",
+          "match_type": "exact",
+          "similarity": 1.0
+        },
+        "solubility_aqsoldb": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2916666666666667
+        }
+      },
+      "efficacy_rank": 28,
+      "combined_score": 10.5
+    },
+    {
+      "drug_id": 1843,
+      "drug_name": "LMP744",
+      "category": "B",
+      "target": "TOP1",
+      "pathway": "DNA replication",
+      "mean_pred_ic50": 1.83748450078282,
+      "sensitivity_rate": 0.0,
+      "rank": 25,
+      "n_assays_tested": 0,
+      "n_pass": 0,
+      "n_caution": 0,
+      "n_nodata": 22,
+      "safety_score": 5.0,
+      "flags": [],
+      "known_approved": false,
+      "tox_interpretation": "양호 (주요 독성 플래그 없음)",
+      "admet_decision": "PASS",
+      "epirubicin_note": null,
+      "assay_details": {
+        "caco2_wang": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3
+        },
+        "hia_hou": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24390243902439024
+        },
+        "pgp_broccatelli": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.26582278481012656
+        },
+        "bioavailability_ma": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.25287356321839083
+        },
+        "bbb_martins": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.25287356321839083
+        },
+        "ppbr_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.23333333333333334
+        },
+        "vdss_lombardo": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24390243902439024
+        },
+        "cyp2c9_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.29411764705882354
+        },
+        "cyp2d6_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3125
+        },
+        "cyp3a4_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3125
+        },
+        "cyp2c9_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2328767123287671
+        },
+        "cyp2d6_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2328767123287671
+        },
+        "cyp3a4_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2328767123287671
+        },
+        "clearance_hepatocyte_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2638888888888889
+        },
+        "clearance_microsome_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2638888888888889
+        },
+        "half_life_obach": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24444444444444444
+        },
+        "ames": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.4307692307692308
+        },
+        "dili": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2318840579710145
+        },
+        "herg": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.27472527472527475
+        },
+        "ld50_zhu": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2857142857142857
+        },
+        "lipophilicity_astrazeneca": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2608695652173913
+        },
+        "solubility_aqsoldb": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2727272727272727
+        }
+      },
+      "efficacy_rank": 25,
+      "combined_score": 7.0
+    },
+    {
+      "drug_id": 1617,
+      "drug_name": "AZD5582",
+      "category": "B",
+      "target": "XIAP, cIAP",
+      "pathway": "Apoptosis regulation",
+      "mean_pred_ic50": 1.8581461117521592,
+      "sensitivity_rate": 0.0,
+      "rank": 26,
+      "n_assays_tested": 0,
+      "n_pass": 0,
+      "n_caution": 0,
+      "n_nodata": 22,
+      "safety_score": 5.0,
+      "flags": [],
+      "known_approved": false,
+      "tox_interpretation": "양호 (주요 독성 플래그 없음)",
+      "admet_decision": "PASS",
+      "epirubicin_note": null,
+      "assay_details": {
+        "caco2_wang": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3111111111111111
+        },
+        "hia_hou": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.24489795918367346
+        },
+        "pgp_broccatelli": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2608695652173913
+        },
+        "bioavailability_ma": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3111111111111111
+        },
+        "bbb_martins": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3111111111111111
+        },
+        "ppbr_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.5365853658536586
+        },
+        "vdss_lombardo": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.28888888888888886
+        },
+        "cyp2c9_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3111111111111111
+        },
+        "cyp2d6_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3263157894736842
+        },
+        "cyp3a4_veith": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3111111111111111
+        },
+        "cyp2c9_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3111111111111111
+        },
+        "cyp2d6_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3111111111111111
+        },
+        "cyp3a4_substrate_carbonmangels": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3111111111111111
+        },
+        "clearance_hepatocyte_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.42045454545454547
+        },
+        "clearance_microsome_az": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.42045454545454547
+        },
+        "half_life_obach": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3103448275862069
+        },
+        "ames": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.25263157894736843
+        },
+        "dili": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.2608695652173913
+        },
+        "herg": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3111111111111111
+        },
+        "ld50_zhu": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.25316455696202533
+        },
+        "lipophilicity_astrazeneca": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.5365853658536586
+        },
+        "solubility_aqsoldb": {
+          "value": null,
+          "status": "no_data",
+          "match_type": "no_match",
+          "similarity": 0.3111111111111111
+        }
+      },
+      "efficacy_rank": 26,
+      "combined_score": 6.5
+    }
+  ],
+  "assay_list": {
+    "caco2_wang": "Caco-2 Permeability",
+    "hia_hou": "HIA (Human Intestinal Absorption)",
+    "pgp_broccatelli": "P-gp Inhibitor",
+    "bioavailability_ma": "Oral Bioavailability (F>20%)",
+    "bbb_martins": "BBB Penetration",
+    "ppbr_az": "Plasma Protein Binding Rate",
+    "vdss_lombardo": "Volume of Distribution",
+    "cyp2c9_veith": "CYP2C9 Inhibitor",
+    "cyp2d6_veith": "CYP2D6 Inhibitor",
+    "cyp3a4_veith": "CYP3A4 Inhibitor",
+    "cyp2c9_substrate_carbonmangels": "CYP2C9 Substrate",
+    "cyp2d6_substrate_carbonmangels": "CYP2D6 Substrate",
+    "cyp3a4_substrate_carbonmangels": "CYP3A4 Substrate",
+    "clearance_hepatocyte_az": "Hepatocyte Clearance",
+    "clearance_microsome_az": "Microsome Clearance",
+    "half_life_obach": "Half-Life",
+    "ames": "Ames Mutagenicity",
+    "dili": "DILI (Drug-Induced Liver Injury)",
+    "herg": "hERG Cardiotoxicity",
+    "ld50_zhu": "Acute Toxicity (LD50)",
+    "lipophilicity_astrazeneca": "Lipophilicity (logD)",
+    "solubility_aqsoldb": "Aqueous Solubility"
+  }
+}

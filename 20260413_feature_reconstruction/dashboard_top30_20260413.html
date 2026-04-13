@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Top 30 Drug Analysis - 2026.04.13</title>
+<style>
+  :root {
+    --bg: #0f172a; --surface: #1e293b; --surface2: #334155;
+    --border: #475569; --text: #f1f5f9; --text2: #94a3b8;
+    --accent: #38bdf8; --accent2: #818cf8; --green: #4ade80;
+    --yellow: #facc15; --red: #f87171; --orange: #fb923c;
+    --pink: #f472b6; --cyan: #22d3ee; --radius: 12px;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f1f5f9; --surface: #ffffff; --surface2: #e2e8f0;
+      --border: #cbd5e1; --text: #0f172a; --text2: #475569;
+    }
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: -apple-system, 'Segoe UI', Roboto, monospace;
+    background: var(--bg); color: var(--text);
+    line-height: 1.6; padding: 24px; max-width: 1500px; margin: 0 auto;
+  }
+  h1 { font-size: 1.5rem; color: var(--accent); margin-bottom: 2px; }
+  .subtitle { color: var(--text2); font-size: 0.82rem; margin-bottom: 28px; }
+  h2 {
+    font-size: 1.05rem; color: var(--accent2); margin-bottom: 14px;
+    border-bottom: 1px solid var(--border); padding-bottom: 6px;
+  }
+  .section { margin-bottom: 36px; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .panel {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 18px; overflow-x: auto;
+  }
+  .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  @media (max-width: 900px) { .g2, .g3 { grid-template-columns: 1fr; } }
+
+  table { width: 100%; border-collapse: collapse; font-size: .76rem; }
+  th, td { padding: 6px 8px; text-align: left; border-bottom: 1px solid var(--border); }
+  th { color: var(--text2); font-weight: 700; text-transform: uppercase; font-size: .66rem; letter-spacing: .3px; position: sticky; top: 0; background: var(--surface); }
+  td { font-variant-numeric: tabular-nums; }
+  tr:hover td { background: var(--surface2); }
+
+  .cat-a { border-left: 3px solid var(--green); }
+  .cat-b { border-left: 3px solid var(--cyan); }
+  .cat-c { border-left: 3px solid var(--orange); }
+  .tag {
+    display: inline-block; padding: 1px 6px; border-radius: 3px;
+    font-size: .62rem; font-weight: 700; letter-spacing: .3px;
+  }
+  .tag-a { background: rgba(74,222,128,.18); color: var(--green); }
+  .tag-b { background: rgba(34,211,238,.18); color: var(--cyan); }
+  .tag-c { background: rgba(251,146,60,.18); color: var(--orange); }
+  .tag-pass { background: rgba(74,222,128,.18); color: var(--green); }
+  .tag-fail { background: rgba(248,113,113,.18); color: var(--red); }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 18px 14px; text-align: center;
+  }
+  .card .label { font-size: 0.7rem; color: var(--text2); margin-bottom: 4px; }
+  .card .value { font-size: 2rem; font-weight: 800; }
+  .card .sub { font-size: .66rem; color: var(--text2); margin-top: 4px; }
+
+  .bar-h { display: flex; height: 28px; border-radius: 6px; overflow: hidden; margin: 8px 0; }
+  .bar-seg { display: flex; align-items: center; justify-content: center; font-size: .65rem; font-weight: 700; color: #fff; }
+
+  .note { font-size: .72rem; color: var(--text2); margin-top: 8px; line-height: 1.5; }
+  .note strong { color: var(--text); }
+  .highlight { background: rgba(74,222,128,.1); border-left: 3px solid var(--green); padding: 10px 14px; margin: 10px 0; border-radius: 0 8px 8px 0; font-size: .78rem; }
+  .warning { background: rgba(250,204,21,.1); border-left: 3px solid var(--yellow); padding: 10px 14px; margin: 10px 0; border-radius: 0 8px 8px 0; font-size: .78rem; }
+
+  .pk-table td:first-child { font-weight: 700; }
+</style>
+</head>
+<body>
+
+<h1>Top 30 Drug Analysis &mdash; 카테고리 분류 및 METABRIC 검증</h1>
+<p class="subtitle">2026.04.13 &nbsp;|&nbsp; v2 앙상블 OOF 기반 (St=0.38/Cb=0.31/RF=0.21/XG=0.10) &nbsp;|&nbsp;
+<a href="dashboard_20260413.html">&larr; 메인 대시보드로 돌아가기</a></p>
+
+<!-- ══════════ 섹션 1: 요약 카드 ══════════ -->
+<div class="section">
+  <h2>1. Top 30 요약 지표</h2>
+  <div class="cards">
+    <div class="card">
+      <div class="label">앙상블 OOF Spearman</div>
+      <div class="value" style="color:var(--accent)">0.5183</div>
+      <div class="sub">가중치: St=0.38 / Cb=0.31 / RF=0.21 / XG=0.10</div>
+    </div>
+    <div class="card">
+      <div class="label">Pred IC50 범위</div>
+      <div class="value" style="color:var(--green);font-size:1.5rem">-4.08 ~ 1.91</div>
+      <div class="sub">전체 295개 범위: -4.08 ~ 5.62</div>
+    </div>
+    <div class="card">
+      <div class="label">Known BRCA Drugs</div>
+      <div class="value" style="color:var(--green)">12/30</div>
+      <div class="sub">P@5=100% | P@10=80% | P@30=40%</div>
+    </div>
+    <div class="card">
+      <div class="label">METABRIC Top 15</div>
+      <div class="value" style="color:var(--accent2)">15</div>
+      <div class="sub">검증 점수 기반 선별 완료</div>
+    </div>
+    <div class="card">
+      <div class="label">Sensitivity Rate (pred)</div>
+      <div class="value" style="color:var(--yellow)">37.5%</div>
+      <div class="sub">전체 평균 3.9% 대비 ~10배</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ 섹션 2: 카테고리 분포 ══════════ -->
+<div class="section">
+  <h2>2. 약물 카테고리 분포</h2>
+  <div class="g2">
+    <div class="panel">
+      <div style="font-size:.78rem;font-weight:700;color:var(--accent);margin-bottom:10px;">카테고리별 비율</div>
+      <div class="bar-h">
+        <div class="bar-seg" style="width:37%;background:var(--green);">A: 37%</div>
+        <div class="bar-seg" style="width:57%;background:var(--cyan);">B: 57%</div>
+        <div class="bar-seg" style="width:6%;background:var(--orange);">C</div>
+      </div>
+      <div style="display:flex;gap:16px;margin-top:10px;font-size:.72rem;">
+        <span><span class="tag tag-a">A</span> Known BRCA Drug (승인/표준) &mdash; 11개</span>
+      </div>
+      <div style="display:flex;gap:16px;margin-top:4px;font-size:.72rem;">
+        <span><span class="tag tag-b">B</span> BRCA 연구 약물 (전임상~Phase II) &mdash; 17개</span>
+      </div>
+      <div style="display:flex;gap:16px;margin-top:4px;font-size:.72rem;">
+        <span><span class="tag tag-c">C</span> 완전 재창출 후보 (유방암 직접 연구 없음) &mdash; 2개</span>
+      </div>
+      <div class="highlight" style="margin-top:14px;">
+        <strong>94%</strong> (28/30)가 이미 BRCA 승인약 또는 연구 중인 약물
+        &rarr; 모델이 생물학적으로 합리적인 약물을 선별하고 있음
+      </div>
+    </div>
+    <div class="panel">
+      <div style="font-size:.78rem;font-weight:700;color:var(--accent);margin-bottom:10px;">P@K 정밀도 (Known BRCA Drug)</div>
+      <table class="pk-table">
+        <thead><tr><th>P@K</th><th>정밀도</th><th>Hits</th><th>시각화</th></tr></thead>
+        <tbody>
+          <tr><td>P@5</td><td style="color:var(--green);font-weight:700">100%</td><td>5/5</td>
+            <td><div style="width:100%;height:14px;background:var(--green);border-radius:3px;"></div></td></tr>
+          <tr><td>P@10</td><td style="color:var(--green)">80%</td><td>8/10</td>
+            <td><div style="width:80%;height:14px;background:var(--green);border-radius:3px;"></div></td></tr>
+          <tr><td>P@15</td><td>60%</td><td>9/15</td>
+            <td><div style="width:60%;height:14px;background:var(--accent);border-radius:3px;"></div></td></tr>
+          <tr><td>P@20</td><td>50%</td><td>10/20</td>
+            <td><div style="width:50%;height:14px;background:var(--accent);border-radius:3px;"></div></td></tr>
+          <tr><td>P@30</td><td>40%</td><td>12/30</td>
+            <td><div style="width:40%;height:14px;background:var(--yellow);border-radius:3px;"></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ 섹션 3: Category A ══════════ -->
+<div class="section">
+  <h2>3-A. Known BRCA Drug (승인/표준치료) &mdash; 11개</h2>
+  <p class="note">이미 유방암 치료에 승인되었거나 표준 요법으로 사용 중인 약물. 모델의 positive control 역할.</p>
+  <div class="panel cat-a" style="margin-top:10px;">
+    <table>
+      <thead><tr><th>Rank</th><th>Drug</th><th>Pred IC50</th><th>Target</th><th>Pathway</th><th>Sens%</th><th>유방암 근거</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><strong>Docetaxel</strong> (1819)</td><td>-4.082</td><td>Microtubule stabiliser</td><td>Mitosis</td><td>100%</td><td>표준 1차 Taxane 항암제</td></tr>
+        <tr><td>3</td><td><strong>Paclitaxel</strong></td><td>-2.157</td><td>Microtubule stabiliser</td><td>Mitosis</td><td>100%</td><td>표준 1차 Taxane 항암제</td></tr>
+        <tr><td>4</td><td><strong>Docetaxel</strong> (1007)</td><td>-1.731</td><td>Microtubule stabiliser</td><td>Mitosis</td><td>90%</td><td>동일 약물 (다른 농도/배치)</td></tr>
+        <tr><td>5</td><td><strong>Vinblastine</strong></td><td>-1.284</td><td>Microtubule destabiliser</td><td>Mitosis</td><td>100%</td><td>Vinca alkaloid, BRCA 사용</td></tr>
+        <tr><td>6</td><td><strong>Vinorelbine</strong></td><td>-1.178</td><td>Microtubule destabiliser</td><td>Mitosis</td><td>96%</td><td>전이성 유방암 승인</td></tr>
+        <tr><td>9</td><td><strong>Topotecan</strong></td><td>-0.496</td><td>TOP1</td><td>DNA replication</td><td>73%</td><td>TOP1 억제, 유방암 임상시험</td></tr>
+        <tr><td>13</td><td><strong>Epirubicin</strong></td><td>0.439</td><td>Anthracycline</td><td>DNA replication</td><td>29%</td><td>FEC 요법 핵심 (표준)</td></tr>
+        <tr><td>19</td><td><strong>Rapamycin</strong></td><td>1.486</td><td>MTORC1</td><td>PI3K/MTOR</td><td>0%</td><td>Everolimus(유사체) HR+ 승인</td></tr>
+        <tr><td>20</td><td><strong>Methotrexate</strong></td><td>1.528</td><td>Antimetabolite</td><td>DNA replication</td><td>0%</td><td>CMF 요법 구성 약물</td></tr>
+        <tr><td>22</td><td><strong>Irinotecan</strong></td><td>1.604</td><td>TOP1</td><td>DNA replication</td><td>0%</td><td>TNBC 임상시험 다수</td></tr>
+        <tr><td>29</td><td><strong>Fulvestrant</strong></td><td>1.869</td><td>ESR</td><td>Hormone</td><td>0%</td><td>ER+ 표준 내분비 치료</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════ 섹션 4: Category B ══════════ -->
+<div class="section">
+  <h2>3-B. BRCA 연구 약물 (전임상~Phase II) &mdash; 17개</h2>
+  <p class="note">유방암에 대한 전임상 또는 초기 임상 근거가 있는 약물. 재창출 파이프라인의 핵심 후보군.</p>
+  <div class="panel cat-b" style="margin-top:10px;">
+    <table>
+      <thead><tr><th>Rank</th><th>Drug</th><th>Pred IC50</th><th>Target</th><th>Pathway</th><th>유방암 연구 현황</th><th>근거 수준</th></tr></thead>
+      <tbody>
+        <tr><td>2</td><td><strong>Dactinomycin</strong> (1811)</td><td>-2.288</td><td>RNA polymerase</td><td>Other</td><td>전이성 BRCA 전임상</td><td>전임상</td></tr>
+        <tr><td>7</td><td><strong>Temsirolimus</strong></td><td>-1.068</td><td>MTOR</td><td>PI3K/MTOR</td><td>HR+ BRCA Phase II</td><td>Phase II</td></tr>
+        <tr><td>8</td><td><strong>Dactinomycin</strong> (1911)</td><td>-0.987</td><td>RNA polymerase</td><td>Other</td><td>동일 약물</td><td>전임상</td></tr>
+        <tr><td>10</td><td><strong>CDK9_5576</strong></td><td>-0.456</td><td>CDK9</td><td>Cell cycle</td><td>TNBC 선택적 억제 (Nature 2023)</td><td>전임상</td></tr>
+        <tr><td>11</td><td><strong>SL0101</strong></td><td>-0.272</td><td>RSK, AURKB</td><td>Other kinases</td><td>TNBC 전이 억제 (MCT 2016)</td><td>전임상</td></tr>
+        <tr><td>12</td><td><strong>Teniposide</strong></td><td>-0.173</td><td>TOP2</td><td>DNA replication</td><td>고형암 Phase I</td><td>Phase I</td></tr>
+        <tr><td>14</td><td><strong>Mitoxantrone</strong></td><td>0.863</td><td>TOP2</td><td>DNA replication</td><td>전이성 BRCA 2차 치료 일부</td><td>임상 사용</td></tr>
+        <tr><td>15</td><td><strong>TW 37</strong></td><td>1.194</td><td>BCL2/XL/MCL1</td><td>Apoptosis</td><td>유방암 세포주 전임상</td><td>전임상</td></tr>
+        <tr><td>16</td><td><strong>CDK9_5038</strong></td><td>1.204</td><td>CDK9</td><td>Cell cycle</td><td>AZD4573 기반, 고형암 임상 진행</td><td>Phase I</td></tr>
+        <tr><td>17</td><td><strong>AZD2014</strong></td><td>1.381</td><td>mTORC1/2</td><td>PI3K/MTOR</td><td>ER+ BRCA Phase II</td><td>Phase II</td></tr>
+        <tr style="background:rgba(74,222,128,.06)"><td>18</td><td><strong>Tanespimycin</strong></td><td>1.413</td><td>HSP90</td><td>Protein stability</td><td>HER2+ BRCA Phase II <strong>유효 확인</strong> (CCR 2011)</td><td style="color:var(--green);font-weight:700">Phase II 유효</td></tr>
+        <tr style="background:rgba(74,222,128,.06)"><td>23</td><td><strong>Sabutoclax</strong></td><td>1.699</td><td>BCL2 pan</td><td>Apoptosis</td><td>유방암 CSC 제거 + 내성 극복 (Cancer Letters 2018)</td><td style="color:var(--green);font-weight:700">전임상 유효</td></tr>
+        <tr><td>24</td><td><strong>MK-2206</strong></td><td>1.714</td><td>AKT1/AKT2</td><td>PI3K/MTOR</td><td>TNBC Phase II, PI3K 경로</td><td>Phase II</td></tr>
+        <tr><td>25</td><td><strong>ABT737</strong></td><td>1.822</td><td>BCL2/XL</td><td>Apoptosis</td><td>유방암 전임상 병용 연구</td><td>전임상</td></tr>
+        <tr><td>26</td><td><strong>Pictilisib</strong></td><td>1.837</td><td>PI3K (class 1)</td><td>PI3K/MTOR</td><td>HR+/HER2- BRCA Phase II 완료</td><td>Phase II</td></tr>
+        <tr style="background:rgba(74,222,128,.06)"><td>27</td><td><strong>LMP744</strong></td><td>1.837</td><td>TOP1 (indenoisoquinoline)</td><td>DNA replication</td><td>Phase I 고형암, <strong>BRCA1-결핍 선택적</strong></td><td style="color:var(--green);font-weight:700">Phase I + 바이오마커</td></tr>
+        <tr><td>28</td><td><strong>AZD5582</strong></td><td>1.858</td><td>XIAP/cIAP</td><td>Apoptosis</td><td>MDA-MB-231(TNBC) 종양 퇴축 전임상</td><td>전임상</td></tr>
+      </tbody>
+    </table>
+    <div class="highlight" style="margin-top:10px;">
+      <strong>주목할 후보 3선:</strong><br>
+      1. <strong>Tanespimycin</strong> &mdash; HER2+ BRCA Phase II에서 ORR 22%, CBR 59% 확인. 상업적 문제로 개발 중단되었으나 효능 입증됨.<br>
+      2. <strong>Sabutoclax</strong> &mdash; 항암제 내성 유방암 줄기세포(CSC)를 BCL2/MCL1 차단으로 제거. 병용 시 시너지.<br>
+      3. <strong>LMP744</strong> &mdash; 차세대 TOP1 억제제(indenoisoquinoline). BRCA1 결핍 세포에 선택적. Camptothecin 대비 안정성 우수.
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ 섹션 5: Category C ══════════ -->
+<div class="section">
+  <h2>3-C. 완전 재창출 후보 (유방암 직접 연구 없음) &mdash; 2개</h2>
+  <p class="note">유방암에 대한 직접적인 연구 근거가 없는 순수 재창출 후보. 새로운 치료 가설 기반.</p>
+  <div class="panel cat-c" style="margin-top:10px;">
+    <table>
+      <thead><tr><th>Rank</th><th>Drug</th><th>Pred IC50</th><th>Target</th><th>원래 적응증</th><th>재창출 메커니즘 가설</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>21</td><td><strong>Avagacestat</strong></td><td>1.564</td>
+          <td>gamma-secretase (Amyloid beta)</td>
+          <td>알츠하이머 (Phase II 중단)</td>
+          <td>Notch 경로 억제 &rarr; Wnt/Notch crosstalk &rarr; 유방암 줄기세포 억제 가능성</td>
+        </tr>
+        <tr>
+          <td>30</td><td><strong>Tozasertib</strong></td><td>1.909</td>
+          <td>AURKA/B/C</td>
+          <td>백혈병 (Phase I/II)</td>
+          <td>Aurora kinase 과발현이 BRCA에서 관찰됨. 유방암 직접 임상시험은 미진행</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="warning" style="margin-top:10px;">
+      <strong>주의:</strong> 두 약물 모두 유방암 직접 전임상/임상 근거 부재. 문헌 기반 추가 검증 및 in-vitro 실험 필요.
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ 섹션 6: METABRIC 검증 결과 ══════════ -->
+<div class="section">
+  <h2>4. METABRIC 외부 검증 결과</h2>
+  <div class="g3">
+    <div class="panel">
+      <div style="font-size:.78rem;font-weight:700;color:var(--green);margin-bottom:8px;">Method A: 타겟 발현</div>
+      <div style="font-size:2rem;font-weight:800;color:var(--green);text-align:center;">29/30</div>
+      <div style="font-size:.7rem;color:var(--text2);text-align:center;">타겟 유전자가 BRCA 환자에서 발현</div>
+      <div style="font-size:.7rem;color:var(--text2);text-align:center;margin-top:4px;">25/30 BRCA-관련 경로</div>
+    </div>
+    <div class="panel">
+      <div style="font-size:.78rem;font-weight:700;color:var(--accent);margin-bottom:8px;">Method B: 생존 분석</div>
+      <div style="font-size:2rem;font-weight:800;color:var(--accent);text-align:center;">23/30</div>
+      <div style="font-size:.7rem;color:var(--text2);text-align:center;">유의한 생존 연관성 (p&lt;0.05)</div>
+      <div style="font-size:.7rem;color:var(--text2);text-align:center;margin-top:4px;">ABT737, SL0101 p&lt;0.0001</div>
+    </div>
+    <div class="panel">
+      <div style="font-size:.78rem;font-weight:700;color:var(--yellow);margin-bottom:8px;">Method C: P@K 정밀도</div>
+      <div style="font-size:2rem;font-weight:800;color:var(--yellow);text-align:center;">P@5=100%</div>
+      <div style="font-size:.7rem;color:var(--text2);text-align:center;">상위 5개 모두 Known BRCA Drug</div>
+      <div style="font-size:.7rem;color:var(--text2);text-align:center;margin-top:4px;">P@10=80%, P@20=50%</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ 섹션 7: Top 15 선별 결과 ══════════ -->
+<div class="section">
+  <h2>5. Top 30 &rarr; Top 15 검증 기반 선별</h2>
+  <p class="note">
+    검증 점수 = 타겟 발현(2.0) + BRCA 경로(1.5) + 생존 유의(2.5) + Known drug(2.0) + 고감수성(1.5) - IC50 순위(0.05)
+  </p>
+  <div class="panel" style="margin-top:10px;">
+    <table>
+      <thead><tr><th>#</th><th>Cat</th><th>Drug</th><th>Pred IC50</th><th>Sens%</th><th>타겟발현</th><th>생존유의</th><th>Known</th><th>Score</th><th>결과</th></tr></thead>
+      <tbody>
+        <tr style="background:rgba(74,222,128,.04)"><td>1</td><td><span class="tag tag-a">A</span></td><td><strong>Docetaxel</strong> (1819)</td><td>-4.082</td><td>100%</td><td>YES</td><td>YES</td><td>YES</td><td>9.45</td><td><span class="tag tag-pass">PASS</span></td></tr>
+        <tr style="background:rgba(74,222,128,.04)"><td>2</td><td><span class="tag tag-b">B</span></td><td><strong>Dactinomycin</strong> (1811)</td><td>-2.288</td><td>100%</td><td>YES</td><td>YES</td><td>YES</td><td>7.90</td><td><span class="tag tag-pass">PASS</span></td></tr>
+        <tr style="background:rgba(74,222,128,.04)"><td>3</td><td><span class="tag tag-a">A</span></td><td><strong>Paclitaxel</strong></td><td>-2.157</td><td>100%</td><td>YES</td><td>YES</td><td>YES</td><td>9.35</td><td><span class="tag tag-pass">PASS</span></td></tr>
+        <tr style="background:rgba(74,222,128,.04)"><td>4</td><td><span class="tag tag-a">A</span></td><td><strong>Docetaxel</strong> (1007)</td><td>-1.731</td><td>90%</td><td>YES</td><td>YES</td><td>YES</td><td>7.80</td><td><span class="tag tag-pass">PASS</span></td></tr>
+        <tr style="background:rgba(74,222,128,.04)"><td>5</td><td><span class="tag tag-a">A</span></td><td><strong>Vinblastine</strong></td><td>-1.284</td><td>100%</td><td>YES</td><td>YES</td><td>YES</td><td>9.25</td><td><span class="tag tag-pass">PASS</span></td></tr>
+        <tr style="background:rgba(74,222,128,.04)"><td>6</td><td><span class="tag tag-a">A</span></td><td><strong>Vinorelbine</strong></td><td>-1.178</td><td>96%</td><td>YES</td><td>YES</td><td>YES</td><td>9.20</td><td><span class="tag tag-pass">PASS</span></td></tr>
+        <tr style="background:rgba(74,222,128,.04)"><td>7</td><td><span class="tag tag-b">B</span></td><td><strong>Dactinomycin</strong> (1911)</td><td>-0.987</td><td>96%</td><td>YES</td><td>YES</td><td>YES</td><td>7.60</td><td><span class="tag tag-pass">PASS</span></td></tr>
+        <tr style="background:rgba(74,222,128,.04)"><td>8</td><td><span class="tag tag-a">A</span></td><td><strong>Topotecan</strong></td><td>-0.496</td><td>73%</td><td>YES</td><td>YES</td><td>YES</td><td>7.55</td><td><span class="tag tag-pass">PASS</span></td></tr>
+        <tr style="background:rgba(34,211,238,.04)"><td>9</td><td><span class="tag tag-b">B</span></td><td><strong>SL0101</strong></td><td>-0.272</td><td>100%</td><td>YES</td><td>YES</td><td>NO</td><td>5.45</td><td><span class="tag tag-pass">PASS</span></td></tr>
+        <tr style="background:rgba(34,211,238,.04)"><td>10</td><td><span class="tag tag-b">B</span></td><td><strong>Teniposide</strong></td><td>-0.173</td><td>69%</td><td>YES</td><td>YES</td><td>NO</td><td>5.40</td><td><span class="tag tag-pass">PASS</span></td></tr>
+        <tr style="background:rgba(74,222,128,.04)"><td>11</td><td><span class="tag tag-a">A</span></td><td><strong>Epirubicin</strong></td><td>0.439</td><td>29%</td><td>YES</td><td>YES</td><td>YES</td><td>7.35</td><td><span class="tag tag-pass">PASS</span></td></tr>
+        <tr style="background:rgba(34,211,238,.04)"><td>12</td><td><span class="tag tag-b">B</span></td><td><strong>Mitoxantrone</strong></td><td>0.863</td><td>8%</td><td>YES</td><td>YES</td><td>NO</td><td>5.30</td><td><span class="tag tag-pass">PASS</span></td></tr>
+        <tr style="background:rgba(34,211,238,.04)"><td>13</td><td><span class="tag tag-b">B</span></td><td><strong>AZD2014</strong></td><td>1.381</td><td>0%</td><td>YES</td><td>YES</td><td>NO</td><td>5.15</td><td><span class="tag tag-pass">PASS</span></td></tr>
+        <tr style="background:rgba(74,222,128,.04)"><td>14</td><td><span class="tag tag-a">A</span></td><td><strong>Rapamycin</strong></td><td>1.486</td><td>0%</td><td>YES</td><td>YES</td><td>YES</td><td>7.05</td><td><span class="tag tag-pass">PASS</span></td></tr>
+        <tr style="background:rgba(74,222,128,.04)"><td>15</td><td><span class="tag tag-a">A</span></td><td><strong>Irinotecan</strong></td><td>1.604</td><td>0%</td><td>YES</td><td>YES</td><td>YES</td><td>6.90</td><td><span class="tag tag-pass">PASS</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="panel" style="margin-top:12px;">
+    <div style="font-size:.78rem;font-weight:700;color:var(--red);margin-bottom:8px;">탈락 약물 (16~30위)</div>
+    <table>
+      <thead><tr><th>Rank</th><th>Cat</th><th>Drug</th><th>Pred IC50</th><th>탈락 사유</th></tr></thead>
+      <tbody>
+        <tr><td>7</td><td><span class="tag tag-b">B</span></td><td>Temsirolimus</td><td>-1.068</td><td>생존 비유의 (p=0.34), METABRIC에서 검증 약함</td></tr>
+        <tr><td>10</td><td><span class="tag tag-b">B</span></td><td>CDK9_5576</td><td>-0.456</td><td>생존 비유의 (p=0.82)</td></tr>
+        <tr><td>15</td><td><span class="tag tag-b">B</span></td><td>TW 37</td><td>1.194</td><td>생존 비유의 (p=0.11), sensitivity 0%</td></tr>
+        <tr><td>16</td><td><span class="tag tag-b">B</span></td><td>CDK9_5038</td><td>1.204</td><td>생존 비유의 (p=0.82), sensitivity 4%</td></tr>
+        <tr><td>18</td><td><span class="tag tag-b">B</span></td><td>Tanespimycin</td><td>1.413</td><td>sensitivity 0%, METABRIC pathway-based</td></tr>
+        <tr><td>20</td><td><span class="tag tag-a">A</span></td><td>Methotrexate</td><td>1.528</td><td>sensitivity 0%, 낮은 종합 점수</td></tr>
+        <tr><td>21</td><td><span class="tag tag-c">C</span></td><td>Avagacestat</td><td>1.564</td><td>BRCA 경로 미해당, sensitivity 0%</td></tr>
+        <tr><td>23</td><td><span class="tag tag-b">B</span></td><td>Sabutoclax</td><td>1.699</td><td>생존 비유의 (p=0.11), sensitivity 0%</td></tr>
+        <tr><td>24</td><td><span class="tag tag-b">B</span></td><td>MK-2206</td><td>1.714</td><td>생존 비유의 (p=0.48), sensitivity 0%</td></tr>
+        <tr><td>25</td><td><span class="tag tag-b">B</span></td><td>ABT737</td><td>1.822</td><td>Known 아님, sensitivity 0%</td></tr>
+        <tr><td>26</td><td><span class="tag tag-b">B</span></td><td>Pictilisib</td><td>1.837</td><td>sensitivity 0%, 낮은 종합 점수</td></tr>
+        <tr><td>27</td><td><span class="tag tag-b">B</span></td><td>LMP744</td><td>1.837</td><td>sensitivity 0%, 낮은 종합 점수</td></tr>
+        <tr><td>28</td><td><span class="tag tag-b">B</span></td><td>AZD5582</td><td>1.858</td><td>생존 비유의 (p=0.21), sensitivity 0%</td></tr>
+        <tr><td>29</td><td><span class="tag tag-a">A</span></td><td>Fulvestrant</td><td>1.869</td><td>BRCA 경로 미해당 (Hormone), sensitivity 0%</td></tr>
+        <tr><td>30</td><td><span class="tag tag-c">C</span></td><td>Tozasertib</td><td>1.909</td><td>Known 아님, sensitivity 0%</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════ 섹션 8: 기존 후보 비교 ══════════ -->
+<div class="section">
+  <h2>6. 기존 Top 15 후보 재평가</h2>
+  <p class="note">이전 KFold (누수) 기반 Top 15 후보가 GroupKFold 재평가에서 어떻게 변했는지 확인.</p>
+  <div class="panel" style="margin-top:10px;">
+    <table>
+      <thead><tr><th>약물</th><th>이전 평가</th><th>현재 순위</th><th>Pred IC50</th><th>Top 30 포함</th><th>변화 원인</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Sepantronium bromide</strong></td>
+          <td>이전 Top 15</td>
+          <td style="color:var(--red)">147/295</td>
+          <td>3.332</td>
+          <td><span class="tag tag-fail">NO</span></td>
+          <td>KFold 누수 제거 후 순위 급락. 같은 약물이 학습/검증에 등장하여 과적합.</td>
+        </tr>
+        <tr>
+          <td><strong>Camptothecin</strong></td>
+          <td>이전 Top 15</td>
+          <td style="color:var(--red)">34/295</td>
+          <td>2.088</td>
+          <td><span class="tag tag-fail">NO</span></td>
+          <td>Top 30 근접하나 미진입. 유사 약물(Topotecan, Irinotecan)이 더 높은 순위.</td>
+        </tr>
+        <tr>
+          <td><strong>Staurosporine</strong></td>
+          <td>이전 Top 15</td>
+          <td style="color:var(--red)">48/295</td>
+          <td>2.365</td>
+          <td><span class="tag tag-fail">NO</span></td>
+          <td>비선택적 kinase 억제제. GroupKFold에서 일반화 성능 부족.</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="warning" style="margin-top:10px;">
+      <strong>결론:</strong> KFold &rarr; GroupKFold 전환으로 정보 누수가 제거되면서 기존 Top 15 후보 3개 모두 탈락.
+      이는 이전 평가의 과적합 문제를 확인하며, 현재 GroupKFold 기반 Top 30이 더 신뢰할 수 있는 결과.
+    </div>
+  </div>
+</div>
+
+<div style="text-align:center;color:var(--text2);font-size:.66rem;margin-top:28px;padding-bottom:16px;">
+  생성일: 2026-04-13 &nbsp;|&nbsp; BRCA 약물 재창출 Top 30 분석 &nbsp;|&nbsp; GroupKFold CV &nbsp;|&nbsp;
+  <a href="dashboard_20260413.html">메인 대시보드</a>
+</div>
+
+</body>
+</html>
