@@ -1,0 +1,8 @@
+{
+  "model": "RandomForest",
+  "oof_spearman": 0.8500045190982551,
+  "oof_rmse": 1.1924730892426767,
+  "holdout_spearman": 0.8660327362254043,
+  "holdout_rmse": 1.1803527645606433,
+  "ensemble_pass": true
+}

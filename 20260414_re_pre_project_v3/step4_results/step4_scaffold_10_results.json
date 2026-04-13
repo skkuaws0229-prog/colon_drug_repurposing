@@ -1,0 +1,27 @@
+{
+  "model": "FlatMLP",
+  "model_id": 10,
+  "stage": "step4_scaffold_split",
+  "data_split": {
+    "total_drugs": 243,
+    "test_drugs": 48,
+    "train_samples": 5133,
+    "test_samples": 1233
+  },
+  "metrics": {
+    "spearman": 0.34009363522311736,
+    "rmse": 2.4033063470498415,
+    "mae": 1.8172655964697495,
+    "median_ae": 1.3672211082611083,
+    "p95_error": 4.750828361093138,
+    "kendall": 0.23482215270536438,
+    "pearson": 0.3485774521684337,
+    "r2": 0.009234761890417054
+  },
+  "random_5cv_spearman": 0.8278,
+  "drop_from_random": 0.4877063647768826,
+  "train_spearman": 0.8544719654212456,
+  "overfitting_gap": 0.5143783301981282,
+  "test_train_ratio": 0.3980161421158561,
+  "overfitting_verdict": "SEVERE"
+}

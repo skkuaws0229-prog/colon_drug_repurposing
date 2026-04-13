@@ -1,0 +1,36 @@
+================================================================================
+Model 2/15: LightGBM DART (CPU)
+================================================================================
+
+Data: X_train=(5092, 5529), X_holdout=(1274, 5529)
+
+[5-Fold CV]
+Fold 1/5: Val Sp=0.8470, RMSE=1.2665, Time=2.9s
+Fold 2/5: Val Sp=0.8413, RMSE=1.2848, Time=3.1s
+Fold 3/5: Val Sp=0.8157, RMSE=1.2830, Time=3.0s
+Fold 4/5: Val Sp=0.8189, RMSE=1.3678, Time=3.1s
+Fold 5/5: Val Sp=0.8496, RMSE=1.3254, Time=3.0s
+
+OOF Spearman: 0.8352
+OOF RMSE:     1.3060
+Holdout Sp:   0.8697
+Holdout RMSE: 1.2308
+
+Ensemble: ✓ PASS
+
+Traceback (most recent call last):
+  File "/Users/skku_aws2_14/20260408_pre_project_biso_myprotocol/20260408_pre_project_biso_myprotocol/20260414_re_pre_project_v3/step4_results/train_dart.py", line 112, in <module>
+    json.dump(results, f, indent=2)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/json/__init__.py", line 179, in dump
+    for chunk in iterable:
+                 ^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/json/encoder.py", line 432, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/json/encoder.py", line 439, in _iterencode
+    o = _default(o)
+        ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type bool is not JSON serializable

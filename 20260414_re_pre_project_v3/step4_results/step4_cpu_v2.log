@@ -1,0 +1,52 @@
+/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+================================================================================
+Step 4: Drug Structure Split (CPU)
+================================================================================
+
+Data Split (Drug-Structure Proxy):
+  Total drugs: 243
+  Test drugs: 48 (19.8%)
+  Train samples: 5133
+  Test samples: 1233
+
+
+================================================================================
+CPU 모델 실행 중...
+================================================================================
+
+================================================================================
+Step 4 Drug Structure: LightGBM (Model 01)
+================================================================================
+  Training...
+  Predicting...
+
+  Spearman: 0.3288
+  RMSE: 2.6722
+  ✓ Saved: step4_scaffold_01_results.json
+
+================================================================================
+Step 4 Drug Structure: LightGBM-DART (Model 02)
+================================================================================
+  Training...
+  Predicting...
+
+  Spearman: 0.3528
+  RMSE: 2.5511
+  ✓ Saved: step4_scaffold_02_results.json
+
+================================================================================
+Step 4 Drug Structure: CatBoost (Model 04)
+================================================================================
+  Training...
+  Predicting...
+
+  Spearman: 0.4475
+  RMSE: 2.1929
+  ✓ Saved: step4_scaffold_04_results.json
+
+================================================================================
+CPU 모델 완료!
+================================================================================

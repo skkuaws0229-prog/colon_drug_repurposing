@@ -1,0 +1,33 @@
+{
+  "model": "LightGBM-DART",
+  "model_id": 2,
+  "stage": "step3_unseen_drug",
+  "data_split": {
+    "total_drugs": 243,
+    "unseen_drugs": 60,
+    "train_samples": 4832,
+    "test_samples": 1534
+  },
+  "regression_metrics": {
+    "spearman": 0.3468725974116411,
+    "rmse": 2.5065587426100353,
+    "mae": 1.8310749992895958,
+    "median_ae": 1.2897512591848648,
+    "p95_error": 6.026345996373166,
+    "kendall": 0.24681602740576503,
+    "pearson": 0.29178573260600804,
+    "r2": -0.14973303747363897
+  },
+  "ranking_metrics": {
+    "precision_at_30": 0.6666666666666666,
+    "recall_at_30": 0.02607561929595828,
+    "ndcg_at_30": 0.8778102412897163,
+    "ef_at_30": 1.3333333333333333
+  },
+  "random_5cv_spearman": 0.8415,
+  "drop_from_random": 0.4946274025883589,
+  "train_spearman": 0.9457953787796926,
+  "overfitting_gap": 0.5989227813680514,
+  "test_train_ratio": 0.3667522650186678,
+  "overfitting_verdict": "SEVERE"
+}

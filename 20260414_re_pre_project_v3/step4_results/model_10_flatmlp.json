@@ -1,0 +1,9 @@
+{
+  "model": "FlatMLP",
+  "device": "mps",
+  "oof_spearman": 0.8458070648069439,
+  "oof_rmse": 1.2006218514362934,
+  "holdout_spearman": 0.8871198066007177,
+  "holdout_rmse": 1.1068838603834263,
+  "ensemble_pass": true
+}

@@ -1,0 +1,68 @@
+{
+  "stage": "step4_scaffold_split",
+  "results": [
+    {
+      "model_id": 1,
+      "model_name": "LightGBM",
+      "train_spearman": 0.9799394193895035,
+      "test_spearman": 0.3287685112192085,
+      "gap": 0.651170908170295,
+      "ratio": 0.33549881218578737,
+      "verdict": "SEVERE"
+    },
+    {
+      "model_id": 2,
+      "model_name": "DART",
+      "train_spearman": 0.94236276357965,
+      "test_spearman": 0.35275602025770597,
+      "gap": 0.5896067433219441,
+      "ratio": 0.3743314505740129,
+      "verdict": "SEVERE"
+    },
+    {
+      "model_id": 4,
+      "model_name": "CatBoost",
+      "train_spearman": 0.9593304045797608,
+      "test_spearman": 0.4474905996809722,
+      "gap": 0.5118398048987887,
+      "ratio": 0.46646139593271574,
+      "verdict": "SEVERE"
+    },
+    {
+      "model_id": 10,
+      "model_name": "FlatMLP",
+      "train_spearman": 0.8544719654212456,
+      "test_spearman": 0.34009363522311736,
+      "gap": 0.5143783301981282,
+      "ratio": 0.3980161421158561,
+      "verdict": "SEVERE"
+    },
+    {
+      "model_id": 12,
+      "model_name": "FT-Transformer",
+      "train_spearman": 0.8465640217202935,
+      "test_spearman": 0.33836945172995514,
+      "gap": 0.5081945699903384,
+      "ratio": 0.39969741572806067,
+      "verdict": "SEVERE"
+    },
+    {
+      "model_id": 13,
+      "model_name": "CrossAttention",
+      "train_spearman": 0.8519144645680624,
+      "test_spearman": 0.35400699977502015,
+      "gap": 0.49790746479304226,
+      "ratio": 0.41554289133300343,
+      "verdict": "SEVERE"
+    },
+    {
+      "model_id": 14,
+      "model_name": "GraphSAGE",
+      "train_spearman": 0.8595211273382825,
+      "test_spearman": 0.3494139399583093,
+      "gap": 0.5101071873799732,
+      "ratio": 0.4065216419290997,
+      "verdict": "SEVERE"
+    }
+  ]
+}

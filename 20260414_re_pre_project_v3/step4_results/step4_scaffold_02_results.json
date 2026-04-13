@@ -1,0 +1,27 @@
+{
+  "model": "LightGBM-DART",
+  "model_id": 2,
+  "stage": "step4_scaffold_split",
+  "data_split": {
+    "total_drugs": 243,
+    "test_drugs": 48,
+    "train_samples": 5133,
+    "test_samples": 1233
+  },
+  "metrics": {
+    "spearman": 0.35275602025770597,
+    "rmse": 2.5511088390142844,
+    "mae": 1.871446806025363,
+    "median_ae": 1.302393109746963,
+    "p95_error": 5.944899620235791,
+    "kendall": 0.2503923489324949,
+    "pearson": 0.31257036652133624,
+    "r2": -0.11637594171024457
+  },
+  "random_5cv_spearman": 0.8415,
+  "drop_from_random": 0.48874397974229405,
+  "train_spearman": 0.94236276357965,
+  "overfitting_gap": 0.5896067433219441,
+  "test_train_ratio": 0.3743314505740129,
+  "overfitting_verdict": "SEVERE"
+}

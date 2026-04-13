@@ -1,0 +1,10 @@
+{
+  "model": "GraphSAGE (Drug-Split)",
+  "device": "mps",
+  "split_type": "drug-based",
+  "oof_spearman": 0.4326003406261216,
+  "oof_rmse": 2.296020210151825,
+  "holdout_spearman": 0.6727392262758214,
+  "holdout_rmse": 2.552186965942383,
+  "ensemble_pass": false
+}

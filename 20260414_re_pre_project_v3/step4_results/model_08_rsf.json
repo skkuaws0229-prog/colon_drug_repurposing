@@ -1,0 +1,8 @@
+{
+  "model": "RSF (RandomForest proxy)",
+  "oof_spearman": 0.7984617674314034,
+  "oof_rmse": 1.5153356486621954,
+  "holdout_spearman": 0.8132666716229545,
+  "holdout_rmse": 1.4623955332153693,
+  "ensemble_pass": false
+}

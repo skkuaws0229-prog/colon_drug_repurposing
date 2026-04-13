@@ -1,0 +1,37 @@
+{
+  "model": "Ensemble_SpearmanWeighted",
+  "model_id": "E2",
+  "stage": "step3_unseen_drug",
+  "ensemble_type": "spearman_weighted",
+  "weights": {
+    "1": 0.14262468115049695,
+    "2": 0.1525639897968159,
+    "4": 0.21167209077315507,
+    "10": 0.16122790043099655,
+    "12": 0.16940803940540064,
+    "13": 0.16250329844313482
+  },
+  "data_split": {
+    "total_drugs": 243,
+    "unseen_drugs": 60,
+    "test_samples": 1534
+  },
+  "regression_metrics": {
+    "spearman": 0.3964719534339175,
+    "rmse": 2.2491523021729,
+    "mae": 1.6695714493630494,
+    "median_ae": 1.19594512783878,
+    "p95_error": 4.90467327057419,
+    "kendall": 0.27607072905424423,
+    "pearson": 0.3839439892661614,
+    "r2": 0.0742814495569023
+  },
+  "ranking_metrics": {
+    "precision_at_30": 0.9666666666666667,
+    "recall_at_30": 0.03780964797913951,
+    "ndcg_at_30": 0.908363885576966,
+    "ef_at_30": 1.9333333333333333
+  },
+  "random_5cv_spearman": 0.8358864807810713,
+  "drop_from_random": 0.4394145273471538
+}

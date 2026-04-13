@@ -1,0 +1,63 @@
+/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+================================================================================
+Step 3: Unseen Drug Holdout (CPU)
+================================================================================
+
+Data Split:
+  Total drugs: 243
+  Unseen drugs: 60 (24.7%)
+  Train samples: 4832
+  Test samples (unseen drugs): 1534
+
+================================================================================
+CPU 모델 실행 중...
+================================================================================
+
+================================================================================
+Step 3 Unseen Drug: LightGBM (Model 01)
+================================================================================
+  Training on seen drugs...
+  Predicting on unseen drugs...
+
+  Regression:
+    Spearman: 0.3243
+    RMSE: 2.5767
+  Ranking:
+    Precision@30: 0.8333
+    NDCG@30: 0.9305
+  ✓ Saved: step3_unseen_drug_01_results.json
+
+================================================================================
+Step 3 Unseen Drug: LightGBM-DART (Model 02)
+================================================================================
+  Training on seen drugs...
+  Predicting on unseen drugs...
+
+  Regression:
+    Spearman: 0.3469
+    RMSE: 2.5066
+  Ranking:
+    Precision@30: 0.6667
+    NDCG@30: 0.8778
+  ✓ Saved: step3_unseen_drug_02_results.json
+
+================================================================================
+Step 3 Unseen Drug: CatBoost (Model 04)
+================================================================================
+  Training on seen drugs...
+  Predicting on unseen drugs...
+
+  Regression:
+    Spearman: 0.4813
+    RMSE: 2.1061
+  Ranking:
+    Precision@30: 0.9667
+    NDCG@30: 0.8951
+  ✓ Saved: step3_unseen_drug_04_results.json
+
+================================================================================
+CPU 모델 완료!
+================================================================================

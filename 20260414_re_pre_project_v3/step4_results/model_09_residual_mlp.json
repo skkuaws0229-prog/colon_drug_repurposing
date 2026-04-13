@@ -1,0 +1,10 @@
+{
+  "model": "ResidualMLP",
+  "device": "MPS (GPU)",
+  "oof_spearman": 0.8459,
+  "oof_rmse": 1.2,
+  "holdout_spearman": 0.8842,
+  "holdout_rmse": 1.2437,
+  "ensemble_pass": true,
+  "avg_fold_time_sec": 9.4
+}

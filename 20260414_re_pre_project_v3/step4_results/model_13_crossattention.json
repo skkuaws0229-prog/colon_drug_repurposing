@@ -1,0 +1,9 @@
+{
+  "model": "CrossAttention",
+  "device": "mps",
+  "oof_spearman": 0.8005404110857616,
+  "oof_rmse": 1.3751413866212978,
+  "holdout_spearman": 0.8593201273721031,
+  "holdout_rmse": 1.4652260541915894,
+  "ensemble_pass": true
+}

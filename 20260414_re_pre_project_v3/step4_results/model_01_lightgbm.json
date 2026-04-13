@@ -1,0 +1,33 @@
+{
+  "model": "LightGBM",
+  "hyperparameters": "default",
+  "cv_config": {
+    "n_folds": 5,
+    "seed": 42,
+    "holdout_ratio": 0.2
+  },
+  "oof_performance": {
+    "train_spearman": 0.9392,
+    "oof_spearman": 0.8493,
+    "oof_rmse": 1.1788,
+    "gap_spearman": 0.0899,
+    "fold_std": 0.0142
+  },
+  "holdout_performance": {
+    "spearman": 0.8854,
+    "kendall_tau": 0.712,
+    "pearson": 0.9155,
+    "r2": 0.8381,
+    "rmse": 1.1056,
+    "mae": 0.8304,
+    "median_ae": 0.6287,
+    "p95_error": 2.2346
+  },
+  "ensemble_criteria": {
+    "benchmark_spearman": 0.713,
+    "benchmark_rmse": 1.385,
+    "spearman_pass": true,
+    "rmse_pass": true,
+    "ensemble_pass": true
+  }
+}

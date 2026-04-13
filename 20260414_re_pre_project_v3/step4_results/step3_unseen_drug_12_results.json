@@ -1,0 +1,33 @@
+{
+  "model": "FT-Transformer",
+  "model_id": 12,
+  "stage": "step3_unseen_drug",
+  "data_split": {
+    "total_drugs": 243,
+    "unseen_drugs": 60,
+    "train_samples": 4832,
+    "test_samples": 1534
+  },
+  "regression_metrics": {
+    "spearman": 0.38521398843108295,
+    "rmse": 2.3490253158709464,
+    "mae": 1.7436551819875457,
+    "median_ae": 1.2445213854599,
+    "p95_error": 4.651855794274423,
+    "kendall": 0.2670420671349392,
+    "pearson": 0.37950169108067744,
+    "r2": -0.009756439555079544
+  },
+  "ranking_metrics": {
+    "precision_at_30": 0.9333333333333333,
+    "recall_at_30": 0.03650586701434159,
+    "ndcg_at_30": 0.875030811722473,
+    "ef_at_30": 1.8666666666666667
+  },
+  "random_5cv_spearman": 0.8057,
+  "drop_from_random": 0.420486011568917,
+  "train_spearman": 0.8546386759179132,
+  "overfitting_gap": 0.46942468748683025,
+  "test_train_ratio": 0.4507331569301483,
+  "overfitting_verdict": "SEVERE"
+}

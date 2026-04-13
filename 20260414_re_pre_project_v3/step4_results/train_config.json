@@ -1,0 +1,37 @@
+{
+  "step": "Step 4-1: Random 5CV + Holdout",
+  "data": {
+    "features_file": "features_slim.parquet",
+    "labels_file": "labels.parquet (S3)",
+    "n_samples": 6366,
+    "n_features": 5529,
+    "label": "label_main (IC50 regression)"
+  },
+  "cv_config": {
+    "n_folds": 5,
+    "seed": 42,
+    "holdout_ratio": 0.2
+  },
+  "ensemble_criteria": {
+    "spearman": 0.713,
+    "rmse": 1.385,
+    "logic": "Spearman >= 0.713 AND RMSE <= 1.385"
+  },
+  "models_to_train": [
+    "LightGBM",
+    "LightGBM-DART",
+    "XGBoost",
+    "CatBoost",
+    "RandomForest",
+    "ExtraTrees",
+    "Stacking",
+    "RSF",
+    "ResidualMLP",
+    "FlatMLP",
+    "TabNet",
+    "FT-Transformer",
+    "CrossAttention",
+    "GraphSAGE",
+    "GAT"
+  ]
+}

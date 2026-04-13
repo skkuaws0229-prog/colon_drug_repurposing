@@ -1,0 +1,27 @@
+{
+  "model": "GraphSAGE",
+  "model_id": 14,
+  "stage": "step4_scaffold_split",
+  "data_split": {
+    "total_drugs": 243,
+    "test_drugs": 48,
+    "train_samples": 5133,
+    "test_samples": 1233
+  },
+  "metrics": {
+    "spearman": 0.3494139399583093,
+    "rmse": 2.417084093234634,
+    "mae": 1.8712541750414677,
+    "median_ae": 1.4878054513549803,
+    "p95_error": 4.89423768110351,
+    "kendall": 0.24075478455040497,
+    "pearson": 0.35872329215183874,
+    "r2": -0.002157576857369614
+  },
+  "random_5cv_spearman": 0.4326,
+  "drop_from_random": 0.08318606004169066,
+  "train_spearman": 0.8595211273382825,
+  "overfitting_gap": 0.5101071873799732,
+  "test_train_ratio": 0.4065216419290997,
+  "overfitting_verdict": "SEVERE"
+}

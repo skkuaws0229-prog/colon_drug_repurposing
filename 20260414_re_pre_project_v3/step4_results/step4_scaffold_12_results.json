@@ -1,0 +1,27 @@
+{
+  "model": "FT-Transformer",
+  "model_id": 12,
+  "stage": "step4_scaffold_split",
+  "data_split": {
+    "total_drugs": 243,
+    "test_drugs": 48,
+    "train_samples": 5133,
+    "test_samples": 1233
+  },
+  "metrics": {
+    "spearman": 0.33836945172995514,
+    "rmse": 2.4532855034631496,
+    "mae": 1.8363110002113368,
+    "median_ae": 1.3722854198913574,
+    "p95_error": 4.880596451010131,
+    "kendall": 0.2323785298237853,
+    "pearson": 0.3415911429751949,
+    "r2": -0.032401623715096584
+  },
+  "random_5cv_spearman": 0.8057,
+  "drop_from_random": 0.46733054827004483,
+  "train_spearman": 0.8465640217202935,
+  "overfitting_gap": 0.5081945699903384,
+  "test_train_ratio": 0.39969741572806067,
+  "overfitting_verdict": "SEVERE"
+}

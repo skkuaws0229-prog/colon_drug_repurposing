@@ -1,0 +1,33 @@
+{
+  "model": "CatBoost",
+  "model_id": 4,
+  "stage": "step3_unseen_drug",
+  "data_split": {
+    "total_drugs": 243,
+    "unseen_drugs": 60,
+    "train_samples": 4832,
+    "test_samples": 1534
+  },
+  "regression_metrics": {
+    "spearman": 0.48134767953092633,
+    "rmse": 2.1060681979948424,
+    "mae": 1.610960994125975,
+    "median_ae": 1.2693162961086772,
+    "p95_error": 4.461474333978407,
+    "kendall": 0.3325049689108198,
+    "pearson": 0.4703031854806775,
+    "r2": 0.1883176591512996
+  },
+  "ranking_metrics": {
+    "precision_at_30": 0.9666666666666667,
+    "recall_at_30": 0.03780964797913951,
+    "ndcg_at_30": 0.8951305641820225,
+    "ef_at_30": 1.9333333333333333
+  },
+  "random_5cv_spearman": 0.8624,
+  "drop_from_random": 0.3810523204690737,
+  "train_spearman": 0.962072165620523,
+  "overfitting_gap": 0.48072448608959667,
+  "test_train_ratio": 0.5003238808187158,
+  "overfitting_verdict": "SEVERE"
+}

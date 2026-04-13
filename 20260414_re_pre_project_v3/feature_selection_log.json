@@ -1,0 +1,51 @@
+{
+  "selection_date": "2026-04-13T20:18:04.129527",
+  "version": "v2_with_pair_features",
+  "input_files": {
+    "features_cleaned": "features_cleaned.parquet (6,366행)",
+    "pair_features": "pair_features_newfe_v2.parquet (S3, 7,730행)"
+  },
+  "output_file": "features_slim.parquet",
+  "merged_rows": 6366,
+  "total_original_columns": 20389,
+  "total_final_columns": 5534,
+  "reduction_count": 14855,
+  "reduction_ratio": 0.729,
+  "gene_features": {
+    "original_count": 18310,
+    "low_variance_removed": 13719,
+    "high_correlation_removed": 176,
+    "final_count": 4415,
+    "reduction_ratio": 0.759
+  },
+  "morgan_fp_features": {
+    "original_count": 2048,
+    "low_variance_removed": 952,
+    "high_correlation_removed": 8,
+    "final_count": 1088,
+    "reduction_ratio": 0.469
+  },
+  "other_features": {
+    "lincs_count": 5,
+    "target_count": 8,
+    "pathway_count": 2,
+    "drug_desc_count": 9,
+    "drug_meta_count": 5,
+    "total_other_count": 29,
+    "selection_applied": false,
+    "note": "모두 유지 (개수 적어 selection 불필요)"
+  },
+  "id_columns": {
+    "count": 2,
+    "columns": [
+      "sample_id",
+      "canonical_drug_id"
+    ]
+  },
+  "selection_parameters": {
+    "variance_threshold": 0.01,
+    "correlation_threshold": 0.95,
+    "tcga_basis_only": true,
+    "importance_based_cut": "not_applied"
+  }
+}

@@ -1,0 +1,13 @@
+================================================================================
+Model 12/15: FT-Transformer (GPU-1, 간소화 Transformer MLP)
+================================================================================
+Device: mps
+Fold 1/5: Sp=0.8425, RMSE=1.2941, Time=15.8s
+Fold 2/5: Sp=0.8565, RMSE=1.3112, Time=12.1s
+Fold 3/5: Sp=0.8476, RMSE=1.2416, Time=17.6s
+Fold 4/5: Sp=0.8577, RMSE=1.3055, Time=18.2s
+Fold 5/5: Sp=0.8187, RMSE=1.3191, Time=10.2s
+OOF: Sp=0.8377, RMSE=1.2946
+Holdout: Sp=0.8543, RMSE=1.2723
+Ensemble: ✓ PASS
+✓ FT-Transformer (SimpleMLP) 완료

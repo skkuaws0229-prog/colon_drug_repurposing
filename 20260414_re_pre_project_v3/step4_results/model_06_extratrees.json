@@ -1,0 +1,8 @@
+{
+  "model": "ExtraTrees",
+  "oof_spearman": 0.8464247638488444,
+  "oof_rmse": 1.2026870808795542,
+  "holdout_spearman": 0.8573743643350682,
+  "holdout_rmse": 1.2030979954517556,
+  "ensemble_pass": true
+}

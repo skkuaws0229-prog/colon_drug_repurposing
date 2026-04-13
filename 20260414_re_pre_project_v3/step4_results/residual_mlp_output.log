@@ -1,0 +1,38 @@
+================================================================================
+Model 9/15: ResidualMLP (GPU/MPS)
+================================================================================
+
+Device: mps
+
+Data: X_train=(5092, 5529), X_holdout=(1274, 5529)
+
+[5-Fold CV]
+Fold 1/5: Val Sp=0.8618, RMSE=1.1650, Time=9.8s
+Fold 2/5: Val Sp=0.8598, RMSE=1.1593, Time=8.9s
+Fold 3/5: Val Sp=0.8514, RMSE=1.1742, Time=9.5s
+Fold 4/5: Val Sp=0.8417, RMSE=1.2674, Time=9.4s
+Fold 5/5: Val Sp=0.8619, RMSE=1.2303, Time=9.4s
+
+OOF Spearman: 0.8459
+OOF RMSE:     1.2000
+Holdout Sp:   0.8842
+Holdout RMSE: 1.2437
+
+Ensemble: ✓ PASS
+
+Traceback (most recent call last):
+  File "/Users/skku_aws2_14/20260408_pre_project_biso_myprotocol/20260408_pre_project_biso_myprotocol/20260414_re_pre_project_v3/step4_results/train_residual_mlp.py", line 186, in <module>
+    json.dump(results, f, indent=2)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/json/__init__.py", line 179, in dump
+    for chunk in iterable:
+                 ^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/json/encoder.py", line 432, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/json/encoder.py", line 439, in _iterencode
+    o = _default(o)
+        ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type bool is not JSON serializable

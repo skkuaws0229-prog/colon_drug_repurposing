@@ -1,0 +1,33 @@
+{
+  "model": "CrossAttention",
+  "model_id": 13,
+  "stage": "step3_unseen_drug",
+  "data_split": {
+    "total_drugs": 243,
+    "unseen_drugs": 60,
+    "train_samples": 4832,
+    "test_samples": 1534
+  },
+  "regression_metrics": {
+    "spearman": 0.3694514139450003,
+    "rmse": 2.279572504342295,
+    "mae": 1.7044650483736141,
+    "median_ae": 1.2476062215728758,
+    "p95_error": 4.64696578753929,
+    "kendall": 0.2560947295100998,
+    "pearson": 0.36711297067243936,
+    "r2": 0.049071076982316386
+  },
+  "ranking_metrics": {
+    "precision_at_30": 0.9,
+    "recall_at_30": 0.035202086049543675,
+    "ndcg_at_30": 0.9019920429087996,
+    "ef_at_30": 1.8
+  },
+  "random_5cv_spearman": 0.8238,
+  "drop_from_random": 0.45434858605499967,
+  "train_spearman": 0.8607952556415007,
+  "overfitting_gap": 0.4913438416965004,
+  "test_train_ratio": 0.4291977813814385,
+  "overfitting_verdict": "SEVERE"
+}

@@ -1,0 +1,33 @@
+{
+  "model": "FlatMLP",
+  "model_id": 10,
+  "stage": "step3_unseen_drug",
+  "data_split": {
+    "total_drugs": 243,
+    "unseen_drugs": 60,
+    "train_samples": 4832,
+    "test_samples": 1534
+  },
+  "regression_metrics": {
+    "spearman": 0.36655731058419205,
+    "rmse": 2.2998343054543366,
+    "mae": 1.7095678800193617,
+    "median_ae": 1.2200123506240845,
+    "p95_error": 4.713780799668405,
+    "kendall": 0.25485303335314946,
+    "pearson": 0.36552292966048294,
+    "r2": 0.03209143571327677
+  },
+  "ranking_metrics": {
+    "precision_at_30": 0.9,
+    "recall_at_30": 0.035202086049543675,
+    "ndcg_at_30": 0.9036321044228413,
+    "ef_at_30": 1.8
+  },
+  "random_5cv_spearman": 0.8278,
+  "drop_from_random": 0.4612426894158079,
+  "train_spearman": 0.860459822267672,
+  "overfitting_gap": 0.49390251168348,
+  "test_train_ratio": 0.4260016575999563,
+  "overfitting_verdict": "SEVERE"
+}

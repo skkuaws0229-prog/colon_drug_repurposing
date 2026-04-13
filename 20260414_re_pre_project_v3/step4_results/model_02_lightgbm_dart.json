@@ -1,0 +1,10 @@
+{
+  "model": "LightGBM-DART",
+  "device": "CPU",
+  "oof_spearman": 0.8352,
+  "oof_rmse": 1.306,
+  "holdout_spearman": 0.8697,
+  "holdout_rmse": 1.2308,
+  "ensemble_pass": true,
+  "avg_fold_time_sec": 3.0
+}

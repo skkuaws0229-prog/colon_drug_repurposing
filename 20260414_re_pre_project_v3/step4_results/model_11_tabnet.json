@@ -1,0 +1,9 @@
+{
+  "model": "TabNet (SimpleMLP)",
+  "device": "mps",
+  "oof_spearman": 0.8417800382298629,
+  "oof_rmse": 1.2561442030102654,
+  "holdout_spearman": 0.8810052108689569,
+  "holdout_rmse": 1.1672295939509714,
+  "ensemble_pass": true
+}

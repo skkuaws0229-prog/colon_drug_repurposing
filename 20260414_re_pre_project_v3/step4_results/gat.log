@@ -1,0 +1,17 @@
+/Users/skku_aws2_14/20260408_pre_project_biso_myprotocol/20260408_pre_project_biso_myprotocol/20260414_re_pre_project_v3/step4_results/train_gat.py:226: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  holdout_sp = spearmanr(y_holdout, holdout_pred)[0]
+================================================================================
+Model 15/15: GAT (Graph Attention Network, Drug-Split)
+================================================================================
+Device: mps
+Drug-split: 194 train drugs, 49 holdout drugs
+Samples: 5097 train, 1269 holdout
+Fold 1/5: Sp=0.4390, RMSE=2.4561, Time=32.8s
+Fold 2/5: Sp=0.4399, RMSE=2.1619, Time=25.0s
+Fold 3/5: Sp=0.5174, RMSE=2.3211, Time=30.8s
+Fold 4/5: Sp=0.4732, RMSE=2.3404, Time=33.9s
+Fold 5/5: Sp=0.4052, RMSE=2.8606, Time=25.9s
+OOF: Sp=0.4257, RMSE=2.4387
+Holdout: Sp=nan, RMSE=4.2493
+Ensemble: ✗ FAIL
+✓ GAT (Drug-Split) 완료

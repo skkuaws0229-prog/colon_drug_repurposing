@@ -1,0 +1,72 @@
+================================================================================
+Step 3: Unseen Drug Holdout (GPU)
+================================================================================
+Device: mps
+
+Data Split:
+  Total drugs: 243
+  Unseen drugs: 60 (24.7%)
+  Train samples: 4832
+  Test samples (unseen drugs): 1534
+
+================================================================================
+GPU 모델 실행 중...
+================================================================================
+
+================================================================================
+Step 3 Unseen Drug: FlatMLP (Model 10)
+================================================================================
+  Training on seen drugs...
+    Epoch 25/100, Loss: 5.8824
+    Epoch 50/100, Loss: 3.9159
+    Epoch 75/100, Loss: 2.6509
+    Epoch 100/100, Loss: 2.2514
+  Predicting on unseen drugs...
+
+  Regression:
+    Spearman: 0.3666
+    RMSE: 2.2998
+  Ranking:
+    Precision@30: 0.9000
+    NDCG@30: 0.9036
+  ✓ Saved: step3_unseen_drug_10_results.json
+
+================================================================================
+Step 3 Unseen Drug: CrossAttention (Model 13)
+================================================================================
+  Training on seen drugs...
+    Epoch 25/100, Loss: 5.8917
+    Epoch 50/100, Loss: 3.8350
+    Epoch 75/100, Loss: 2.5109
+    Epoch 100/100, Loss: 2.2636
+  Predicting on unseen drugs...
+
+  Regression:
+    Spearman: 0.3695
+    RMSE: 2.2796
+  Ranking:
+    Precision@30: 0.9000
+    NDCG@30: 0.9020
+  ✓ Saved: step3_unseen_drug_13_results.json
+
+================================================================================
+Step 3 Unseen Drug: FT-Transformer (Model 12)
+================================================================================
+  Training on seen drugs...
+    Epoch 25/100, Loss: 5.8011
+    Epoch 50/100, Loss: 3.6894
+    Epoch 75/100, Loss: 2.2881
+    Epoch 100/100, Loss: 1.8220
+  Predicting on unseen drugs...
+
+  Regression:
+    Spearman: 0.3852
+    RMSE: 2.3490
+  Ranking:
+    Precision@30: 0.9333
+    NDCG@30: 0.8750
+  ✓ Saved: step3_unseen_drug_12_results.json
+
+================================================================================
+GPU 모델 완료!
+================================================================================

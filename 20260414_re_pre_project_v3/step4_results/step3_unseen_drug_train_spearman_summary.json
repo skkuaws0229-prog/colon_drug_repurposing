@@ -1,0 +1,59 @@
+{
+  "stage": "step3_unseen_drug",
+  "results": [
+    {
+      "model_id": 1,
+      "model_name": "LightGBM",
+      "train_spearman": 0.9788619204233295,
+      "test_spearman": 0.32430216486215013,
+      "gap": 0.6545597555611794,
+      "ratio": 0.33130532314700606,
+      "verdict": "SEVERE"
+    },
+    {
+      "model_id": 2,
+      "model_name": "DART",
+      "train_spearman": 0.9457953787796926,
+      "test_spearman": 0.3468725974116411,
+      "gap": 0.5989227813680514,
+      "ratio": 0.3667522650186678,
+      "verdict": "SEVERE"
+    },
+    {
+      "model_id": 4,
+      "model_name": "CatBoost",
+      "train_spearman": 0.962072165620523,
+      "test_spearman": 0.48134767953092633,
+      "gap": 0.48072448608959667,
+      "ratio": 0.5003238808187158,
+      "verdict": "SEVERE"
+    },
+    {
+      "model_id": 10,
+      "model_name": "FlatMLP",
+      "train_spearman": 0.860459822267672,
+      "test_spearman": 0.36655731058419205,
+      "gap": 0.49390251168348,
+      "ratio": 0.4260016575999563,
+      "verdict": "SEVERE"
+    },
+    {
+      "model_id": 12,
+      "model_name": "FT-Transformer",
+      "train_spearman": 0.8546386759179132,
+      "test_spearman": 0.38521398843108295,
+      "gap": 0.46942468748683025,
+      "ratio": 0.4507331569301483,
+      "verdict": "SEVERE"
+    },
+    {
+      "model_id": 13,
+      "model_name": "CrossAttention",
+      "train_spearman": 0.8607952556415007,
+      "test_spearman": 0.3694514139450003,
+      "gap": 0.4913438416965004,
+      "ratio": 0.4291977813814385,
+      "verdict": "SEVERE"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "model": "Stacking",
+  "oof_spearman": 0.862639529546476,
+  "oof_rmse": 1.1353243950498229,
+  "holdout_spearman": 0.872127963549762,
+  "holdout_rmse": 1.1314520866089781,
+  "ensemble_pass": true
+}

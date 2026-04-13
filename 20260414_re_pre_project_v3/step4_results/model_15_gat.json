@@ -1,0 +1,10 @@
+{
+  "model": "GAT (Drug-Split)",
+  "device": "mps",
+  "split_type": "drug-based",
+  "oof_spearman": 0.42565353330806516,
+  "oof_rmse": 2.438673422655253,
+  "holdout_spearman": NaN,
+  "holdout_rmse": 4.2492828369140625,
+  "ensemble_pass": false
+}

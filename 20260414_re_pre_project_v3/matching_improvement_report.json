@@ -1,0 +1,38 @@
+{
+  "개선_전": {
+    "usable_count": 147,
+    "usable_rate": 0.498,
+    "ab_grade_count": 139,
+    "ab_grade_rate": 0.471
+  },
+  "개선_방법": {
+    "chembl_rematch": 0,
+    "smiles_normalization": 0,
+    "total_improvement": 0
+  },
+  "개선_후_예상": {
+    "usable_count": 147,
+    "usable_rate": 0.498,
+    "ab_grade_count": 139,
+    "ab_grade_rate": 0.471
+  },
+  "문제_분석": {
+    "low_density_total": 96,
+    "low_density_grade_dist": {
+      "NA": 52,
+      "D": 18,
+      "A": 17,
+      "C": 6,
+      "B": 3
+    },
+    "all_zero_total": 52,
+    "d_grade_total": 95,
+    "d_grade_low_density": 18,
+    "d_grade_low_density_ratio": 0.189
+  },
+  "개선_불가능": {
+    "unmatched_drugs": 52,
+    "low_density_unfixable": 78,
+    "total_na_expected": 130
+  }
+}

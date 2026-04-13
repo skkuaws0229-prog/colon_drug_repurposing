@@ -1,0 +1,8 @@
+{
+  "model": "XGBoost",
+  "oof_spearman": 0.8331516229920711,
+  "oof_rmse": 1.2344283011847996,
+  "holdout_spearman": 0.873282669514427,
+  "holdout_rmse": 1.1462969667593343,
+  "ensemble_pass": true
+}

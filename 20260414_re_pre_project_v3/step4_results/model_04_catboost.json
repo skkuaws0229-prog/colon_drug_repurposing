@@ -1,0 +1,8 @@
+{
+  "model": "CatBoost",
+  "oof_spearman": 0.8624132562233484,
+  "oof_rmse": 1.1470506742304665,
+  "holdout_spearman": 0.8708910968042847,
+  "holdout_rmse": 1.1388341776110202,
+  "ensemble_pass": true
+}

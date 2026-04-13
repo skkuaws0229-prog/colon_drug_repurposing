@@ -1,0 +1,379 @@
+
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.4.4 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+Traceback (most recent call last):  File "/Users/skku_aws2_14/20260408_pre_project_biso_myprotocol/20260408_pre_project_biso_myprotocol/20260414_re_pre_project_v3/step4_results/extended_eval_step4_scaffold_gpu.py", line 12, in <module>
+    from rdkit import Chem
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/rdkit/Chem/__init__.py", line 15, in <module>
+    from rdkit import DataStructs, RDConfig, rdBase
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/rdkit/DataStructs/__init__.py", line 13, in <module>
+    from rdkit.DataStructs import cDataStructs
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/numpy/core/_multiarray_umath.py", line 46, in __getattr__
+    raise ImportError(msg)
+ImportError: 
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.4.4 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+
+
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.4.4 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+Traceback (most recent call last):  File "/Users/skku_aws2_14/20260408_pre_project_biso_myprotocol/20260408_pre_project_biso_myprotocol/20260414_re_pre_project_v3/step4_results/extended_eval_step4_scaffold_gpu.py", line 12, in <module>
+    from rdkit import Chem
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/rdkit/Chem/__init__.py", line 16, in <module>
+    from rdkit.Chem import rdchem
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/numpy/core/_multiarray_umath.py", line 46, in __getattr__
+    raise ImportError(msg)
+ImportError: 
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.4.4 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+
+
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.4.4 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+Traceback (most recent call last):  File "/Users/skku_aws2_14/20260408_pre_project_biso_myprotocol/20260408_pre_project_biso_myprotocol/20260414_re_pre_project_v3/step4_results/extended_eval_step4_scaffold_gpu.py", line 12, in <module>
+    from rdkit import Chem
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/rdkit/Chem/__init__.py", line 24, in <module>
+    from rdkit.Chem.rdmolops import *
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/numpy/core/_multiarray_umath.py", line 46, in __getattr__
+    raise ImportError(msg)
+ImportError: 
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.4.4 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+
+
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.4.4 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+Traceback (most recent call last):  File "/Users/skku_aws2_14/20260408_pre_project_biso_myprotocol/20260408_pre_project_biso_myprotocol/20260414_re_pre_project_v3/step4_results/extended_eval_step4_scaffold_gpu.py", line 13, in <module>
+    from rdkit.Chem.Scaffolds import MurckoScaffold
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/rdkit/Chem/Scaffolds/MurckoScaffold.py", line 10, in <module>
+    from rdkit.Chem import AllChem
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/rdkit/Chem/AllChem.py", line 22, in <module>
+    from rdkit.Chem.EnumerateStereoisomers import (EnumerateStereoisomers,
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/rdkit/Chem/EnumerateStereoisomers.py", line 4, in <module>
+    from rdkit.Chem.rdDistGeom import EmbedMolecule
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/numpy/core/_multiarray_umath.py", line 46, in __getattr__
+    raise ImportError(msg)
+ImportError: 
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.4.4 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+
+
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.4.4 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+Traceback (most recent call last):  File "/Users/skku_aws2_14/20260408_pre_project_biso_myprotocol/20260408_pre_project_biso_myprotocol/20260414_re_pre_project_v3/step4_results/extended_eval_step4_scaffold_gpu.py", line 13, in <module>
+    from rdkit.Chem.Scaffolds import MurckoScaffold
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/rdkit/Chem/Scaffolds/MurckoScaffold.py", line 10, in <module>
+    from rdkit.Chem import AllChem
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/rdkit/Chem/AllChem.py", line 25, in <module>
+    from rdkit.Chem.rdDepictor import *
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/numpy/core/_multiarray_umath.py", line 46, in __getattr__
+    raise ImportError(msg)
+ImportError: 
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.4.4 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+
+
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.4.4 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+Traceback (most recent call last):  File "/Users/skku_aws2_14/20260408_pre_project_biso_myprotocol/20260408_pre_project_biso_myprotocol/20260414_re_pre_project_v3/step4_results/extended_eval_step4_scaffold_gpu.py", line 13, in <module>
+    from rdkit.Chem.Scaffolds import MurckoScaffold
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/rdkit/Chem/Scaffolds/MurckoScaffold.py", line 10, in <module>
+    from rdkit.Chem import AllChem
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/rdkit/Chem/AllChem.py", line 27, in <module>
+    from rdkit.Chem.rdFingerprintGenerator import *
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/numpy/core/_multiarray_umath.py", line 46, in __getattr__
+    raise ImportError(msg)
+ImportError: 
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.4.4 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+
+
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.4.4 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+Traceback (most recent call last):  File "/Users/skku_aws2_14/20260408_pre_project_biso_myprotocol/20260408_pre_project_biso_myprotocol/20260414_re_pre_project_v3/step4_results/extended_eval_step4_scaffold_gpu.py", line 13, in <module>
+    from rdkit.Chem.Scaffolds import MurckoScaffold
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/rdkit/Chem/Scaffolds/MurckoScaffold.py", line 10, in <module>
+    from rdkit.Chem import AllChem
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/rdkit/Chem/AllChem.py", line 29, in <module>
+    from rdkit.Chem.rdMolAlign import *
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/numpy/core/_multiarray_umath.py", line 46, in __getattr__
+    raise ImportError(msg)
+ImportError: 
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.4.4 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+
+
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.4.4 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+Traceback (most recent call last):  File "/Users/skku_aws2_14/20260408_pre_project_biso_myprotocol/20260408_pre_project_biso_myprotocol/20260414_re_pre_project_v3/step4_results/extended_eval_step4_scaffold_gpu.py", line 13, in <module>
+    from rdkit.Chem.Scaffolds import MurckoScaffold
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/rdkit/Chem/Scaffolds/MurckoScaffold.py", line 10, in <module>
+    from rdkit.Chem import AllChem
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/rdkit/Chem/AllChem.py", line 32, in <module>
+    from rdkit.Chem.rdMolTransforms import *
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/numpy/core/_multiarray_umath.py", line 46, in __getattr__
+    raise ImportError(msg)
+ImportError: 
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.4.4 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+
+
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.4.4 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+Traceback (most recent call last):  File "/Users/skku_aws2_14/20260408_pre_project_biso_myprotocol/20260408_pre_project_biso_myprotocol/20260414_re_pre_project_v3/step4_results/extended_eval_step4_scaffold_gpu.py", line 13, in <module>
+    from rdkit.Chem.Scaffolds import MurckoScaffold
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/rdkit/Chem/Scaffolds/MurckoScaffold.py", line 10, in <module>
+    from rdkit.Chem import AllChem
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/rdkit/Chem/AllChem.py", line 35, in <module>
+    from rdkit.Chem.rdReducedGraphs import *
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/numpy/core/_multiarray_umath.py", line 46, in __getattr__
+    raise ImportError(msg)
+ImportError: 
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.4.4 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+
+
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.4.4 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+Traceback (most recent call last):  File "/Users/skku_aws2_14/20260408_pre_project_biso_myprotocol/20260408_pre_project_biso_myprotocol/20260414_re_pre_project_v3/step4_results/extended_eval_step4_scaffold_gpu.py", line 13, in <module>
+    from rdkit.Chem.Scaffolds import MurckoScaffold
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/rdkit/Chem/Scaffolds/MurckoScaffold.py", line 10, in <module>
+    from rdkit.Chem import AllChem
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/rdkit/Chem/AllChem.py", line 36, in <module>
+    from rdkit.Chem.rdShapeHelpers import *
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/numpy/core/_multiarray_umath.py", line 46, in __getattr__
+    raise ImportError(msg)
+ImportError: 
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.4.4 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+
+================================================================================
+Step 4: Scaffold Split (GPU)
+================================================================================
+Device: mps
+
+Generating Murcko scaffolds...
+Total samples: 6366
+Unique scaffolds: 220
+
+Data Split:
+  Test scaffolds: 44 (20.0%)
+  Train samples: 5046
+  Test samples: 1320
+
+================================================================================
+GPU 모델 실행 중...
+================================================================================
+
+================================================================================
+Step 4 Scaffold Split: FlatMLP (Model 10)
+================================================================================
+  Training on seen scaffolds...
+    Epoch 25/100, Loss: 5.7674
+    Epoch 50/100, Loss: 3.8838
+    Epoch 75/100, Loss: 2.5612
+    Epoch 100/100, Loss: 1.9569
+  Predicting on unseen scaffolds...
+
+  Spearman: 0.5186
+  RMSE: 2.4500
+  MAE: 1.8191
+  ✓ Saved: step4_scaffold_10_results.json
+
+================================================================================
+Step 4 Scaffold Split: CrossAttention (Model 13)
+================================================================================
+  Training on seen scaffolds...
+    Epoch 25/100, Loss: 6.1028
+    Epoch 50/100, Loss: 4.3352
+    Epoch 75/100, Loss: 2.7898
+    Epoch 100/100, Loss: 2.3172
+  Predicting on unseen scaffolds...
+
+  Spearman: 0.5181
+  RMSE: 2.4508
+  MAE: 1.8056
+  ✓ Saved: step4_scaffold_13_results.json
+
+================================================================================
+Step 4 Scaffold Split: FT-Transformer (Model 12)
+================================================================================
+  Training on seen scaffolds...
+    Epoch 25/100, Loss: 5.6112
+    Epoch 50/100, Loss: 4.2766
+    Epoch 75/100, Loss: 2.4122
+    Epoch 100/100, Loss: 1.8235
+  Predicting on unseen scaffolds...
+
+  Spearman: 0.4522
+  RMSE: 2.6735
+  MAE: 1.9874
+  ✓ Saved: step4_scaffold_12_results.json
+
+================================================================================
+Step 4 Scaffold Split: GraphSAGE (Model 14)
+================================================================================
+  Training on seen scaffolds...
+    Epoch 25/100, Loss: 6.0574
+    Epoch 50/100, Loss: 4.2966
+    Epoch 75/100, Loss: 2.9223
+    Epoch 100/100, Loss: 2.0862
+  Predicting on unseen scaffolds...
+
+  Spearman: 0.4905
+  RMSE: 2.4075
+  MAE: 1.7965
+  ✓ Saved: step4_scaffold_14_results.json
+
+================================================================================
+GPU 모델 완료!
+================================================================================

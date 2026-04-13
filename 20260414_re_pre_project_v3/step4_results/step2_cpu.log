@@ -1,0 +1,109 @@
+/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+================================================================================
+2단계: GroupKFold (by canonical_drug_id) 평가
+================================================================================
+
+데이터 로드:
+  Features: (6366, 5529)
+  Labels: (6366,)
+  유니크 약물 수: 243
+
+
+================================================================================
+CPU 모델 실행 중...
+================================================================================
+
+================================================================================
+2단계 GroupKFold: CatBoost (Model 04)
+================================================================================
+
+Fold 1/5:
+  Sp: 0.5630, RMSE: 2.4616, MAE: 1.8763
+
+Fold 2/5:
+  Sp: 0.4323, RMSE: 3.1020, MAE: 2.2531
+
+Fold 3/5:
+  Sp: 0.4078, RMSE: 2.2724, MAE: 1.7185
+
+Fold 4/5:
+  Sp: 0.5086, RMSE: 1.7956, MAE: 1.4307
+
+Fold 5/5:
+  Sp: 0.5427, RMSE: 1.8965, MAE: 1.5014
+
+전체 GroupKFold 성능:
+  Spearman: 0.4933 ± 0.0609
+  Random 5CV 대비 하락: nan
+✓ 저장 완료: step2_groupkfold_04_results.json
+
+================================================================================
+2단계 GroupKFold: LightGBM (Model 01)
+================================================================================
+
+Fold 1/5:
+  Sp: 0.6241, RMSE: 2.3667, MAE: 1.8714
+
+Fold 2/5:
+  Sp: 0.4365, RMSE: 3.0693, MAE: 2.1952
+
+Fold 3/5:
+  Sp: 0.4750, RMSE: 2.0051, MAE: 1.5598
+
+Fold 4/5:
+  Sp: 0.5233, RMSE: 1.9415, MAE: 1.4726
+
+Fold 5/5:
+  Sp: 0.5035, RMSE: 1.9334, MAE: 1.4902
+
+전체 GroupKFold 성능:
+  Spearman: 0.5153 ± 0.0630
+  Random 5CV 대비 하락: nan
+✓ 저장 완료: step2_groupkfold_01_results.json
+
+================================================================================
+2단계 GroupKFold: LightGBM-DART (Model 02)
+================================================================================
+
+Fold 1/5:
+  Sp: 0.6110, RMSE: 2.4069, MAE: 1.9303
+
+Fold 2/5:
+  Sp: 0.4416, RMSE: 3.0103, MAE: 2.1927
+
+Fold 3/5:
+  Sp: 0.4890, RMSE: 1.9611, MAE: 1.5368
+
+Fold 4/5:
+  Sp: 0.5151, RMSE: 1.9703, MAE: 1.5333
+
+Fold 5/5:
+  Sp: 0.4087, RMSE: 2.0923, MAE: 1.6243
+
+전체 GroupKFold 성능:
+  Spearman: 0.4974 ± 0.0696
+  Random 5CV 대비 하락: 0.3441
+✓ 저장 완료: step2_groupkfold_02_results.json
+
+================================================================================
+CPU 모델 완료!
+================================================================================

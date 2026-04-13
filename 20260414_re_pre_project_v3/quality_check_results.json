@@ -1,0 +1,48 @@
+{
+  "validation_date": "2026-04-13",
+  "total_drugs": 295,
+  "summary": {
+    "smiles_보유": 243,
+    "rdkit_파싱_성공": 243,
+    "raw_parse_success_rate": 0.824,
+    "final_usable_rate": 0.498,
+    "bit_density_low_flag": 96,
+    "mw_outlier": 0,
+    "ab_grade_ratio": 0.471,
+    "scaffold_success": 243
+  },
+  "qc_결과": {
+    "final_usable_rate_95pct": "FAIL (49.8%)",
+    "ab_grade_60pct": "FAIL (47.1%)",
+    "no_conflicts": "PASS"
+  },
+  "주요_문제": {
+    "1": "Bit density < 2% 플래그: 96개 약물 (정보량 부족)",
+    "2": "Final usable SMILES rate: 49.8% (목표 95% 미달)",
+    "3": "A+B 등급 비율: 47.1% (목표 60% 미달)"
+  },
+  "등급_분포": {
+    "A_chembl": 130,
+    "B_drugbank_name": 9,
+    "C_drugbank_synonym_fuzzy": 9,
+    "D_pubchem_api": 95,
+    "NA_unmatched": 52
+  },
+  "fingerprint_품질": {
+    "morgan_bits": 2048,
+    "bit_density_평균": 0.0222,
+    "bit_density_중앙값": 0.0254,
+    "bit_density_p5": 0.0,
+    "bit_density_p95": 0.0399,
+    "all_zero_fingerprint": 52,
+    "low_density_count": 96
+  },
+  "최종_판정": {
+    "na_drugs_count": 52,
+    "na_drugs_treatment": "모델 입력에서 제외 (features_cleaned.parquet)",
+    "low_density_not_na_count": 44,
+    "low_density_treatment": "structural_limitation 태그 + 유지",
+    "features_cleaned_rows": 6366,
+    "removed_rows": 1364
+  }
+}

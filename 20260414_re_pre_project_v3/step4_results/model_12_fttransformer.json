@@ -1,0 +1,9 @@
+{
+  "model": "FT-Transformer (SimpleMLP)",
+  "device": "mps",
+  "oof_spearman": 0.8377313837102199,
+  "oof_rmse": 1.2945682009467534,
+  "holdout_spearman": 0.8543213623310214,
+  "holdout_rmse": 1.2723108530044556,
+  "ensemble_pass": true
+}

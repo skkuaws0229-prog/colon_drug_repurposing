@@ -1,0 +1,27 @@
+{
+  "model": "CatBoost",
+  "model_id": 4,
+  "stage": "step4_scaffold_split",
+  "data_split": {
+    "total_drugs": 243,
+    "test_drugs": 48,
+    "train_samples": 5133,
+    "test_samples": 1233
+  },
+  "metrics": {
+    "spearman": 0.4474905996809722,
+    "rmse": 2.192883117786559,
+    "mae": 1.6998595098691351,
+    "median_ae": 1.3012798266645782,
+    "p95_error": 4.4322958893842985,
+    "kendall": 0.3099003591704321,
+    "pearson": 0.4557860378418206,
+    "r2": 0.17513388783261463
+  },
+  "random_5cv_spearman": 0.8624,
+  "drop_from_random": 0.41490940031902784,
+  "train_spearman": 0.9593304045797608,
+  "overfitting_gap": 0.5118398048987887,
+  "test_train_ratio": 0.46646139593271574,
+  "overfitting_verdict": "SEVERE"
+}
