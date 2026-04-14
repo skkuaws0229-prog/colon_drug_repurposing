@@ -1,0 +1,120 @@
+{
+  "survival_results": [
+    {
+      "drug_idx": 75,
+      "p_value": 0.04662825283078248,
+      "p_value_bonferroni": 0.6994237924617372,
+      "hr": 0.43271732219392595,
+      "ci_95_lower": 0.32056487668586187,
+      "ci_95_upper": 0.584107288554174,
+      "c_index": 0.5636088680791067,
+      "significant": true,
+      "bonferroni_significant": false
+    },
+    {
+      "drug_idx": 209,
+      "p_value": 0.010065410133408927,
+      "p_value_bonferroni": 0.1509811520011339,
+      "hr": 0.6254986751384576,
+      "ci_95_lower": 0.463380815554844,
+      "ci_95_upper": 0.8443348957627681,
+      "c_index": 0.6555198353165432,
+      "significant": true,
+      "bonferroni_significant": false
+    },
+    {
+      "drug_idx": 85,
+      "p_value": 0.04998187231655204,
+      "p_value_bonferroni": 0.7497280847482806,
+      "hr": 1.904346699157256,
+      "ci_95_lower": 1.410774733230781,
+      "ci_95_upper": 2.5705991645357114,
+      "c_index": 0.6280701631620401,
+      "significant": true,
+      "bonferroni_significant": false
+    },
+    {
+      "drug_idx": 240,
+      "p_value": 0.04071817203703984,
+      "p_value_bonferroni": 0.6107725805555976,
+      "hr": 0.49189536403067663,
+      "ci_95_lower": 0.36440504834279175,
+      "ci_95_upper": 0.6639892895426132,
+      "c_index": 0.6171407558766918,
+      "significant": true,
+      "bonferroni_significant": false
+    },
+    {
+      "drug_idx": 109,
+      "p_value": 0.09049659220936046,
+      "p_value_bonferroni": 1.3574488831404068,
+      "hr": 1.5514557167689347,
+      "ci_95_lower": 1.1493466635632414,
+      "ci_95_upper": 2.0942461638446876,
+      "c_index": 0.6984648676145022,
+      "significant": false,
+      "bonferroni_significant": false
+    },
+    {
+      "drug_idx": 176,
+      "p_value": 0.0324552783515794,
+      "p_value_bonferroni": 0.486829175273691,
+      "hr": 1.0318539184126376,
+      "ci_95_lower": 0.7644161838419087,
+      "ci_95_upper": 1.3928570999011094,
+      "c_index": 0.6459387820628024,
+      "significant": true,
+      "bonferroni_significant": false
+    },
+    {
+      "drug_idx": 32,
+      "p_value": 0.379141536238641,
+      "p_value_bonferroni": 5.687123043579615,
+      "hr": 0.6649810005668692,
+      "ci_95_lower": 0.49263004162709645,
+      "ci_95_upper": 0.8976304604858915,
+      "c_index": 0.5208129454243448,
+      "significant": false,
+      "bonferroni_significant": false
+    },
+    {
+      "drug_idx": 105,
+      "p_value": 0.3805961447333386,
+      "p_value_bonferroni": 5.7089421710000785,
+      "hr": 1.4077616912815307,
+      "ci_95_lower": 1.0428955112790694,
+      "ci_95_upper": 1.9002795179444645,
+      "c_index": 0.5209456631726338,
+      "significant": false,
+      "bonferroni_significant": false
+    },
+    {
+      "drug_idx": 44,
+      "p_value": 0.08057607234077965,
+      "p_value_bonferroni": 1.2086410851116949,
+      "hr": 1.1701456672732846,
+      "ci_95_lower": 0.8668652311678162,
+      "ci_95_upper": 1.5795314351157426,
+      "c_index": 0.5323933445462417,
+      "significant": false,
+      "bonferroni_significant": false
+    },
+    {
+      "drug_idx": 76,
+      "p_value": 0.04533463307396843,
+      "p_value_bonferroni": 0.6800194961095264,
+      "hr": 1.1146826081445989,
+      "ci_95_lower": 0.8257771863905383,
+      "ci_95_upper": 1.5046641362557773,
+      "c_index": 0.6017823506024633,
+      "significant": true,
+      "bonferroni_significant": false
+    }
+  ],
+  "summary": {
+    "total_drugs": 15,
+    "analyzed_drugs": 10,
+    "significant_drugs": 6,
+    "bonferroni_significant": 0
+  }
+}

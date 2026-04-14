@@ -1,0 +1,16 @@
+drug_idx,canonical_id,drug_name,target,pathway,category,fda_approval,clinical_trials,source
+75,1239,YK-4-279,RNA helicase A,Unknown,Other Cancer Approved/Clinical,Approved,35,Ensemble A
+209,2109,AZ6102,"TNKS1, TNKS2",Unknown,Other Cancer Approved/Clinical,Approved,26,Ensemble A
+85,1441,AZD2014,"mTORC1, mTORC2",Unknown,New Candidate,Not Approved,3,Ensemble A
+240,1502,Bicalutamide,AR,Unknown,New Candidate,Not Approved,48,Ensemble A
+109,1593,Entinostat,"HDAC1, HDAC3",Unknown,BRCA Current Use,Approved,47,Ensemble A
+176,1922,Cediranib,"VEGFR, FLT1, FLT2, FLT3, FLT4, KIT, PDGFRB",Unknown,BRCA Current Use,Approved,29,Ensemble A
+32,1047,Nutlin-3a (-),MDM2,Unknown,New Candidate,Not Approved,19,Ensemble A
+105,1580,GSK2801,,Unknown,New Candidate,Not Approved,0,Ensemble A
+44,1061,SB590885,BRAF,Unknown,Other Cancer Approved/Clinical,Approved,26,Ensemble A
+76,1249,BMS-345541,"IKK-1, IKK-2",Unknown,Other Cancer Approved/Clinical,Approved,9,Ensemble A
+87,1463,AZD1332,"NTRK1, NTRK2, NTRK3",Unknown,New Candidate,Not Approved,32,Ensemble A
+117,1620,PFI3,"Polybromo 1, SMARCA4, SMARCA2",Unknown,Other Cancer Approved/Clinical,Approved,14,Ensemble A
+219,2170,AT13148,AKT1,Unknown,Other Cancer Approved/Clinical,Approved,3,Ensemble A
+1,1004,Vinblastine,Microtubule destabiliser,Unknown,BRCA Current Use,Approved,24,Ensemble A
+124,1629,ML323,"USP1, UAF1",Unknown,BRCA Current Use,Approved,3,Ensemble A

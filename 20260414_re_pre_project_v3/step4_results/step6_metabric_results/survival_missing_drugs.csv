@@ -1,0 +1,6 @@
+drug_idx,drug_name,target,reason_for_exclusion,can_be_analyzed
+1,Vinblastine,Microtubule destabiliser,Target gene has zero variance,True
+117,PFI3,"Polybromo 1, SMARCA4, SMARCA2",Target gene not in METABRIC expression data,True
+87,AZD1332,"NTRK1, NTRK2, NTRK3",Target gene ID mapping failed,False
+219,AT13148,AKT1,Missing survival data for patients,False
+124,ML323,"USP1, UAF1",Target gene has zero variance,True

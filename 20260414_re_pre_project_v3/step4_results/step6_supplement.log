@@ -1,0 +1,86 @@
+================================================================================
+Step 6 보완 분석
+================================================================================
+✓ Drug mapping loaded: 243 drugs
+✓ GDSC annotations loaded: 295 drugs
+✓ Drug targets loaded: 485 records
+✓ Drug features loaded: 295 drugs
+
+================================================================================
+1. Top 15 약물명 매핑
+================================================================================
+
+[CatBoost Top 15]
+ drug_idx     drug_name                                     target                       category fda_approval
+       75      YK-4-279                             RNA helicase A Other Cancer Approved/Clinical     Approved
+      209        AZ6102                               TNKS1, TNKS2 Other Cancer Approved/Clinical     Approved
+       85       AZD2014                             mTORC1, mTORC2                  New Candidate Not Approved
+      240  Bicalutamide                                         AR                  New Candidate Not Approved
+       32 Nutlin-3a (-)                                       MDM2                  New Candidate Not Approved
+      109    Entinostat                               HDAC1, HDAC3               BRCA Current Use     Approved
+      176     Cediranib VEGFR, FLT1, FLT2, FLT3, FLT4, KIT, PDGFRB               BRCA Current Use     Approved
+      105       GSK2801                                       <NA>                  New Candidate Not Approved
+       44      SB590885                                       BRAF Other Cancer Approved/Clinical     Approved
+      117          PFI3              Polybromo 1, SMARCA4, SMARCA2 Other Cancer Approved/Clinical     Approved
+       87       AZD1332                        NTRK1, NTRK2, NTRK3                  New Candidate Not Approved
+       76    BMS-345541                               IKK-1, IKK-2 Other Cancer Approved/Clinical     Approved
+       33         Mirin                                      MRE11                        Unknown      Unknown
+      161          OF-1                              BRPF1B, BRPF2                        Unknown      Unknown
+      201       MK-8776                         CHEK1, CHEK2, CDK2                        Unknown      Unknown
+
+[Ensemble A Top 15]
+ drug_idx     drug_name                                     target                       category fda_approval
+       75      YK-4-279                             RNA helicase A Other Cancer Approved/Clinical     Approved
+      209        AZ6102                               TNKS1, TNKS2 Other Cancer Approved/Clinical     Approved
+       85       AZD2014                             mTORC1, mTORC2                  New Candidate Not Approved
+      240  Bicalutamide                                         AR                  New Candidate Not Approved
+      109    Entinostat                               HDAC1, HDAC3               BRCA Current Use     Approved
+      176     Cediranib VEGFR, FLT1, FLT2, FLT3, FLT4, KIT, PDGFRB               BRCA Current Use     Approved
+       32 Nutlin-3a (-)                                       MDM2                  New Candidate Not Approved
+      105       GSK2801                                       <NA>                  New Candidate Not Approved
+       44      SB590885                                       BRAF Other Cancer Approved/Clinical     Approved
+       76    BMS-345541                               IKK-1, IKK-2 Other Cancer Approved/Clinical     Approved
+       87       AZD1332                        NTRK1, NTRK2, NTRK3                  New Candidate Not Approved
+      117          PFI3              Polybromo 1, SMARCA4, SMARCA2 Other Cancer Approved/Clinical     Approved
+      219       AT13148                                       AKT1 Other Cancer Approved/Clinical     Approved
+        1   Vinblastine                   Microtubule destabiliser               BRCA Current Use     Approved
+      124         ML323                                 USP1, UAF1               BRCA Current Use     Approved
+
+✓ Saved detailed Top 15 CSVs
+
+================================================================================
+2. v1 Top 3 약물 검증
+================================================================================
+        v1_drug_name  found_in_gdsc  canonical_id  drug_idx  in_v3_catboost  in_v3_ensemble catboost_rank ensemble_rank
+Sepantronium bromide           True          1941       189           False           False          None          None
+        Camptothecin           True          1003         0           False           False          None          None
+       Staurosporine           True          1034        26           False           False          None          None
+
+✓ Saved v1_v3_comparison.csv
+
+================================================================================
+3. 카테고리 3 (신약 후보) 상세 분석
+================================================================================
+카테고리 3 약물: 5개
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/pandas/core/indexes/base.py", line 3812, in get_loc
+    return self._engine.get_loc(casted_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "pandas/_libs/index.pyx", line 167, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 196, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7096, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'canonical_drug_id'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/skku_aws2_14/20260408_pre_project_biso_myprotocol/20260408_pre_project_biso_myprotocol/20260414_re_pre_project_v3/step4_results/step6_supplement_analysis.py", line 217, in <module>
+    if canonical_id is not None and canonical_id in drug_features['canonical_drug_id'].values:
+                                                    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/pandas/core/frame.py", line 4113, in __getitem__
+    indexer = self.columns.get_loc(key)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/pandas/core/indexes/base.py", line 3819, in get_loc
+    raise KeyError(key) from err
+KeyError: 'canonical_drug_id'

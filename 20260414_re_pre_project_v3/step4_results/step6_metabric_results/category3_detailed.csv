@@ -1,0 +1,6 @@
+drug_idx,drug_name,target,pathway,canonical_id,molecular_weight,structure_available,pubmed_papers,patent_family
+85,AZD2014,"mTORC1, mTORC2",Unknown,1441,474,True,48,8
+240,Bicalutamide,AR,Unknown,1502,525,True,31,6
+32,Nutlin-3a (-),MDM2,Unknown,1047,269,True,47,4
+105,GSK2801,,Unknown,1580,261,True,17,5
+87,AZD1332,"NTRK1, NTRK2, NTRK3",Unknown,1463,392,True,184,5

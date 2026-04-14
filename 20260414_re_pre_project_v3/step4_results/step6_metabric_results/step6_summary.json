@@ -1,0 +1,33 @@
+{
+  "metabric_patients": 1980,
+  "gdsc_drugs": 243,
+  "method_a": {
+    "top15_overlap": 12,
+    "spearman": 0.993847232048921,
+    "ndcg_15": 0.7955645652709467
+  },
+  "method_b": {
+    "total_drugs": 15,
+    "analyzed_drugs": 10,
+    "significant_drugs": 6,
+    "bonferroni_significant": 0
+  },
+  "method_c": {
+    "precision_20": 0.670206703888894,
+    "precision_15": 0.7802508655625054,
+    "ndcg_15": 0.8243838606746845,
+    "known_brca_recall": 0.5596973608433965
+  },
+  "distribution_shift": {
+    "ks_test": {
+      "statistic": 0.26696853044645535,
+      "p_value": 0.005343398911355022
+    },
+    "pca_separation": 2.8489290854431415
+  },
+  "drug_categories": {
+    "BRCA Current Use": 4,
+    "New Candidate": 5,
+    "Other Cancer Approved/Clinical": 6
+  }
+}

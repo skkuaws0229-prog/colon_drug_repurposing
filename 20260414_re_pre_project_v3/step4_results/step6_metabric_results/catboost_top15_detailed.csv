@@ -1,0 +1,16 @@
+drug_idx,canonical_id,drug_name,target,pathway,category,fda_approval,clinical_trials,source
+75,1239,YK-4-279,RNA helicase A,Unknown,Other Cancer Approved/Clinical,Approved,35,CatBoost
+209,2109,AZ6102,"TNKS1, TNKS2",Unknown,Other Cancer Approved/Clinical,Approved,26,CatBoost
+85,1441,AZD2014,"mTORC1, mTORC2",Unknown,New Candidate,Not Approved,3,CatBoost
+240,1502,Bicalutamide,AR,Unknown,New Candidate,Not Approved,48,CatBoost
+32,1047,Nutlin-3a (-),MDM2,Unknown,New Candidate,Not Approved,19,CatBoost
+109,1593,Entinostat,"HDAC1, HDAC3",Unknown,BRCA Current Use,Approved,47,CatBoost
+176,1922,Cediranib,"VEGFR, FLT1, FLT2, FLT3, FLT4, KIT, PDGFRB",Unknown,BRCA Current Use,Approved,29,CatBoost
+105,1580,GSK2801,,Unknown,New Candidate,Not Approved,0,CatBoost
+44,1061,SB590885,BRAF,Unknown,Other Cancer Approved/Clinical,Approved,26,CatBoost
+117,1620,PFI3,"Polybromo 1, SMARCA4, SMARCA2",Unknown,Other Cancer Approved/Clinical,Approved,14,CatBoost
+87,1463,AZD1332,"NTRK1, NTRK2, NTRK3",Unknown,New Candidate,Not Approved,32,CatBoost
+76,1249,BMS-345541,"IKK-1, IKK-2",Unknown,Other Cancer Approved/Clinical,Approved,9,CatBoost
+33,1048,Mirin,MRE11,Unknown,Unknown,Unknown,0,CatBoost
+161,1853,OF-1,"BRPF1B, BRPF2",Unknown,Unknown,Unknown,0,CatBoost
+201,2046,MK-8776,"CHEK1, CHEK2, CDK2",Unknown,Unknown,Unknown,0,CatBoost

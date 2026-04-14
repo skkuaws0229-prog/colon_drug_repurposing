@@ -1,0 +1,4 @@
+v1_drug_name,found_in_gdsc,canonical_id,drug_idx,in_v3_catboost,in_v3_ensemble,catboost_rank,ensemble_rank
+Sepantronium bromide,True,1941,189,False,False,,
+Camptothecin,True,1003,0,False,False,,
+Staurosporine,True,1034,26,False,False,,
