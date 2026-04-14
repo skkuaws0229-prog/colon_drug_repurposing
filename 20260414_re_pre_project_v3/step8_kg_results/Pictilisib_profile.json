@@ -1,0 +1,108 @@
+{
+  "drug_name": "Pictilisib",
+  "basic_info": {
+    "status": "success",
+    "data": {
+      "molecular_formula": "C23H27N7O3S2",
+      "inchikey": "LHNIIDJUOCFXAP-UHFFFAOYSA-N",
+      "inchi": "InChI=1S/C23H27N7O3S2/c1-35(31,32)30-7-5-28(6-8-30)15-16-13-20-21(34-16)23(29-9-11-33-12-10-29)26-22(25-20)17-3-2-4-19-18(17)14-24-27-19/h2-4,13-14H,5-12,15H2,1H3,(H,24,27)",
+      "gdsc_id": 1058,
+      "smiles": "CS(=O)(=O)N1CCN(CC2=CC3=C(S2)C(=NC(=N3)C2=C3C=NNC3=CC=C2)N2CCOCC2)CC1",
+      "drug_type": "small molecule",
+      "name": "Pictilisib",
+      "drugbank_id": "DB11663",
+      "molecular_weight": "513.636"
+    },
+    "source": "neo4j",
+    "timestamp": "2026-04-14T08:34:45.538683+00:00"
+  },
+  "targets": {
+    "status": "success",
+    "data": [],
+    "source": "neo4j",
+    "timestamp": "2026-04-14T08:34:45.644914+00:00"
+  },
+  "side_effects": {
+    "status": "success",
+    "data": [],
+    "source": "neo4j",
+    "timestamp": "2026-04-14T08:34:45.750398+00:00"
+  },
+  "trials": {
+    "status": "success",
+    "data": [],
+    "source": "neo4j",
+    "timestamp": "2026-04-14T08:34:45.857664+00:00"
+  },
+  "pathways": {
+    "status": "success",
+    "data": [],
+    "source": "neo4j",
+    "timestamp": "2026-04-14T08:34:45.964584+00:00"
+  },
+  "pubmed": {
+    "status": "success",
+    "data": [
+      {
+        "pmid": "29604436",
+        "title": "Investigational chemotherapy and novel pharmacokinetic mechanisms for the treatment of breast cancer brain metastases.",
+        "authors": [
+          "Shah N",
+          "Mohammad AS",
+          "Saralkar P",
+          "Sprowls SA",
+          "Vickers SD"
+        ],
+        "journal": "Pharmacological research",
+        "pub_date": "2018 Jun"
+      },
+      {
+        "pmid": "36419719",
+        "title": "Combined Docetaxel/Pictilisib-Loaded mPEGylated Nanocarriers with Dual HER2 Targeting Antibodies for Synergistic Chemotherapy of Breast Cancer.",
+        "authors": [
+          "Cheng WJ",
+          "Lin SY",
+          "Chuang KH",
+          "Chen M",
+          "Ho HO"
+        ],
+        "journal": "International journal of nanomedicine",
+        "pub_date": "2022"
+      },
+      {
+        "pmid": "31787861",
+        "title": "(11)C-Labeled Pictilisib (GDC-0941) as a Molecular Tracer Targeting Phosphatidylinositol 3-Kinase (PI3K) for Breast Cancer Imaging.",
+        "authors": [
+          "Han N",
+          "Jiang Y",
+          "Gai Y",
+          "Liu Q",
+          "Yuan L"
+        ],
+        "journal": "Contrast media & molecular imaging",
+        "pub_date": "2019"
+      },
+      {
+        "pmid": "33707948",
+        "title": "Role of Alpelisib in the Treatment of PIK3CA-Mutated Breast Cancer: Patient Selection and Clinical Perspectives.",
+        "authors": [
+          "Chang DY",
+          "Ma WL",
+          "Lu YS"
+        ],
+        "journal": "Therapeutics and clinical risk management",
+        "pub_date": "2021"
+      },
+      {
+        "pmid": "25656903",
+        "title": "Pictilisib stalls advanced ER+/PR+ breast cancer.",
+        "authors": [],
+        "journal": "Cancer discovery",
+        "pub_date": "2015 Feb"
+      }
+    ],
+    "source": "pubmed",
+    "timestamp": "2026-04-14T08:34:47.481104+00:00"
+  },
+  "errors": []
+}

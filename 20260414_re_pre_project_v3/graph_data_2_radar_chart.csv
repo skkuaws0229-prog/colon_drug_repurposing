@@ -1,0 +1,6 @@
+﻿약물명,Repurposing_Rank,IC50_score,Survival_score,Tanimoto_score,Target_score,Clinical_score
+AZD2014,6,0.2009,0.95,0.17,0.0333,0.5
+Dactinomycin,7,0.9079,0.0,0.0,0.0333,0.5
+Temsirolimus,9,0.7441,0.0,0.0,0.0333,0.5
+Teniposide,12,0.5431,0.0,0.0,0.0,0.5
+SL0101,15,0.5676,0.0,0.0,0.0,0.0

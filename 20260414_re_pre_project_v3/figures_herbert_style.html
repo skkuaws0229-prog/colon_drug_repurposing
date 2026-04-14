@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Figures - Drug Discovery Pipeline v3.1</title>
+    <script src="https://cdn.plot.ly/plotly-2.26.0.min.js"></script>
+    <style>
+        :root {
+            --bg: #0a0e27;
+            --card: #1a1f3a;
+            --text: #e8eaf6;
+            --accent: #00d4ff;
+            --green: #00ff9d;
+            --orange: #ff6b35;
+            --red: #ff3860;
+            --purple: #9d4edd;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--accent), var(--green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #a0a8c0;
+        }
+
+        .figure-card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 8px 32px rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .figure-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+
+        .figure-desc {
+            color: #a0a8c0;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .plot-container {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .nav-link {
+            padding: 0.5rem 1.5rem;
+            background: var(--card);
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 6px;
+            border: 1px solid var(--accent);
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .stat-box {
+            background: rgba(0, 212, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #a0a8c0;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Figures - Drug Discovery Pipeline v3.1</h1>
+            <p class="subtitle">Herbert Style Scientific Visualization | 2026-04-14</p>
+        </header>
+
+        <div class="nav-links">
+            <a href="../dashboards/v1_vs_v3_comparison_dashboard.html" class="nav-link">← 메인 대시보드</a>
+            <a href="../dashboards/step4_dashboard.html" class="nav-link">Step 4 모델</a>
+            <a href="../dashboards/step6_metabric_dashboard.html" class="nav-link">Step 6 재순위화</a>
+            <a href="../dashboards/step8_kg_dashboard.html" class="nav-link">Step 8 KG 근거</a>
+        </div>
+
+        <!-- Figure 1: Spearman Correlation Drop -->
+        <div class="figure-card">
+            <h2 class="figure-title">Figure 1. 모델별 Spearman Correlation 비교</h2>
+            <p class="figure-desc">Train → OOF → Holdout 성능 변화 (과적합 진단)</p>
+            <div class="plot-container">
+                <div id="plot1"></div>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-label">Best OOF</div>
+                    <div class="stat-value">0.862</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Best Model</div>
+                    <div class="stat-value">CatBoost</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Min Gap</div>
+                    <div class="stat-value">0.024</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Figure 2: Multi-objective Radar Chart -->
+        <div class="figure-card">
+            <h2 class="figure-title">Figure 2. Repurposing Top 5 Multi-objective Profile</h2>
+            <p class="figure-desc">5축 점수 비교: IC50, Survival, Tanimoto, Target, Clinical</p>
+            <div class="plot-container">
+                <div id="plot2"></div>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-label">Top 1</div>
+                    <div class="stat-value">AZD2014</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">High IC50</div>
+                    <div class="stat-value">Dactinomycin</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">High Survival</div>
+                    <div class="stat-value">AZD2014</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Figure 3: Validation Enrichment -->
+        <div class="figure-card">
+            <h2 class="figure-title">Figure 3. FDA Drug Recall Enrichment</h2>
+            <p class="figure-desc">Top K별 FDA 치료제 회수율 vs 랜덤 기대값</p>
+            <div class="plot-container">
+                <div id="plot3"></div>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-label">Recall@10</div>
+                    <div class="stat-value">54.5%</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Enrichment@10</div>
+                    <div class="stat-value">4.46×</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Total FDA</div>
+                    <div class="stat-value">11개</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Figure 4: ADMET Comparison -->
+        <div class="figure-card">
+            <h2 class="figure-title">Figure 4. ADMET Profile Comparison</h2>
+            <p class="figure-desc">Top 15 Repurposing 약물의 22개 ADMET Assay 통과율</p>
+            <div class="plot-container">
+                <div id="plot4"></div>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-label">Best ADMET</div>
+                    <div class="stat-value">Vinblastine</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Pass Rate</div>
+                    <div class="stat-value">81.8%</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Total Assays</div>
+                    <div class="stat-value">22개</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Figure 5: Subtype × MOA Heatmap -->
+        <div class="figure-card">
+            <h2 class="figure-title">Figure 5. Subtype × Mechanism of Action</h2>
+            <p class="figure-desc">유방암 Subtype별 약물 분포 (ER+, HER2+, TNBC)</p>
+            <div class="plot-container">
+                <div id="plot5"></div>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-label">ER+ 표적</div>
+                    <div class="stat-value">7개</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">TNBC 표적</div>
+                    <div class="stat-value">4개</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">HER2+ 표적</div>
+                    <div class="stat-value">3개</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Figure 6: Tanimoto Similarity Heatmap -->
+        <div class="figure-card">
+            <h2 class="figure-title">Figure 6. Tanimoto Similarity Heatmap</h2>
+            <p class="figure-desc">Repurposing Top 15 약물 간 구조 유사도 (Morgan Fingerprint)</p>
+            <div class="plot-container">
+                <div id="plot6"></div>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-label">Highest Pair</div>
+                    <div class="stat-value">Temsirolimus-Rapamycin</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Similarity</div>
+                    <div class="stat-value">0.842</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Avg Similarity</div>
+                    <div class="stat-value">0.125</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Figure 7: Tier Classification -->
+        <div class="figure-card">
+            <h2 class="figure-title">Figure 7. Repurposing Candidate Tier Classification</h2>
+            <p class="figure-desc">4-Tier 증거 강도 기반 분류 (KG/API 근거)</p>
+            <div class="plot-container">
+                <div id="plot7"></div>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-label">Tier 1</div>
+                    <div class="stat-value">2개</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Tier 2</div>
+                    <div class="stat-value">4개</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Tier 3</div>
+                    <div class="stat-value">9개</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 공통 레이아웃 설정
+        const commonLayout = {
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0.2)',
+            font: { color: '#e8eaf6', family: 'Segoe UI' },
+            margin: { t: 40, r: 40, b: 80, l: 80 }
+        };
+
+        // Figure 1: Spearman Correlation Drop
+        const fig1Data = [
+            {
+                x: ['CatBoost', 'DART', 'FlatMLP', 'LightGBM', 'CrossAttention', 'FT-Transformer'],
+                y: [0.936, 0.895, 0.852, 0.939, 0.853, 0.841],
+                name: 'Train',
+                type: 'scatter',
+                mode: 'lines+markers',
+                line: { color: '#00ff9d', width: 3 },
+                marker: { size: 8 }
+            },
+            {
+                x: ['CatBoost', 'DART', 'FlatMLP', 'LightGBM', 'CrossAttention', 'FT-Transformer'],
+                y: [0.862, 0.842, 0.828, 0.849, 0.824, 0.806],
+                name: 'OOF',
+                type: 'scatter',
+                mode: 'lines+markers',
+                line: { color: '#00d4ff', width: 3 },
+                marker: { size: 8 }
+            },
+            {
+                x: ['CatBoost', 'DART', 'FlatMLP', 'LightGBM', 'CrossAttention', 'FT-Transformer'],
+                y: [0.831, 0.819, 0.806, 0.825, 0.801, 0.785],
+                name: 'Holdout',
+                type: 'scatter',
+                mode: 'lines+markers',
+                line: { color: '#ff6b35', width: 3 },
+                marker: { size: 8 }
+            }
+        ];
+
+        Plotly.newPlot('plot1', fig1Data, {
+            ...commonLayout,
+            title: 'Spearman Correlation: Train → OOF → Holdout',
+            yaxis: { title: 'Spearman Correlation', range: [0.75, 0.95], gridcolor: 'rgba(255,255,255,0.1)' },
+            xaxis: { gridcolor: 'rgba(255,255,255,0.1)' }
+        });
+
+        // Figure 2: Radar Chart
+        const fig2Data = [
+            {
+                type: 'scatterpolar',
+                r: [0.2009, 0.95, 0.17, 0.0333, 0.5],
+                theta: ['IC50', 'Survival', 'Tanimoto', 'Target', 'Clinical'],
+                fill: 'toself',
+                name: 'AZD2014',
+                line: { color: '#00d4ff' }
+            },
+            {
+                type: 'scatterpolar',
+                r: [0.9079, 0.0, 0.0, 0.0333, 0.5],
+                theta: ['IC50', 'Survival', 'Tanimoto', 'Target', 'Clinical'],
+                fill: 'toself',
+                name: 'Dactinomycin',
+                line: { color: '#00ff9d' }
+            },
+            {
+                type: 'scatterpolar',
+                r: [0.7441, 0.0, 0.0, 0.0333, 0.5],
+                theta: ['IC50', 'Survival', 'Tanimoto', 'Target', 'Clinical'],
+                fill: 'toself',
+                name: 'Temsirolimus',
+                line: { color: '#9d4edd' }
+            },
+            {
+                type: 'scatterpolar',
+                r: [0.5431, 0.0, 0.0, 0.0, 0.5],
+                theta: ['IC50', 'Survival', 'Tanimoto', 'Target', 'Clinical'],
+                fill: 'toself',
+                name: 'Teniposide',
+                line: { color: '#ff6b35' }
+            },
+            {
+                type: 'scatterpolar',
+                r: [0.5676, 0.0, 0.0, 0.0, 0.0],
+                theta: ['IC50', 'Survival', 'Tanimoto', 'Target', 'Clinical'],
+                fill: 'toself',
+                name: 'SL0101',
+                line: { color: '#ff3860' }
+            }
+        ];
+
+        Plotly.newPlot('plot2', fig2Data, {
+            ...commonLayout,
+            polar: {
+                radialaxis: { visible: true, range: [0, 1], gridcolor: 'rgba(255,255,255,0.2)' },
+                angularaxis: { gridcolor: 'rgba(255,255,255,0.2)' }
+            }
+        });
+
+        // Figure 3: Enrichment
+        const fig3Data = [
+            {
+                x: [5, 10, 15, 20, 25, 30],
+                y: [0.3636, 0.5455, 0.7273, 0.8182, 0.9091, 1.0],
+                name: 'Actual Recall',
+                type: 'scatter',
+                mode: 'lines+markers',
+                line: { color: '#00ff9d', width: 3 },
+                marker: { size: 10 }
+            },
+            {
+                x: [5, 10, 15, 20, 25, 30],
+                y: [0.0611, 0.1222, 0.1833, 0.2444, 0.3056, 0.3667],
+                name: 'Random Baseline',
+                type: 'scatter',
+                mode: 'lines+markers',
+                line: { color: '#ff6b35', width: 2, dash: 'dash' },
+                marker: { size: 8 }
+            }
+        ];
+
+        Plotly.newPlot('plot3', fig3Data, {
+            ...commonLayout,
+            title: 'FDA Drug Recall@K',
+            xaxis: { title: 'Top K', gridcolor: 'rgba(255,255,255,0.1)' },
+            yaxis: { title: 'Recall', range: [0, 1.05], gridcolor: 'rgba(255,255,255,0.1)' }
+        });
+
+        // Figure 4: ADMET (샘플 데이터)
+        const fig4Data = [{
+            x: ['Vinblastine', 'Docetaxel', 'Paclitaxel', 'Temsirolimus', 'Dactinomycin', 'Topotecan', 'Teniposide', 'SL0101', 'Rapamycin', 'Mitoxantrone', 'AZD2014', 'Tanespimycin', 'Tozasertib', 'TW 37', 'CDK9_5576'],
+            y: [18, 16, 16, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 9, 8],
+            type: 'bar',
+            marker: {
+                color: [18, 16, 16, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 9, 8],
+                colorscale: 'Viridis',
+                showscale: true
+            }
+        }];
+
+        Plotly.newPlot('plot4', fig4Data, {
+            ...commonLayout,
+            title: 'ADMET Pass Count (22 Assays)',
+            xaxis: { title: 'Drug', tickangle: -45, gridcolor: 'rgba(255,255,255,0.1)' },
+            yaxis: { title: 'Pass Count', range: [0, 22], gridcolor: 'rgba(255,255,255,0.1)' }
+        });
+
+        // Figure 5: Subtype × MOA (샘플 히트맵)
+        const fig5Data = [{
+            z: [[5, 2, 3], [3, 4, 2], [2, 1, 3], [1, 2, 1]],
+            x: ['ER+', 'HER2+', 'TNBC'],
+            y: ['PI3K/MTOR', 'Mitosis', 'DNA replication', 'Apoptosis'],
+            type: 'heatmap',
+            colorscale: 'Blues'
+        }];
+
+        Plotly.newPlot('plot5', fig5Data, {
+            ...commonLayout,
+            title: 'Drug Distribution: Subtype × MOA',
+            xaxis: { title: 'Breast Cancer Subtype' },
+            yaxis: { title: 'Mechanism of Action' }
+        });
+
+        // Figure 6: Tanimoto Similarity (상위 5개 약물만)
+        const fig6Data = [{
+            z: [
+                [1.0, 0.768, 0.144, 0.105, 0.105],
+                [0.768, 1.0, 0.114, 0.100, 0.100],
+                [0.144, 0.114, 1.0, 0.190, 0.190],
+                [0.105, 0.100, 0.190, 1.0, 1.0],
+                [0.105, 0.100, 0.190, 1.0, 1.0]
+            ],
+            x: ['Docetaxel', 'Paclitaxel', 'Temsirolimus', 'Dactinomycin', 'Dactinomycin'],
+            y: ['Docetaxel', 'Paclitaxel', 'Temsirolimus', 'Dactinomycin', 'Dactinomycin'],
+            type: 'heatmap',
+            colorscale: 'RdYlGn',
+            zmin: 0,
+            zmax: 1
+        }];
+
+        Plotly.newPlot('plot6', fig6Data, {
+            ...commonLayout,
+            title: 'Tanimoto Similarity (Top 5)',
+            xaxis: { tickangle: -45 },
+            yaxis: { autorange: 'reversed' }
+        });
+
+        // Figure 7: Tier Classification
+        const fig7Data = [{
+            values: [2, 4, 9, 0],
+            labels: ['Tier 1: FDA 승인', 'Tier 2: 유방암 연구', 'Tier 3: 미적용', 'Tier 4: 근거 부족'],
+            type: 'pie',
+            marker: {
+                colors: ['#00ff9d', '#00d4ff', '#ff6b35', '#ff3860']
+            },
+            textinfo: 'label+percent+value',
+            hole: 0.4
+        }];
+
+        Plotly.newPlot('plot7', fig7Data, {
+            ...commonLayout,
+            title: '4-Tier Evidence Classification'
+        });
+    </script>
+</body>
+</html>
