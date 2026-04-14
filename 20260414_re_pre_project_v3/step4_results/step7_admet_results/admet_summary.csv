@@ -1,0 +1,16 @@
+rank,drug_name,drug_id,target,category,fda_approval,safety_score,combined_score,n_assays_tested,n_pass,n_caution,flags
+1,Entinostat,1593,"HDAC1, HDAC3",BRCA Current Use,Approved,12.0,17.5,1,1,0,None
+2,AZD2014,1441,"mTORC1, mTORC2",New Candidate,Not Approved,10.0,16.5,2,2,0,None
+3,BMS-345541,1249,"IKK-1, IKK-2",Other Cancer Approved/Clinical,Approved,12.0,15.0,1,1,0,None
+4,YK-4-279,1239,RNA helicase A,Other Cancer Approved/Clinical,Approved,7.0,14.5,0,0,0,None
+5,AZ6102,2109,"TNKS1, TNKS2",Other Cancer Approved/Clinical,Approved,7.0,14.0,0,0,0,None
+6,Bicalutamide,1502,AR,New Candidate,Not Approved,6.5,12.5,4,3,1,DILI (Drug-Induced Liver Injury)(+)
+7,Cediranib,1922,"VEGFR, FLT1, FLT2, FLT3, FLT4, KIT, PDGFRB",BRCA Current Use,Approved,7.0,12.0,0,0,0,None
+8,SB590885,1061,BRAF,Other Cancer Approved/Clinical,Approved,7.0,10.5,0,0,0,None
+9,Nutlin-3a (-),1047,MDM2,New Candidate,Not Approved,5.0,9.5,0,0,0,None
+10,GSK2801,1580,,New Candidate,Not Approved,5.0,9.0,0,0,0,None
+11,PFI3,1620,"Polybromo 1, SMARCA4, SMARCA2",Other Cancer Approved/Clinical,Approved,7.0,9.0,0,0,0,None
+12,Vinblastine,1004,Microtubule destabiliser,BRCA Current Use,Approved,7.83,8.83,12,7,1,None
+13,AT13148,2170,AKT1,Other Cancer Approved/Clinical,Approved,7.0,8.5,0,0,0,None
+14,AZD1332,1463,"NTRK1, NTRK2, NTRK3",New Candidate,Not Approved,5.0,7.5,0,0,0,None
+15,ML323,1629,"USP1, UAF1",BRCA Current Use,Approved,7.0,7.5,0,0,0,None

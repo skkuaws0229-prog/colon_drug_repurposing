@@ -1,0 +1,331 @@
+drug_name,drug_id,assay_name,assay_category,assay_full_name,value,status,match_type,similarity
+Entinostat,1593,caco2_wang,Absorption,Caco-2 Permeability,,no_data,no_match,0.2808988764044944
+Entinostat,1593,hia_hou,Absorption,HIA (Human Intestinal Absorption),,no_data,no_match,0.30303030303030304
+Entinostat,1593,pgp_broccatelli,Absorption,P-gp Inhibitor,,no_data,no_match,0.4
+Entinostat,1593,bioavailability_ma,Absorption,Oral Bioavailability (F>20%),,no_data,no_match,0.30303030303030304
+Entinostat,1593,bbb_martins,Distribution,BBB Penetration,,no_data,no_match,0.375
+Entinostat,1593,ppbr_az,Distribution,Plasma Protein Binding Rate,,no_data,no_match,0.328125
+Entinostat,1593,vdss_lombardo,Distribution,Volume of Distribution,,no_data,no_match,0.30303030303030304
+Entinostat,1593,cyp2c9_veith,Metabolism,CYP2C9 Inhibitor,,no_data,no_match,0.4
+Entinostat,1593,cyp2d6_veith,Metabolism,CYP2D6 Inhibitor,,no_data,no_match,0.4
+Entinostat,1593,cyp3a4_veith,Metabolism,CYP3A4 Inhibitor,,no_data,no_match,0.4
+Entinostat,1593,cyp2c9_substrate_carbonmangels,Metabolism,CYP2C9 Substrate,,no_data,no_match,0.2808988764044944
+Entinostat,1593,cyp2d6_substrate_carbonmangels,Metabolism,CYP2D6 Substrate,,no_data,no_match,0.2808988764044944
+Entinostat,1593,cyp3a4_substrate_carbonmangels,Metabolism,CYP3A4 Substrate,,no_data,no_match,0.2808988764044944
+Entinostat,1593,clearance_hepatocyte_az,Excretion,Hepatocyte Clearance,,no_data,no_match,0.35294117647058826
+Entinostat,1593,clearance_microsome_az,Excretion,Microsome Clearance,,no_data,no_match,0.35294117647058826
+Entinostat,1593,half_life_obach,Excretion,Half-Life,,no_data,no_match,0.3
+Entinostat,1593,ames,Toxicity,Ames Mutagenicity,,no_data,no_match,0.359375
+Entinostat,1593,dili,Toxicity,DILI (Drug-Induced Liver Injury),,no_data,no_match,0.359375
+Entinostat,1593,herg,Toxicity,hERG Cardiotoxicity,,no_data,no_match,0.31645569620253167
+Entinostat,1593,ld50_zhu,Toxicity,Acute Toxicity (LD50),,no_data,no_match,0.46153846153846156
+Entinostat,1593,lipophilicity_astrazeneca,Properties,Lipophilicity (logD),1.26,measured,exact,1.0
+Entinostat,1593,solubility_aqsoldb,Properties,Aqueous Solubility,,no_data,no_match,0.3684210526315789
+AZD2014,1441,caco2_wang,Absorption,Caco-2 Permeability,,no_data,no_match,0.2604166666666667
+AZD2014,1441,hia_hou,Absorption,HIA (Human Intestinal Absorption),,no_data,no_match,0.21333333333333335
+AZD2014,1441,pgp_broccatelli,Absorption,P-gp Inhibitor,,no_data,no_match,0.2375
+AZD2014,1441,bioavailability_ma,Absorption,Oral Bioavailability (F>20%),,no_data,no_match,0.2235294117647059
+AZD2014,1441,bbb_martins,Distribution,BBB Penetration,,no_data,no_match,0.24285714285714285
+AZD2014,1441,ppbr_az,Distribution,Plasma Protein Binding Rate,,no_data,no_match,0.27586206896551724
+AZD2014,1441,vdss_lombardo,Distribution,Volume of Distribution,,no_data,no_match,0.23863636363636365
+AZD2014,1441,cyp2c9_veith,Metabolism,CYP2C9 Inhibitor,,no_data,no_match,0.30666666666666664
+AZD2014,1441,cyp2d6_veith,Metabolism,CYP2D6 Inhibitor,,no_data,no_match,0.30666666666666664
+AZD2014,1441,cyp3a4_veith,Metabolism,CYP3A4 Inhibitor,,no_data,no_match,0.30666666666666664
+AZD2014,1441,cyp2c9_substrate_carbonmangels,Metabolism,CYP2C9 Substrate,,no_data,no_match,0.225
+AZD2014,1441,cyp2d6_substrate_carbonmangels,Metabolism,CYP2D6 Substrate,,no_data,no_match,0.225
+AZD2014,1441,cyp3a4_substrate_carbonmangels,Metabolism,CYP3A4 Substrate,,no_data,no_match,0.225
+AZD2014,1441,clearance_hepatocyte_az,Excretion,Hepatocyte Clearance,10.0,measured,analog,0.8
+AZD2014,1441,clearance_microsome_az,Excretion,Microsome Clearance,,no_data,no_match,0.3411764705882353
+AZD2014,1441,half_life_obach,Excretion,Half-Life,,no_data,no_match,0.22826086956521738
+AZD2014,1441,ames,Toxicity,Ames Mutagenicity,,no_data,no_match,0.2711864406779661
+AZD2014,1441,dili,Toxicity,DILI (Drug-Induced Liver Injury),,no_data,no_match,0.21
+AZD2014,1441,herg,Toxicity,hERG Cardiotoxicity,,no_data,no_match,0.22826086956521738
+AZD2014,1441,ld50_zhu,Toxicity,Acute Toxicity (LD50),,no_data,no_match,0.265625
+AZD2014,1441,lipophilicity_astrazeneca,Properties,Lipophilicity (logD),2.49,measured,analog,0.8
+AZD2014,1441,solubility_aqsoldb,Properties,Aqueous Solubility,,no_data,no_match,0.2235294117647059
+BMS-345541,1249,caco2_wang,Absorption,Caco-2 Permeability,,no_data,no_match,0.2
+BMS-345541,1249,hia_hou,Absorption,HIA (Human Intestinal Absorption),,no_data,no_match,0.2033898305084746
+BMS-345541,1249,pgp_broccatelli,Absorption,P-gp Inhibitor,,no_data,no_match,0.22077922077922077
+BMS-345541,1249,bioavailability_ma,Absorption,Oral Bioavailability (F>20%),,no_data,no_match,0.21875
+BMS-345541,1249,bbb_martins,Distribution,BBB Penetration,,no_data,no_match,0.22058823529411764
+BMS-345541,1249,ppbr_az,Distribution,Plasma Protein Binding Rate,,no_data,no_match,0.2361111111111111
+BMS-345541,1249,vdss_lombardo,Distribution,Volume of Distribution,,no_data,no_match,0.3064516129032258
+BMS-345541,1249,cyp2c9_veith,Metabolism,CYP2C9 Inhibitor,,no_data,no_match,0.38095238095238093
+BMS-345541,1249,cyp2d6_veith,Metabolism,CYP2D6 Inhibitor,,no_data,no_match,0.38095238095238093
+BMS-345541,1249,cyp3a4_veith,Metabolism,CYP3A4 Inhibitor,,no_data,no_match,0.38095238095238093
+BMS-345541,1249,cyp2c9_substrate_carbonmangels,Metabolism,CYP2C9 Substrate,,no_data,no_match,0.22058823529411764
+BMS-345541,1249,cyp2d6_substrate_carbonmangels,Metabolism,CYP2D6 Substrate,,no_data,no_match,0.22058823529411764
+BMS-345541,1249,cyp3a4_substrate_carbonmangels,Metabolism,CYP3A4 Substrate,,no_data,no_match,0.22058823529411764
+BMS-345541,1249,clearance_hepatocyte_az,Excretion,Hepatocyte Clearance,,no_data,no_match,0.2261904761904762
+BMS-345541,1249,clearance_microsome_az,Excretion,Microsome Clearance,,no_data,no_match,0.2261904761904762
+BMS-345541,1249,half_life_obach,Excretion,Half-Life,,no_data,no_match,0.2077922077922078
+BMS-345541,1249,ames,Toxicity,Ames Mutagenicity,,no_data,no_match,0.28846153846153844
+BMS-345541,1249,dili,Toxicity,DILI (Drug-Induced Liver Injury),,no_data,no_match,0.18309859154929578
+BMS-345541,1249,herg,Toxicity,hERG Cardiotoxicity,,no_data,no_match,0.18309859154929578
+BMS-345541,1249,ld50_zhu,Toxicity,Acute Toxicity (LD50),,no_data,no_match,0.3448275862068966
+BMS-345541,1249,lipophilicity_astrazeneca,Properties,Lipophilicity (logD),0.88,measured,exact,1.0
+BMS-345541,1249,solubility_aqsoldb,Properties,Aqueous Solubility,,no_data,no_match,0.2878787878787879
+YK-4-279,1239,caco2_wang,Absorption,Caco-2 Permeability,,no_data,no_match,0.26865671641791045
+YK-4-279,1239,hia_hou,Absorption,HIA (Human Intestinal Absorption),,no_data,no_match,0.25
+YK-4-279,1239,pgp_broccatelli,Absorption,P-gp Inhibitor,,no_data,no_match,0.3333333333333333
+YK-4-279,1239,bioavailability_ma,Absorption,Oral Bioavailability (F>20%),,no_data,no_match,0.26865671641791045
+YK-4-279,1239,bbb_martins,Distribution,BBB Penetration,,no_data,no_match,0.3137254901960784
+YK-4-279,1239,ppbr_az,Distribution,Plasma Protein Binding Rate,,no_data,no_match,0.273972602739726
+YK-4-279,1239,vdss_lombardo,Distribution,Volume of Distribution,,no_data,no_match,0.2647058823529412
+YK-4-279,1239,cyp2c9_veith,Metabolism,CYP2C9 Inhibitor,,no_data,no_match,0.3448275862068966
+YK-4-279,1239,cyp2d6_veith,Metabolism,CYP2D6 Inhibitor,,no_data,no_match,0.3448275862068966
+YK-4-279,1239,cyp3a4_veith,Metabolism,CYP3A4 Inhibitor,,no_data,no_match,0.36065573770491804
+YK-4-279,1239,cyp2c9_substrate_carbonmangels,Metabolism,CYP2C9 Substrate,,no_data,no_match,0.26865671641791045
+YK-4-279,1239,cyp2d6_substrate_carbonmangels,Metabolism,CYP2D6 Substrate,,no_data,no_match,0.26865671641791045
+YK-4-279,1239,cyp3a4_substrate_carbonmangels,Metabolism,CYP3A4 Substrate,,no_data,no_match,0.26865671641791045
+YK-4-279,1239,clearance_hepatocyte_az,Excretion,Hepatocyte Clearance,,no_data,no_match,0.2777777777777778
+YK-4-279,1239,clearance_microsome_az,Excretion,Microsome Clearance,,no_data,no_match,0.273972602739726
+YK-4-279,1239,half_life_obach,Excretion,Half-Life,,no_data,no_match,0.26865671641791045
+YK-4-279,1239,ames,Toxicity,Ames Mutagenicity,,no_data,no_match,0.35714285714285715
+YK-4-279,1239,dili,Toxicity,DILI (Drug-Induced Liver Injury),,no_data,no_match,0.27692307692307694
+YK-4-279,1239,herg,Toxicity,hERG Cardiotoxicity,,no_data,no_match,0.2647058823529412
+YK-4-279,1239,ld50_zhu,Toxicity,Acute Toxicity (LD50),,no_data,no_match,0.36363636363636365
+YK-4-279,1239,lipophilicity_astrazeneca,Properties,Lipophilicity (logD),,no_data,no_match,0.3584905660377358
+YK-4-279,1239,solubility_aqsoldb,Properties,Aqueous Solubility,,no_data,no_match,0.40425531914893614
+AZ6102,2109,caco2_wang,Absorption,Caco-2 Permeability,,no_data,no_match,0.21505376344086022
+AZ6102,2109,hia_hou,Absorption,HIA (Human Intestinal Absorption),,no_data,no_match,0.2222222222222222
+AZ6102,2109,pgp_broccatelli,Absorption,P-gp Inhibitor,,no_data,no_match,0.2289156626506024
+AZ6102,2109,bioavailability_ma,Absorption,Oral Bioavailability (F>20%),,no_data,no_match,0.2222222222222222
+AZ6102,2109,bbb_martins,Distribution,BBB Penetration,,no_data,no_match,0.22972972972972974
+AZ6102,2109,ppbr_az,Distribution,Plasma Protein Binding Rate,,no_data,no_match,0.3484848484848485
+AZ6102,2109,vdss_lombardo,Distribution,Volume of Distribution,,no_data,no_match,0.25842696629213485
+AZ6102,2109,cyp2c9_veith,Metabolism,CYP2C9 Inhibitor,,no_data,no_match,0.2571428571428571
+AZ6102,2109,cyp2d6_veith,Metabolism,CYP2D6 Inhibitor,,no_data,no_match,0.2571428571428571
+AZ6102,2109,cyp3a4_veith,Metabolism,CYP3A4 Inhibitor,,no_data,no_match,0.2571428571428571
+AZ6102,2109,cyp2c9_substrate_carbonmangels,Metabolism,CYP2C9 Substrate,,no_data,no_match,0.24390243902439024
+AZ6102,2109,cyp2d6_substrate_carbonmangels,Metabolism,CYP2D6 Substrate,,no_data,no_match,0.24390243902439024
+AZ6102,2109,cyp3a4_substrate_carbonmangels,Metabolism,CYP3A4 Substrate,,no_data,no_match,0.24390243902439024
+AZ6102,2109,clearance_hepatocyte_az,Excretion,Hepatocyte Clearance,,no_data,no_match,0.22105263157894736
+AZ6102,2109,clearance_microsome_az,Excretion,Microsome Clearance,,no_data,no_match,0.25
+AZ6102,2109,half_life_obach,Excretion,Half-Life,,no_data,no_match,0.24390243902439024
+AZ6102,2109,ames,Toxicity,Ames Mutagenicity,,no_data,no_match,0.2608695652173913
+AZ6102,2109,dili,Toxicity,DILI (Drug-Induced Liver Injury),,no_data,no_match,0.20253164556962025
+AZ6102,2109,herg,Toxicity,hERG Cardiotoxicity,,no_data,no_match,0.18421052631578946
+AZ6102,2109,ld50_zhu,Toxicity,Acute Toxicity (LD50),,no_data,no_match,0.24390243902439024
+AZ6102,2109,lipophilicity_astrazeneca,Properties,Lipophilicity (logD),,no_data,no_match,0.3484848484848485
+AZ6102,2109,solubility_aqsoldb,Properties,Aqueous Solubility,,no_data,no_match,0.2571428571428571
+Bicalutamide,1502,caco2_wang,Absorption,Caco-2 Permeability,-4.6599998,measured,exact,1.0
+Bicalutamide,1502,hia_hou,Absorption,HIA (Human Intestinal Absorption),1.0,pass,exact,1.0
+Bicalutamide,1502,pgp_broccatelli,Absorption,P-gp Inhibitor,,no_data,no_match,0.2112676056338028
+Bicalutamide,1502,bioavailability_ma,Absorption,Oral Bioavailability (F>20%),,no_data,no_match,0.20689655172413793
+Bicalutamide,1502,bbb_martins,Distribution,BBB Penetration,,no_data,no_match,0.32075471698113206
+Bicalutamide,1502,ppbr_az,Distribution,Plasma Protein Binding Rate,,no_data,no_match,0.3484848484848485
+Bicalutamide,1502,vdss_lombardo,Distribution,Volume of Distribution,,no_data,no_match,0.2878787878787879
+Bicalutamide,1502,cyp2c9_veith,Metabolism,CYP2C9 Inhibitor,,no_data,no_match,0.5
+Bicalutamide,1502,cyp2d6_veith,Metabolism,CYP2D6 Inhibitor,,no_data,no_match,0.5245901639344263
+Bicalutamide,1502,cyp3a4_veith,Metabolism,CYP3A4 Inhibitor,,no_data,no_match,0.5245901639344263
+Bicalutamide,1502,cyp2c9_substrate_carbonmangels,Metabolism,CYP2C9 Substrate,,no_data,no_match,0.3384615384615385
+Bicalutamide,1502,cyp2d6_substrate_carbonmangels,Metabolism,CYP2D6 Substrate,,no_data,no_match,0.3384615384615385
+Bicalutamide,1502,cyp3a4_substrate_carbonmangels,Metabolism,CYP3A4 Substrate,,no_data,no_match,0.3384615384615385
+Bicalutamide,1502,clearance_hepatocyte_az,Excretion,Hepatocyte Clearance,,no_data,no_match,0.2857142857142857
+Bicalutamide,1502,clearance_microsome_az,Excretion,Microsome Clearance,,no_data,no_match,0.2857142857142857
+Bicalutamide,1502,half_life_obach,Excretion,Half-Life,,no_data,no_match,0.24675324675324675
+Bicalutamide,1502,ames,Toxicity,Ames Mutagenicity,,no_data,no_match,0.2807017543859649
+Bicalutamide,1502,dili,Toxicity,DILI (Drug-Induced Liver Injury),1.0,caution,exact,1.0
+Bicalutamide,1502,herg,Toxicity,hERG Cardiotoxicity,,no_data,no_match,0.2826086956521739
+Bicalutamide,1502,ld50_zhu,Toxicity,Acute Toxicity (LD50),,no_data,no_match,0.3384615384615385
+Bicalutamide,1502,lipophilicity_astrazeneca,Properties,Lipophilicity (logD),2.87,measured,exact,1.0
+Bicalutamide,1502,solubility_aqsoldb,Properties,Aqueous Solubility,,no_data,no_match,0.3148148148148148
+Cediranib,1922,caco2_wang,Absorption,Caco-2 Permeability,,no_data,no_match,0.43373493975903615
+Cediranib,1922,hia_hou,Absorption,HIA (Human Intestinal Absorption),,no_data,no_match,0.23
+Cediranib,1922,pgp_broccatelli,Absorption,P-gp Inhibitor,,no_data,no_match,0.28378378378378377
+Cediranib,1922,bioavailability_ma,Absorption,Oral Bioavailability (F>20%),,no_data,no_match,0.43373493975903615
+Cediranib,1922,bbb_martins,Distribution,BBB Penetration,,no_data,no_match,0.35365853658536583
+Cediranib,1922,ppbr_az,Distribution,Plasma Protein Binding Rate,,no_data,no_match,0.29896907216494845
+Cediranib,1922,vdss_lombardo,Distribution,Volume of Distribution,,no_data,no_match,0.32222222222222224
+Cediranib,1922,cyp2c9_veith,Metabolism,CYP2C9 Inhibitor,,no_data,no_match,0.3484848484848485
+Cediranib,1922,cyp2d6_veith,Metabolism,CYP2D6 Inhibitor,,no_data,no_match,0.3484848484848485
+Cediranib,1922,cyp3a4_veith,Metabolism,CYP3A4 Inhibitor,,no_data,no_match,0.3484848484848485
+Cediranib,1922,cyp2c9_substrate_carbonmangels,Metabolism,CYP2C9 Substrate,,no_data,no_match,0.31868131868131866
+Cediranib,1922,cyp2d6_substrate_carbonmangels,Metabolism,CYP2D6 Substrate,,no_data,no_match,0.31868131868131866
+Cediranib,1922,cyp3a4_substrate_carbonmangels,Metabolism,CYP3A4 Substrate,,no_data,no_match,0.31868131868131866
+Cediranib,1922,clearance_hepatocyte_az,Excretion,Hepatocyte Clearance,,no_data,no_match,0.29896907216494845
+Cediranib,1922,clearance_microsome_az,Excretion,Microsome Clearance,,no_data,no_match,0.2891566265060241
+Cediranib,1922,half_life_obach,Excretion,Half-Life,,no_data,no_match,0.43373493975903615
+Cediranib,1922,ames,Toxicity,Ames Mutagenicity,,no_data,no_match,0.2894736842105263
+Cediranib,1922,dili,Toxicity,DILI (Drug-Induced Liver Injury),,no_data,no_match,0.2236842105263158
+Cediranib,1922,herg,Toxicity,hERG Cardiotoxicity,,no_data,no_match,0.5121951219512195
+Cediranib,1922,ld50_zhu,Toxicity,Acute Toxicity (LD50),,no_data,no_match,0.3
+Cediranib,1922,lipophilicity_astrazeneca,Properties,Lipophilicity (logD),,no_data,no_match,0.5064935064935064
+Cediranib,1922,solubility_aqsoldb,Properties,Aqueous Solubility,,no_data,no_match,0.33707865168539325
+SB590885,1061,caco2_wang,Absorption,Caco-2 Permeability,,no_data,no_match,0.2716049382716049
+SB590885,1061,hia_hou,Absorption,HIA (Human Intestinal Absorption),,no_data,no_match,0.2702702702702703
+SB590885,1061,pgp_broccatelli,Absorption,P-gp Inhibitor,,no_data,no_match,0.3375
+SB590885,1061,bioavailability_ma,Absorption,Oral Bioavailability (F>20%),,no_data,no_match,0.2702702702702703
+SB590885,1061,bbb_martins,Distribution,BBB Penetration,,no_data,no_match,0.2702702702702703
+SB590885,1061,ppbr_az,Distribution,Plasma Protein Binding Rate,,no_data,no_match,0.2891566265060241
+SB590885,1061,vdss_lombardo,Distribution,Volume of Distribution,,no_data,no_match,0.23255813953488372
+SB590885,1061,cyp2c9_veith,Metabolism,CYP2C9 Inhibitor,,no_data,no_match,0.32
+SB590885,1061,cyp2d6_veith,Metabolism,CYP2D6 Inhibitor,,no_data,no_match,0.36231884057971014
+SB590885,1061,cyp3a4_veith,Metabolism,CYP3A4 Inhibitor,,no_data,no_match,0.36231884057971014
+SB590885,1061,cyp2c9_substrate_carbonmangels,Metabolism,CYP2C9 Substrate,,no_data,no_match,0.2702702702702703
+SB590885,1061,cyp2d6_substrate_carbonmangels,Metabolism,CYP2D6 Substrate,,no_data,no_match,0.2702702702702703
+SB590885,1061,cyp3a4_substrate_carbonmangels,Metabolism,CYP3A4 Substrate,,no_data,no_match,0.2702702702702703
+SB590885,1061,clearance_hepatocyte_az,Excretion,Hepatocyte Clearance,,no_data,no_match,0.25806451612903225
+SB590885,1061,clearance_microsome_az,Excretion,Microsome Clearance,,no_data,no_match,0.2839506172839506
+SB590885,1061,half_life_obach,Excretion,Half-Life,,no_data,no_match,0.2441860465116279
+SB590885,1061,ames,Toxicity,Ames Mutagenicity,,no_data,no_match,0.359375
+SB590885,1061,dili,Toxicity,DILI (Drug-Induced Liver Injury),,no_data,no_match,0.2716049382716049
+SB590885,1061,herg,Toxicity,hERG Cardiotoxicity,,no_data,no_match,0.2702702702702703
+SB590885,1061,ld50_zhu,Toxicity,Acute Toxicity (LD50),,no_data,no_match,0.2702702702702703
+SB590885,1061,lipophilicity_astrazeneca,Properties,Lipophilicity (logD),,no_data,no_match,0.3472222222222222
+SB590885,1061,solubility_aqsoldb,Properties,Aqueous Solubility,,no_data,no_match,0.2702702702702703
+Nutlin-3a (-),1047,caco2_wang,Absorption,Caco-2 Permeability,,no_data,no_match,0.23863636363636365
+Nutlin-3a (-),1047,hia_hou,Absorption,HIA (Human Intestinal Absorption),,no_data,no_match,0.23655913978494625
+Nutlin-3a (-),1047,pgp_broccatelli,Absorption,P-gp Inhibitor,,no_data,no_match,0.23863636363636365
+Nutlin-3a (-),1047,bioavailability_ma,Absorption,Oral Bioavailability (F>20%),,no_data,no_match,0.23863636363636365
+Nutlin-3a (-),1047,bbb_martins,Distribution,BBB Penetration,,no_data,no_match,0.35802469135802467
+Nutlin-3a (-),1047,ppbr_az,Distribution,Plasma Protein Binding Rate,,no_data,no_match,0.25510204081632654
+Nutlin-3a (-),1047,vdss_lombardo,Distribution,Volume of Distribution,,no_data,no_match,0.23595505617977527
+Nutlin-3a (-),1047,cyp2c9_veith,Metabolism,CYP2C9 Inhibitor,,no_data,no_match,0.2708333333333333
+Nutlin-3a (-),1047,cyp2d6_veith,Metabolism,CYP2D6 Inhibitor,,no_data,no_match,0.2708333333333333
+Nutlin-3a (-),1047,cyp3a4_veith,Metabolism,CYP3A4 Inhibitor,,no_data,no_match,0.2682926829268293
+Nutlin-3a (-),1047,cyp2c9_substrate_carbonmangels,Metabolism,CYP2C9 Substrate,,no_data,no_match,0.23863636363636365
+Nutlin-3a (-),1047,cyp2d6_substrate_carbonmangels,Metabolism,CYP2D6 Substrate,,no_data,no_match,0.23863636363636365
+Nutlin-3a (-),1047,cyp3a4_substrate_carbonmangels,Metabolism,CYP3A4 Substrate,,no_data,no_match,0.23863636363636365
+Nutlin-3a (-),1047,clearance_hepatocyte_az,Excretion,Hepatocyte Clearance,,no_data,no_match,0.25510204081632654
+Nutlin-3a (-),1047,clearance_microsome_az,Excretion,Microsome Clearance,,no_data,no_match,0.25510204081632654
+Nutlin-3a (-),1047,half_life_obach,Excretion,Half-Life,,no_data,no_match,0.23863636363636365
+Nutlin-3a (-),1047,ames,Toxicity,Ames Mutagenicity,,no_data,no_match,0.2441860465116279
+Nutlin-3a (-),1047,dili,Toxicity,DILI (Drug-Induced Liver Injury),,no_data,no_match,0.25882352941176473
+Nutlin-3a (-),1047,herg,Toxicity,hERG Cardiotoxicity,,no_data,no_match,0.23655913978494625
+Nutlin-3a (-),1047,ld50_zhu,Toxicity,Acute Toxicity (LD50),,no_data,no_match,0.26582278481012656
+Nutlin-3a (-),1047,lipophilicity_astrazeneca,Properties,Lipophilicity (logD),,no_data,no_match,0.3058823529411765
+Nutlin-3a (-),1047,solubility_aqsoldb,Properties,Aqueous Solubility,,no_data,no_match,0.2714285714285714
+GSK2801,1580,caco2_wang,Absorption,Caco-2 Permeability,,no_data,no_match,0.30434782608695654
+GSK2801,1580,hia_hou,Absorption,HIA (Human Intestinal Absorption),,no_data,no_match,0.26153846153846155
+GSK2801,1580,pgp_broccatelli,Absorption,P-gp Inhibitor,,no_data,no_match,0.25806451612903225
+GSK2801,1580,bioavailability_ma,Absorption,Oral Bioavailability (F>20%),,no_data,no_match,0.24
+GSK2801,1580,bbb_martins,Distribution,BBB Penetration,,no_data,no_match,0.25
+GSK2801,1580,ppbr_az,Distribution,Plasma Protein Binding Rate,,no_data,no_match,0.26582278481012656
+GSK2801,1580,vdss_lombardo,Distribution,Volume of Distribution,,no_data,no_match,0.23376623376623376
+GSK2801,1580,cyp2c9_veith,Metabolism,CYP2C9 Inhibitor,,no_data,no_match,0.29577464788732394
+GSK2801,1580,cyp2d6_veith,Metabolism,CYP2D6 Inhibitor,,no_data,no_match,0.28125
+GSK2801,1580,cyp3a4_veith,Metabolism,CYP3A4 Inhibitor,,no_data,no_match,0.29577464788732394
+GSK2801,1580,cyp2c9_substrate_carbonmangels,Metabolism,CYP2C9 Substrate,,no_data,no_match,0.21739130434782608
+GSK2801,1580,cyp2d6_substrate_carbonmangels,Metabolism,CYP2D6 Substrate,,no_data,no_match,0.21739130434782608
+GSK2801,1580,cyp3a4_substrate_carbonmangels,Metabolism,CYP3A4 Substrate,,no_data,no_match,0.21739130434782608
+GSK2801,1580,clearance_hepatocyte_az,Excretion,Hepatocyte Clearance,,no_data,no_match,0.24
+GSK2801,1580,clearance_microsome_az,Excretion,Microsome Clearance,,no_data,no_match,0.26582278481012656
+GSK2801,1580,half_life_obach,Excretion,Half-Life,,no_data,no_match,0.24
+GSK2801,1580,ames,Toxicity,Ames Mutagenicity,,no_data,no_match,0.2647058823529412
+GSK2801,1580,dili,Toxicity,DILI (Drug-Induced Liver Injury),,no_data,no_match,0.2753623188405797
+GSK2801,1580,herg,Toxicity,hERG Cardiotoxicity,,no_data,no_match,0.23529411764705882
+GSK2801,1580,ld50_zhu,Toxicity,Acute Toxicity (LD50),,no_data,no_match,0.31746031746031744
+GSK2801,1580,lipophilicity_astrazeneca,Properties,Lipophilicity (logD),,no_data,no_match,0.26582278481012656
+GSK2801,1580,solubility_aqsoldb,Properties,Aqueous Solubility,,no_data,no_match,0.3157894736842105
+PFI3,1620,caco2_wang,Absorption,Caco-2 Permeability,,no_data,no_match,0.23333333333333334
+PFI3,1620,hia_hou,Absorption,HIA (Human Intestinal Absorption),,no_data,no_match,0.23728813559322035
+PFI3,1620,pgp_broccatelli,Absorption,P-gp Inhibitor,,no_data,no_match,0.22972972972972974
+PFI3,1620,bioavailability_ma,Absorption,Oral Bioavailability (F>20%),,no_data,no_match,0.22972972972972974
+PFI3,1620,bbb_martins,Distribution,BBB Penetration,,no_data,no_match,0.28
+PFI3,1620,ppbr_az,Distribution,Plasma Protein Binding Rate,,no_data,no_match,0.25
+PFI3,1620,vdss_lombardo,Distribution,Volume of Distribution,,no_data,no_match,0.22972972972972974
+PFI3,1620,cyp2c9_veith,Metabolism,CYP2C9 Inhibitor,,no_data,no_match,0.3584905660377358
+PFI3,1620,cyp2d6_veith,Metabolism,CYP2D6 Inhibitor,,no_data,no_match,0.3584905660377358
+PFI3,1620,cyp3a4_veith,Metabolism,CYP3A4 Inhibitor,,no_data,no_match,0.3584905660377358
+PFI3,1620,cyp2c9_substrate_carbonmangels,Metabolism,CYP2C9 Substrate,,no_data,no_match,0.28
+PFI3,1620,cyp2d6_substrate_carbonmangels,Metabolism,CYP2D6 Substrate,,no_data,no_match,0.28
+PFI3,1620,cyp3a4_substrate_carbonmangels,Metabolism,CYP3A4 Substrate,,no_data,no_match,0.28
+PFI3,1620,clearance_hepatocyte_az,Excretion,Hepatocyte Clearance,,no_data,no_match,0.3076923076923077
+PFI3,1620,clearance_microsome_az,Excretion,Microsome Clearance,,no_data,no_match,0.3076923076923077
+PFI3,1620,half_life_obach,Excretion,Half-Life,,no_data,no_match,0.2
+PFI3,1620,ames,Toxicity,Ames Mutagenicity,,no_data,no_match,0.28
+PFI3,1620,dili,Toxicity,DILI (Drug-Induced Liver Injury),,no_data,no_match,0.28
+PFI3,1620,herg,Toxicity,hERG Cardiotoxicity,,no_data,no_match,0.19791666666666666
+PFI3,1620,ld50_zhu,Toxicity,Acute Toxicity (LD50),,no_data,no_match,0.28
+PFI3,1620,lipophilicity_astrazeneca,Properties,Lipophilicity (logD),,no_data,no_match,0.3225806451612903
+PFI3,1620,solubility_aqsoldb,Properties,Aqueous Solubility,,no_data,no_match,0.31666666666666665
+Vinblastine,1004,caco2_wang,Absorption,Caco-2 Permeability,-5.48,measured,exact,1.0
+Vinblastine,1004,hia_hou,Absorption,HIA (Human Intestinal Absorption),,no_data,no_match,0.20491803278688525
+Vinblastine,1004,pgp_broccatelli,Absorption,P-gp Inhibitor,,no_data,no_match,0.2711864406779661
+Vinblastine,1004,bioavailability_ma,Absorption,Oral Bioavailability (F>20%),1.0,pass,analog,0.7387387387387387
+Vinblastine,1004,bbb_martins,Distribution,BBB Penetration,1.0,info,exact,1.0
+Vinblastine,1004,ppbr_az,Distribution,Plasma Protein Binding Rate,,no_data,no_match,0.23684210526315788
+Vinblastine,1004,vdss_lombardo,Distribution,Volume of Distribution,28.0,measured,exact,1.0
+Vinblastine,1004,cyp2c9_veith,Metabolism,CYP2C9 Inhibitor,0.0,pass,close_analog,0.883495145631068
+Vinblastine,1004,cyp2d6_veith,Metabolism,CYP2D6 Inhibitor,0.0,pass,exact,1.0
+Vinblastine,1004,cyp3a4_veith,Metabolism,CYP3A4 Inhibitor,1.0,minor,close_analog,0.883495145631068
+Vinblastine,1004,cyp2c9_substrate_carbonmangels,Metabolism,CYP2C9 Substrate,0.0,info,exact,1.0
+Vinblastine,1004,cyp2d6_substrate_carbonmangels,Metabolism,CYP2D6 Substrate,0.0,info,exact,1.0
+Vinblastine,1004,cyp3a4_substrate_carbonmangels,Metabolism,CYP3A4 Substrate,1.0,info,exact,1.0
+Vinblastine,1004,clearance_hepatocyte_az,Excretion,Hepatocyte Clearance,,no_data,no_match,0.19491525423728814
+Vinblastine,1004,clearance_microsome_az,Excretion,Microsome Clearance,,no_data,no_match,0.18796992481203006
+Vinblastine,1004,half_life_obach,Excretion,Half-Life,67.0,measured,exact,1.0
+Vinblastine,1004,ames,Toxicity,Ames Mutagenicity,,no_data,no_match,0.24817518248175183
+Vinblastine,1004,dili,Toxicity,DILI (Drug-Induced Liver Injury),0.0,pass,exact,1.0
+Vinblastine,1004,herg,Toxicity,hERG Cardiotoxicity,,no_data,no_match,0.208
+Vinblastine,1004,ld50_zhu,Toxicity,Acute Toxicity (LD50),,no_data,no_match,0.26785714285714285
+Vinblastine,1004,lipophilicity_astrazeneca,Properties,Lipophilicity (logD),,no_data,no_match,0.2711864406779661
+Vinblastine,1004,solubility_aqsoldb,Properties,Aqueous Solubility,,no_data,no_match,0.2396694214876033
+AT13148,2170,caco2_wang,Absorption,Caco-2 Permeability,,no_data,no_match,0.25
+AT13148,2170,hia_hou,Absorption,HIA (Human Intestinal Absorption),,no_data,no_match,0.22641509433962265
+AT13148,2170,pgp_broccatelli,Absorption,P-gp Inhibitor,,no_data,no_match,0.23255813953488372
+AT13148,2170,bioavailability_ma,Absorption,Oral Bioavailability (F>20%),,no_data,no_match,0.25
+AT13148,2170,bbb_martins,Distribution,BBB Penetration,,no_data,no_match,0.3181818181818182
+AT13148,2170,ppbr_az,Distribution,Plasma Protein Binding Rate,,no_data,no_match,0.25
+AT13148,2170,vdss_lombardo,Distribution,Volume of Distribution,,no_data,no_match,0.25
+AT13148,2170,cyp2c9_veith,Metabolism,CYP2C9 Inhibitor,,no_data,no_match,0.3617021276595745
+AT13148,2170,cyp2d6_veith,Metabolism,CYP2D6 Inhibitor,,no_data,no_match,0.3617021276595745
+AT13148,2170,cyp3a4_veith,Metabolism,CYP3A4 Inhibitor,,no_data,no_match,0.3090909090909091
+AT13148,2170,cyp2c9_substrate_carbonmangels,Metabolism,CYP2C9 Substrate,,no_data,no_match,0.25
+AT13148,2170,cyp2d6_substrate_carbonmangels,Metabolism,CYP2D6 Substrate,,no_data,no_match,0.25
+AT13148,2170,cyp3a4_substrate_carbonmangels,Metabolism,CYP3A4 Substrate,,no_data,no_match,0.25
+AT13148,2170,clearance_hepatocyte_az,Excretion,Hepatocyte Clearance,,no_data,no_match,0.25862068965517243
+AT13148,2170,clearance_microsome_az,Excretion,Microsome Clearance,,no_data,no_match,0.2807017543859649
+AT13148,2170,half_life_obach,Excretion,Half-Life,,no_data,no_match,0.25
+AT13148,2170,ames,Toxicity,Ames Mutagenicity,,no_data,no_match,0.32558139534883723
+AT13148,2170,dili,Toxicity,DILI (Drug-Induced Liver Injury),,no_data,no_match,0.25
+AT13148,2170,herg,Toxicity,hERG Cardiotoxicity,,no_data,no_match,0.25
+AT13148,2170,ld50_zhu,Toxicity,Acute Toxicity (LD50),,no_data,no_match,0.38636363636363635
+AT13148,2170,lipophilicity_astrazeneca,Properties,Lipophilicity (logD),,no_data,no_match,0.6
+AT13148,2170,solubility_aqsoldb,Properties,Aqueous Solubility,,no_data,no_match,0.325
+AZD1332,1463,caco2_wang,Absorption,Caco-2 Permeability,,no_data,no_match,0.19791666666666666
+AZD1332,1463,hia_hou,Absorption,HIA (Human Intestinal Absorption),,no_data,no_match,0.18
+AZD1332,1463,pgp_broccatelli,Absorption,P-gp Inhibitor,,no_data,no_match,0.17857142857142858
+AZD1332,1463,bioavailability_ma,Absorption,Oral Bioavailability (F>20%),,no_data,no_match,0.18
+AZD1332,1463,bbb_martins,Distribution,BBB Penetration,,no_data,no_match,0.17721518987341772
+AZD1332,1463,ppbr_az,Distribution,Plasma Protein Binding Rate,,no_data,no_match,0.6119402985074627
+AZD1332,1463,vdss_lombardo,Distribution,Volume of Distribution,,no_data,no_match,0.19753086419753085
+AZD1332,1463,cyp2c9_veith,Metabolism,CYP2C9 Inhibitor,,no_data,no_match,0.2571428571428571
+AZD1332,1463,cyp2d6_veith,Metabolism,CYP2D6 Inhibitor,,no_data,no_match,0.2571428571428571
+AZD1332,1463,cyp3a4_veith,Metabolism,CYP3A4 Inhibitor,,no_data,no_match,0.2571428571428571
+AZD1332,1463,cyp2c9_substrate_carbonmangels,Metabolism,CYP2C9 Substrate,,no_data,no_match,0.18
+AZD1332,1463,cyp2d6_substrate_carbonmangels,Metabolism,CYP2D6 Substrate,,no_data,no_match,0.18
+AZD1332,1463,cyp3a4_substrate_carbonmangels,Metabolism,CYP3A4 Substrate,,no_data,no_match,0.18
+AZD1332,1463,clearance_hepatocyte_az,Excretion,Hepatocyte Clearance,,no_data,no_match,0.4657534246575342
+AZD1332,1463,clearance_microsome_az,Excretion,Microsome Clearance,,no_data,no_match,0.42028985507246375
+AZD1332,1463,half_life_obach,Excretion,Half-Life,,no_data,no_match,0.18
+AZD1332,1463,ames,Toxicity,Ames Mutagenicity,,no_data,no_match,0.2
+AZD1332,1463,dili,Toxicity,DILI (Drug-Induced Liver Injury),,no_data,no_match,0.2159090909090909
+AZD1332,1463,herg,Toxicity,hERG Cardiotoxicity,,no_data,no_match,0.18421052631578946
+AZD1332,1463,ld50_zhu,Toxicity,Acute Toxicity (LD50),,no_data,no_match,0.20987654320987653
+AZD1332,1463,lipophilicity_astrazeneca,Properties,Lipophilicity (logD),,no_data,no_match,0.5064935064935064
+AZD1332,1463,solubility_aqsoldb,Properties,Aqueous Solubility,,no_data,no_match,0.20987654320987653
+ML323,1629,caco2_wang,Absorption,Caco-2 Permeability,,no_data,no_match,0.2159090909090909
+ML323,1629,hia_hou,Absorption,HIA (Human Intestinal Absorption),,no_data,no_match,0.23376623376623376
+ML323,1629,pgp_broccatelli,Absorption,P-gp Inhibitor,,no_data,no_match,0.22857142857142856
+ML323,1629,bioavailability_ma,Absorption,Oral Bioavailability (F>20%),,no_data,no_match,0.21518987341772153
+ML323,1629,bbb_martins,Distribution,BBB Penetration,,no_data,no_match,0.2236842105263158
+ML323,1629,ppbr_az,Distribution,Plasma Protein Binding Rate,,no_data,no_match,0.25675675675675674
+ML323,1629,vdss_lombardo,Distribution,Volume of Distribution,,no_data,no_match,0.22916666666666666
+ML323,1629,cyp2c9_veith,Metabolism,CYP2C9 Inhibitor,,no_data,no_match,0.3333333333333333
+ML323,1629,cyp2d6_veith,Metabolism,CYP2D6 Inhibitor,,no_data,no_match,0.3333333333333333
+ML323,1629,cyp3a4_veith,Metabolism,CYP3A4 Inhibitor,,no_data,no_match,0.3333333333333333
+ML323,1629,cyp2c9_substrate_carbonmangels,Metabolism,CYP2C9 Substrate,,no_data,no_match,0.1919191919191919
+ML323,1629,cyp2d6_substrate_carbonmangels,Metabolism,CYP2D6 Substrate,,no_data,no_match,0.1919191919191919
+ML323,1629,cyp3a4_substrate_carbonmangels,Metabolism,CYP3A4 Substrate,,no_data,no_match,0.1919191919191919
+ML323,1629,clearance_hepatocyte_az,Excretion,Hepatocyte Clearance,,no_data,no_match,0.25675675675675674
+ML323,1629,clearance_microsome_az,Excretion,Microsome Clearance,,no_data,no_match,0.25675675675675674
+ML323,1629,half_life_obach,Excretion,Half-Life,,no_data,no_match,0.21518987341772153
+ML323,1629,ames,Toxicity,Ames Mutagenicity,,no_data,no_match,0.2222222222222222
+ML323,1629,dili,Toxicity,DILI (Drug-Induced Liver Injury),,no_data,no_match,0.1919191919191919
+ML323,1629,herg,Toxicity,hERG Cardiotoxicity,,no_data,no_match,0.189873417721519
+ML323,1629,ld50_zhu,Toxicity,Acute Toxicity (LD50),,no_data,no_match,0.2727272727272727
+ML323,1629,lipophilicity_astrazeneca,Properties,Lipophilicity (logD),,no_data,no_match,0.26153846153846155
+ML323,1629,solubility_aqsoldb,Properties,Aqueous Solubility,,no_data,no_match,0.2727272727272727

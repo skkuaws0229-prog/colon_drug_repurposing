@@ -1,0 +1,677 @@
+{
+  "source_dir": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group",
+  "task_count": 22,
+  "tasks": {
+    "ames": {
+      "splits": {
+        "train_val": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/ames/train_val.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/ames/train_val_basic_clean_20260406.parquet",
+          "rows": 5821,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 0
+        },
+        "test": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/ames/test.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/ames/test_basic_clean_20260406.parquet",
+          "rows": 1457,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 0
+        }
+      }
+    },
+    "bbb_martins": {
+      "splits": {
+        "train_val": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/bbb_martins/train_val.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/bbb_martins/train_val_basic_clean_20260406.parquet",
+          "rows": 1624,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 8
+        },
+        "test": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/bbb_martins/test.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/bbb_martins/test_basic_clean_20260406.parquet",
+          "rows": 406,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 2
+        }
+      }
+    },
+    "bioavailability_ma": {
+      "splits": {
+        "train_val": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/bioavailability_ma/train_val.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/bioavailability_ma/train_val_basic_clean_20260406.parquet",
+          "rows": 512,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 0
+        },
+        "test": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/bioavailability_ma/test.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/bioavailability_ma/test_basic_clean_20260406.parquet",
+          "rows": 128,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 0
+        }
+      }
+    },
+    "caco2_wang": {
+      "splits": {
+        "train_val": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/caco2_wang/train_val.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/caco2_wang/train_val_basic_clean_20260406.parquet",
+          "rows": 728,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 67
+        },
+        "test": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/caco2_wang/test.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/caco2_wang/test_basic_clean_20260406.parquet",
+          "rows": 182,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 5
+        }
+      }
+    },
+    "clearance_hepatocyte_az": {
+      "splits": {
+        "train_val": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/clearance_hepatocyte_az/train_val.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/clearance_hepatocyte_az/train_val_basic_clean_20260406.parquet",
+          "rows": 970,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 153
+        },
+        "test": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/clearance_hepatocyte_az/test.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/clearance_hepatocyte_az/test_basic_clean_20260406.parquet",
+          "rows": 243,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 40
+        }
+      }
+    },
+    "clearance_microsome_az": {
+      "splits": {
+        "train_val": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/clearance_microsome_az/train_val.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/clearance_microsome_az/train_val_basic_clean_20260406.parquet",
+          "rows": 881,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 0
+        },
+        "test": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/clearance_microsome_az/test.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/clearance_microsome_az/test_basic_clean_20260406.parquet",
+          "rows": 221,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 0
+        }
+      }
+    },
+    "cyp2c9_substrate_carbonmangels": {
+      "splits": {
+        "train_val": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/cyp2c9_substrate_carbonmangels/train_val.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/cyp2c9_substrate_carbonmangels/train_val_basic_clean_20260406.parquet",
+          "rows": 534,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 1
+        },
+        "test": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/cyp2c9_substrate_carbonmangels/test.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/cyp2c9_substrate_carbonmangels/test_basic_clean_20260406.parquet",
+          "rows": 135,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 0
+        }
+      }
+    },
+    "cyp2c9_veith": {
+      "splits": {
+        "train_val": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/cyp2c9_veith/train_val.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/cyp2c9_veith/train_val_basic_clean_20260406.parquet",
+          "rows": 9673,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 0
+        },
+        "test": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/cyp2c9_veith/test.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/cyp2c9_veith/test_basic_clean_20260406.parquet",
+          "rows": 2419,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 0
+        }
+      }
+    },
+    "cyp2d6_substrate_carbonmangels": {
+      "splits": {
+        "train_val": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/cyp2d6_substrate_carbonmangels/train_val.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/cyp2d6_substrate_carbonmangels/train_val_basic_clean_20260406.parquet",
+          "rows": 532,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 1
+        },
+        "test": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/cyp2d6_substrate_carbonmangels/test.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/cyp2d6_substrate_carbonmangels/test_basic_clean_20260406.parquet",
+          "rows": 135,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 0
+        }
+      }
+    },
+    "cyp2d6_veith": {
+      "splits": {
+        "train_val": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/cyp2d6_veith/train_val.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/cyp2d6_veith/train_val_basic_clean_20260406.parquet",
+          "rows": 10504,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 0
+        },
+        "test": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/cyp2d6_veith/test.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/cyp2d6_veith/test_basic_clean_20260406.parquet",
+          "rows": 2626,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 0
+        }
+      }
+    },
+    "cyp3a4_substrate_carbonmangels": {
+      "splits": {
+        "train_val": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/cyp3a4_substrate_carbonmangels/train_val.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/cyp3a4_substrate_carbonmangels/train_val_basic_clean_20260406.parquet",
+          "rows": 535,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 1
+        },
+        "test": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/cyp3a4_substrate_carbonmangels/test.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/cyp3a4_substrate_carbonmangels/test_basic_clean_20260406.parquet",
+          "rows": 135,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 0
+        }
+      }
+    },
+    "cyp3a4_veith": {
+      "splits": {
+        "train_val": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/cyp3a4_veith/train_val.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/cyp3a4_veith/train_val_basic_clean_20260406.parquet",
+          "rows": 9861,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 0
+        },
+        "test": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/cyp3a4_veith/test.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/cyp3a4_veith/test_basic_clean_20260406.parquet",
+          "rows": 2467,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 0
+        }
+      }
+    },
+    "dili": {
+      "splits": {
+        "train_val": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/dili/train_val.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/dili/train_val_basic_clean_20260406.parquet",
+          "rows": 379,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 0
+        },
+        "test": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/dili/test.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/dili/test_basic_clean_20260406.parquet",
+          "rows": 96,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 0
+        }
+      }
+    },
+    "half_life_obach": {
+      "splits": {
+        "train_val": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/half_life_obach/train_val.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/half_life_obach/train_val_basic_clean_20260406.parquet",
+          "rows": 532,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 1
+        },
+        "test": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/half_life_obach/test.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/half_life_obach/test_basic_clean_20260406.parquet",
+          "rows": 135,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 1
+        }
+      }
+    },
+    "herg": {
+      "splits": {
+        "train_val": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/herg/train_val.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/herg/train_val_basic_clean_20260406.parquet",
+          "rows": 523,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 21,
+          "missing_like_pct": 1.338432122370937,
+          "drug_id_missing": 21,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 16
+        },
+        "test": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/herg/test.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/herg/test_basic_clean_20260406.parquet",
+          "rows": 132,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 1,
+          "missing_like_pct": 0.25252525252525254,
+          "drug_id_missing": 1,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 2
+        }
+      }
+    },
+    "hia_hou": {
+      "splits": {
+        "train_val": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/hia_hou/train_val.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/hia_hou/train_val_basic_clean_20260406.parquet",
+          "rows": 461,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 0
+        },
+        "test": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/hia_hou/test.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/hia_hou/test_basic_clean_20260406.parquet",
+          "rows": 117,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 0
+        }
+      }
+    },
+    "ld50_zhu": {
+      "splits": {
+        "train_val": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/ld50_zhu/train_val.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/ld50_zhu/train_val_basic_clean_20260406.parquet",
+          "rows": 5907,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 10
+        },
+        "test": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/ld50_zhu/test.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/ld50_zhu/test_basic_clean_20260406.parquet",
+          "rows": 1478,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 3
+        }
+      }
+    },
+    "lipophilicity_astrazeneca": {
+      "splits": {
+        "train_val": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/lipophilicity_astrazeneca/train_val.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/lipophilicity_astrazeneca/train_val_basic_clean_20260406.parquet",
+          "rows": 3360,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 0
+        },
+        "test": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/lipophilicity_astrazeneca/test.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/lipophilicity_astrazeneca/test_basic_clean_20260406.parquet",
+          "rows": 840,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 0
+        }
+      }
+    },
+    "pgp_broccatelli": {
+      "splits": {
+        "train_val": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/pgp_broccatelli/train_val.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/pgp_broccatelli/train_val_basic_clean_20260406.parquet",
+          "rows": 973,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 16
+        },
+        "test": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/pgp_broccatelli/test.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/pgp_broccatelli/test_basic_clean_20260406.parquet",
+          "rows": 245,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 4
+        }
+      }
+    },
+    "ppbr_az": {
+      "splits": {
+        "train_val": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/ppbr_az/train_val.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/ppbr_az/train_val_basic_clean_20260406.parquet",
+          "rows": 2231,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 777
+        },
+        "test": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/ppbr_az/test.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/ppbr_az/test_basic_clean_20260406.parquet",
+          "rows": 559,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 216
+        }
+      }
+    },
+    "solubility_aqsoldb": {
+      "splits": {
+        "train_val": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/solubility_aqsoldb/train_val.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/solubility_aqsoldb/train_val_basic_clean_20260406.parquet",
+          "rows": 7985,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 62
+        },
+        "test": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/solubility_aqsoldb/test.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/solubility_aqsoldb/test_basic_clean_20260406.parquet",
+          "rows": 1997,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 25
+        }
+      }
+    },
+    "vdss_lombardo": {
+      "splits": {
+        "train_val": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/vdss_lombardo/train_val.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/vdss_lombardo/train_val_basic_clean_20260406.parquet",
+          "rows": 904,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 0
+        },
+        "test": {
+          "source": "/Users/skku_aws2_18/drug/derived/official_dataset_sources_20260406/admet/tdc_admet_group/admet_group/vdss_lombardo/test.csv",
+          "output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/vdss_lombardo/test_basic_clean_20260406.parquet",
+          "rows": 226,
+          "cols": 3,
+          "exact_duplicates": 0,
+          "missing_like_cells": 0,
+          "missing_like_pct": 0.0,
+          "drug_id_missing": 0,
+          "drug_missing": 0,
+          "y_missing": 0,
+          "drug_id_duplicate_non_null": 0
+        }
+      }
+    }
+  },
+  "basic_preprocessing_scope": {
+    "actions": [
+      "ADMET task별 train_val/test CSV를 개별 clean parquet로 변환",
+      "Drug_ID와 Drug의 whitespace trim 및 placeholder를 NA로 통일",
+      "Y를 numeric으로 변환하되 task 의미는 건드리지 않음",
+      "task들을 하나의 테이블로 합치지 않음",
+      "새 feature 생성 없음"
+    ]
+  },
+  "inventory_output": "/Users/skku_aws2_18/drug/derived/basic_preprocessing_20260406/admet/admet_task_inventory_20260406.parquet",
+  "inventory_rows": 44
+}

@@ -1,0 +1,188 @@
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:51] WARNING: not removing hydrogen atom without neighbors
+[10:16:57] WARNING: not removing hydrogen atom without neighbors
+[10:16:57] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:58] WARNING: not removing hydrogen atom without neighbors
+[10:16:59] WARNING: not removing hydrogen atom without neighbors
+[10:16:59] WARNING: not removing hydrogen atom without neighbors
+[10:16:59] WARNING: not removing hydrogen atom without neighbors
+[10:16:59] WARNING: not removing hydrogen atom without neighbors
+[10:16:59] WARNING: not removing hydrogen atom without neighbors
+[10:16:59] WARNING: not removing hydrogen atom without neighbors
+[10:16:59] WARNING: not removing hydrogen atom without neighbors
+[10:16:59] WARNING: not removing hydrogen atom without neighbors
+[10:16:59] WARNING: not removing hydrogen atom without neighbors
+[10:16:59] WARNING: not removing hydrogen atom without neighbors
+[10:16:59] WARNING: not removing hydrogen atom without neighbors
+[10:16:59] WARNING: not removing hydrogen atom without neighbors
+[10:16:59] WARNING: not removing hydrogen atom without neighbors
+[10:16:59] WARNING: not removing hydrogen atom without neighbors
+[10:16:59] WARNING: not removing hydrogen atom without neighbors
+[10:16:59] WARNING: not removing hydrogen atom without neighbors
+[10:16:59] WARNING: not removing hydrogen atom without neighbors
+[10:16:59] WARNING: not removing hydrogen atom without neighbors
+[10:16:59] WARNING: not removing hydrogen atom without neighbors
+[10:16:59] WARNING: not removing hydrogen atom without neighbors
+[10:16:59] WARNING: not removing hydrogen atom without neighbors
+[10:16:59] WARNING: not removing hydrogen atom without neighbors
+[10:16:59] WARNING: not removing hydrogen atom without neighbors
+[10:16:59] WARNING: not removing hydrogen atom without neighbors
+[10:16:59] WARNING: not removing hydrogen atom without neighbors
+[10:16:59] WARNING: not removing hydrogen atom without neighbors
+================================================================================
+Step 7: ADMET Gate (v3 - 실제 데이터)
+================================================================================
+
+Loading data...
+  ✓ Top 15 drugs loaded: 15
+  ✓ SMILES available: 15/15
+  ✓ Time: 0.2s
+
+================================================================================
+ADMET Assay Lookup (22 assays × 15 drugs)
+v1 방법: Tanimoto similarity 기반 데이터셋 검색
+================================================================================
+  Absorption   Caco-2 Permeability                      matched: 2/15
+  Absorption   HIA (Human Intestinal Absorption)        matched: 1/15
+  Absorption   P-gp Inhibitor                           matched: 0/15
+  Absorption   Oral Bioavailability (F>20%)             matched: 0/15
+  Distribution BBB Penetration                          matched: 1/15
+  Distribution Plasma Protein Binding Rate              matched: 0/15
+  Distribution Volume of Distribution                   matched: 1/15
+  Metabolism   CYP2C9 Inhibitor                         matched: 1/15
+  Metabolism   CYP2D6 Inhibitor                         matched: 1/15
+  Metabolism   CYP3A4 Inhibitor                         matched: 1/15
+  Metabolism   CYP2C9 Substrate                         matched: 1/15
+  Metabolism   CYP2D6 Substrate                         matched: 1/15
+  Metabolism   CYP3A4 Substrate                         matched: 1/15
+  Excretion    Hepatocyte Clearance                     matched: 0/15
+  Excretion    Microsome Clearance                      matched: 0/15
+  Excretion    Half-Life                                matched: 1/15
+  Toxicity     Ames Mutagenicity                        matched: 0/15
+  Toxicity     DILI (Drug-Induced Liver Injury)         matched: 2/15
+  Toxicity     hERG Cardiotoxicity                      matched: 0/15
+  Toxicity     Acute Toxicity (LD50)                    matched: 0/15
+  Properties   Lipophilicity (logD)                     matched: 3/15
+  Properties   Aqueous Solubility                       matched: 0/15
+
+================================================================================
+Safety Profile Assessment
+================================================================================
+
+  #   Drug                       Safety Tested  Pass Caution  NoData      FDA Flags
+  ------------------------------------------------------------------------------------------
+  1   Entinostat                   12.0      1     1       0      21      YES -
+  2   AZD2014                      10.0      2     2       0      20        - -
+  3   BMS-345541                   12.0      1     1       0      21      YES -
+  4   YK-4-279                      7.0      0     0       0      22      YES -
+  5   AZ6102                        7.0      0     0       0      22      YES -
+  6   Bicalutamide                  6.5      4     3       1      18        - DILI (Drug-Induced Liver Injury)(+)
+  7   Cediranib                     7.0      0     0       0      22      YES -
+  8   SB590885                      7.0      0     0       0      22      YES -
+  9   Nutlin-3a (-)                 5.0      0     0       0      22        - -
+  10  GSK2801                       5.0      0     0       0      22        - -
+  11  PFI3                          7.0      0     0       0      22      YES -
+  12  Vinblastine                   7.8     12     7       1      10      YES -
+  13  AT13148                       7.0      0     0       0      22      YES -
+  14  AZD1332                       5.0      0     0       0      22        - -
+  15  ML323                         7.0      0     0       0      22      YES -
+
+================================================================================
+Saving Results
+================================================================================
+  ✓ /Users/skku_aws2_14/20260408_pre_project_biso_myprotocol/20260408_pre_project_biso_myprotocol/20260414_re_pre_project_v3/step4_results/step7_admet_results/step7_admet_results.json
+  ✓ /Users/skku_aws2_14/20260408_pre_project_biso_myprotocol/20260408_pre_project_biso_myprotocol/20260414_re_pre_project_v3/step4_results/step7_admet_results/admet_summary.csv
+  ✓ /Users/skku_aws2_14/20260408_pre_project_biso_myprotocol/20260408_pre_project_biso_myprotocol/20260414_re_pre_project_v3/step4_results/step7_admet_results/admet_detailed_assays.csv
+
+================================================================================
+ADMET Gate Summary
+================================================================================
+  Total drugs: 15
+  High safety (≥7.0): 11
+  Medium safety (5.0-6.9): 4
+  Low safety (<5.0): 0
+
+  Top 3 by combined score:
+    1. Entinostat - Safety: 12.0, Combined: 17.5
+    2. AZD2014 - Safety: 10.0, Combined: 16.5
+    3. BMS-345541 - Safety: 12.0, Combined: 15.0
+================================================================================
+
+✓ Step 7 COMPLETE (0.2 min)
+  Results: /Users/skku_aws2_14/20260408_pre_project_biso_myprotocol/20260408_pre_project_biso_myprotocol/20260414_re_pre_project_v3/step4_results/step7_admet_results/
