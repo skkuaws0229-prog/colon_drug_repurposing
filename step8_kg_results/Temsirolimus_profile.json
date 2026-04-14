@@ -1,0 +1,105 @@
+{
+  "drug_name": "Temsirolimus",
+  "basic_info": {
+    "status": "success",
+    "data": {
+      "molecular_formula": "C56H87NO16",
+      "inchikey": "CBPNZQVSJQDFBE-FUXHJELOSA-N",
+      "inchi": "InChI=1S/C56H87NO16/c1-33-17-13-12-14-18-34(2)45(68-9)29-41-22-20-39(7)56(67,73-41)51(63)52(64)57-24-16-15-19-42(57)53(65)71-46(30-43(60)35(3)26-38(6)49(62)50(70-11)48(61)37(5)25-33)36(4)27-40-21-23-44(47(28-40)69-10)72-54(66)55(8,31-58)32-59/h12-14,17-18,26,33,35-37,39-42,44-47,49-50,58-59,62,67H,15-16,19-25,27-32H2,1-11H3/b14-12+,17-13+,34-18+,38-26+/t33-,35-,36-,37-,39-,40+,41+,42+,44-,45+,46+,47-,49-,50+,56-/m1/s1",
+      "gdsc_id": 1016,
+      "smiles": "OCC(C)(CO)C(=O)O[C@@H]1CC[C@@H](C[C@@H](C)[C@]2([H])CC(=O)[C@H](C)\\C=C(C)\\[C@@H](O)[C@@H](OC)C(=O)[C@H](C)C[C@H](C)\\C=C\\C=C\\C=C(C)\\[C@@H](OC)C[C@]3([H])CC[C@@H](C)[C@@](O)(O3)C(=O)C(=O)N3CCCC[C@H]3C(=O)O2)C[C@H]1OC",
+      "drug_type": "small molecule",
+      "name": "Temsirolimus",
+      "drugbank_id": "DB06287",
+      "molecular_weight": "1030.2871"
+    },
+    "source": "neo4j",
+    "timestamp": "2026-04-14T08:34:29.557443+00:00"
+  },
+  "targets": {
+    "status": "success",
+    "data": [],
+    "source": "neo4j",
+    "timestamp": "2026-04-14T08:34:29.662976+00:00"
+  },
+  "side_effects": {
+    "status": "success",
+    "data": [],
+    "source": "neo4j",
+    "timestamp": "2026-04-14T08:34:29.769118+00:00"
+  },
+  "trials": {
+    "status": "success",
+    "data": [],
+    "source": "neo4j",
+    "timestamp": "2026-04-14T08:34:29.876728+00:00"
+  },
+  "pathways": {
+    "status": "success",
+    "data": [],
+    "source": "neo4j",
+    "timestamp": "2026-04-14T08:34:29.982554+00:00"
+  },
+  "pubmed": {
+    "status": "success",
+    "data": [
+      {
+        "pmid": "33375317",
+        "title": "PI3K/AKT/mTOR Signaling Pathway in Breast Cancer: From Molecular Landscape to Clinical Aspects.",
+        "authors": [
+          "Miricescu D",
+          "Totan A",
+          "Stanescu-Spinu II",
+          "Badoiu SC",
+          "Stefani C"
+        ],
+        "journal": "International journal of molecular sciences",
+        "pub_date": "2020 Dec 26"
+      },
+      {
+        "pmid": "37494474",
+        "title": "Pharmaco-proteogenomic characterization of liver cancer organoids for precision oncology.",
+        "authors": [
+          "Ji S",
+          "Feng L",
+          "Fu Z",
+          "Wu G",
+          "Wu Y"
+        ],
+        "journal": "Science translational medicine",
+        "pub_date": "2023 Jul 26"
+      },
+      {
+        "pmid": "38866361",
+        "title": "Targeting the RAS upstream and downstream signaling pathway for cancer treatment.",
+        "authors": [
+          "Hossain MA"
+        ],
+        "journal": "European journal of pharmacology",
+        "pub_date": "2024 Sep 15"
+      },
+      {
+        "pmid": "38216005",
+        "title": "Properties of FDA-approved small molecule protein kinase inhibitors: A 2024 update.",
+        "authors": [
+          "Roskoski R Jr"
+        ],
+        "journal": "Pharmacological research",
+        "pub_date": "2024 Feb"
+      },
+      {
+        "pmid": "29103175",
+        "title": "Efficacy and safety in older patient subsets in studies of endocrine monotherapy versus combination therapy in patients with HR+/HER2- advanced breast cancer: a review.",
+        "authors": [
+          "Freedman RA",
+          "Tolaney SM"
+        ],
+        "journal": "Breast cancer research and treatment",
+        "pub_date": "2018 Feb"
+      }
+    ],
+    "source": "pubmed",
+    "timestamp": "2026-04-14T08:34:32.598514+00:00"
+  },
+  "errors": []
+}

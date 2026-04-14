@@ -1,0 +1,37 @@
+{
+  "drug_name": "CDK9_5576",
+  "basic_info": null,
+  "targets": {
+    "status": "success",
+    "data": [],
+    "source": "neo4j",
+    "timestamp": "2026-04-14T08:34:35.967943+00:00"
+  },
+  "side_effects": {
+    "status": "success",
+    "data": [],
+    "source": "neo4j",
+    "timestamp": "2026-04-14T08:34:36.075570+00:00"
+  },
+  "trials": {
+    "status": "success",
+    "data": [],
+    "source": "neo4j",
+    "timestamp": "2026-04-14T08:34:36.181106+00:00"
+  },
+  "pathways": {
+    "status": "success",
+    "data": [],
+    "source": "neo4j",
+    "timestamp": "2026-04-14T08:34:36.286577+00:00"
+  },
+  "pubmed": {
+    "status": "success",
+    "data": [],
+    "source": "pubmed",
+    "timestamp": "2026-04-14T08:34:36.952329+00:00"
+  },
+  "errors": [
+    "basic_info: 404 Not Found"
+  ]
+}

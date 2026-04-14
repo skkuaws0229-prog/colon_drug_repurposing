@@ -293,52 +293,6 @@ body {
 }
 .highlight-box strong { color: var(--text); }
 
-
-/* ─── NAVIGATION ─── */
-.nav-section {
-  text-align: center;
-  padding: 1.5rem 0 2rem;
-  border-bottom: 1px solid var(--border);
-}
-.nav-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.8rem;
-  margin-top: 1rem;
-}
-.nav-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.7rem 1.5rem;
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  color: var(--text);
-  text-decoration: none;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.75rem;
-  font-weight: 500;
-  transition: all 0.3s;
-}
-.nav-btn:hover {
-  border-color: var(--accent);
-  background: var(--bg3);
-  box-shadow: 0 0 20px rgba(0,229,255,0.1);
-  transform: translateY(-2px);
-}
-.nav-btn .step-num {
-  display: inline-block;
-  width: 60px;
-  padding: 0.25rem 0.5rem;
-  background: var(--bg3);
-  border-radius: 4px;
-  color: var(--accent);
-  font-size: 0.65rem;
-  text-align: center;
-}
-
 /* ─── FOOTER ─── */
 .footer {
   text-align: center;
@@ -358,31 +312,6 @@ body {
   <div class="subtitle">biso_myprotocol · Drug Discovery Pipeline</div>
   <div class="date-badge">2026-04-08 (v1) → 2026-04-14 (v3) · say2-4team</div>
 </div>
-
-
-<!-- ═══ NAVIGATION ═══ -->
-<div class="nav-section">
-  <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:3px;color:var(--text3);margin-bottom:1rem;">Pipeline Steps</div>
-  <div class="nav-buttons">
-    <a href="step4_model_detail_dashboard.html" class="nav-btn">
-      <span class="step-num">Step 4</span>
-      <span>Model Detail</span>
-    </a>
-    <a href="step5_ensemble_dashboard.html" class="nav-btn">
-      <span class="step-num">Step 5</span>
-      <span>Ensemble</span>
-    </a>
-    <a href="step6_metabric_dashboard.html" class="nav-btn">
-      <span class="step-num">Step 6</span>
-      <span>METABRIC</span>
-    </a>
-    <a href="step7_admet_dashboard.html" class="nav-btn">
-      <span class="step-num">Step 7</span>
-      <span>ADMET</span>
-    </a>
-  </div>
-</div>
-
 
 <div class="container">
 
@@ -409,7 +338,7 @@ body {
     <div class="flow-arrow">→</div>
     <a href="step7_admet_dashboard.html" class="flow-step flow-step-link" style="text-decoration:none;color:inherit;"><div class="flow-step-num">Step 7</div><div class="flow-step-name">ADMET</div><div style="font-size:0.55rem;color:var(--accent);margin-top:0.2rem;">클릭하여 상세 보기 →</div></a>
     <div class="flow-arrow">→</div>
-    <div class="flow-step new-step"><div class="flow-step-num">Step 7+</div><div class="flow-step-name">KG/API 검증</div><div class="new-badge">v3 신규</div></div>
+    <a href="step8_kg_dashboard.html" class="flow-step flow-step-link new-step" style="text-decoration:none;color:inherit;"><div class="flow-step-num">Step 8</div><div class="flow-step-name">KG/API 근거 수집</div><div class="new-badge">v3 신규</div><div style="font-size:0.55rem;color:var(--accent);margin-top:0.2rem;">클릭하여 상세 보기 →</div></a>
   </div>
 </div>
 
@@ -943,8 +872,9 @@ body {
     </div>
     <div class="card" style="padding:0.8rem 1rem;">
       <div style="font-size:0.8rem;line-height:2;">
-        <a href="step6_metabric_dashboard.html" style="color:var(--accent);text-decoration:none;">→ Step 6 METABRIC 외부 검증 상세</a><br>
-        <a href="step7_admet_dashboard.html" style="color:var(--accent);text-decoration:none;">→ Step 7 ADMET + 약물 추천 상세</a>
+        <a href="step6_metabric_dashboard.html" style="color:var(--accent);text-decoration:none;">→ Step 6 Top 30 평가 + Repurposing Top 15 (v3.1)</a><br>
+        <a href="step7_admet_dashboard.html" style="color:var(--accent);text-decoration:none;">→ Step 7 ADMET 안전성 검증 (v1 Tanimoto)</a><br>
+        <a href="step8_kg_dashboard.html" style="color:var(--accent);text-decoration:none;">→ Step 8 KG/API 근거 수집 · 최종 평가</a>
       </div>
     </div>
   </div>
@@ -990,7 +920,7 @@ body {
     </div>
   </div>
   <div class="highlight-box" style="margin-top:0.5rem;border-left-color:var(--purple);">
-    <strong>METABRIC 결과:</strong> 앙상블 A와 CatBoost 단독 Top 15 overlap 80%(12/15 일치), Sp 0.994. <strong>CatBoost 단독 채택.</strong> Survival 유의 약물 6/10(60%). FDA 승인 10/15(67%). 신약 후보 5개(Bicalutamide 재창출 1순위).
+    <strong>v3.1 최종:</strong> CatBoost 단독 채택 → Top 30 → Multi-objective scoring (H1~H4 + Survival) → 치료제 분리 (Validation 10개) → <strong>Repurposing Top 15 확정</strong> (연구중 8 + 신규 7). Positive Control 5개 별도. ADMET v1 Tanimoto: PASS 2, WARNING 11, FAIL 5. Validation AUC-ROC 0.847, MAP 0.914.
   </div>
 </div>
 
@@ -1075,6 +1005,98 @@ body {
         P@30 0.87~0.97 (랭킹 품질 우수)
       </div>
     </div>
+  </div>
+</div>
+
+<!-- ═══ STEP 8 KG/API VERIFICATION ═══ -->
+<div class="section">
+  <div class="section-title">Step 8 · KG/API 근거 수집 (v3 신규)</div>
+  <div class="highlight-box" style="border-left-color:var(--accent);">
+    <strong>목적:</strong> Top 15 Repurposing 약물에 대한 외부 근거(DrugBank, FAERS, ClinicalTrials, PubMed) 수집 및 재용도 타당성 평가<br>
+    <strong>데이터 소스:</strong> Neo4j KG (30,558 nodes) · FastAPI 6 endpoints · DrugBank · FAERS · ClinicalTrials.gov · PubMed<br>
+    <strong>수행일:</strong> 2026-04-14 08:34 UTC · <strong>대상:</strong> 15개 약물 · <strong>API 성공률:</strong> 100%
+  </div>
+
+  <div class="grid-4" style="margin-top:1.5rem;">
+    <div class="card">
+      <div class="card-label">API 호출 성공</div>
+      <div class="card-value" style="color:var(--green);">100%</div>
+      <div class="card-sub">90개 엔드포인트 · 0 실패</div>
+    </div>
+    <div class="card">
+      <div class="card-label">DrugBank 등록</div>
+      <div class="card-value" style="color:var(--accent);">9/15</div>
+      <div class="card-sub">60% 기본 정보 확보</div>
+    </div>
+    <div class="card">
+      <div class="card-label">PubMed 문헌</div>
+      <div class="card-value" style="color:var(--green);">13/15</div>
+      <div class="card-sub">86.7% · 총 57편</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Neo4j KG 데이터</div>
+      <div class="card-value" style="color:var(--yellow);">Sparse</div>
+      <div class="card-sub">타겟 13% · 부작용 13%</div>
+    </div>
+  </div>
+
+  <div style="margin-top:1.5rem;">
+    <div style="font-size:0.75rem; color:var(--text3); margin-bottom:0.8rem; font-family:'JetBrains Mono',monospace; letter-spacing:2px; text-transform:uppercase;">재용도 근거 강도 평가 (4-Tier 분류)</div>
+
+    <div class="card" style="border-left:3px solid var(--green); margin-bottom:0.8rem;">
+      <div style="display:flex; align-items:center; gap:0.8rem; margin-bottom:0.6rem;">
+        <span style="font-family:'JetBrains Mono',monospace; font-size:0.65rem; color:var(--green); font-weight:700;">⭐⭐⭐⭐⭐ TIER 1</span>
+        <span style="font-size:0.75rem; color:var(--text2);">강력한 재용도 근거 (2개)</span>
+      </div>
+      <div style="font-size:0.78rem; line-height:1.8;">
+        <strong>1. Rapamycin</strong> — 유도체 Everolimus가 HR+/HER2- 유방암 FDA 승인. MTOR 타겟. 5개 진행 중 임상시험(NCT05749588 등). 10개 FAERS 부작용. PubMed 5편(Nature Med, NEJM 포함). <em>최우선 재용도 후보.</em><br>
+        <strong>2. Dactinomycin</strong> — FDA 승인 약물(윌름스 종양). TOP2A 타겟. 10개 FAERS 부작용. PubMed 5편. 한국 HIRA 등재 이력. <em>Off-label use 가능성 높음.</em>
+      </div>
+    </div>
+
+    <div class="card" style="border-left:3px solid var(--accent); margin-bottom:0.8rem;">
+      <div style="display:flex; align-items:center; gap:0.8rem; margin-bottom:0.6rem;">
+        <span style="font-family:'JetBrains Mono',monospace; font-size:0.65rem; color:var(--accent); font-weight:700;">⭐⭐⭐ TIER 2</span>
+        <span style="font-size:0.75rem; color:var(--text2);">중간 재용도 근거 (8개)</span>
+      </div>
+      <div style="font-size:0.78rem; line-height:1.8;">
+        <strong>AZD2014</strong> (mTORC1/2, First-in-Human 완료) · <strong>MK-2206</strong> (AKT, Window study) · <strong>Temsirolimus</strong> (FDA 신장암 승인) · <strong>Pictilisib</strong> (PI3K) · <strong>Teniposide</strong> (FDA 백혈병 승인) · <strong>Tanespimycin</strong> (HSP90) · <strong>Tozasertib</strong> (Aurora kinase) · <strong>SL0101</strong> (RSK)<br>
+        DrugBank 등록 또는 임상 이력. PubMed 문헌 5편 이상. 전임상/조기 임상 수준.
+      </div>
+    </div>
+
+    <div class="card" style="border-left:3px solid var(--yellow); margin-bottom:0.8rem;">
+      <div style="display:flex; align-items:center; gap:0.8rem; margin-bottom:0.6rem;">
+        <span style="font-family:'JetBrains Mono',monospace; font-size:0.65rem; color:var(--yellow); font-weight:700;">⭐⭐ TIER 3</span>
+        <span style="font-size:0.75rem; color:var(--text2);">낮은 재용도 근거 (2개)</span>
+      </div>
+      <div style="font-size:0.78rem; line-height:1.8;">
+        <strong>Sabutoclax</strong> (BCL-2, PubMed 2편) · <strong>Avagacestat</strong> (γ-secretase, PubMed 1편)<br>
+        제한적 문헌. 초기 연구 단계.
+      </div>
+    </div>
+
+    <div class="card" style="border-left:3px solid var(--red);">
+      <div style="display:flex; align-items:center; gap:0.8rem; margin-bottom:0.6rem;">
+        <span style="font-family:'JetBrains Mono',monospace; font-size:0.65rem; color:var(--red); font-weight:700;">⭐ TIER 4</span>
+        <span style="font-size:0.75rem; color:var(--text2);">근거 부족 (3개)</span>
+      </div>
+      <div style="font-size:0.78rem; line-height:1.8;">
+        <strong>TW 37</strong> (PubMed 비특이적) · <strong>CDK9_5576</strong> (PubMed 0편) · <strong>CDK9_5038</strong> (PubMed 0편)<br>
+        DrugBank 미등록. GDSC 스크리닝 데이터만 보유. 재용도 타당성 매우 낮음.
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight-box" style="margin-top:1.5rem; border-left-color:var(--orange);">
+    <strong>⚠️ 데이터 품질 이슈:</strong><br>
+    Neo4j KG의 타겟/부작용/임상시험 데이터 희소성 확인 (대부분 빈 배열). ChEMBL, TTD, KEGG/Reactome 추가 통합 필요. FAERS 직접 쿼리 및 ClinicalTrials.gov API 활용으로 데이터 보강 권장.
+  </div>
+
+  <div style="margin-top:1rem; text-align:center;">
+    <a href="step8_kg_dashboard.html" style="display:inline-block; padding:0.6rem 1.5rem; background:var(--bg3); border:1px solid var(--accent); border-radius:8px; color:var(--accent); text-decoration:none; font-family:'JetBrains Mono',monospace; font-size:0.75rem; transition:all 0.2s ease;">
+      Step 8 상세 대시보드 보기 →
+    </a>
   </div>
 </div>
 

@@ -1,0 +1,116 @@
+{
+  "drug_name": "Tanespimycin",
+  "basic_info": {
+    "status": "success",
+    "data": {
+      "molecular_formula": "C31H43N3O8",
+      "inchikey": "AYUNIORJHRXIBJ-TXHRRWQRSA-N",
+      "inchi": "InChI=1S/C31H43N3O8/c1-8-12-33-26-21-13-17(2)14-25(41-7)27(36)19(4)15-20(5)29(42-31(32)39)24(40-6)11-9-10-18(3)30(38)34-22(28(21)37)16-23(26)35/h8-11,15-17,19,24-25,27,29,33,36H,1,12-14H2,2-7H3,(H2,32,39)(H,34,38)/b11-9-,18-10+,20-15+/t17-,19+,24+,25+,27-,29+/m1/s1",
+      "gdsc_id": 1026,
+      "smiles": "[H]/C1=C([H])/[C@]([H])(OC)[C@@]([H])(OC(O)=N)C(C)=C([H])[C@]([H])(C)[C@@]([H])(O)[C@]([H])(C[C@]([H])(C)CC2=C(NCC=C)C(=O)C=C(N=C(O)\\C(C)=C\\1/[H])C2=O)OC",
+      "drug_type": "small molecule",
+      "name": "Tanespimycin",
+      "drugbank_id": "DB05134",
+      "molecular_weight": "585.698"
+    },
+    "source": "neo4j",
+    "timestamp": "2026-04-14T08:34:37.562158+00:00"
+  },
+  "targets": {
+    "status": "success",
+    "data": [],
+    "source": "neo4j",
+    "timestamp": "2026-04-14T08:34:37.669285+00:00"
+  },
+  "side_effects": {
+    "status": "success",
+    "data": [],
+    "source": "neo4j",
+    "timestamp": "2026-04-14T08:34:37.775164+00:00"
+  },
+  "trials": {
+    "status": "success",
+    "data": [],
+    "source": "neo4j",
+    "timestamp": "2026-04-14T08:34:37.883612+00:00"
+  },
+  "pathways": {
+    "status": "success",
+    "data": [],
+    "source": "neo4j",
+    "timestamp": "2026-04-14T08:34:37.989797+00:00"
+  },
+  "pubmed": {
+    "status": "success",
+    "data": [
+      {
+        "pmid": "37056925",
+        "title": "Timosaponin AIII promotes non-small-cell lung cancer ferroptosis through targeting and facilitating HSP90 mediated GPX4 ubiquitination and degradation.",
+        "authors": [
+          "Zhou C",
+          "Yu T",
+          "Zhu R",
+          "Lu J",
+          "Ouyang X"
+        ],
+        "journal": "International journal of biological sciences",
+        "pub_date": "2023"
+      },
+      {
+        "pmid": "35037689",
+        "title": "Identification of potential immunotherapy biomarkers for breast cancer by bioinformatics analysis.",
+        "authors": [
+          "Song Y",
+          "Lu M",
+          "Feng L",
+          "Chen Q",
+          "Huang H"
+        ],
+        "journal": "Bioscience reports",
+        "pub_date": "2022 Feb 25"
+      },
+      {
+        "pmid": "36926455",
+        "title": "Ranking Breast Cancer Drugs and Biomarkers Identification Using Machine Learning and Pharmacogenomics.",
+        "authors": [
+          "Mehmood A",
+          "Nawab S",
+          "Jin Y",
+          "Hassan H",
+          "Kaushik AC"
+        ],
+        "journal": "ACS pharmacology & translational science",
+        "pub_date": "2023 Mar 10"
+      },
+      {
+        "pmid": "36532861",
+        "title": "Exploring breast cancer exosomes for novel biomarkers of potential diagnostic and prognostic importance.",
+        "authors": [
+          "Alagundagi DB",
+          "Ghate SD",
+          "Rajendra VKJ",
+          "Gollapalli P",
+          "Shetty VV"
+        ],
+        "journal": "3 Biotech",
+        "pub_date": "2023 Jan"
+      },
+      {
+        "pmid": "38821604",
+        "title": "A Potential Combination of Targeting HSP90 and mTOR in Breast Cancer Cell Growth, Migration, and Invasion Through Inhibiting AKT Phosphorylation and F-actin Organization.",
+        "authors": [
+          "Suwannalert P",
+          "Panpinyaporn P",
+          "Wantanachaisaeng P",
+          "Teeppaibul T",
+          "Khumsri W"
+        ],
+        "journal": "Anticancer research",
+        "pub_date": "2024 Jun"
+      }
+    ],
+    "source": "pubmed",
+    "timestamp": "2026-04-14T08:34:39.546232+00:00"
+  },
+  "errors": []
+}
