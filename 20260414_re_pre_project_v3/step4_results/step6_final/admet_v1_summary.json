@@ -1,0 +1,15 @@
+{
+  "timestamp": "2026-04-14 13:52:29",
+  "method": "Tanimoto Similarity v1",
+  "threshold": 0.7,
+  "n_drugs": 20,
+  "n_drugs_with_smiles": 18,
+  "n_assays_loaded": 22,
+  "total_matches": 82,
+  "avg_assays_per_drug": 4.823529411764706,
+  "verdict_distribution": {
+    "PASS": 2,
+    "WARNING": 11,
+    "FAIL": 5
+  }
+}

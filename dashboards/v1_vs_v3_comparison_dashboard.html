@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>biso · Drug Discovery Pipeline — v1 vs v3 Comparison</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #06090f;
+  --bg2: #0c1219;
+  --bg3: #111a25;
+  --bg4: #182230;
+  --border: #1e2d3d;
+  --border2: #2a3f55;
+  --accent: #00e5ff;
+  --accent2: #0088cc;
+  --green: #00ff88;
+  --green2: #00cc6a;
+  --yellow: #ffd600;
+  --red: #ff3d5a;
+  --orange: #ff8a00;
+  --purple: #a78bfa;
+  --text: #e8f0fa;
+  --text2: #8899aa;
+  --text3: #4a6075;
+  --v1: #ff8a00;
+  --v3: #00e5ff;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 15px; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Sans KR', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ─── HEADER ─── */
+.header {
+  padding: 3rem 2rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.header::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(ellipse at 30% 50%, rgba(0,229,255,0.04) 0%, transparent 50%),
+              radial-gradient(ellipse at 70% 50%, rgba(255,138,0,0.03) 0%, transparent 50%);
+  pointer-events: none;
+}
+.header h1 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  position: relative;
+}
+.header h1 .v1-tag { color: var(--v1); }
+.header h1 .vs { color: var(--text3); margin: 0 0.3rem; }
+.header h1 .v3-tag { color: var(--v3); }
+.header .subtitle {
+  font-size: 0.85rem;
+  color: var(--text2);
+  margin-top: 0.5rem;
+  font-family: 'JetBrains Mono', monospace;
+}
+.header .date-badge {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.3rem 1rem;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--text2);
+}
+
+/* ─── CONTAINER ─── */
+.container { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+
+/* ─── SECTION ─── */
+.section {
+  margin-bottom: 2.5rem;
+}
+.section-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--text3);
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ─── GRID ─── */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+
+@media (max-width: 768px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+}
+
+/* ─── CARD ─── */
+.card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.2rem 1.4rem;
+  transition: border-color 0.3s, transform 0.2s;
+}
+.card:hover {
+  border-color: var(--border2);
+  transform: translateY(-1px);
+}
+.card-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text3);
+  margin-bottom: 0.6rem;
+}
+.card-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+.card-sub {
+  font-size: 0.75rem;
+  color: var(--text2);
+  margin-top: 0.3rem;
+}
+
+/* ─── COMPARISON TABLE ─── */
+.comp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+.comp-table th {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text3);
+  padding: 0.8rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg2);
+}
+.comp-table th.v1-col { color: var(--v1); }
+.comp-table th.v3-col { color: var(--v3); }
+.comp-table th.delta-col { color: var(--purple); }
+.comp-table td {
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid rgba(30,45,61,0.5);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+}
+.comp-table tr:hover td { background: rgba(0,229,255,0.02); }
+.comp-table td:first-child {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 500;
+  color: var(--text);
+}
+.comp-table .v1-val { color: var(--v1); }
+.comp-table .v3-val { color: var(--v3); }
+.comp-table .delta-pos { color: var(--green); }
+.comp-table .delta-neg { color: var(--red); }
+.comp-table .delta-neutral { color: var(--text3); }
+.comp-table .tag {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.tag-pass { background: rgba(0,255,136,0.1); color: var(--green); border: 1px solid rgba(0,255,136,0.2); }
+.tag-fail { background: rgba(255,61,90,0.1); color: var(--red); border: 1px solid rgba(255,61,90,0.2); }
+.tag-new { background: rgba(0,229,255,0.1); color: var(--accent); border: 1px solid rgba(0,229,255,0.2); }
+.tag-removed { background: rgba(255,138,0,0.1); color: var(--v1); border: 1px solid rgba(255,138,0,0.2); }
+.tag-warn { background: rgba(255,214,0,0.1); color: var(--yellow); border: 1px solid rgba(255,214,0,0.2); }
+
+/* ─── BAR CHART ─── */
+.bar-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.6rem;
+  gap: 0.8rem;
+}
+.bar-label {
+  width: 140px;
+  font-size: 0.75rem;
+  color: var(--text2);
+  text-align: right;
+  flex-shrink: 0;
+}
+.bar-track {
+  flex: 1;
+  height: 22px;
+  background: var(--bg3);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+.bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 1.5s cubic-bezier(0.23, 1, 0.32, 1);
+  position: relative;
+}
+.bar-fill.v1 { background: linear-gradient(90deg, var(--v1), #cc6e00); }
+.bar-fill.v3 { background: linear-gradient(90deg, var(--v3), var(--accent2)); }
+.bar-value {
+  width: 80px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* ─── FLOW DIAGRAM ─── */
+.flow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  align-items: stretch;
+  justify-content: center;
+  margin: 1rem 0;
+}
+.flow-step {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  min-width: 130px;
+  text-align: center;
+  position: relative;
+}
+.flow-step.new-step {
+  border-color: var(--accent);
+  box-shadow: 0 0 15px rgba(0,229,255,0.08);
+}
+.flow-step-link:hover {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 20px rgba(0,229,255,0.15);
+  transform: translateY(-2px);
+}
+.flow-arrow {
+  display: flex;
+  align-items: center;
+  color: var(--text3);
+  font-size: 1.2rem;
+  padding: 0 0.3rem;
+}
+.flow-step-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--text3);
+  margin-bottom: 0.2rem;
+}
+.flow-step-name {
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+.flow-step .new-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.55rem;
+  color: var(--accent);
+  margin-top: 0.2rem;
+}
+
+/* ─── HIGHLIGHT BOX ─── */
+.highlight-box {
+  background: var(--bg3);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  padding: 1rem 1.4rem;
+  margin: 1rem 0;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--text2);
+}
+.highlight-box strong { color: var(--text); }
+
+
+/* ─── NAVIGATION ─── */
+.nav-section {
+  text-align: center;
+  padding: 1.5rem 0 2rem;
+  border-bottom: 1px solid var(--border);
+}
+.nav-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.5rem;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  text-decoration: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+.nav-btn:hover {
+  border-color: var(--accent);
+  background: var(--bg3);
+  box-shadow: 0 0 20px rgba(0,229,255,0.1);
+  transform: translateY(-2px);
+}
+.nav-btn .step-num {
+  display: inline-block;
+  width: 60px;
+  padding: 0.25rem 0.5rem;
+  background: var(--bg3);
+  border-radius: 4px;
+  color: var(--accent);
+  font-size: 0.65rem;
+  text-align: center;
+}
+
+/* ─── FOOTER ─── */
+.footer {
+  text-align: center;
+  padding: 2rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--text3);
+  border-top: 1px solid var(--border);
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<div class="header">
+  <h1><span class="v1-tag">v1</span><span class="vs">vs</span><span class="v3-tag">v3</span> Comparison</h1>
+  <div class="subtitle">biso_myprotocol · Drug Discovery Pipeline</div>
+  <div class="date-badge">2026-04-08 (v1) → 2026-04-14 (v3) · say2-4team</div>
+</div>
+
+
+<!-- ═══ NAVIGATION ═══ -->
+<div class="nav-section">
+  <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:3px;color:var(--text3);margin-bottom:1rem;">Pipeline Steps</div>
+  <div class="nav-buttons">
+    <a href="step4_model_detail_dashboard.html" class="nav-btn">
+      <span class="step-num">Step 4</span>
+      <span>Model Detail</span>
+    </a>
+    <a href="step5_ensemble_dashboard.html" class="nav-btn">
+      <span class="step-num">Step 5</span>
+      <span>Ensemble</span>
+    </a>
+    <a href="step6_metabric_dashboard.html" class="nav-btn">
+      <span class="step-num">Step 6</span>
+      <span>METABRIC</span>
+    </a>
+    <a href="step7_admet_dashboard.html" class="nav-btn">
+      <span class="step-num">Step 7</span>
+      <span>ADMET</span>
+    </a>
+  </div>
+</div>
+
+
+<div class="container">
+
+<!-- ═══ PIPELINE FLOW ═══ -->
+<div class="section">
+  <div class="section-title">파이프라인 흐름 비교</div>
+  <div style="margin-bottom:0.8rem; font-size:0.75rem; color:var(--v1);">▸ v1 (4/8): Step 1 → 2 → 3 → 4 → 5 → 6 → 7</div>
+  <div class="flow">
+    <div class="flow-step"><div class="flow-step-num">Step 1</div><div class="flow-step-name">환경 설정</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-step-num">Step 2</div><div class="flow-step-name">데이터 준비</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-step-num">Step 3</div><div class="flow-step-name">FE 실행</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step new-step"><div class="flow-step-num">Step 3-2.5</div><div class="flow-step-name">매칭 품질 검증</div><div class="new-badge">v3 신규</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step new-step"><div class="flow-step-num">Step 3.5</div><div class="flow-step-name">Feature Selection</div><div class="new-badge">v3 신규</div></div>
+    <div class="flow-arrow">→</div>
+    <a href="step4_model_detail_dashboard.html" class="flow-step flow-step-link" style="text-decoration:none;color:inherit;"><div class="flow-step-num">Step 4</div><div class="flow-step-name">모델 학습</div><div style="font-size:0.55rem;color:var(--accent);margin-top:0.2rem;">클릭하여 상세 보기 →</div></a>
+    <div class="flow-arrow">→</div>
+    <a href="step5_ensemble_dashboard.html" class="flow-step flow-step-link" style="text-decoration:none;color:inherit;"><div class="flow-step-num">Step 5</div><div class="flow-step-name">앙상블</div><div style="font-size:0.55rem;color:var(--accent);margin-top:0.2rem;">클릭하여 상세 보기 →</div></a>
+    <div class="flow-arrow">→</div>
+    <a href="step6_metabric_dashboard.html" class="flow-step flow-step-link" style="text-decoration:none;color:inherit;"><div class="flow-step-num">Step 6</div><div class="flow-step-name">METABRIC</div><div style="font-size:0.55rem;color:var(--accent);margin-top:0.2rem;">클릭하여 상세 보기 →</div></a>
+    <div class="flow-arrow">→</div>
+    <a href="step7_admet_dashboard.html" class="flow-step flow-step-link" style="text-decoration:none;color:inherit;"><div class="flow-step-num">Step 7</div><div class="flow-step-name">ADMET</div><div style="font-size:0.55rem;color:var(--accent);margin-top:0.2rem;">클릭하여 상세 보기 →</div></a>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step new-step"><div class="flow-step-num">Step 7+</div><div class="flow-step-name">KG/API 검증</div><div class="new-badge">v3 신규</div></div>
+  </div>
+</div>
+
+<!-- ═══ SUMMARY CARDS ═══ -->
+<div class="section">
+  <div class="section-title">핵심 수치 요약</div>
+  <div class="grid-4">
+    <div class="card">
+      <div class="card-label">총 Feature 수</div>
+      <div class="card-value" style="color:var(--v1);">20,389</div>
+      <div class="card-sub">v1 · 원본 전체</div>
+    </div>
+    <div class="card">
+      <div class="card-label">총 Feature 수</div>
+      <div class="card-value" style="color:var(--v3);">5,534</div>
+      <div class="card-sub">v3 · 72.9% 감축</div>
+    </div>
+    <div class="card">
+      <div class="card-label">학습 샘플 수</div>
+      <div class="card-value" style="color:var(--v1);">7,730</div>
+      <div class="card-sub">v1 · NA 52개 포함</div>
+    </div>
+    <div class="card">
+      <div class="card-label">학습 샘플 수</div>
+      <div class="card-value" style="color:var(--v3);">6,366</div>
+      <div class="card-sub">v3 · NA 52개 제외</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FEATURE COMPOSITION ═══ -->
+<div class="section">
+  <div class="section-title">Feature 구성 비교</div>
+  <div class="card" style="padding:1.5rem;">
+    <div style="margin-bottom:1.2rem;">
+      <div style="font-size:0.7rem; color:var(--v1); margin-bottom:0.6rem; font-family:'JetBrains Mono',monospace; letter-spacing:1px;">▸ v1 (20,389 features)</div>
+      <div class="bar-row">
+        <div class="bar-label">CRISPR Gene</div>
+        <div class="bar-track"><div class="bar-fill v1" style="width:89.8%;"></div></div>
+        <div class="bar-value v1-val">18,310</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Morgan FP</div>
+        <div class="bar-track"><div class="bar-fill v1" style="width:10.0%;"></div></div>
+        <div class="bar-value v1-val">2,048</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">LINCS</div>
+        <div class="bar-track"><div class="bar-fill v1" style="width:0.5%;"></div></div>
+        <div class="bar-value v1-val">5</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Target + Pathway</div>
+        <div class="bar-track"><div class="bar-fill v1" style="width:0.5%;"></div></div>
+        <div class="bar-value v1-val">10</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Drug Desc + Meta</div>
+        <div class="bar-track"><div class="bar-fill v1" style="width:0.8%;"></div></div>
+        <div class="bar-value v1-val">16</div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:0.7rem; color:var(--v3); margin-bottom:0.6rem; font-family:'JetBrains Mono',monospace; letter-spacing:1px;">▸ v3 (5,534 features)</div>
+      <div class="bar-row">
+        <div class="bar-label">CRISPR Gene</div>
+        <div class="bar-track"><div class="bar-fill v3" style="width:79.8%;"></div></div>
+        <div class="bar-value v3-val">4,415</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Morgan FP</div>
+        <div class="bar-track"><div class="bar-fill v3" style="width:19.7%;"></div></div>
+        <div class="bar-value v3-val">1,088</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">LINCS</div>
+        <div class="bar-track"><div class="bar-fill v3" style="width:0.5%;"></div></div>
+        <div class="bar-value v3-val">5</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Target + Pathway</div>
+        <div class="bar-track"><div class="bar-fill v3" style="width:0.5%;"></div></div>
+        <div class="bar-value v3-val">10</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Drug Desc + Meta</div>
+        <div class="bar-track"><div class="bar-fill v3" style="width:0.8%;"></div></div>
+        <div class="bar-value v3-val">14</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FEATURE SELECTION DETAIL ═══ -->
+<div class="section">
+  <div class="section-title">Feature Selection 상세 (v3 신규)</div>
+  <div class="card" style="overflow-x:auto;">
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Feature 유형</th>
+          <th class="v1-col">v1 원본</th>
+          <th class="v3-col">v3 Selection 후</th>
+          <th>제거 수</th>
+          <th>감축률</th>
+          <th>제거 방법</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>CRISPR Gene</td>
+          <td class="v1-val">18,310</td>
+          <td class="v3-val">4,415</td>
+          <td>13,895</td>
+          <td>75.9%</td>
+          <td>Low var: 13,719 · Corr>0.95: 176</td>
+        </tr>
+        <tr>
+          <td>Morgan Fingerprint</td>
+          <td class="v1-val">2,048</td>
+          <td class="v3-val">1,088</td>
+          <td>960</td>
+          <td>46.9%</td>
+          <td>Low var: 952 · Corr>0.95: 8</td>
+        </tr>
+        <tr>
+          <td>LINCS</td>
+          <td class="v1-val">5</td>
+          <td class="v3-val">5</td>
+          <td>0</td>
+          <td>0%</td>
+          <td>전부 유지</td>
+        </tr>
+        <tr>
+          <td>Target</td>
+          <td class="v1-val">8</td>
+          <td class="v3-val">8</td>
+          <td>0</td>
+          <td>0%</td>
+          <td>전부 유지</td>
+        </tr>
+        <tr>
+          <td>Pathway</td>
+          <td class="v1-val">2</td>
+          <td class="v3-val">2</td>
+          <td>0</td>
+          <td>0%</td>
+          <td>전부 유지</td>
+        </tr>
+        <tr>
+          <td>Drug Descriptors</td>
+          <td class="v1-val">9</td>
+          <td class="v3-val">9</td>
+          <td>0</td>
+          <td>0%</td>
+          <td>전부 유지</td>
+        </tr>
+        <tr style="font-weight:700; border-top:2px solid var(--border2);">
+          <td>Total</td>
+          <td class="v1-val">20,389</td>
+          <td class="v3-val">5,534</td>
+          <td>14,855</td>
+          <td>72.9%</td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══ DATA QUALITY ═══ -->
+<div class="section">
+  <div class="section-title">데이터 품질 비교</div>
+  <div class="card" style="overflow-x:auto;">
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>항목</th>
+          <th class="v1-col">v1 (4/8)</th>
+          <th class="v3-col">v3 (4/14)</th>
+          <th class="delta-col">변경 사항</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>총 약물 수</td>
+          <td class="v1-val">295</td>
+          <td class="v3-val">243</td>
+          <td class="delta-neutral">NA 52개 제외</td>
+        </tr>
+        <tr>
+          <td>SMILES 매칭률</td>
+          <td class="v1-val">82.4% (243/295)</td>
+          <td class="v3-val">82.4% (243/295)</td>
+          <td class="delta-neutral">동일</td>
+        </tr>
+        <tr>
+          <td>매칭 품질 검증</td>
+          <td class="v1-val"><span class="tag tag-fail">미실시</span></td>
+          <td class="v3-val"><span class="tag tag-pass">완료</span></td>
+          <td><span class="tag tag-new">신규</span></td>
+        </tr>
+        <tr>
+          <td>RDKit 파싱 성공률</td>
+          <td class="v1-val">—</td>
+          <td class="v3-val">100% (243/243)</td>
+          <td><span class="tag tag-new">신규</span></td>
+        </tr>
+        <tr>
+          <td>Final Usable SMILES</td>
+          <td class="v1-val">—</td>
+          <td class="v3-val">147개 (49.8%)</td>
+          <td><span class="tag tag-new">신규</span></td>
+        </tr>
+        <tr>
+          <td>구조적 한계 약물</td>
+          <td class="v1-val">—</td>
+          <td class="v3-val">44개 (flag+유지)</td>
+          <td><span class="tag tag-new">신규</span></td>
+        </tr>
+        <tr>
+          <td>All-zero FP 약물</td>
+          <td class="v1-val">52개 (포함)</td>
+          <td class="v3-val">52개 (제외)</td>
+          <td class="delta-pos">✓ 노이즈 제거</td>
+        </tr>
+        <tr>
+          <td>A+B 등급 비율</td>
+          <td class="v1-val">—</td>
+          <td class="v3-val">47.1% (139/295)</td>
+          <td><span class="tag tag-new">신규</span></td>
+        </tr>
+        <tr>
+          <td>drug_id 구조 충돌</td>
+          <td class="v1-val">—</td>
+          <td class="v3-val">0건</td>
+          <td><span class="tag tag-pass">PASS</span></td>
+        </tr>
+        <tr>
+          <td>학습 샘플 수</td>
+          <td class="v1-val">7,730</td>
+          <td class="v3-val">6,366</td>
+          <td class="delta-neutral">-1,364행 (NA 약물 관련)</td>
+        </tr>
+        <tr>
+          <td>GDSC 버전</td>
+          <td class="v1-val">GDSC2 only</td>
+          <td class="v3-val">GDSC2 only</td>
+          <td class="delta-neutral">동일</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══ MATCHING SOURCE ═══ -->
+<div class="section">
+  <div class="section-title">매칭 소스별 신뢰도 (v3 신규 검증)</div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-label">소스별 분포</div>
+      <div class="bar-row">
+        <div class="bar-label" style="width:100px;">A · ChEMBL</div>
+        <div class="bar-track"><div class="bar-fill v3" style="width:53.5%; background:var(--green);"></div></div>
+        <div class="bar-value" style="color:var(--green);">130</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label" style="width:100px;">B · DrugBank</div>
+        <div class="bar-track"><div class="bar-fill v3" style="width:3.7%; background:var(--accent);"></div></div>
+        <div class="bar-value" style="color:var(--accent);">9</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label" style="width:100px;">C · DB fuzzy</div>
+        <div class="bar-track"><div class="bar-fill v3" style="width:3.7%; background:var(--yellow);"></div></div>
+        <div class="bar-value" style="color:var(--yellow);">9</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label" style="width:100px;">D · PubChem</div>
+        <div class="bar-track"><div class="bar-fill v3" style="width:39.1%; background:var(--orange);"></div></div>
+        <div class="bar-value" style="color:var(--orange);">95</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label" style="width:100px;">NA · 미매칭</div>
+        <div class="bar-track"><div class="bar-fill" style="width:21.4%; background:var(--text3);"></div></div>
+        <div class="bar-value" style="color:var(--text3);">52</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-label">Fingerprint 품질 분포</div>
+      <div style="font-family:'JetBrains Mono',monospace; font-size:0.8rem; line-height:2;">
+        <div>평균 bit density: <span style="color:var(--text);">2.22%</span></div>
+        <div>중앙값: <span style="color:var(--text);">2.54%</span></div>
+        <div>P5: <span style="color:var(--red);">0.00%</span> <span style="tag tag-fail" style="font-size:0.6rem;">하위 5% 비어있음</span></div>
+        <div>P95: <span style="color:var(--green);">3.99%</span></div>
+        <div>All-zero: <span style="color:var(--red);">52개</span> → v3에서 제외</div>
+        <div>Low density (<2%): <span style="color:var(--yellow);">96개</span> → 44개 flag 유지</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ EVALUATION COMPARISON ═══ -->
+<div class="section">
+  <div class="section-title">평가 체계 비교</div>
+  <div class="card" style="overflow-x:auto;">
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>평가 항목</th>
+          <th class="v1-col">v1 (4/8)</th>
+          <th class="v3-col">v3 (4/14)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Random 5-fold CV</td>
+          <td class="v1-val"><span class="tag tag-pass">적용</span></td>
+          <td class="v3-val"><span class="tag tag-pass">적용</span></td>
+        </tr>
+        <tr>
+          <td>Holdout Test (20%)</td>
+          <td class="v1-val"><span class="tag tag-fail">미적용</span></td>
+          <td class="v3-val"><span class="tag tag-new">신규</span></td>
+        </tr>
+        <tr>
+          <td>GroupKFold (Drug)</td>
+          <td class="v1-val"><span class="tag tag-fail">미적용</span></td>
+          <td class="v3-val"><span class="tag tag-new">신규</span></td>
+        </tr>
+        <tr>
+          <td>Unseen Drug Holdout</td>
+          <td class="v1-val"><span class="tag tag-fail">미적용</span></td>
+          <td class="v3-val"><span class="tag tag-new">신규</span></td>
+        </tr>
+        <tr>
+          <td>Scaffold Split</td>
+          <td class="v1-val"><span class="tag tag-fail">미적용</span></td>
+          <td class="v3-val"><span class="tag tag-new">신규</span></td>
+        </tr>
+        <tr>
+          <td>Multi-seed Stability</td>
+          <td class="v1-val"><span class="tag tag-fail">미적용</span></td>
+          <td class="v3-val"><span class="tag tag-new">신규 (5 seeds)</span></td>
+        </tr>
+        <tr>
+          <td>측정 지표 수</td>
+          <td class="v1-val">2개 (Sp, RMSE)</td>
+          <td class="v3-val">32개</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══ METRICS ═══ -->
+<div class="section">
+  <div class="section-title">측정 지표 비교 (v1: 2개 → v3: 32개)</div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-label">v1 — 2개 지표</div>
+      <div style="font-size:0.8rem; line-height:2; font-family:'JetBrains Mono',monospace;">
+        <div>1. Spearman</div>
+        <div>2. RMSE</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-label">v3 — 32개 지표 (5개 카테고리)</div>
+      <div style="font-size:0.75rem; line-height:1.8;">
+        <div style="color:var(--accent); font-family:'JetBrains Mono',monospace; font-size:0.65rem; margin-top:0.5rem;">예측 성능 (8)</div>
+        <div>Spearman · Kendall tau · Pearson · R² · RMSE · MAE · MedianAE · P95 error</div>
+        <div style="color:var(--yellow); font-family:'JetBrains Mono',monospace; font-size:0.65rem; margin-top:0.5rem;">과적합 진단 (5)</div>
+        <div>Train Sp · OOF Sp · Gap · Ratio · Fold std</div>
+        <div style="color:var(--green); font-family:'JetBrains Mono',monospace; font-size:0.65rem; margin-top:0.5rem;">일반화 (6종 Split)</div>
+        <div>5CV · Holdout · GroupKFold · Unseen Drug · Scaffold · Multi-seed</div>
+        <div style="color:var(--purple); font-family:'JetBrains Mono',monospace; font-size:0.65rem; margin-top:0.5rem;">앙상블 품질 (4)</div>
+        <div>앙상블>Best · Gap · 가중치 분포 · Diversity</div>
+        <div style="color:var(--orange); font-family:'JetBrains Mono',monospace; font-size:0.65rem; margin-top:0.5rem;">약물 랭킹 (9)</div>
+        <div>P@k · R@k · NDCG@k · MAP · EF@k · Overlap(seed) · Overlap(split) · 계열 중복률 · Target coverage</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MODEL RESULTS ═══ -->
+<div class="section">
+  <div class="section-title">v1 vs v3 모델 결과 비교 (15개 전체 · 재학습 기준)</div>
+  <div class="card" style="overflow-x:auto;">
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>모델</th>
+          <th>유형</th>
+          <th>v1 OOF Sp</th>
+          <th class="v3-col">v3 OOF Sp</th>
+          <th class="v3-col">v3 Gap</th>
+          <th>과적합</th>
+          <th>v3 앙상블</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background:rgba(0,229,255,0.03);"><td>4</td><td>CatBoost</td><td>ML</td><td class="v1-val">0.8007</td><td class="v3-val">0.8624</td><td>0.074</td><td><span class="tag tag-warn">WARNING</span></td><td><span class="tag tag-pass">앙상블 6</span></td></tr>
+        <tr style="background:rgba(0,229,255,0.03);"><td>1</td><td>LightGBM</td><td>ML</td><td class="v1-val">0.7913</td><td class="v3-val">0.8493</td><td>0.090</td><td><span class="tag tag-warn">WARNING</span></td><td><span class="tag tag-pass">앙상블 6</span></td></tr>
+        <tr style="background:rgba(0,229,255,0.03);"><td>2</td><td>DART</td><td>ML</td><td class="v1-val">0.7848</td><td class="v3-val">0.8415</td><td>0.053</td><td><span class="tag tag-warn">WARNING</span></td><td><span class="tag tag-pass">앙상블 6</span></td></tr>
+        <tr style="background:rgba(0,229,255,0.03);"><td>10</td><td>FlatMLP</td><td>DL</td><td class="v1-val">0.7936</td><td class="v3-val">0.8278</td><td>0.024</td><td><span class="tag tag-pass">NORMAL</span></td><td><span class="tag tag-pass">앙상블 6</span></td></tr>
+        <tr style="background:rgba(0,229,255,0.03);"><td>13</td><td>CrossAttention</td><td>DL</td><td class="v1-val">0.7852</td><td class="v3-val">0.8238</td><td>0.029</td><td><span class="tag tag-pass">NORMAL</span></td><td><span class="tag tag-pass">앙상블 6</span></td></tr>
+        <tr style="background:rgba(0,229,255,0.03);"><td>12</td><td>FT-Transformer</td><td>DL</td><td class="v1-val">0.7625</td><td class="v3-val">0.8057</td><td>0.035</td><td><span class="tag tag-pass">NORMAL</span></td><td><span class="tag tag-pass">앙상블 6</span></td></tr>
+        <tr style="opacity:0.6;"><td>3</td><td>XGBoost</td><td>ML</td><td class="v1-val">0.7895</td><td>0.8433</td><td>0.140</td><td><span class="tag tag-fail">OVERFITTING</span></td><td>제외</td></tr>
+        <tr style="opacity:0.6;"><td>7</td><td>Stacking</td><td>ML</td><td class="v1-val">0.7981</td><td>0.8626</td><td>0.116</td><td><span class="tag tag-fail">OVERFITTING</span></td><td>제외</td></tr>
+        <tr style="opacity:0.6;"><td>5</td><td>RandomForest</td><td>ML</td><td class="v1-val">0.6267</td><td>0.8500</td><td>0.132</td><td><span class="tag tag-fail">OVERFITTING</span></td><td>제외</td></tr>
+        <tr style="opacity:0.6;"><td>6</td><td>ExtraTrees</td><td>ML</td><td class="v1-val">0.6468</td><td>0.8464</td><td>0.151</td><td><span class="tag" style="background:rgba(255,61,90,0.15);color:var(--red);border:1px solid rgba(255,61,90,0.3);">SEVERE</span></td><td>제외</td></tr>
+        <tr style="opacity:0.6;"><td>11</td><td>TabNet</td><td>DL</td><td class="v1-val">0.7780</td><td>0.8554</td><td>0.093</td><td><span class="tag tag-warn">WARNING</span></td><td>제외</td></tr>
+        <tr style="opacity:0.6;"><td>9</td><td>ResidualMLP</td><td>DL</td><td class="v1-val">0.7855</td><td>0.7629</td><td>0.027</td><td><span class="tag tag-pass">NORMAL</span></td><td>제외 (Sp↓)</td></tr>
+        <tr style="opacity:0.4;"><td>8</td><td>RSF</td><td>ML</td><td class="v1-val">0.6142</td><td>0.7985</td><td>~0</td><td><span class="tag tag-pass">NORMAL</span></td><td>METABRIC 전용</td></tr>
+        <tr style="opacity:0.4;"><td>14</td><td>GraphSAGE</td><td>GNN</td><td class="v1-val">0.3852</td><td>0.4326</td><td>—</td><td>—</td><td>drug-split FAIL</td></tr>
+        <tr style="opacity:0.4;"><td>15</td><td>GAT</td><td>GNN</td><td class="v1-val">0.0085</td><td>0.4257</td><td>—</td><td>—</td><td>완전 실패</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="highlight-box" style="margin-top:1rem;">
+    <strong>v1 앙상블:</strong> 6개 모델 · Spearman 0.8055 · RMSE 1.3008 · Gap 0.0004<br>
+    <strong>v3 앙상블 A:</strong> 3개 모델 (CatBoost+DART+FlatMLP) · Sp 0.8641 · RMSE 1.146 · METABRIC에서 CatBoost 단독과 비교 예정
+  </div>
+</div>
+
+<!-- ═══ ENSEMBLE COMPOSITION ═══ -->
+<div class="section">
+  <div class="section-title">v3 앙상블 — 최종 확정 (<a href="step5_ensemble_dashboard.html" style="color:var(--accent);text-decoration:none;">상세 보기 →</a>)</div>
+  <div class="grid-2">
+    <div class="card" style="border-left:3px solid var(--accent);">
+      <div class="card-label">앙상블 A (3개) — 비교 대상 1</div>
+      <div style="font-size:0.8rem; line-height:2;">
+        <div><strong style="color:var(--v3);">CatBoost</strong> · Sp 0.862 · Gap 0.074 · 34.0%</div>
+        <div><strong style="color:var(--v3);">DART</strong> · Sp 0.842 · Gap 0.053 · 33.8%</div>
+        <div><strong style="color:var(--v3);">FlatMLP</strong> · Sp 0.828 · Gap 0.024 · 32.3%</div>
+      </div>
+      <div style="font-size:0.7rem;color:var(--text3);margin-top:0.3rem;">OOF 0.8641 · RMSE 1.146 · P@30 70%</div>
+    </div>
+    <div class="card" style="border-left:3px solid var(--orange);">
+      <div class="card-label">CatBoost 단독 — 비교 대상 2</div>
+      <div style="font-size:0.8rem; line-height:2;">
+        <div><strong style="color:var(--orange);">CatBoost</strong> · OOF 0.8704</div>
+        <div>Seed: 0.870 ± 0.001 · Top-30 overlap 57%</div>
+        <div>앙상블보다 Sp +0.006 높음</div>
+      </div>
+      <div style="font-size:0.7rem;color:var(--text3);margin-top:0.3rem;">성능+안정성 모두 1위 · diversity 부족이 앙상블 한계 원인</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ OVERFITTING ANALYSIS ═══ -->
+<div class="section">
+  <div class="section-title">과적합 분석 · v1 vs v3 Gap 비교</div>
+  <div class="card" style="padding:1.5rem;">
+    <div style="font-size:0.7rem; color:var(--text3); margin-bottom:0.8rem; font-family:'JetBrains Mono',monospace;">앙상블 6개 모델 Gap 비교 (낮을수록 좋음)</div>
+    <div class="bar-row">
+      <div class="bar-label">CatBoost v1</div>
+      <div class="bar-track"><div class="bar-fill v1" style="width:73%;"></div></div>
+      <div class="bar-value" style="color:var(--v1);">0.110</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">CatBoost v3</div>
+      <div class="bar-track"><div class="bar-fill v3" style="width:49%;"></div></div>
+      <div class="bar-value" style="color:var(--v3);">0.074</div>
+    </div>
+    <div style="height:8px;"></div>
+    <div class="bar-row">
+      <div class="bar-label">LightGBM v1</div>
+      <div class="bar-track"><div class="bar-fill v1" style="width:82%;"></div></div>
+      <div class="bar-value" style="color:var(--v1);">0.123</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">LightGBM v3</div>
+      <div class="bar-track"><div class="bar-fill v3" style="width:60%;"></div></div>
+      <div class="bar-value" style="color:var(--v3);">0.090</div>
+    </div>
+    <div style="height:8px;"></div>
+    <div class="bar-row">
+      <div class="bar-label">DART v1</div>
+      <div class="bar-track"><div class="bar-fill v1" style="width:43%;"></div></div>
+      <div class="bar-value" style="color:var(--v1);">0.065</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">DART v3</div>
+      <div class="bar-track"><div class="bar-fill v3" style="width:35%;"></div></div>
+      <div class="bar-value" style="color:var(--v3);">0.053</div>
+    </div>
+    <div style="height:8px;"></div>
+    <div class="bar-row">
+      <div class="bar-label">CrossAttn v1</div>
+      <div class="bar-track"><div class="bar-fill v1" style="width:16%;"></div></div>
+      <div class="bar-value" style="color:var(--v1);">0.024</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">CrossAttn v3</div>
+      <div class="bar-track"><div class="bar-fill v3" style="width:19%;"></div></div>
+      <div class="bar-value" style="color:var(--v3);">0.029</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ OUTLIER SAMPLES ═══ -->
+<div class="section">
+  <div class="section-title">이상치 샘플 (모든 모델 동시 실패 · Top 5)</div>
+  <div class="card" style="overflow-x:auto;">
+    <table class="comp-table">
+      <thead><tr><th>순위</th><th>Sample</th><th>Drug ID</th><th>실제 IC50</th><th>평균 오차</th><th>특이사항</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>UACC-893</td><td>1799</td><td>-2.697</td><td style="color:var(--red);">6.508</td><td>조합만 극단적 민감</td></tr>
+        <tr><td>2</td><td>HCC1806</td><td>1190</td><td>-5.851</td><td style="color:var(--red);">5.882</td><td>약물 IC50 분산 극대(std=3.26)</td></tr>
+        <tr><td>3</td><td>MDA-MB-231</td><td>1819</td><td>2.301</td><td style="color:var(--red);">5.493</td><td>약물 평균 대비 이상치</td></tr>
+        <tr><td>4</td><td>MDA-MB-453</td><td>1706</td><td>-2.158</td><td style="color:var(--yellow);">4.448</td><td>—</td></tr>
+        <tr><td>5</td><td>OCUB-M</td><td>1557</td><td>-0.744</td><td style="color:var(--yellow);">4.275</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="highlight-box" style="margin-top:0.5rem;border-left-color:var(--yellow);">
+    동일 10개 샘플에서 모든 모델(6개)이 극단적 오차 발생. 모델 문제가 아닌 데이터 특성(특정 약물-세포주 상호작용). README에 기록.
+  </div>
+</div>
+
+<!-- ═══ EXTENDED EVALUATION SUMMARY ═══ -->
+<div class="section">
+  <div class="section-title">전체 파이프라인 결과 — 상세 대시보드 링크</div>
+  <div class="grid-2" style="margin-bottom:1.5rem;">
+    <div class="card" style="padding:0.8rem 1rem;">
+      <div style="font-size:0.8rem;line-height:2;">
+        <a href="step4_model_detail_dashboard.html" style="color:var(--accent);text-decoration:none;">→ Step 4 모델 학습 + 6단계 평가 상세</a><br>
+        <a href="step5_ensemble_dashboard.html" style="color:var(--accent);text-decoration:none;">→ Step 5 앙상블 분석 상세</a>
+      </div>
+    </div>
+    <div class="card" style="padding:0.8rem 1rem;">
+      <div style="font-size:0.8rem;line-height:2;">
+        <a href="step6_metabric_dashboard.html" style="color:var(--accent);text-decoration:none;">→ Step 6 METABRIC 외부 검증 상세</a><br>
+        <a href="step7_admet_dashboard.html" style="color:var(--accent);text-decoration:none;">→ Step 7 ADMET + 약물 추천 상세</a>
+      </div>
+    </div>
+  </div>
+  <div class="section-title">6단계 확장 평가 결과 요약</div>
+  <div class="card" style="overflow-x:auto;">
+    <table class="comp-table">
+      <thead><tr><th>단계</th><th>평가 방식</th><th>평균 Sp</th><th>하락률</th><th>Best 모델</th><th>의미</th></tr></thead>
+      <tbody>
+        <tr><td>1단계</td><td>Random 5CV</td><td style="color:var(--green);">0.835</td><td>—</td><td>CatBoost 0.862</td><td>기준선 (optimistic)</td></tr>
+        <tr><td>2단계</td><td>GroupKFold (Drug)</td><td style="color:var(--yellow);">0.537</td><td>-36%</td><td>CatBoost 0.559</td><td>Drug leakage 제거</td></tr>
+        <tr><td>3단계</td><td>Unseen Drug</td><td style="color:var(--orange);">0.326</td><td>-61%</td><td>CatBoost 0.353</td><td>신약 예측 한계</td></tr>
+        <tr><td>4단계</td><td>Scaffold Split</td><td style="color:var(--red);">0.325</td><td>-61%</td><td>GraphSAGE 0.359</td><td>구조 일반화 한계</td></tr>
+        <tr><td>5단계</td><td>Multi-seed (5)</td><td style="color:var(--green);">0.844</td><td>—</td><td>CatBoost 0.870±0.001</td><td>재현성 검증</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="highlight-box" style="margin-top:0.5rem;border-left-color:var(--accent);">
+    <strong>핵심:</strong> Random 5CV 성능의 36%는 drug leakage에 의한 과대평가. Unseen Drug/Scaffold에서 61% 하락은 Herbert et al. (2025)의 결론과 일치하는 데이터셋 본질적 한계. 하지만 P@30 0.87~0.97로 랭킹 품질은 우수.
+  </div>
+</div>
+
+<!-- ═══ ENSEMBLE FINAL ═══ -->
+<div class="section">
+  <div class="section-title">앙상블 최종 결과 — METABRIC 검증 완료 (<a href="step6_metabric_dashboard.html" style="color:var(--accent);text-decoration:none;">Step 6 상세 →</a>)</div>
+  <div class="grid-2">
+    <div class="card" style="border-left:3px solid var(--accent);">
+      <div class="card-label">앙상블 A (3개 모델)</div>
+      <div style="font-size:0.8rem; line-height:2;">
+        <div><strong>구성:</strong> CatBoost + DART + FlatMLP</div>
+        <div><strong>OOF Sp:</strong> <span style="color:var(--v3);">0.8641</span> · RMSE: 1.146</div>
+        <div><strong>P@30:</strong> 70% · NDCG@30: 79.0%</div>
+        <div><strong>장점:</strong> RMSE 최저, NDCG 앙상블이 단독보다 우수</div>
+      </div>
+    </div>
+    <div class="card" style="border-left:3px solid var(--orange);">
+      <div class="card-label">CatBoost 단독</div>
+      <div style="font-size:0.8rem; line-height:2;">
+        <div><strong>구성:</strong> CatBoost only</div>
+        <div><strong>OOF Sp:</strong> <span style="color:var(--orange);">0.8704</span> · 앙상블보다 +0.006</div>
+        <div><strong>안정성:</strong> Top-30 overlap 57%, Jaccard 0.664</div>
+        <div><strong>장점:</strong> 성능 최고, 랭킹 안정성 압도적</div>
+      </div>
+    </div>
+  </div>
+  <div class="highlight-box" style="margin-top:0.5rem;border-left-color:var(--purple);">
+    <strong>METABRIC 결과:</strong> 앙상블 A와 CatBoost 단독 Top 15 overlap 80%(12/15 일치), Sp 0.994. <strong>CatBoost 단독 채택.</strong> Survival 유의 약물 6/10(60%). FDA 승인 10/15(67%). 신약 후보 5개(Bicalutamide 재창출 1순위).
+  </div>
+</div>
+
+<!-- ═══ GAP INTERPRETATION ═══ -->
+<div class="section">
+  <div class="section-title">Gap 해석 가이드 — 평가 단계별 의미가 다름</div>
+  <div class="grid-2">
+    <div class="card" style="border-left:3px solid var(--green);">
+      <div class="card-label">1단계 Random 5CV Gap</div>
+      <div style="font-size:0.78rem; line-height:1.7;">
+        <strong>순수 과적합 지표</strong><br>
+        &lt;0.05 안정 / 0.05~0.10 경계 / &gt;0.10 과적합 의심<br>
+        이 기준은 1단계에만 적용
+      </div>
+    </div>
+    <div class="card" style="border-left:3px solid var(--yellow);">
+      <div class="card-label">2단계 GroupKFold Gap</div>
+      <div style="font-size:0.78rem; line-height:1.7;">
+        <strong>Random CV 과대평가 정도</strong><br>
+        Gap↑ = 기존 성능이 inflated<br>
+        과적합이 아니라 평가 방법의 문제 탐지
+      </div>
+    </div>
+    <div class="card" style="border-left:3px solid var(--orange);">
+      <div class="card-label">3~4단계 Unseen/Scaffold Gap</div>
+      <div style="font-size:0.78rem; line-height:1.7;">
+        <strong>단일 요인이 아님 (주의)</strong><br>
+        = Task difficulty + Distribution shift<br>
+        + Model generalization + Feature 한계<br>
+        ❌ "과적합이다" 단정 금지<br>
+        ✅ "과적합만으로 설명할 수 없다"
+      </div>
+    </div>
+    <div class="card" style="border-left:3px solid var(--red);">
+      <div class="card-label">핵심 원칙</div>
+      <div style="font-size:0.78rem; line-height:1.7;">
+        <strong>절대값 해석 ❌ · 상대 비교 ✅</strong><br>
+        Gap만 보면 안 됨. 같이 볼 것:<br>
+        Test Sp · Top-30 overlap · P@k · NDCG@k<br>
+        <em>Herbert et al. (2025) bioRxiv</em>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ KEY CHANGES ═══ -->
+<div class="section">
+  <div class="section-title">v1 → v3 핵심 변경 사항 (확정)</div>
+  <div class="grid-3">
+    <div class="card" style="border-left:3px solid var(--green);">
+      <div class="card-label">추가된 것</div>
+      <div style="font-size:0.8rem; line-height:1.8;">
+        Step 3-2.5 매칭 품질 검증<br>
+        Step 3.5 Feature Selection<br>
+        6단계 평가 체계<br>
+        32개 측정 지표<br>
+        과적합 진단 (Train Sp/Gap)<br>
+        Gap 해석 가이드<br>
+        이상치 샘플 식별
+      </div>
+    </div>
+    <div class="card" style="border-left:3px solid var(--red);">
+      <div class="card-label">제거/제외된 것</div>
+      <div style="font-size:0.8rem; line-height:1.8;">
+        NA 52개 약물 (all-zero FP)<br>
+        Feature 14,855개 (72.9% 감축)<br>
+        ExtraTrees (Gap 0.151 SEVERE)<br>
+        XGBoost · RandomForest · Stacking<br>
+        FT-Transformer (Top-30 overlap 0%)<br>
+        CrossAttention (FlatMLP과 상관 1.0)<br>
+        MultiModalFusionNet · Step 8 허들
+      </div>
+    </div>
+    <div class="card" style="border-left:3px solid var(--accent);">
+      <div class="card-label">확인된 개선</div>
+      <div style="font-size:0.8rem; line-height:1.8;">
+        CatBoost Gap: 0.110→0.074 (-33%)<br>
+        LightGBM Gap: 0.123→0.090 (-27%)<br>
+        DART · FT-Trans: v1 FAIL→v3 PASS<br>
+        CatBoost 5-seed std 0.001 (최안정)<br>
+        앙상블 A: 3개 모델 (Tree 2 + DL 1)<br>
+        P@30 0.87~0.97 (랭킹 품질 우수)
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ REFERENCE ═══ -->
+<div class="section">
+  <div class="section-title">참고 문헌</div>
+  <div class="highlight-box" style="border-left-color:var(--purple);">
+    <strong>Herbert et al. (2025)</strong> "Monotherapy cancer drug-blind response prediction is limited to intraclass generalization" bioRxiv. DOI: 10.1101/2025.06.16.659838<br><br>
+    Drug-blind 예측은 같은 MOA 계열 내에서만 일반화 가능. Mixed set 성능의 90%는 약물 분포 암기. 본 파이프라인 2~4단계 확장 평가 결과와 일치. Gap 해석 가이드의 이론적 근거.
+  </div>
+</div>
+
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<div class="footer">
+  biso_myprotocol · say2-4team · v1 (20260408) vs v3 (20260414) · Drug Discovery Pipeline Comparison Dashboard
+</div>
+
+</body>
+</html>

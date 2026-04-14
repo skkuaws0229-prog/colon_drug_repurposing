@@ -1,0 +1,762 @@
+[
+  {
+    "drug_name": "AZD2014",
+    "n_total": 2,
+    "n_exact": 0,
+    "n_close_analog": 0,
+    "n_analog": 2,
+    "safety_score": 5.663192482602661,
+    "verdict": "WARNING",
+    "assays": [
+      {
+        "assay": "clearance_hepatocyte_az",
+        "category": "Excretion",
+        "value": 10.0,
+        "similarity": 0.8,
+        "match_type": "analog"
+      },
+      {
+        "assay": "lipophilicity_astrazeneca",
+        "category": "Properties",
+        "value": 2.49,
+        "similarity": 0.8,
+        "match_type": "analog"
+      }
+    ]
+  },
+  {
+    "drug_name": "Dactinomycin",
+    "n_total": 5,
+    "n_exact": 5,
+    "n_close_analog": 0,
+    "n_analog": 0,
+    "safety_score": 4.230858200003368,
+    "verdict": "WARNING",
+    "assays": [
+      {
+        "assay": "dili",
+        "category": "Toxicity",
+        "value": 1.0,
+        "similarity": 1.0,
+        "match_type": "exact"
+      },
+      {
+        "assay": "ld50_zhu",
+        "category": "Toxicity",
+        "value": 5.2410000000000005,
+        "similarity": 1.0,
+        "match_type": "exact"
+      },
+      {
+        "assay": "bbb_martins",
+        "category": "Distribution",
+        "value": 0.0,
+        "similarity": 1.0,
+        "match_type": "exact"
+      },
+      {
+        "assay": "cyp2c9_veith",
+        "category": "Metabolism",
+        "value": 0.0,
+        "similarity": 1.0,
+        "match_type": "exact"
+      },
+      {
+        "assay": "cyp2d6_veith",
+        "category": "Metabolism",
+        "value": 0.0,
+        "similarity": 1.0,
+        "match_type": "exact"
+      }
+    ]
+  },
+  {
+    "drug_name": "SL0101",
+    "n_total": 0,
+    "n_exact": 0,
+    "n_close_analog": 0,
+    "n_analog": 0,
+    "safety_score": 5.0,
+    "verdict": "WARNING",
+    "assays": []
+  },
+  {
+    "drug_name": "Temsirolimus",
+    "n_total": 5,
+    "n_exact": 2,
+    "n_close_analog": 0,
+    "n_analog": 3,
+    "safety_score": 4.391606506757801,
+    "verdict": "WARNING",
+    "assays": [
+      {
+        "assay": "caco2_wang",
+        "category": "Absorption",
+        "value": -4.96,
+        "similarity": 0.8421052631578947,
+        "match_type": "analog"
+      },
+      {
+        "assay": "vdss_lombardo",
+        "category": "Distribution",
+        "value": 3.0,
+        "similarity": 1.0,
+        "match_type": "exact"
+      },
+      {
+        "assay": "cyp2c9_substrate_carbonmangels",
+        "category": "Metabolism",
+        "value": 0.0,
+        "similarity": 0.8461538461538461,
+        "match_type": "analog"
+      },
+      {
+        "assay": "cyp3a4_substrate_carbonmangels",
+        "category": "Metabolism",
+        "value": 1.0,
+        "similarity": 0.8461538461538461,
+        "match_type": "analog"
+      },
+      {
+        "assay": "half_life_obach",
+        "category": "Excretion",
+        "value": 18.0,
+        "similarity": 1.0,
+        "match_type": "exact"
+      }
+    ]
+  },
+  {
+    "drug_name": "Teniposide",
+    "n_total": 17,
+    "n_exact": 8,
+    "n_close_analog": 0,
+    "n_analog": 9,
+    "safety_score": 1.82826315945863,
+    "verdict": "FAIL",
+    "assays": [
+      {
+        "assay": "ames",
+        "category": "Toxicity",
+        "value": 1.0,
+        "similarity": 1.0,
+        "match_type": "exact"
+      },
+      {
+        "assay": "dili",
+        "category": "Toxicity",
+        "value": 1.0,
+        "similarity": 0.7530864197530864,
+        "match_type": "analog"
+      },
+      {
+        "assay": "ld50_zhu",
+        "category": "Toxicity",
+        "value": 2.898,
+        "similarity": 0.8148148148148148,
+        "match_type": "analog"
+      },
+      {
+        "assay": "bioavailability_ma",
+        "category": "Absorption",
+        "value": 1.0,
+        "similarity": 0.7530864197530864,
+        "match_type": "analog"
+      },
+      {
+        "assay": "bbb_martins",
+        "category": "Distribution",
+        "value": 1.0,
+        "similarity": 1.0,
+        "match_type": "exact"
+      },
+      {
+        "assay": "caco2_wang",
+        "category": "Absorption",
+        "value": -6.0500002,
+        "similarity": 1.0,
+        "match_type": "exact"
+      },
+      {
+        "assay": "pgp_broccatelli",
+        "category": "Absorption",
+        "value": 0.0,
+        "similarity": 0.7530864197530864,
+        "match_type": "analog"
+      },
+      {
+        "assay": "ppbr_az",
+        "category": "Distribution",
+        "value": 98.17,
+        "similarity": 0.7530864197530864,
+        "match_type": "analog"
+      },
+      {
+        "assay": "vdss_lombardo",
+        "category": "Distribution",
+        "value": 0.41,
+        "similarity": 1.0,
+        "match_type": "exact"
+      },
+      {
+        "assay": "cyp2c9_veith",
+        "category": "Metabolism",
+        "value": 1.0,
+        "similarity": 0.7530864197530864,
+        "match_type": "analog"
+      },
+      {
+        "assay": "cyp2d6_veith",
+        "category": "Metabolism",
+        "value": 0.0,
+        "similarity": 0.7530864197530864,
+        "match_type": "analog"
+      },
+      {
+        "assay": "cyp3a4_veith",
+        "category": "Metabolism",
+        "value": 0.0,
+        "similarity": 0.7530864197530864,
+        "match_type": "analog"
+      },
+      {
+        "assay": "cyp2c9_substrate_carbonmangels",
+        "category": "Metabolism",
+        "value": 0.0,
+        "similarity": 1.0,
+        "match_type": "exact"
+      },
+      {
+        "assay": "cyp2d6_substrate_carbonmangels",
+        "category": "Metabolism",
+        "value": 0.0,
+        "similarity": 1.0,
+        "match_type": "exact"
+      },
+      {
+        "assay": "cyp3a4_substrate_carbonmangels",
+        "category": "Metabolism",
+        "value": 1.0,
+        "similarity": 1.0,
+        "match_type": "exact"
+      },
+      {
+        "assay": "half_life_obach",
+        "category": "Excretion",
+        "value": 16.0,
+        "similarity": 1.0,
+        "match_type": "exact"
+      },
+      {
+        "assay": "solubility_aqsoldb",
+        "category": "Properties",
+        "value": -3.47,
+        "similarity": 0.7530864197530864,
+        "match_type": "analog"
+      }
+    ]
+  },
+  {
+    "drug_name": "Tanespimycin",
+    "n_total": 1,
+    "n_exact": 1,
+    "n_close_analog": 0,
+    "n_analog": 0,
+    "safety_score": 4.65,
+    "verdict": "WARNING",
+    "assays": [
+      {
+        "assay": "pgp_broccatelli",
+        "category": "Absorption",
+        "value": 1.0,
+        "similarity": 1.0,
+        "match_type": "exact"
+      }
+    ]
+  },
+  {
+    "drug_name": "Rapamycin",
+    "n_total": 5,
+    "n_exact": 1,
+    "n_close_analog": 3,
+    "n_analog": 1,
+    "safety_score": 3.924235157221183,
+    "verdict": "FAIL",
+    "assays": [
+      {
+        "assay": "caco2_wang",
+        "category": "Absorption",
+        "value": -4.96,
+        "similarity": 1.0,
+        "match_type": "exact"
+      },
+      {
+        "assay": "vdss_lombardo",
+        "category": "Distribution",
+        "value": 3.2,
+        "similarity": 0.8727272727272727,
+        "match_type": "close_analog"
+      },
+      {
+        "assay": "cyp2c9_substrate_carbonmangels",
+        "category": "Metabolism",
+        "value": 0.0,
+        "similarity": 0.8727272727272727,
+        "match_type": "close_analog"
+      },
+      {
+        "assay": "cyp3a4_substrate_carbonmangels",
+        "category": "Metabolism",
+        "value": 1.0,
+        "similarity": 0.8727272727272727,
+        "match_type": "close_analog"
+      },
+      {
+        "assay": "half_life_obach",
+        "category": "Excretion",
+        "value": 18.0,
+        "similarity": 0.8421052631578947,
+        "match_type": "analog"
+      }
+    ]
+  },
+  {
+    "drug_name": "MK-2206",
+    "n_total": 1,
+    "n_exact": 1,
+    "n_close_analog": 0,
+    "n_analog": 0,
+    "safety_score": 5.223475598721113,
+    "verdict": "WARNING",
+    "assays": [
+      {
+        "assay": "lipophilicity_astrazeneca",
+        "category": "Properties",
+        "value": 2.5,
+        "similarity": 1.0,
+        "match_type": "exact"
+      }
+    ]
+  },
+  {
+    "drug_name": "Pictilisib",
+    "n_total": 3,
+    "n_exact": 3,
+    "n_close_analog": 0,
+    "n_analog": 0,
+    "safety_score": 6.494867466598714,
+    "verdict": "PASS",
+    "assays": [
+      {
+        "assay": "clearance_hepatocyte_az",
+        "category": "Excretion",
+        "value": 33.11,
+        "similarity": 1.0,
+        "match_type": "exact"
+      },
+      {
+        "assay": "clearance_microsome_az",
+        "category": "Excretion",
+        "value": 14.79,
+        "similarity": 1.0,
+        "match_type": "exact"
+      },
+      {
+        "assay": "lipophilicity_astrazeneca",
+        "category": "Properties",
+        "value": 3.3,
+        "similarity": 1.0,
+        "match_type": "exact"
+      }
+    ]
+  },
+  {
+    "drug_name": "TW 37",
+    "n_total": 1,
+    "n_exact": 1,
+    "n_close_analog": 0,
+    "n_analog": 0,
+    "safety_score": 5.249313121527236,
+    "verdict": "WARNING",
+    "assays": [
+      {
+        "assay": "lipophilicity_astrazeneca",
+        "category": "Properties",
+        "value": 3.44,
+        "similarity": 1.0,
+        "match_type": "exact"
+      }
+    ]
+  },
+  {
+    "drug_name": "Sabutoclax",
+    "n_total": 1,
+    "n_exact": 1,
+    "n_close_analog": 0,
+    "n_analog": 0,
+    "safety_score": 5.250380194896255,
+    "verdict": "WARNING",
+    "assays": [
+      {
+        "assay": "lipophilicity_astrazeneca",
+        "category": "Properties",
+        "value": 3.48,
+        "similarity": 1.0,
+        "match_type": "exact"
+      }
+    ]
+  },
+  {
+    "drug_name": "Tozasertib",
+    "n_total": 1,
+    "n_exact": 1,
+    "n_close_analog": 0,
+    "n_analog": 0,
+    "safety_score": 5.250113693091837,
+    "verdict": "WARNING",
+    "assays": [
+      {
+        "assay": "lipophilicity_astrazeneca",
+        "category": "Properties",
+        "value": 3.47,
+        "similarity": 1.0,
+        "match_type": "exact"
+      }
+    ]
+  },
+  {
+    "drug_name": "Avagacestat",
+    "n_total": 1,
+    "n_exact": 1,
+    "n_close_analog": 0,
+    "n_analog": 0,
+    "safety_score": 5.4499999984309975,
+    "verdict": "WARNING",
+    "assays": [
+      {
+        "assay": "ppbr_az",
+        "category": "Distribution",
+        "value": 98.81,
+        "similarity": 1.0,
+        "match_type": "exact"
+      }
+    ]
+  },
+  {
+    "drug_name": "Vinblastine",
+    "n_total": 10,
+    "n_exact": 8,
+    "n_close_analog": 1,
+    "n_analog": 1,
+    "safety_score": 5.9965266796572605,
+    "verdict": "WARNING",
+    "assays": [
+      {
+        "assay": "bioavailability_ma",
+        "category": "Absorption",
+        "value": 1.0,
+        "similarity": 0.7387387387387387,
+        "match_type": "analog"
+      },
+      {
+        "assay": "bbb_martins",
+        "category": "Distribution",
+        "value": 1.0,
+        "similarity": 1.0,
+        "match_type": "exact"
+      },
+      {
+        "assay": "caco2_wang",
+        "category": "Absorption",
+        "value": -5.48,
+        "similarity": 1.0,
+        "match_type": "exact"
+      },
+      {
+        "assay": "vdss_lombardo",
+        "category": "Distribution",
+        "value": 28.0,
+        "similarity": 1.0,
+        "match_type": "exact"
+      },
+      {
+        "assay": "cyp2c9_veith",
+        "category": "Metabolism",
+        "value": 0.0,
+        "similarity": 0.883495145631068,
+        "match_type": "close_analog"
+      },
+      {
+        "assay": "cyp2d6_veith",
+        "category": "Metabolism",
+        "value": 0.0,
+        "similarity": 1.0,
+        "match_type": "exact"
+      },
+      {
+        "assay": "cyp2c9_substrate_carbonmangels",
+        "category": "Metabolism",
+        "value": 0.0,
+        "similarity": 1.0,
+        "match_type": "exact"
+      },
+      {
+        "assay": "cyp2d6_substrate_carbonmangels",
+        "category": "Metabolism",
+        "value": 0.0,
+        "similarity": 1.0,
+        "match_type": "exact"
+      },
+      {
+        "assay": "cyp3a4_substrate_carbonmangels",
+        "category": "Metabolism",
+        "value": 1.0,
+        "similarity": 1.0,
+        "match_type": "exact"
+      },
+      {
+        "assay": "half_life_obach",
+        "category": "Excretion",
+        "value": 67.0,
+        "similarity": 1.0,
+        "match_type": "exact"
+      }
+    ]
+  },
+  {
+    "drug_name": "Docetaxel",
+    "n_total": 10,
+    "n_exact": 2,
+    "n_close_analog": 2,
+    "n_analog": 6,
+    "safety_score": 2.7838824824708155,
+    "verdict": "FAIL",
+    "assays": [
+      {
+        "assay": "dili",
+        "category": "Toxicity",
+        "value": 1.0,
+        "similarity": 1.0,
+        "match_type": "exact"
+      },
+      {
+        "assay": "bbb_martins",
+        "category": "Distribution",
+        "value": 0.0,
+        "similarity": 1.0,
+        "match_type": "exact"
+      },
+      {
+        "assay": "vdss_lombardo",
+        "category": "Distribution",
+        "value": 3.0,
+        "similarity": 0.7676767676767676,
+        "match_type": "analog"
+      },
+      {
+        "assay": "cyp2c9_veith",
+        "category": "Metabolism",
+        "value": 0.0,
+        "similarity": 0.7676767676767676,
+        "match_type": "analog"
+      },
+      {
+        "assay": "cyp2d6_veith",
+        "category": "Metabolism",
+        "value": 0.0,
+        "similarity": 0.7676767676767676,
+        "match_type": "analog"
+      },
+      {
+        "assay": "cyp2d6_substrate_carbonmangels",
+        "category": "Metabolism",
+        "value": 0.0,
+        "similarity": 0.7676767676767676,
+        "match_type": "analog"
+      },
+      {
+        "assay": "cyp3a4_substrate_carbonmangels",
+        "category": "Metabolism",
+        "value": 1.0,
+        "similarity": 0.7676767676767676,
+        "match_type": "analog"
+      },
+      {
+        "assay": "half_life_obach",
+        "category": "Excretion",
+        "value": 11.0,
+        "similarity": 0.9888888888888889,
+        "match_type": "close_analog"
+      },
+      {
+        "assay": "lipophilicity_astrazeneca",
+        "category": "Properties",
+        "value": 3.4,
+        "similarity": 0.9888888888888889,
+        "match_type": "close_analog"
+      },
+      {
+        "assay": "solubility_aqsoldb",
+        "category": "Properties",
+        "value": -6.33,
+        "similarity": 0.7676767676767676,
+        "match_type": "analog"
+      }
+    ]
+  },
+  {
+    "drug_name": "Paclitaxel",
+    "n_total": 10,
+    "n_exact": 9,
+    "n_close_analog": 0,
+    "n_analog": 1,
+    "safety_score": 2.097308140632177,
+    "verdict": "FAIL",
+    "assays": [
+      {
+        "assay": "dili",
+        "category": "Toxicity",
+        "value": 1.0,
+        "similarity": 1.0,
+        "match_type": "exact"
+      },
+      {
+        "assay": "bbb_martins",
+        "category": "Distribution",
+        "value": 0.0,
+        "similarity": 1.0,
+        "match_type": "exact"
+      },
+      {
+        "assay": "vdss_lombardo",
+        "category": "Distribution",
+        "value": 3.0,
+        "similarity": 1.0,
+        "match_type": "exact"
+      },
+      {
+        "assay": "cyp2c9_veith",
+        "category": "Metabolism",
+        "value": 0.0,
+        "similarity": 1.0,
+        "match_type": "exact"
+      },
+      {
+        "assay": "cyp2d6_veith",
+        "category": "Metabolism",
+        "value": 0.0,
+        "similarity": 1.0,
+        "match_type": "exact"
+      },
+      {
+        "assay": "cyp2d6_substrate_carbonmangels",
+        "category": "Metabolism",
+        "value": 0.0,
+        "similarity": 1.0,
+        "match_type": "exact"
+      },
+      {
+        "assay": "cyp3a4_substrate_carbonmangels",
+        "category": "Metabolism",
+        "value": 1.0,
+        "similarity": 1.0,
+        "match_type": "exact"
+      },
+      {
+        "assay": "half_life_obach",
+        "category": "Excretion",
+        "value": 11.0,
+        "similarity": 1.0,
+        "match_type": "exact"
+      },
+      {
+        "assay": "lipophilicity_astrazeneca",
+        "category": "Properties",
+        "value": 3.4,
+        "similarity": 0.76,
+        "match_type": "analog"
+      },
+      {
+        "assay": "solubility_aqsoldb",
+        "category": "Properties",
+        "value": -6.33,
+        "similarity": 1.0,
+        "match_type": "exact"
+      }
+    ]
+  },
+  {
+    "drug_name": "Vinorelbine",
+    "n_total": 9,
+    "n_exact": 3,
+    "n_close_analog": 0,
+    "n_analog": 6,
+    "safety_score": 6.610404898275964,
+    "verdict": "PASS",
+    "assays": [
+      {
+        "assay": "bioavailability_ma",
+        "category": "Absorption",
+        "value": 1.0,
+        "similarity": 1.0,
+        "match_type": "exact"
+      },
+      {
+        "assay": "bbb_martins",
+        "category": "Distribution",
+        "value": 1.0,
+        "similarity": 0.7387387387387387,
+        "match_type": "analog"
+      },
+      {
+        "assay": "caco2_wang",
+        "category": "Absorption",
+        "value": -5.48,
+        "similarity": 0.7387387387387387,
+        "match_type": "analog"
+      },
+      {
+        "assay": "vdss_lombardo",
+        "category": "Distribution",
+        "value": 23.0,
+        "similarity": 1.0,
+        "match_type": "exact"
+      },
+      {
+        "assay": "cyp2d6_veith",
+        "category": "Metabolism",
+        "value": 0.0,
+        "similarity": 0.7387387387387387,
+        "match_type": "analog"
+      },
+      {
+        "assay": "cyp2c9_substrate_carbonmangels",
+        "category": "Metabolism",
+        "value": 0.0,
+        "similarity": 0.7387387387387387,
+        "match_type": "analog"
+      },
+      {
+        "assay": "cyp2d6_substrate_carbonmangels",
+        "category": "Metabolism",
+        "value": 0.0,
+        "similarity": 0.7387387387387387,
+        "match_type": "analog"
+      },
+      {
+        "assay": "cyp3a4_substrate_carbonmangels",
+        "category": "Metabolism",
+        "value": 1.0,
+        "similarity": 0.7387387387387387,
+        "match_type": "analog"
+      },
+      {
+        "assay": "half_life_obach",
+        "category": "Excretion",
+        "value": 18.0,
+        "similarity": 1.0,
+        "match_type": "exact"
+      }
+    ]
+  }
+]
