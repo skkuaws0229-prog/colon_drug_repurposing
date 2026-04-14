@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>biso · Step 4 모델 학습 + 평가 최종 — v3</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#06090f;--bg2:#0c1219;--bg3:#111a25;--border:#1e2d3d;--border2:#2a3f55;--accent:#00e5ff;--accent2:#0088cc;--green:#00ff88;--yellow:#ffd600;--red:#ff3d5a;--orange:#ff8a00;--purple:#a78bfa;--text:#e8f0fa;--text2:#8899aa;--text3:#4a6075;--v1:#ff8a00;--v3:#00e5ff}
+*{margin:0;padding:0;box-sizing:border-box}html{font-size:14.5px}body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-serif;min-height:100vh}
+.header{padding:2rem 2rem 1.5rem}.header .back-link{font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--accent);text-decoration:none;opacity:0.7}.header .back-link:hover{opacity:1}.header h1{font-family:'JetBrains Mono',monospace;font-size:1.4rem;font-weight:700;margin-top:0.8rem}.header h1 .step-num{color:var(--accent)}.header .subtitle{font-size:0.78rem;color:var(--text2);margin-top:0.3rem}
+.container{max-width:1360px;margin:0 auto;padding:0 1.5rem 4rem}.section{margin-bottom:2.2rem}.section-title{font-family:'JetBrains Mono',monospace;font-size:0.68rem;text-transform:uppercase;letter-spacing:3px;color:var(--text3);margin-bottom:1rem;padding-bottom:0.4rem;border-bottom:1px solid var(--border)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:0.8rem}@media(max-width:900px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.3rem}.card-label{font-family:'JetBrains Mono',monospace;font-size:0.62rem;text-transform:uppercase;letter-spacing:2px;color:var(--text3);margin-bottom:0.4rem}.card-value{font-family:'JetBrains Mono',monospace;font-size:1.4rem;font-weight:700}.card-sub{font-size:0.72rem;color:var(--text2);margin-top:0.2rem}
+table.dt{width:100%;border-collapse:collapse;font-size:0.76rem}table.dt th{font-family:'JetBrains Mono',monospace;font-size:0.6rem;text-transform:uppercase;letter-spacing:1px;color:var(--text3);padding:0.6rem 0.5rem;text-align:left;border-bottom:1px solid var(--border);background:var(--bg2)}table.dt td{padding:0.5rem 0.5rem;border-bottom:1px solid rgba(30,45,61,0.35);font-family:'JetBrains Mono',monospace;font-size:0.7rem}table.dt tr:hover td{background:rgba(0,229,255,0.02)}
+.tag{display:inline-block;padding:0.1rem 0.4rem;border-radius:4px;font-size:0.56rem;font-weight:700;font-family:'JetBrains Mono',monospace}.t-p{background:rgba(0,255,136,0.1);color:var(--green);border:1px solid rgba(0,255,136,0.2)}.t-w{background:rgba(255,214,0,0.1);color:var(--yellow);border:1px solid rgba(255,214,0,0.2)}.t-o{background:rgba(255,138,0,0.1);color:var(--orange);border:1px solid rgba(255,138,0,0.2)}.t-s{background:rgba(255,61,90,0.15);color:var(--red);border:1px solid rgba(255,61,90,0.3)}.t-e{background:rgba(0,229,255,0.1);color:var(--accent);border:1px solid rgba(0,229,255,0.2)}.t-r{background:rgba(255,214,0,0.1);color:var(--yellow);border:1px solid rgba(255,214,0,0.2)}.t-n{background:rgba(0,255,136,0.08);color:var(--green);border:1px solid rgba(0,255,136,0.15)}
+.ibox{background:var(--bg3);border-radius:8px;padding:1rem 1.2rem;border-left:3px solid var(--accent);margin:0.6rem 0}.ibox h4{font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--accent);text-transform:uppercase;letter-spacing:2px;margin-bottom:0.4rem}.ibox p{font-size:0.76rem;color:var(--text2);line-height:1.7}.ibox strong{color:var(--text)}
+.comment{background:var(--bg3);border-radius:8px;padding:1rem 1.2rem;border-left:3px solid var(--purple);margin:0.6rem 0}.comment h4{font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--purple);text-transform:uppercase;letter-spacing:2px;margin-bottom:0.4rem}.comment p{font-size:0.76rem;color:var(--text2);line-height:1.7}.comment strong{color:var(--text)}
+.bar-row{display:flex;align-items:center;margin-bottom:0.4rem;gap:0.5rem}.bar-label{width:110px;font-size:0.66rem;color:var(--text2);text-align:right;flex-shrink:0}.bar-track{flex:1;height:15px;background:var(--bg3);border-radius:3px;overflow:hidden}.bar-fill{height:100%;border-radius:3px}.bv1{background:linear-gradient(90deg,var(--v1),#cc6e00)}.bv3{background:linear-gradient(90deg,var(--v3),var(--accent2))}.bgn{background:var(--green)}.bgw{background:var(--yellow)}.bgo{background:var(--orange)}.bgs{background:var(--red)}.bar-value{width:50px;font-family:'JetBrains Mono',monospace;font-size:0.66rem;text-align:right;flex-shrink:0}
+.chip{display:inline-flex;align-items:center;gap:0.4rem;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:0.4rem 0.7rem;font-family:'JetBrains Mono',monospace;font-size:0.66rem;margin:0 0.3rem 0.4rem 0}.dot{width:7px;height:7px;border-radius:50%}.dot-d{background:var(--green)}.dot-r{background:var(--yellow);animation:p 2s infinite}@keyframes p{0%,100%{opacity:1}50%{opacity:0.3}}
+.footer{text-align:center;padding:2rem;font-family:'JetBrains Mono',monospace;font-size:0.63rem;color:var(--text3);border-top:1px solid var(--border)}
+
+/* ─── BACK BUTTON ─── */
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  text-decoration: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 500;
+  transition: all 0.3s;
+  margin: 1rem auto;
+  max-width: fit-content;
+}
+.back-btn:hover {
+  border-color: var(--accent);
+  background: var(--bg3);
+  box-shadow: 0 0 20px rgba(0,229,255,0.1);
+  transform: translateX(-2px);
+}
+.back-btn::before {
+  content: '←';
+  font-size: 1rem;
+  color: var(--accent);
+}
+
+</style>
+</head>
+<body>
+<div class="header">
+  <a href="v1_vs_v3_comparison_dashboard.html" class="back-link">← 메인 대시보드</a>
+  <h1><span class="step-num">Step 4</span> 모델 학습 + 6단계 평가 최종 결과</h1>
+  <div class="subtitle">15개 모델 · 6단계 평가 완료 · 앙상블 확정 · features_slim 5,534컬럼 · 6,366샘플</div>
+</div>
+<div class="container">
+
+<div style="text-align:center;">
+  <a href="v1_vs_v3_comparison_dashboard.html" class="back-btn">메인 대시보드로 돌아가기</a>
+</div>
+
+
+
+<!-- STATUS -->
+<div class="section">
+  <span class="chip"><span class="dot dot-d"></span>1단계 5CV 완료</span>
+  <span class="chip"><span class="dot dot-d"></span>2단계 GroupKFold 완료</span>
+  <span class="chip"><span class="dot dot-d"></span>3단계 Unseen Drug 완료</span>
+  <span class="chip"><span class="dot dot-d"></span>4단계 Scaffold 완료</span>
+  <span class="chip"><span class="dot dot-d"></span>5단계 Multi-seed 완료</span>
+  <span class="chip"><span class="dot dot-d"></span>앙상블 확정</span>
+</div>
+
+<!-- SUMMARY -->
+<div class="section">
+  <div class="section-title">핵심 수치</div>
+  <div class="grid-4">
+    <div class="card"><div class="card-label">앙상블 A (확정)</div><div class="card-value" style="color:var(--v3);">3개</div><div class="card-sub">CatBoost + DART + FlatMLP</div></div>
+    <div class="card"><div class="card-label">앙상블 A OOF Sp</div><div class="card-value" style="color:var(--green);">0.8641</div><div class="card-sub">가중 평균 · RMSE 1.146</div></div>
+    <div class="card"><div class="card-label">CatBoost 단독</div><div class="card-value" style="color:var(--orange);">0.8704</div><div class="card-sub">앙상블보다 +0.006 높음</div></div>
+    <div class="card"><div class="card-label">CatBoost 안정성</div><div class="card-value" style="color:var(--green);">57%</div><div class="card-sub">Top-30 overlap · Jaccard 0.664</div></div>
+  </div>
+</div>
+
+<!-- 6-STAGE SUMMARY TABLE -->
+<div class="section">
+  <div class="section-title">6개 모델 · 5단계 평가 종합 테이블</div>
+  <div class="card" style="overflow-x:auto;padding:0.6rem;">
+    <table class="dt">
+      <thead><tr><th>모델</th><th>1단계<br>5CV Sp</th><th>2단계<br>GroupKFold</th><th>3단계<br>Unseen Drug</th><th>4단계<br>Scaffold</th><th>5단계<br>Seed mean±std</th><th>5단계<br>Top30 overlap</th><th>1단계<br>Gap</th></tr></thead>
+      <tbody>
+        <tr style="background:rgba(0,229,255,0.03);"><td><strong>CatBoost</strong></td><td style="color:var(--v3);">0.862</td><td>0.559</td><td style="color:var(--green);">0.353</td><td style="color:var(--green);">0.358</td><td style="color:var(--green);">0.870±0.001</td><td style="color:var(--green);">57%</td><td>0.074</td></tr>
+        <tr style="background:rgba(0,229,255,0.03);"><td><strong>DART</strong></td><td>0.842</td><td>0.534</td><td>0.316</td><td>0.326</td><td>0.865±0.003</td><td>37%</td><td>0.053</td></tr>
+        <tr style="background:rgba(0,229,255,0.03);"><td><strong>FlatMLP</strong></td><td>0.828</td><td>0.539</td><td>0.316</td><td>0.313</td><td>0.827±0.005</td><td>27%</td><td>0.024</td></tr>
+        <tr style="opacity:0.7;"><td>LightGBM</td><td>0.849</td><td>0.515</td><td>0.324</td><td>0.329</td><td>0.862±0.003</td><td>23%</td><td>0.090</td></tr>
+        <tr style="opacity:0.7;"><td>CrossAttn</td><td>0.824</td><td>0.542</td><td>0.335</td><td>0.320</td><td>0.827±0.005</td><td>27%</td><td>0.029</td></tr>
+        <tr style="opacity:0.7;"><td>FT-Trans</td><td>0.806</td><td>0.531</td><td>0.312</td><td>0.305</td><td>0.812±0.007</td><td style="color:var(--red);">0%</td><td>0.035</td></tr>
+        <tr style="opacity:0.5;"><td>GraphSAGE</td><td>0.433</td><td>—</td><td>—</td><td>0.359</td><td>0.826±0.004</td><td>10%</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="comment">
+    <h4>코멘트</h4>
+    <p><strong>CatBoost가 모든 단계에서 최강입니다.</strong> 5CV 1위, Unseen Drug 1위, Scaffold 공동 1위, Seed 안정성 1위(std 0.001), Top-30 overlap 1위(57%). 성능과 안정성 모두 압도적입니다.<br><br>
+    <strong>FT-Transformer의 역설:</strong> GroupKFold에서 개별 모델 1위(0.528)로 일반화 최강이었지만, Top-30 overlap 0%로 랭킹 안정성이 최악. 약물 추천 관점에서는 사용 불가.<br><br>
+    <strong>DL 모델의 한계:</strong> Gap은 낮지만(0.02~0.03) 랭킹 안정성이 낮음(overlap 27%). 성능은 안정적인데 "어떤 약물을 추천하는지"는 불안정.</p>
+  </div>
+</div>
+
+<!-- PERFORMANCE DROP ACROSS STAGES -->
+<div class="section">
+  <div class="section-title">단계별 성능 하락 패턴</div>
+  <div class="card" style="overflow-x:auto;padding:0.6rem;">
+    <table class="dt">
+      <thead><tr><th>단계</th><th>평균 Sp</th><th>평균 Drop</th><th>하락률</th><th>의미</th></tr></thead>
+      <tbody>
+        <tr><td>1단계 5CV</td><td style="color:var(--green);">0.835</td><td>—</td><td>—</td><td>기준선 (optimistic)</td></tr>
+        <tr><td>2단계 GroupKFold</td><td style="color:var(--yellow);">0.537</td><td>-0.298</td><td>-36%</td><td>Drug leakage 제거 후 실제 성능</td></tr>
+        <tr><td>3단계 Unseen Drug</td><td style="color:var(--orange);">0.326</td><td>-0.509</td><td>-61%</td><td>새 약물 예측의 본질적 어려움</td></tr>
+        <tr><td>4단계 Scaffold</td><td style="color:var(--red);">0.325</td><td>-0.510</td><td>-61%</td><td>구조 일반화 한계</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="comment">
+    <h4>코멘트</h4>
+    <p><strong>Random 5CV 성능의 36%는 drug leakage에 의한 과대평가였습니다.</strong> GroupKFold로 leakage를 제거하면 0.835 → 0.537로 하락. 이건 기존 v1에서도 동일했을 문제이지만 v1에서는 측정하지 않았습니다.<br><br>
+    <strong>Unseen Drug와 Scaffold의 하락폭이 거의 동일합니다(-61%).</strong> Herbert et al. (2025)의 결론과 일치: drug-blind 예측은 같은 MOA 내에서만 일반화 가능. 새로운 약물/구조에 대한 예측은 데이터셋의 본질적 한계.<br><br>
+    <strong>하지만 P@30은 0.87~0.97로 우수합니다.</strong> 절대 예측값(IC50)은 부정확하지만, 상대 순위(어떤 약물이 더 효과적인지)는 상당히 정확합니다. 약물 재창출 관점에서는 순위가 더 중요합니다.</p>
+  </div>
+</div>
+
+<!-- GAP INTERPRETATION GUIDE -->
+<div class="section">
+  <div class="section-title">Gap 해석 가이드 — 평가 단계별 의미가 다름</div>
+  <div class="grid-2">
+    <div class="ibox">
+      <h4>1단계 Random 5CV Gap</h4>
+      <p><strong>순수 과적합 지표</strong><br>
+      동일 약물 포함 상태에서 Train-Val 차이<br>
+      &lt;0.05 안정 / 0.05~0.10 경계 / &gt;0.10 과적합 의심<br>
+      이 기준은 1단계에만 적용</p>
+    </div>
+    <div class="ibox">
+      <h4>2단계 GroupKFold Gap</h4>
+      <p><strong>Random CV 과대평가 정도</strong><br>
+      Drug leakage 제거 후 성능 하락폭<br>
+      Gap↑ = 기존 성능이 inflated<br>
+      과적합이 아니라 평가 방법의 문제 탐지</p>
+    </div>
+    <div class="ibox" style="border-left-color:var(--yellow);">
+      <h4>3~4단계 Unseen/Scaffold Gap</h4>
+      <p><strong>단일 요인이 아님 (주의)</strong><br>
+      = Task difficulty + Distribution shift<br>
+      + Model generalization + Feature 한계<br>
+      ❌ "과적합이다" 단정 금지<br>
+      ❌ "과적합이 아니다" 단정도 금지<br>
+      ✅ "과적합만으로 설명할 수 없다"가 정확</p>
+    </div>
+    <div class="ibox" style="border-left-color:var(--orange);">
+      <h4>핵심 원칙</h4>
+      <p><strong>절대값 해석 ❌ · 모델 간 상대 비교 ✅</strong><br>
+      Gap만 보면 안 됨. 반드시 같이 볼 것:<br>
+      · Test Spearman (절대 성능)<br>
+      · Rank stability (Top-30 overlap)<br>
+      · P@k, NDCG@k (랭킹 품질)<br>
+      <em>참고: Herbert et al. (2025) bioRxiv 10.1101/2025.06.16.659838</em></p>
+    </div>
+  </div>
+</div>
+
+<!-- ENSEMBLE COMPARISON -->
+<div class="section">
+  <div class="section-title">앙상블 비교 — A(3개) vs B(4개) vs CatBoost 단독</div>
+  <div class="card" style="overflow-x:auto;padding:0.6rem;">
+    <table class="dt">
+      <thead><tr><th>구성</th><th>모델</th><th>OOF Sp</th><th>RMSE</th><th>P@30</th><th>NDCG@30</th><th>Gap</th><th>Top30 vs A</th></tr></thead>
+      <tbody>
+        <tr style="background:rgba(0,229,255,0.03);"><td><strong>앙상블 A</strong></td><td>CatBoost+DART+FlatMLP</td><td style="color:var(--v3);">0.8641</td><td style="color:var(--green);">1.146</td><td>70%</td><td>79.0%</td><td>-0.323</td><td>—</td></tr>
+        <tr><td>앙상블 B</td><td>A + CrossAttention</td><td>0.8575</td><td>1.186</td><td>60%</td><td>81.5%</td><td>-0.314</td><td>27/30</td></tr>
+        <tr style="background:rgba(255,138,0,0.03);"><td><strong>CatBoost 단독</strong></td><td>CatBoost only</td><td style="color:var(--orange);">0.8704</td><td>—</td><td>—</td><td>—</td><td>0.086</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="comment">
+    <h4>코멘트 — 앙상블의 역설</h4>
+    <p><strong>앙상블 A가 CatBoost 단독보다 낮습니다(0.8641 vs 0.8704).</strong> 일반적으로 앙상블이 개별 모델보다 좋아야 하는데, 모델 간 예측 상관이 0.96 이상(diversity 부족)이라 DART와 FlatMLP가 CatBoost 성능을 깎아먹고 있습니다.<br><br>
+    <strong>하지만 RMSE는 앙상블이 더 좋습니다(1.146).</strong> 그리고 Unseen Drug에서 앙상블 NDCG@30(0.908)이 CatBoost(0.895)보다 높았습니다. 순위 품질은 앙상블이 나을 수 있습니다.<br><br>
+    <strong>Step 6 METABRIC에서 둘 다 비교하고 최종 결정합니다.</strong> CatBoost 단독과 앙상블 A 둘 다 가지고 진행합니다.<br><br>
+    <strong>CrossAttention 추가(앙상블 B)는 비권장.</strong> FlatMLP과 예측 상관 1.0(완전 중복). 넣으면 P@30이 70%→60%로 오히려 하락.</p>
+  </div>
+</div>
+
+<!-- DIVERSITY -->
+<div class="section">
+  <div class="section-title">앙상블 Diversity 분석</div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-label">모델 간 예측 상관</div>
+      <div class="bar-row"><div class="bar-label">CatBoost-DART</div><div class="bar-track"><div class="bar-fill bgs" style="width:99%;"></div></div><div class="bar-value" style="color:var(--red);">0.990</div></div>
+      <div class="bar-row"><div class="bar-label">CatBoost-FlatMLP</div><div class="bar-track"><div class="bar-fill bgo" style="width:95%;"></div></div><div class="bar-value" style="color:var(--orange);">0.950</div></div>
+      <div class="bar-row"><div class="bar-label">DART-FlatMLP</div><div class="bar-track"><div class="bar-fill bgo" style="width:96%;"></div></div><div class="bar-value" style="color:var(--orange);">0.962</div></div>
+      <div class="bar-row"><div class="bar-label">FlatMLP-CrossAttn</div><div class="bar-track"><div class="bar-fill bgs" style="width:100%;"></div></div><div class="bar-value" style="color:var(--red);">1.000</div></div>
+      <div style="font-size:0.68rem;color:var(--text3);margin-top:0.5rem;">이상적 상관: 0.5~0.8 / 현재: 0.95+ (diversity 부족)</div>
+    </div>
+    <div class="card">
+      <div class="card-label">가중치 분포 (앙상블 A)</div>
+      <div class="bar-row"><div class="bar-label">CatBoost</div><div class="bar-track"><div class="bar-fill bv3" style="width:34%;"></div></div><div class="bar-value" style="color:var(--v3);">34.0%</div></div>
+      <div class="bar-row"><div class="bar-label">DART</div><div class="bar-track"><div class="bar-fill bv3" style="width:33.8%;"></div></div><div class="bar-value" style="color:var(--v3);">33.8%</div></div>
+      <div class="bar-row"><div class="bar-label">FlatMLP</div><div class="bar-track"><div class="bar-fill bv3" style="width:32.3%;"></div></div><div class="bar-value" style="color:var(--v3);">32.3%</div></div>
+      <div style="font-size:0.68rem;color:var(--text3);margin-top:0.5rem;">Entropy 1.000 (완전 균일) → 특정 모델 쏠림 없음</div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 5 STABILITY -->
+<div class="section">
+  <div class="section-title">Step 5 Multi-seed 안정성</div>
+  <div class="card" style="padding:1.2rem;">
+    <div style="font-size:0.63rem;color:var(--text3);margin-bottom:0.6rem;font-family:'JetBrains Mono',monospace;">Top-30 Overlap across 5 seeds (높을수록 안정적)</div>
+    <div class="bar-row"><div class="bar-label">CatBoost</div><div class="bar-track"><div class="bar-fill bgn" style="width:57%;"></div></div><div class="bar-value" style="color:var(--green);">57%</div></div>
+    <div class="bar-row"><div class="bar-label">DART</div><div class="bar-track"><div class="bar-fill bgw" style="width:37%;"></div></div><div class="bar-value" style="color:var(--yellow);">37%</div></div>
+    <div class="bar-row"><div class="bar-label">FlatMLP</div><div class="bar-track"><div class="bar-fill bgw" style="width:27%;"></div></div><div class="bar-value" style="color:var(--yellow);">27%</div></div>
+    <div class="bar-row"><div class="bar-label">CrossAttn</div><div class="bar-track"><div class="bar-fill bgw" style="width:27%;"></div></div><div class="bar-value" style="color:var(--yellow);">27%</div></div>
+    <div class="bar-row"><div class="bar-label">LightGBM</div><div class="bar-track"><div class="bar-fill bgo" style="width:23%;"></div></div><div class="bar-value" style="color:var(--orange);">23%</div></div>
+    <div class="bar-row"><div class="bar-label">GraphSAGE</div><div class="bar-track"><div class="bar-fill bgo" style="width:10%;"></div></div><div class="bar-value" style="color:var(--orange);">10%</div></div>
+    <div class="bar-row"><div class="bar-label">FT-Trans</div><div class="bar-track"><div class="bar-fill bgs" style="width:2%;"></div></div><div class="bar-value" style="color:var(--red);">0%</div></div>
+  </div>
+  <div class="comment">
+    <h4>코멘트</h4>
+    <p><strong>CatBoost만 유일하게 과반수(57%) 안정성을 보입니다.</strong> 나머지 모델은 seed를 바꾸면 Top 30의 60~100%가 달라집니다. 이건 약물 추천의 신뢰성 관점에서 중요한 발견입니다. "이 약물이 효과적이다"라는 추천이 seed에 따라 바뀌면 임상적으로 의미가 없습니다.<br><br>
+    <strong>앙상블이 이 문제를 완화할 수 있습니다.</strong> 여러 모델의 예측을 합치면 개별 모델의 랭킹 불안정성이 상쇄됩니다. Step 6에서 앙상블 A와 CatBoost 단독의 Top 30을 비교해서 최종 결정합니다.</p>
+  </div>
+</div>
+
+<!-- OVERFIT CHART -->
+<div class="section">
+  <div class="section-title">1단계 Random 5CV 과적합 (Gap 분포)</div>
+  <div class="card" style="padding:1.2rem;">
+    <div class="bar-row"><div class="bar-label">FlatMLP</div><div class="bar-track"><div class="bar-fill bgn" style="width:16%;"></div></div><div class="bar-value" style="color:var(--green);">0.024</div></div>
+    <div class="bar-row"><div class="bar-label">CrossAttn</div><div class="bar-track"><div class="bar-fill bgn" style="width:19%;"></div></div><div class="bar-value" style="color:var(--green);">0.029</div></div>
+    <div class="bar-row"><div class="bar-label">FT-Trans</div><div class="bar-track"><div class="bar-fill bgn" style="width:23%;"></div></div><div class="bar-value" style="color:var(--green);">0.035</div></div>
+    <div class="bar-row"><div class="bar-label">DART</div><div class="bar-track"><div class="bar-fill bgw" style="width:35%;"></div></div><div class="bar-value" style="color:var(--yellow);">0.053</div></div>
+    <div class="bar-row"><div class="bar-label">CatBoost</div><div class="bar-track"><div class="bar-fill bgw" style="width:49%;"></div></div><div class="bar-value" style="color:var(--yellow);">0.074</div></div>
+    <div class="bar-row"><div class="bar-label">LightGBM</div><div class="bar-track"><div class="bar-fill bgw" style="width:60%;"></div></div><div class="bar-value" style="color:var(--yellow);">0.090</div></div>
+    <div class="bar-row"><div class="bar-label">Stacking</div><div class="bar-track"><div class="bar-fill bgo" style="width:77%;"></div></div><div class="bar-value" style="color:var(--orange);">0.116</div></div>
+    <div class="bar-row"><div class="bar-label">XGBoost</div><div class="bar-track"><div class="bar-fill bgo" style="width:93%;"></div></div><div class="bar-value" style="color:var(--orange);">0.140</div></div>
+    <div class="bar-row"><div class="bar-label">ExtraTrees</div><div class="bar-track"><div class="bar-fill bgs" style="width:100%;"></div></div><div class="bar-value" style="color:var(--red);">0.151</div></div>
+  </div>
+</div>
+
+<!-- NEXT STEPS -->
+<div class="section">
+  <div class="section-title">다음 단계</div>
+  <div class="grid-3">
+    <div class="card" style="border-left:3px solid var(--accent);">
+      <div class="card-label">Step 6 METABRIC</div>
+      <div style="font-size:0.76rem;line-height:1.7;">A+B+C 외부 검증<br>앙상블 A vs CatBoost 단독 비교<br>Top 30 → Top 15 선별</div>
+    </div>
+    <div class="card" style="border-left:3px solid var(--green);">
+      <div class="card-label">Step 7 ADMET</div>
+      <div style="font-size:0.76rem;line-height:1.7;">22개 assay 3단계 필터링<br>약물 재창출 후보 발굴<br>유방암 적응증 분류</div>
+    </div>
+    <div class="card" style="border-left:3px solid var(--purple);">
+      <div class="card-label">Step 7+ KG/API</div>
+      <div style="font-size:0.76rem;line-height:1.7;">FAERS 부작용 · ClinicalTrials<br>PubMed 논문 · HIRA 약가<br>최종 근거 보고서 자동 생성</div>
+    </div>
+  </div>
+</div>
+
+<!-- REFERENCE -->
+<!-- ═══ VISUALIZATIONS ═══ -->
+<div class="section">
+  <div class="section-title">시각화 — 단계별 성능 하락 (Spearman)</div>
+  <div class="card" style="padding:1.5rem;">
+    <svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:700px;">
+      <!-- Grid -->
+      <line x1="80" y1="30" x2="80" y2="270" stroke="#1e2d3d" stroke-width="1"/>
+      <line x1="80" y1="270" x2="680" y2="270" stroke="#1e2d3d" stroke-width="1"/>
+      <!-- Y axis labels -->
+      <text x="70" y="35" fill="#4a6075" font-size="10" text-anchor="end" font-family="JetBrains Mono">0.90</text>
+      <text x="70" y="95" fill="#4a6075" font-size="10" text-anchor="end" font-family="JetBrains Mono">0.70</text>
+      <text x="70" y="155" fill="#4a6075" font-size="10" text-anchor="end" font-family="JetBrains Mono">0.50</text>
+      <text x="70" y="215" fill="#4a6075" font-size="10" text-anchor="end" font-family="JetBrains Mono">0.30</text>
+      <text x="70" y="275" fill="#4a6075" font-size="10" text-anchor="end" font-family="JetBrains Mono">0.10</text>
+      <!-- Grid lines -->
+      <line x1="80" y1="30" x2="680" y2="30" stroke="#1e2d3d" stroke-width="0.5" stroke-dasharray="4"/>
+      <line x1="80" y1="90" x2="680" y2="90" stroke="#1e2d3d" stroke-width="0.5" stroke-dasharray="4"/>
+      <line x1="80" y1="150" x2="680" y2="150" stroke="#1e2d3d" stroke-width="0.5" stroke-dasharray="4"/>
+      <line x1="80" y1="210" x2="680" y2="210" stroke="#1e2d3d" stroke-width="0.5" stroke-dasharray="4"/>
+      <!-- X axis labels -->
+      <text x="170" y="295" fill="#8899aa" font-size="9" text-anchor="middle" font-family="JetBrains Mono">1.Random 5CV</text>
+      <text x="320" y="295" fill="#8899aa" font-size="9" text-anchor="middle" font-family="JetBrains Mono">2.GroupKFold</text>
+      <text x="470" y="295" fill="#8899aa" font-size="9" text-anchor="middle" font-family="JetBrains Mono">3.Unseen Drug</text>
+      <text x="620" y="295" fill="#8899aa" font-size="9" text-anchor="middle" font-family="JetBrains Mono">4.Scaffold</text>
+      <!-- CatBoost line (cyan) -->
+      <polyline points="170,41 320,128 470,175 620,172" fill="none" stroke="#00e5ff" stroke-width="2.5"/>
+      <circle cx="170" cy="41" r="4" fill="#00e5ff"/><circle cx="320" cy="128" r="4" fill="#00e5ff"/><circle cx="470" cy="175" r="4" fill="#00e5ff"/><circle cx="620" cy="172" r="4" fill="#00e5ff"/>
+      <text x="175" y="35" fill="#00e5ff" font-size="8" font-family="JetBrains Mono">0.862</text>
+      <text x="325" y="122" fill="#00e5ff" font-size="8" font-family="JetBrains Mono">0.559</text>
+      <text x="475" y="169" fill="#00e5ff" font-size="8" font-family="JetBrains Mono">0.353</text>
+      <text x="625" y="166" fill="#00e5ff" font-size="8" font-family="JetBrains Mono">0.358</text>
+      <!-- DART line (yellow) -->
+      <polyline points="170,49 320,138 470,182 620,184" fill="none" stroke="#ffd600" stroke-width="2" stroke-dasharray="6,3"/>
+      <circle cx="170" cy="49" r="3.5" fill="#ffd600"/><circle cx="320" cy="138" r="3.5" fill="#ffd600"/><circle cx="470" cy="182" r="3.5" fill="#ffd600"/><circle cx="620" cy="184" r="3.5" fill="#ffd600"/>
+      <!-- FlatMLP line (green) -->
+      <polyline points="170,55 320,135 470,182 620,187" fill="none" stroke="#00ff88" stroke-width="2" stroke-dasharray="3,3"/>
+      <circle cx="170" cy="55" r="3.5" fill="#00ff88"/><circle cx="320" cy="135" r="3.5" fill="#00ff88"/><circle cx="470" cy="182" r="3.5" fill="#00ff88"/><circle cx="620" cy="187" r="3.5" fill="#00ff88"/>
+      <!-- Ensemble line (purple) -->
+      <polyline points="170,42 320,127 470,163 620,160" fill="none" stroke="#a78bfa" stroke-width="2"/>
+      <circle cx="170" cy="42" r="3.5" fill="#a78bfa"/><circle cx="320" cy="127" r="3.5" fill="#a78bfa"/><circle cx="470" cy="163" r="3.5" fill="#a78bfa"/><circle cx="620" cy="160" r="3.5" fill="#a78bfa"/>
+      <!-- Legend -->
+      <line x1="100" y1="310" x2="120" y2="310" stroke="#00e5ff" stroke-width="2.5"/><text x="125" y="313" fill="#00e5ff" font-size="8" font-family="JetBrains Mono">CatBoost</text>
+      <line x1="200" y1="310" x2="220" y2="310" stroke="#ffd600" stroke-width="2" stroke-dasharray="6,3"/><text x="225" y="313" fill="#ffd600" font-size="8" font-family="JetBrains Mono">DART</text>
+      <line x1="280" y1="310" x2="300" y2="310" stroke="#00ff88" stroke-width="2" stroke-dasharray="3,3"/><text x="305" y="313" fill="#00ff88" font-size="8" font-family="JetBrains Mono">FlatMLP</text>
+      <line x1="380" y1="310" x2="400" y2="310" stroke="#a78bfa" stroke-width="2"/><text x="405" y="313" fill="#a78bfa" font-size="8" font-family="JetBrains Mono">Ensemble A</text>
+    </svg>
+    <div style="font-size:0.65rem;color:var(--text3);margin-top:0.5rem;">모든 모델이 1→2단계에서 -36%, 2→3단계에서 추가 -25%p 하락. CatBoost와 앙상블이 전 단계에서 상위.</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">시각화 — 모델 간 예측 상관 히트맵 (Diversity)</div>
+  <div class="card" style="padding:1.5rem;">
+    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:400px;margin:0 auto;display:block;">
+      <!-- Labels -->
+      <text x="145" y="55" fill="#8899aa" font-size="9" text-anchor="middle" font-family="JetBrains Mono">CatBoost</text>
+      <text x="225" y="55" fill="#8899aa" font-size="9" text-anchor="middle" font-family="JetBrains Mono">DART</text>
+      <text x="305" y="55" fill="#8899aa" font-size="9" text-anchor="middle" font-family="JetBrains Mono">FlatMLP</text>
+      <text x="100" y="110" fill="#8899aa" font-size="9" text-anchor="end" font-family="JetBrains Mono">CatBoost</text>
+      <text x="100" y="190" fill="#8899aa" font-size="9" text-anchor="end" font-family="JetBrains Mono">DART</text>
+      <text x="100" y="270" fill="#8899aa" font-size="9" text-anchor="end" font-family="JetBrains Mono">FlatMLP</text>
+      <!-- Cells: CatBoost-CatBoost -->
+      <rect x="105" y="70" width="80" height="80" rx="4" fill="#00e5ff" opacity="1.0"/>
+      <text x="145" y="115" fill="#06090f" font-size="11" font-weight="700" text-anchor="middle" font-family="JetBrains Mono">1.000</text>
+      <!-- CatBoost-DART -->
+      <rect x="185" y="70" width="80" height="80" rx="4" fill="#ff3d5a" opacity="0.85"/>
+      <text x="225" y="115" fill="#fff" font-size="11" font-weight="700" text-anchor="middle" font-family="JetBrains Mono">0.990</text>
+      <!-- CatBoost-FlatMLP -->
+      <rect x="265" y="70" width="80" height="80" rx="4" fill="#ff8a00" opacity="0.75"/>
+      <text x="305" y="115" fill="#fff" font-size="11" font-weight="700" text-anchor="middle" font-family="JetBrains Mono">0.950</text>
+      <!-- DART-CatBoost -->
+      <rect x="105" y="150" width="80" height="80" rx="4" fill="#ff3d5a" opacity="0.85"/>
+      <text x="145" y="195" fill="#fff" font-size="11" font-weight="700" text-anchor="middle" font-family="JetBrains Mono">0.990</text>
+      <!-- DART-DART -->
+      <rect x="185" y="150" width="80" height="80" rx="4" fill="#00e5ff" opacity="1.0"/>
+      <text x="225" y="195" fill="#06090f" font-size="11" font-weight="700" text-anchor="middle" font-family="JetBrains Mono">1.000</text>
+      <!-- DART-FlatMLP -->
+      <rect x="265" y="150" width="80" height="80" rx="4" fill="#ff8a00" opacity="0.7"/>
+      <text x="305" y="195" fill="#fff" font-size="11" font-weight="700" text-anchor="middle" font-family="JetBrains Mono">0.947</text>
+      <!-- FlatMLP-CatBoost -->
+      <rect x="105" y="230" width="80" height="80" rx="4" fill="#ff8a00" opacity="0.75"/>
+      <text x="145" y="275" fill="#fff" font-size="11" font-weight="700" text-anchor="middle" font-family="JetBrains Mono">0.950</text>
+      <!-- FlatMLP-DART -->
+      <rect x="185" y="230" width="80" height="80" rx="4" fill="#ff8a00" opacity="0.7"/>
+      <text x="225" y="275" fill="#fff" font-size="11" font-weight="700" text-anchor="middle" font-family="JetBrains Mono">0.947</text>
+      <!-- FlatMLP-FlatMLP -->
+      <rect x="265" y="230" width="80" height="80" rx="4" fill="#00e5ff" opacity="1.0"/>
+      <text x="305" y="275" fill="#06090f" font-size="11" font-weight="700" text-anchor="middle" font-family="JetBrains Mono">1.000</text>
+      <!-- Color scale -->
+      <text x="145" y="340" fill="#8899aa" font-size="8" text-anchor="middle" font-family="JetBrains Mono">이상적 범위: 0.5~0.8</text>
+      <text x="305" y="340" fill="#ff3d5a" font-size="8" text-anchor="middle" font-family="JetBrains Mono">현재: 0.95+ (Diversity 부족)</text>
+      <text x="225" y="365" fill="#4a6075" font-size="8" text-anchor="middle" font-family="JetBrains Mono">Red/Orange = 높은 상관 → 앙상블 효과 제한</text>
+    </svg>
+  </div>
+</div>
+
+<!-- STEP 5 DETAILED METRICS -->
+<div class="section">
+  <div class="section-title">Step 5 앙상블 상세 — Regression Metrics</div>
+  <div class="card" style="overflow-x:auto;padding:0.6rem;">
+    <table class="dt">
+      <thead><tr><th>앙상블</th><th>가중치</th><th>OOF Sp</th><th>Kendall</th><th>Pearson</th><th>RMSE</th><th>MAE</th><th>MedianAE</th><th>P95 Err</th><th>R²</th></tr></thead>
+      <tbody>
+        <tr style="background:rgba(0,229,255,0.03);"><td><strong>A</strong></td><td>Weighted</td><td style="color:var(--v3);">0.8668</td><td>0.6924</td><td>0.9089</td><td style="color:var(--green);">1.146</td><td>0.870</td><td>0.684</td><td>2.272</td><td>0.821</td></tr>
+        <tr style="background:rgba(0,229,255,0.03);"><td><strong>A</strong></td><td>Equal</td><td>0.8664</td><td>0.6920</td><td>0.9085</td><td>1.148</td><td>0.872</td><td>0.684</td><td>2.273</td><td>0.820</td></tr>
+        <tr style="opacity:0.7;"><td>B</td><td>Weighted</td><td>0.8571</td><td>0.6830</td><td>0.9053</td><td>1.186</td><td>0.899</td><td>0.706</td><td>2.368</td><td>0.806</td></tr>
+        <tr style="opacity:0.7;"><td>B</td><td>Equal</td><td>0.8564</td><td>0.6822</td><td>0.9047</td><td>1.189</td><td>0.902</td><td>0.708</td><td>2.372</td><td>0.805</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Step 5 앙상블 상세 — Ranking Metrics (Top 30)</div>
+  <div class="card" style="overflow-x:auto;padding:0.6rem;">
+    <table class="dt">
+      <thead><tr><th>앙상블</th><th>가중치</th><th>P@30</th><th>R@30</th><th>NDCG@30</th><th>EF@30</th><th>MAP</th></tr></thead>
+      <tbody>
+        <tr style="background:rgba(0,229,255,0.03);"><td><strong>A</strong></td><td>Weighted</td><td style="color:var(--green);">70.0%</td><td>70.0%</td><td>79.0%</td><td>148.5</td><td>0.500</td></tr>
+        <tr style="background:rgba(0,229,255,0.03);"><td><strong>A</strong></td><td>Equal</td><td>70.0%</td><td>70.0%</td><td>78.9%</td><td>148.5</td><td>0.500</td></tr>
+        <tr style="opacity:0.7;"><td>B</td><td>Weighted</td><td>60.0%</td><td>60.0%</td><td>81.5%</td><td>127.3</td><td>0.416</td></tr>
+        <tr style="opacity:0.7;"><td>B</td><td>Equal</td><td>60.0%</td><td>60.0%</td><td>81.6%</td><td>127.3</td><td>0.417</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="comment">
+    <h4>코멘트 — 앙상블 A Weighted 확정</h4>
+    <p><strong>앙상블 A(Weighted)가 모든 핵심 지표에서 최우수입니다.</strong> Spearman 0.8668, RMSE 1.146, P@30 70%, R² 0.821.<br><br>
+    <strong>앙상블 B는 NDCG만 2.5% 높지만 나머지 전부 열등.</strong> P@30이 10%p 낮은 건 치명적. CrossAttention-FlatMLP 상관 1.0 때문.<br><br>
+    <strong>하지만 CatBoost 단독(0.8704)이 여전히 앙상블(0.8668)보다 높습니다.</strong> Step 6 METABRIC에서 Survival analysis로 최종 판정.</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">시각화 — 앙상블 A vs CatBoost 단독 vs 앙상블 B</div>
+  <div class="card" style="padding:1.5rem;">
+    <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:700px;">
+      <!-- Y axis -->
+      <line x1="100" y1="30" x2="100" y2="230" stroke="#1e2d3d" stroke-width="1"/>
+      <line x1="100" y1="230" x2="680" y2="230" stroke="#1e2d3d" stroke-width="1"/>
+      <text x="90" y="35" fill="#4a6075" font-size="9" text-anchor="end" font-family="JetBrains Mono">0.88</text>
+      <text x="90" y="130" fill="#4a6075" font-size="9" text-anchor="end" font-family="JetBrains Mono">0.86</text>
+      <text x="90" y="230" fill="#4a6075" font-size="9" text-anchor="end" font-family="JetBrains Mono">0.84</text>
+      <!-- Grid -->
+      <line x1="100" y1="30" x2="680" y2="30" stroke="#1e2d3d" stroke-width="0.3" stroke-dasharray="3"/>
+      <line x1="100" y1="130" x2="680" y2="130" stroke="#1e2d3d" stroke-width="0.3" stroke-dasharray="3"/>
+      <!-- Bars: CatBoost = 0.8704 → height proportional -->
+      <rect x="140" y="28" width="80" height="202" rx="4" fill="#ff8a00" opacity="0.8"/>
+      <text x="180" y="22" fill="#ff8a00" font-size="11" font-weight="700" text-anchor="middle" font-family="JetBrains Mono">0.8704</text>
+      <text x="180" y="250" fill="#8899aa" font-size="9" text-anchor="middle" font-family="JetBrains Mono">CatBoost</text>
+      <!-- Ensemble A Weighted = 0.8668 -->
+      <rect x="280" y="64" width="80" height="166" rx="4" fill="#00e5ff" opacity="0.8"/>
+      <text x="320" y="58" fill="#00e5ff" font-size="11" font-weight="700" text-anchor="middle" font-family="JetBrains Mono">0.8668</text>
+      <text x="320" y="250" fill="#8899aa" font-size="9" text-anchor="middle" font-family="JetBrains Mono">Ens.A(W)</text>
+      <!-- Ensemble A Equal = 0.8664 -->
+      <rect x="380" y="68" width="80" height="162" rx="4" fill="#00e5ff" opacity="0.5"/>
+      <text x="420" y="62" fill="#00e5ff" font-size="11" text-anchor="middle" font-family="JetBrains Mono">0.8664</text>
+      <text x="420" y="250" fill="#8899aa" font-size="9" text-anchor="middle" font-family="JetBrains Mono">Ens.A(E)</text>
+      <!-- Ensemble B Weighted = 0.8571 -->
+      <rect x="520" y="161" width="80" height="69" rx="4" fill="#a78bfa" opacity="0.5"/>
+      <text x="560" y="155" fill="#a78bfa" font-size="11" text-anchor="middle" font-family="JetBrains Mono">0.8571</text>
+      <text x="560" y="250" fill="#8899aa" font-size="9" text-anchor="middle" font-family="JetBrains Mono">Ens.B(W)</text>
+      <!-- Annotation -->
+      <text x="390" y="275" fill="#4a6075" font-size="8" text-anchor="middle" font-family="JetBrains Mono">CatBoost 단독 > 앙상블 A > 앙상블 B — Diversity 부족이 원인</text>
+    </svg>
+  </div>
+</div>
+
+<!-- STEP 5 EXTENDED METRICS TABLE -->
+<div class="section">
+  <div class="section-title">Step 5 Multi-seed 상세 (5 Seeds)</div>
+  <div class="card" style="overflow-x:auto;padding:0.6rem;">
+    <table class="dt">
+      <thead><tr><th>모델</th><th>Seed 42</th><th>Seed 123</th><th>Seed 456</th><th>Seed 789</th><th>Seed 2026</th><th>Mean</th><th>Std</th><th>Top30 Overlap</th><th>Jaccard</th></tr></thead>
+      <tbody>
+        <tr style="background:rgba(0,229,255,0.03);"><td><strong>CatBoost</strong></td><td>0.870</td><td>0.871</td><td>0.869</td><td>0.870</td><td>0.871</td><td style="color:var(--green);">0.870</td><td style="color:var(--green);">0.001</td><td style="color:var(--green);">57%</td><td style="color:var(--green);">0.664</td></tr>
+        <tr><td>DART</td><td>0.866</td><td>0.868</td><td>0.863</td><td>0.864</td><td>0.862</td><td>0.865</td><td>0.003</td><td>37%</td><td>0.420</td></tr>
+        <tr><td>LightGBM</td><td>0.862</td><td>0.864</td><td>0.860</td><td>0.859</td><td>0.863</td><td>0.862</td><td>0.003</td><td>23%</td><td>0.297</td></tr>
+        <tr><td>FlatMLP</td><td>0.830</td><td>0.823</td><td>0.831</td><td>0.824</td><td>0.825</td><td>0.827</td><td>0.005</td><td>27%</td><td>0.412</td></tr>
+        <tr><td>CrossAttn</td><td>0.830</td><td>0.823</td><td>0.831</td><td>0.824</td><td>0.825</td><td>0.827</td><td>0.005</td><td>27%</td><td>0.412</td></tr>
+        <tr><td>GraphSAGE</td><td>0.828</td><td>0.822</td><td>0.829</td><td>0.825</td><td>0.824</td><td>0.826</td><td>0.004</td><td style="color:var(--orange);">10%</td><td>0.234</td></tr>
+        <tr><td>FT-Trans</td><td>0.818</td><td>0.805</td><td>0.819</td><td>0.808</td><td>0.810</td><td>0.812</td><td>0.007</td><td style="color:var(--red);">0%</td><td style="color:var(--red);">0.167</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- STEP 6 READINESS -->
+<div class="section">
+  <div class="section-title">Step 6 METABRIC — 준비 현황</div>
+  <div class="grid-2">
+    <div class="card" style="border-left:3px solid var(--accent);">
+      <div class="card-label">비교 대상</div>
+      <div style="font-size:0.76rem;line-height:2;">
+        1. 앙상블 A (Weighted): CatBoost 34% + DART 34% + FlatMLP 32%<br>
+        2. CatBoost 단독: 개별 최고 성능 + 안정성 1위
+      </div>
+    </div>
+    <div class="card" style="border-left:3px solid var(--yellow);">
+      <div class="card-label">측정 Method</div>
+      <div style="font-size:0.76rem;line-height:2;">
+        A. IC50 Proxy (P@15, NDCG@15, MAP, EF@15, KS test)<br>
+        B. Survival (KM, Cox HR, C-index, Bonferroni)<br>
+        C. GraphSAGE P@20
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">참고 문헌</div>
+  <div class="ibox" style="border-left-color:var(--purple);">
+    <h4>Herbert et al. (2025)</h4>
+    <p>"Monotherapy cancer drug-blind response prediction is limited to intraclass generalization" bioRxiv 10.1101/2025.06.16.659838<br>
+    Drug-blind 예측은 같은 MOA 내에서만 일반화 가능. Mixed set 성능의 90%는 약물 분포 암기. 본 파이프라인 2~4단계 평가 설계 및 결과 해석의 이론적 근거.</p>
+  </div>
+</div>
+
+</div>
+<div class="footer">biso_myprotocol · say2-4team · Step 4 최종 · v3 (20260414) · 전체 6단계 평가 완료</div>
+</body>
+</html>

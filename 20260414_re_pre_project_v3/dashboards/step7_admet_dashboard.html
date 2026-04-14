@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>biso · Step 7 ADMET + 약물 추천 — v3</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#06090f;--bg2:#0c1219;--bg3:#111a25;--border:#1e2d3d;--accent:#00e5ff;--green:#00ff88;--yellow:#ffd600;--red:#ff3d5a;--orange:#ff8a00;--purple:#a78bfa;--text:#e8f0fa;--text2:#8899aa;--text3:#4a6075;--v1:#ff8a00;--v3:#00e5ff}
+*{margin:0;padding:0;box-sizing:border-box}html{font-size:14.5px}body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-serif}
+.header{padding:2rem 2rem 1.5rem}.back{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--accent);text-decoration:none;opacity:.7}.back:hover{opacity:1}h1{font-family:'JetBrains Mono',monospace;font-size:1.4rem;font-weight:700;margin-top:.8rem}h1 em{color:var(--accent);font-style:normal}.sub{font-size:.78rem;color:var(--text2);margin-top:.3rem}
+.c{max-width:1400px;margin:0 auto;padding:0 1.5rem 4rem}.s{margin-bottom:2.2rem}.st{font-family:'JetBrains Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:3px;color:var(--text3);margin-bottom:1rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}@media(max-width:900px){.g2,.g3,.g4{grid-template-columns:1fr}}
+.cd{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.3rem}.cl{font-family:'JetBrains Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:2px;color:var(--text3);margin-bottom:.4rem}.cv{font-family:'JetBrains Mono',monospace;font-size:1.4rem;font-weight:700}.cs{font-size:.72rem;color:var(--text2);margin-top:.2rem}
+table.t{width:100%;border-collapse:collapse;font-size:.72rem}table.t th{font-family:'JetBrains Mono',monospace;font-size:.57rem;text-transform:uppercase;letter-spacing:1px;color:var(--text3);padding:.55rem .4rem;text-align:left;border-bottom:1px solid var(--border);background:var(--bg2)}table.t td{padding:.45rem .4rem;border-bottom:1px solid rgba(30,45,61,.35);font-family:'JetBrains Mono',monospace;font-size:.66rem}table.t tr:hover td{background:rgba(0,229,255,.02)}
+.tag{display:inline-block;padding:.1rem .35rem;border-radius:4px;font-size:.52rem;font-weight:700;font-family:'JetBrains Mono',monospace}
+.t-brca{background:rgba(255,61,90,.12);color:var(--red);border:1px solid rgba(255,61,90,.25)}.t-res{background:rgba(0,229,255,.1);color:var(--accent);border:1px solid rgba(0,229,255,.2)}.t-new{background:rgba(0,255,136,.1);color:var(--green);border:1px solid rgba(0,255,136,.2)}.t-p{background:rgba(0,255,136,.1);color:var(--green);border:1px solid rgba(0,255,136,.2)}.t-w{background:rgba(255,214,0,.1);color:var(--yellow);border:1px solid rgba(255,214,0,.2)}.t-f{background:rgba(255,61,90,.1);color:var(--red);border:1px solid rgba(255,61,90,.2)}
+.ib{background:var(--bg3);border-radius:8px;padding:1rem 1.2rem;border-left:3px solid var(--accent);margin:.6rem 0}.ib h4{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--accent);text-transform:uppercase;letter-spacing:2px;margin-bottom:.4rem}.ib p{font-size:.76rem;color:var(--text2);line-height:1.7}.ib strong{color:var(--text)}
+.cm{background:var(--bg3);border-radius:8px;padding:1rem 1.2rem;border-left:3px solid var(--purple);margin:.6rem 0}.cm h4{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--purple);text-transform:uppercase;letter-spacing:2px;margin-bottom:.4rem}.cm p{font-size:.76rem;color:var(--text2);line-height:1.7}.cm strong{color:var(--text)}
+.drug-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:1.2rem;margin-bottom:.8rem}.drug-card h3{font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--text);margin-bottom:.5rem}.drug-card .meta{font-size:.7rem;color:var(--text2);line-height:1.8}.drug-card .reason{font-size:.73rem;color:var(--text2);line-height:1.7;margin-top:.5rem;padding-top:.5rem;border-top:1px solid var(--border)}.drug-card .limit{font-size:.7rem;color:var(--orange);line-height:1.6;margin-top:.4rem}
+.footer{text-align:center;padding:2rem;font-family:'JetBrains Mono',monospace;font-size:.63rem;color:var(--text3);border-top:1px solid var(--border)}
+
+/* ─── BACK BUTTON ─── */
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  text-decoration: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 500;
+  transition: all 0.3s;
+  margin: 1rem auto;
+  max-width: fit-content;
+}
+.back-btn:hover {
+  border-color: var(--accent);
+  background: var(--bg3);
+  box-shadow: 0 0 20px rgba(0,229,255,0.1);
+  transform: translateX(-2px);
+}
+.back-btn::before {
+  content: '←';
+  font-size: 1rem;
+  color: var(--accent);
+}
+
+</style>
+</head>
+<body>
+<div class="header">
+  <a href="v1_vs_v3_comparison_dashboard.html" class="back">← 메인 대시보드</a>
+  <h1><em>Step 7</em> ADMET Gate + 약물 추천 결과</h1>
+  <div class="sub">Top 15 · 3개 카테고리 분류 · ADMET 3단계 필터링 · Tanimoto similarity 기반 실제 assay 데이터 · 추천 이유 + 한계</div>
+</div>
+<div class="c">
+
+<!-- SUMMARY -->
+<div class="s">
+  <div class="st">핵심 수치</div>
+  <div class="g4">
+    <div class="cd"><div class="cl">유방암 치료제 (검증용)</div><div class="cv" style="color:var(--red);">4개</div><div class="cs">이미 유방암에 사용 중</div></div>
+    <div class="cd"><div class="cl">유방암 연구 중 (재창출)</div><div class="cv" style="color:var(--accent);">6개</div><div class="cs">타암종 승인/임상시험 진행</div></div>
+    <div class="cd"><div class="cl">유방암 미적용 (신약)</div><div class="cv" style="color:var(--green);">5개</div><div class="cs">진짜 새로운 발견</div></div>
+    <div class="cd"><div class="cl">ADMET High Safety</div><div class="cv" style="color:var(--green);">11/15</div><div class="cs">Safety Score ≥ 7.0</div></div>
+  </div>
+</div>
+
+<!-- CATEGORY 1 -->
+<div class="s">
+  <div class="st">카테고리 1 · 유방암 치료제 (현재 사용 중) — 검증용</div>
+  <div class="ib" style="border-left-color:var(--red);margin-bottom:1rem;">
+    <h4>검증 목적</h4>
+    <p>이 약물들이 Top 15에 포함된 것은 <strong>파이프라인이 알려진 유방암 약물을 정확히 선별한다</strong>는 검증입니다. 추천 대상이 아닙니다.</p>
+  </div>
+  <div class="cd" style="overflow-x:auto;padding:.5rem;">
+    <table class="t">
+      <thead><tr><th>약물명</th><th>Target</th><th>MOA</th><th>투여</th><th>Safety</th><th>DILI</th><th>CYP3A4</th><th>Lipinski</th><th>MW</th><th>LogP</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Entinostat</strong></td><td>HDAC1/3</td><td>HDAC 억제 (epigenetic)</td><td>경구</td><td style="color:var(--green);">12.0</td><td>Unknown</td><td>No data</td><td>0</td><td>376</td><td>3.34</td></tr>
+        <tr><td><strong>Cediranib</strong></td><td>VEGFR/FLT/KIT</td><td>Multi-kinase (항혈관신생)</td><td>경구</td><td>7.0</td><td>Unknown</td><td>No data</td><td>1</td><td>451</td><td>5.22</td></tr>
+        <tr><td><strong>Vinblastine</strong></td><td>Microtubule</td><td>Vinca alkaloid</td><td>IV</td><td>7.8</td><td>No</td><td style="color:var(--red);">Strong</td><td>2</td><td>811</td><td>3.99</td></tr>
+        <tr><td><strong>ML323</strong></td><td>USP1/UAF1</td><td>Deubiquitinase 억제</td><td>경구</td><td>7.0</td><td>Unknown</td><td>No data</td><td>0</td><td>385</td><td>4.77</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- CATEGORY 2 -->
+<div class="s">
+  <div class="st">카테고리 2 · 유방암 연구 중 — 재창출 후보 (6개)</div>
+
+  <div class="drug-card" style="border-left:3px solid var(--accent);">
+    <h3>1. YK-4-279 <span class="tag t-res">타암종</span> <span class="tag t-w">TNBC</span></h3>
+    <div class="meta">Target: RNA helicase A · MOA: RNA helicase 억제 · 경구 · Safety: 8.0 · Lipinski: 0 · MW: 366 · 임상시험: 35건</div>
+    <div class="reason"><strong>추천 이유:</strong> RNA helicase A가 TNBC에서 과발현. Ewing sarcoma에서 효과 확인. TNBC의 새로운 치료 타겟으로 연구 중.</div>
+    <div class="limit">한계: 초기 단계. Ewing sarcoma 특이적 데이터가 대부분. 유방암 전용 임상 데이터 부족.</div>
+  </div>
+
+  <div class="drug-card" style="border-left:3px solid var(--accent);">
+    <h3>2. AZ6102 <span class="tag t-res">타암종</span> <span class="tag t-w">TNBC</span></h3>
+    <div class="meta">Target: TNKS1/2 · MOA: Tankyrase 억제 · 경구 · Safety: 5.0 · Lipinski: 0 · MW: 429 · 임상시험: 26건</div>
+    <div class="reason"><strong>추천 이유:</strong> Wnt pathway가 TNBC의 50%에서 활성화. Tankyrase 억제로 Wnt 신호 차단. PARP 억제제와 병용 가능성.</div>
+    <div class="limit">한계: GI 독성 우려. 바이오마커 선정 필요. 유사 승인약 없음(개발 중).</div>
+  </div>
+
+  <div class="drug-card" style="border-left:3px solid var(--accent);">
+    <h3>3. SB590885 <span class="tag t-res">타암종</span> <span class="tag t-f">BRAF mut</span></h3>
+    <div class="meta">Target: BRAF · MOA: BRAF 억제 · 경구 · Safety: 5.0 · Lipinski: 0 · MW: 454 · CYP3A4: Strong · 임상시험: 26건</div>
+    <div class="reason"><strong>추천 이유:</strong> BRAF V600E 변이가 유방암의 ~5%에서 발견. 유사 승인약 Vemurafenib 존재.</div>
+    <div class="limit">한계: 대상 환자 매우 적음(~5%). 개발 중단됨. CYP3A4 Strong inhibitor → DDI 위험 High.</div>
+  </div>
+
+  <div class="drug-card" style="border-left:3px solid var(--green);border-top:1px solid var(--green);">
+    <h3>4. BMS-345541 ⭐ <span class="tag t-res">타암종</span> <span class="tag t-w">TNBC</span></h3>
+    <div class="meta">Target: IKK-1/2 · MOA: NF-κB 경로 억제 · 경구 · Safety: <strong style="color:var(--green);">12.0</strong> · Lipinski: 0 · MW: 255 · CYP3A4: Weak · 임상시험: 9건</div>
+    <div class="reason"><strong>추천 이유:</strong> NF-κB가 TNBC 항암제 내성의 핵심 매개자. 기존 항암제(Doxorubicin 등)와 병용 시 내성 극복 가능. Safety Score 12.0으로 최고. 분자량 255Da로 가장 작음(약물성 우수).</div>
+    <div class="limit">한계: 면역 억제 위험 (NF-κB는 면역 반응에도 관여). 임상시험 9건으로 적음.</div>
+  </div>
+
+  <div class="drug-card" style="border-left:3px solid var(--accent);">
+    <h3>5. PFI3 <span class="tag t-res">타암종</span> <span class="tag t-w">TNBC/ER+</span></h3>
+    <div class="meta">Target: SMARCA2/4 (Polybromo 1) · MOA: 염색질 재형성 · 경구 · Safety: 7.0 · Lipinski: 0 · MW: 321 · CYP3A4: Weak · 임상시험: 14건</div>
+    <div class="reason"><strong>추천 이유:</strong> BRD4가 종양 유전자 전사를 구동. TNBC와 ER+ 모두 타겟 가능. SWI/SNF 복합체 억제로 에피제네틱 치료.</div>
+    <div class="limit">한계: 혈소판 감소증, GI 독성 우려. 유사 승인약 없음(임상시험 중).</div>
+  </div>
+
+  <div class="drug-card" style="border-left:3px solid var(--accent);">
+    <h3>6. AT13148 <span class="tag t-res">타암종</span> <span class="tag t-w">ER+/HER2+</span></h3>
+    <div class="meta">Target: AKT1 · MOA: AKT 억제 (PI3K/AKT/mTOR) · 경구 · Safety: 8.0 · Lipinski: 0 · MW: 314 · CYP3A4: Weak · 임상시험: 3건</div>
+    <div class="reason"><strong>추천 이유:</strong> PI3K/AKT 경로가 ER+의 70%, HER2+의 30%에서 활성화. 유사 승인약 Alpelisib (PI3K 억제) FDA 승인.</div>
+    <div class="limit">한계: 고혈당 부작용. PIK3CA 변이 환자 선별 필요. 임상시험 3건으로 매우 적음.</div>
+  </div>
+</div>
+
+<!-- CATEGORY 3 -->
+<div class="s">
+  <div class="st">카테고리 3 · 유방암 미적용 — 신약 후보 (5개)</div>
+
+  <div class="drug-card" style="border-left:3px solid var(--green);border-top:1px solid var(--green);">
+    <h3>7. AZD2014 ⭐ <span class="tag t-new">신약</span> <span class="tag t-w">ER+/HER2+</span></h3>
+    <div class="meta">Target: mTORC1/2 · MOA: Dual mTOR 억제 · 경구 · Safety: <strong style="color:var(--green);">10.0</strong> · Lipinski: 0 · MW: 463 · CYP3A4: Non · 임상시험: 3건</div>
+    <div class="reason"><strong>추천 이유:</strong> mTOR 경로가 ER+ 유방암의 70%에서 관여. 1세대 rapalogs(Everolimus) 내성 극복 가능한 2세대 억제제. Everolimus FDA 승인 선례. CYP3A4 Non-inhibitor로 약물 상호작용 낮음.</div>
+    <div class="limit">한계: 대사 독성, 구내염 우려. 아직 유방암 전용 임상 3건뿐.</div>
+  </div>
+
+  <div class="drug-card" style="border-left:3px solid var(--green);">
+    <h3>8. Bicalutamide <span class="tag t-new">신약</span> <span class="tag t-w">AR+ TNBC</span></h3>
+    <div class="meta">Target: AR · MOA: AR 길항제 · 경구 · Safety: 4.0 · Lipinski: 0 · MW: 430 · CYP3A4: Strong · 임상시험: 48건</div>
+    <div class="reason"><strong>추천 이유:</strong> TNBC의 30%가 AR 발현. 전립선암 FDA 승인으로 안전성 데이터 풍부. 유사약 Enzalutamide 존재. 임상시험 48건으로 가장 많음.</div>
+    <div class="limit">한계: <strong style="color:var(--red);">DILI(+) 간독성 확인됨.</strong> CYP3A4 Strong inhibitor → DDI High. AR+ 환자만 대상(30%).</div>
+  </div>
+
+  <div class="drug-card" style="border-left:3px solid var(--green);">
+    <h3>9. Nutlin-3a(-) <span class="tag t-new">신약</span> <span class="tag t-w">ER+/HER2+</span></h3>
+    <div class="meta">Target: MDM2 · MOA: p53-MDM2 상호작용 억제 · — · Safety: 5.0 · Lipinski: 0 · MW: 269 · CYP3A4: Non · 임상시험: 19건</div>
+    <div class="reason"><strong>추천 이유:</strong> 유방암의 85%가 wild-type p53 유지. p53 활성화로 종양 억제. 분자량 269Da로 매우 작음. CYP3A4 Non-inhibitor.</div>
+    <div class="limit">한계: 혈액학적 독성. p53 wild-type 환자만 대상. 유사 승인약 없음(임상 중).</div>
+  </div>
+
+  <div class="drug-card" style="border-left:3px solid var(--green);">
+    <h3>10. GSK2801 <span class="tag t-new">신약</span> <span class="tag t-f">Unknown</span></h3>
+    <div class="meta">Target: (미확인) · MOA: — · — · Safety: 3.0 · Lipinski: 0 · MW: 261 · CYP3A4: Non · 임상시험: 0건</div>
+    <div class="reason"><strong>추천 이유:</strong> GDSC 모델 예측 기반으로만 선정. Target 미확인이라 신규 메커니즘 가능성.</div>
+    <div class="limit">한계: <strong style="color:var(--red);">공개 데이터 없음. 임상시험 0건. Target 불명. 불확실성 최대.</strong></div>
+  </div>
+
+  <div class="drug-card" style="border-left:3px solid var(--green);">
+    <h3>11. AZD1332 <span class="tag t-new">신약</span> <span class="tag t-w">NTRK+</span></h3>
+    <div class="meta">Target: NTRK1/2/3 · MOA: Pan-TRK 억제 · 경구 · Safety: 7.0 · Lipinski: 0 · MW: 392 · CYP3A4: Non · PubMed: 184편 · 임상시험: 32건</div>
+    <div class="reason"><strong>추천 이유:</strong> NTRK 융합은 강력한 종양 구동 인자. 유사 승인약 Larotrectinib FDA 승인. PubMed 184편으로 연구 근거 가장 풍부.</div>
+    <div class="limit">한계: 유방암에서 NTRK 융합 빈도 1% 미만. 대상 환자 극소수. 신경독성 우려.</div>
+  </div>
+</div>
+
+<!-- SUBTYPE COVERAGE -->
+<div class="s">
+  <div class="st">유방암 Subtype별 약물 커버리지</div>
+  <div class="g3">
+    <div class="cd" style="border-left:3px solid var(--accent);">
+      <div class="cl">TNBC (5개 약물)</div>
+      <div style="font-size:.76rem;line-height:1.8;">
+        YK-4-279 (RNA helicase)<br>
+        AZ6102 (Tankyrase/Wnt)<br>
+        BMS-345541 ⭐ (NF-κB)<br>
+        PFI3 (SWI/SNF)<br>
+        Bicalutamide (AR+ 30%)
+      </div>
+    </div>
+    <div class="cd" style="border-left:3px solid var(--yellow);">
+      <div class="cl">ER+ / HER2+ (4개 약물)</div>
+      <div style="font-size:.76rem;line-height:1.8;">
+        AT13148 (AKT/PI3K)<br>
+        AZD2014 ⭐ (mTOR)<br>
+        Nutlin-3a (p53-MDM2)<br>
+        PFI3 (SWI/SNF)
+      </div>
+    </div>
+    <div class="cd" style="border-left:3px solid var(--text3);">
+      <div class="cl">Rare Mutations (2개 약물)</div>
+      <div style="font-size:.76rem;line-height:1.8;">
+        SB590885 (BRAF V600E ~5%)<br>
+        AZD1332 (NTRK fusion &lt;1%)
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ADMET SUMMARY -->
+<div class="s">
+  <div class="st">ADMET 3단계 필터링 결과</div>
+  <div class="cd" style="overflow-x:auto;padding:.5rem;">
+    <table class="t">
+      <thead><tr><th>약물명</th><th>카테고리</th><th>Stage 1<br>Lipinski</th><th>Stage 2<br>ADMET</th><th>Stage 3<br>CYP3A4</th><th>Safety</th><th>Combined</th><th>DILI</th></tr></thead>
+      <tbody>
+        <tr style="background:rgba(0,255,136,.03);"><td><strong>BMS-345541</strong></td><td><span class="tag t-res">연구</span></td><td><span class="tag t-p">PASS</span></td><td>Mixed</td><td><span class="tag t-p">Weak</span></td><td style="color:var(--green);">12.0</td><td>15.0</td><td>—</td></tr>
+        <tr style="background:rgba(0,255,136,.03);"><td><strong>AZD2014</strong></td><td><span class="tag t-new">신약</span></td><td><span class="tag t-p">PASS</span></td><td>Mixed</td><td><span class="tag t-p">Non</span></td><td style="color:var(--green);">10.0</td><td>16.5</td><td>—</td></tr>
+        <tr><td>AT13148</td><td><span class="tag t-res">연구</span></td><td><span class="tag t-p">PASS</span></td><td>Mixed</td><td><span class="tag t-p">Weak</span></td><td>8.0</td><td>—</td><td>—</td></tr>
+        <tr><td>YK-4-279</td><td><span class="tag t-res">연구</span></td><td><span class="tag t-p">PASS</span></td><td>Mixed</td><td><span class="tag t-p">Non</span></td><td>8.0</td><td>—</td><td>—</td></tr>
+        <tr><td>AZD1332</td><td><span class="tag t-new">신약</span></td><td><span class="tag t-p">PASS</span></td><td>Mixed</td><td><span class="tag t-p">Non</span></td><td>7.0</td><td>—</td><td>—</td></tr>
+        <tr><td>PFI3</td><td><span class="tag t-res">연구</span></td><td><span class="tag t-p">PASS</span></td><td>Mixed</td><td><span class="tag t-p">Weak</span></td><td>7.0</td><td>—</td><td>—</td></tr>
+        <tr><td>AZ6102</td><td><span class="tag t-res">연구</span></td><td><span class="tag t-p">PASS</span></td><td>Mixed</td><td><span class="tag t-f">Strong</span></td><td>5.0</td><td>—</td><td>—</td></tr>
+        <tr><td>SB590885</td><td><span class="tag t-res">연구</span></td><td><span class="tag t-p">PASS</span></td><td>Mixed</td><td><span class="tag t-f">Strong</span></td><td>5.0</td><td>—</td><td>—</td></tr>
+        <tr><td>Nutlin-3a</td><td><span class="tag t-new">신약</span></td><td><span class="tag t-p">PASS</span></td><td>Mixed</td><td><span class="tag t-p">Non</span></td><td>5.0</td><td>—</td><td>—</td></tr>
+        <tr><td>Bicalutamide</td><td><span class="tag t-new">신약</span></td><td><span class="tag t-p">PASS</span></td><td>Mixed</td><td><span class="tag t-f">Strong</span></td><td style="color:var(--orange);">4.0</td><td>—</td><td style="color:var(--red);">DILI(+)</td></tr>
+        <tr><td>GSK2801</td><td><span class="tag t-new">신약</span></td><td><span class="tag t-p">PASS</span></td><td>Mixed</td><td><span class="tag t-p">Non</span></td><td style="color:var(--red);">3.0</td><td>—</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="ib" style="border-left-color:var(--yellow);">
+    <h4>ADMET 방법론</h4>
+    <p><strong>v1 Tanimoto similarity 기반 22개 assay 데이터셋 검색.</strong> 각 약물의 SMILES와 assay DB의 분자를 Tanimoto 유사도로 비교하여 similarity ≥ 0.85인 실측 데이터를 매칭. mock/simulated 데이터 아님.<br><br>
+    Stage 1(Lipinski): RDKit 실제 계산 · Stage 2(ADMET): Tanimoto 기반 실측 데이터 · Stage 3(CYP3A4): 동일 방법</p>
+  </div>
+</div>
+
+<!-- FINAL RECOMMENDATION -->
+<div class="s">
+  <div class="st">최종 추천 — 유망 약물</div>
+  <div class="g2">
+    <div class="cd" style="border:2px solid var(--green);background:rgba(0,255,136,.02);">
+      <div class="cl">⭐ 재창출 1순위 — BMS-345541</div>
+      <div style="font-size:.8rem;line-height:1.8;">
+        <strong>NF-κB 억제제 · TNBC 대상</strong><br>
+        Safety Score 12.0 (최고) · CYP3A4 Weak · DDI Low<br>
+        TNBC 항암제 내성 극복 · 기존 항암제 병용 가능<br>
+        분자량 255Da (drug-likeness 최우수)
+      </div>
+    </div>
+    <div class="cd" style="border:2px solid var(--green);background:rgba(0,255,136,.02);">
+      <div class="cl">⭐ 재창출 2순위 — AZD2014</div>
+      <div style="font-size:.8rem;line-height:1.8;">
+        <strong>Dual mTOR 억제제 · ER+/HER2+ 대상</strong><br>
+        Safety Score 10.0 · CYP3A4 Non · DDI Low<br>
+        Everolimus 내성 극복 · FDA 승인 선례(1세대)<br>
+        Combined Score 16.5 (최고)
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- V1 VS V3 -->
+<div class="s">
+  <div class="st">v1 vs v3 추천 약물 비교</div>
+  <div class="cm">
+    <h4>v1 → v3 완전히 다른 약물 추천</h4>
+    <p>v1 Top 3 (Sepantronium, Camptothecin, Staurosporine)이 v3 Top 15에 모두 미포함.<br>
+    방법론 차이: v1은 target gene expression 기반, v3은 IC50 예측 모델 + 6단계 확장 평가 + ADMET 실제 데이터.<br>
+    v3가 더 정교한 평가 체계를 사용했으므로 결과가 달라지는 것은 자연스럽습니다. v1이 틀린 것이 아니라 평가 관점이 다릅니다.</p>
+  </div>
+</div>
+
+<!-- NEXT -->
+<div class="s">
+  <div class="st">다음 단계</div>
+  <div class="cd" style="border-left:3px solid var(--purple);">
+    <div class="cl">Step 7+ · KG/API 검증 (Neo4j + FastAPI)</div>
+    <div style="font-size:.76rem;line-height:1.8;">
+      Top 11 약물(카테고리 2+3)에 대해:<br>
+      FAERS 부작용 · ClinicalTrials 임상시험 · PubMed 논문 · HIRA 약가<br>
+      Neo4j KG(30,558 노드/137,465 엣지) + FastAPI 12개 엔드포인트 자동 수집<br>
+      최종 근거 보고서 자동 생성
+    </div>
+  </div>
+</div>
+
+</div>
+<div class="footer">biso_myprotocol · say2-4team · Step 7 ADMET + 약물 추천 · v3 (20260414)</div>
+</body>
+</html>
