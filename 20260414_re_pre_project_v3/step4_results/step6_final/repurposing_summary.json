@@ -1,0 +1,331 @@
+{
+  "timestamp": "2026-04-14 13:22:31",
+  "n_total": 15,
+  "category_distribution": {
+    "approved": 0,
+    "research": 8,
+    "novel": 7
+  },
+  "moa_distribution": {
+    "PI3K/MTOR signaling": 5,
+    "Other": 2,
+    "Cell cycle": 2,
+    "Apoptosis regulation": 2,
+    "Other kinases": 1,
+    "DNA replication": 1,
+    "Protein stability and degradation": 1,
+    "Mitosis": 1
+  },
+  "target_coverage": 8,
+  "unique_targets": [
+    "AKT1",
+    "AURKA",
+    "BCL2",
+    "CDK9",
+    "ESR1",
+    "HSP90",
+    "MTOR",
+    "PIK3CA"
+  ],
+  "subtype_coverage": {
+    "ER+": 7,
+    "HER2+": 5,
+    "TNBC": 3
+  },
+  "jaccard_with_top30": 0.5357142857142857,
+  "drug_details": [
+    {
+      "rank": 1,
+      "drug_name": "AZD2014",
+      "category": "Category 2: 유방암 연구 중",
+      "final_score": 0.3409374479794934,
+      "target": "MTOR",
+      "pathway": "PI3K/MTOR signaling",
+      "subtypes": "ER+, HER2+",
+      "tanimoto": 0.17,
+      "survival_score": 0.950018127683448,
+      "recommendation_reasons": [
+        "높은 multi-objective score",
+        "생존 예측 개선 가능성",
+        "유방암 관련 타겟 (MTOR)",
+        "유방암 임상 연구 진행 중"
+      ],
+      "limitations": [
+        "일반적인 임상 검증 필요"
+      ]
+    },
+    {
+      "rank": 2,
+      "drug_name": "Dactinomycin",
+      "category": "Category 2: 유방암 연구 중",
+      "final_score": 0.3290375354573231,
+      "target": "ESR1",
+      "pathway": "Other",
+      "subtypes": "ER+",
+      "tanimoto": 0.0,
+      "survival_score": 0.0,
+      "recommendation_reasons": [
+        "높은 multi-objective score",
+        "유방암 관련 타겟 (ESR1)",
+        "유방암 임상 연구 진행 중"
+      ],
+      "limitations": [
+        "FDA 약물과 구조적 유사도 낮음",
+        "생존 데이터 부재"
+      ]
+    },
+    {
+      "rank": 3,
+      "drug_name": "SL0101",
+      "category": "Category 3: 유방암 미적용",
+      "final_score": 0.2944470816733066,
+      "target": NaN,
+      "pathway": "Other kinases",
+      "subtypes": "Unknown",
+      "tanimoto": 0.0,
+      "survival_score": 0.620858463761359,
+      "recommendation_reasons": [
+        "생존 예측 개선 가능성",
+        "유방암 관련 타겟 (nan)"
+      ],
+      "limitations": [
+        "FDA 약물과 구조적 유사도 낮음",
+        "서브타입 매칭 불확실",
+        "유방암 연구 사례 부족, 추가 검증 필요"
+      ]
+    },
+    {
+      "rank": 4,
+      "drug_name": "Temsirolimus",
+      "category": "Category 2: 유방암 연구 중",
+      "final_score": 0.2799113077933346,
+      "target": "MTOR",
+      "pathway": "PI3K/MTOR signaling",
+      "subtypes": "ER+, HER2+",
+      "tanimoto": 0.0,
+      "survival_score": 0.0,
+      "recommendation_reasons": [
+        "유방암 관련 타겟 (MTOR)",
+        "유방암 임상 연구 진행 중"
+      ],
+      "limitations": [
+        "FDA 약물과 구조적 유사도 낮음",
+        "생존 데이터 부재"
+      ]
+    },
+    {
+      "rank": 5,
+      "drug_name": "Teniposide",
+      "category": "Category 2: 유방암 연구 중",
+      "final_score": 0.2129179253438862,
+      "target": NaN,
+      "pathway": "DNA replication",
+      "subtypes": "Unknown",
+      "tanimoto": 0.0,
+      "survival_score": 0.0,
+      "recommendation_reasons": [
+        "유방암 관련 타겟 (nan)",
+        "유방암 임상 연구 진행 중"
+      ],
+      "limitations": [
+        "FDA 약물과 구조적 유사도 낮음",
+        "생존 데이터 부재",
+        "서브타입 매칭 불확실"
+      ]
+    },
+    {
+      "rank": 6,
+      "drug_name": "CDK9_5576",
+      "category": "Category 3: 유방암 미적용",
+      "final_score": 0.1902892661446016,
+      "target": "CDK9",
+      "pathway": "Cell cycle",
+      "subtypes": "Unknown",
+      "tanimoto": 0.0,
+      "survival_score": 0.0,
+      "recommendation_reasons": [
+        "유방암 관련 타겟 (CDK9)"
+      ],
+      "limitations": [
+        "FDA 약물과 구조적 유사도 낮음",
+        "생존 데이터 부재",
+        "서브타입 매칭 불확실",
+        "유방암 연구 사례 부족, 추가 검증 필요"
+      ]
+    },
+    {
+      "rank": 7,
+      "drug_name": "Tanespimycin",
+      "category": "Category 2: 유방암 연구 중",
+      "final_score": 0.1153908037285723,
+      "target": "HSP90",
+      "pathway": "Protein stability and degradation",
+      "subtypes": "Unknown",
+      "tanimoto": 0.0,
+      "survival_score": 0.0,
+      "recommendation_reasons": [
+        "유방암 관련 타겟 (HSP90)",
+        "유방암 임상 연구 진행 중"
+      ],
+      "limitations": [
+        "FDA 약물과 구조적 유사도 낮음",
+        "생존 데이터 부재",
+        "서브타입 매칭 불확실"
+      ]
+    },
+    {
+      "rank": 8,
+      "drug_name": "Rapamycin",
+      "category": "Category 2: 유방암 연구 중",
+      "final_score": 0.1120425850306739,
+      "target": "MTOR",
+      "pathway": "PI3K/MTOR signaling",
+      "subtypes": "ER+, HER2+",
+      "tanimoto": 0.0,
+      "survival_score": 0.0,
+      "recommendation_reasons": [
+        "유방암 관련 타겟 (MTOR)",
+        "유방암 임상 연구 진행 중"
+      ],
+      "limitations": [
+        "FDA 약물과 구조적 유사도 낮음",
+        "생존 데이터 부재"
+      ]
+    },
+    {
+      "rank": 9,
+      "drug_name": "MK-2206",
+      "category": "Category 2: 유방암 연구 중",
+      "final_score": 0.1024414026085509,
+      "target": "AKT1",
+      "pathway": "PI3K/MTOR signaling",
+      "subtypes": "ER+, HER2+",
+      "tanimoto": 0.0,
+      "survival_score": 0.0,
+      "recommendation_reasons": [
+        "유방암 관련 타겟 (AKT1)",
+        "유방암 임상 연구 진행 중"
+      ],
+      "limitations": [
+        "FDA 약물과 구조적 유사도 낮음",
+        "생존 데이터 부재"
+      ]
+    },
+    {
+      "rank": 10,
+      "drug_name": "Pictilisib",
+      "category": "Category 2: 유방암 연구 중",
+      "final_score": 0.0978922709192639,
+      "target": "PIK3CA",
+      "pathway": "PI3K/MTOR signaling",
+      "subtypes": "ER+, HER2+",
+      "tanimoto": 0.0,
+      "survival_score": 0.0,
+      "recommendation_reasons": [
+        "유방암 관련 타겟 (PIK3CA)",
+        "유방암 임상 연구 진행 중"
+      ],
+      "limitations": [
+        "FDA 약물과 구조적 유사도 낮음",
+        "생존 데이터 부재"
+      ]
+    },
+    {
+      "rank": 11,
+      "drug_name": "TW 37",
+      "category": "Category 3: 유방암 미적용",
+      "final_score": 0.0764429706126459,
+      "target": "BCL2",
+      "pathway": "Apoptosis regulation",
+      "subtypes": "TNBC",
+      "tanimoto": 0.0,
+      "survival_score": 0.0,
+      "recommendation_reasons": [
+        "유방암 관련 타겟 (BCL2)"
+      ],
+      "limitations": [
+        "FDA 약물과 구조적 유사도 낮음",
+        "생존 데이터 부재",
+        "유방암 연구 사례 부족, 추가 검증 필요"
+      ]
+    },
+    {
+      "rank": 12,
+      "drug_name": "CDK9_5038",
+      "category": "Category 3: 유방암 미적용",
+      "final_score": 0.0759118361269414,
+      "target": "CDK9",
+      "pathway": "Cell cycle",
+      "subtypes": "Unknown",
+      "tanimoto": 0.0,
+      "survival_score": 0.0,
+      "recommendation_reasons": [
+        "유방암 관련 타겟 (CDK9)"
+      ],
+      "limitations": [
+        "FDA 약물과 구조적 유사도 낮음",
+        "생존 데이터 부재",
+        "서브타입 매칭 불확실",
+        "유방암 연구 사례 부족, 추가 검증 필요"
+      ]
+    },
+    {
+      "rank": 13,
+      "drug_name": "Sabutoclax",
+      "category": "Category 3: 유방암 미적용",
+      "final_score": 0.0530273895748817,
+      "target": "BCL2",
+      "pathway": "Apoptosis regulation",
+      "subtypes": "TNBC",
+      "tanimoto": 0.0,
+      "survival_score": 0.0,
+      "recommendation_reasons": [
+        "유방암 관련 타겟 (BCL2)"
+      ],
+      "limitations": [
+        "FDA 약물과 구조적 유사도 낮음",
+        "생존 데이터 부재",
+        "유방암 연구 사례 부족, 추가 검증 필요"
+      ]
+    },
+    {
+      "rank": 14,
+      "drug_name": "Tozasertib",
+      "category": "Category 3: 유방암 미적용",
+      "final_score": 0.052048575148876,
+      "target": "ESR1, AURKA",
+      "pathway": "Mitosis",
+      "subtypes": "ER+, TNBC",
+      "tanimoto": 0.0,
+      "survival_score": 0.0,
+      "recommendation_reasons": [
+        "유방암 관련 타겟 (ESR1, AURKA)"
+      ],
+      "limitations": [
+        "FDA 약물과 구조적 유사도 낮음",
+        "생존 데이터 부재",
+        "유방암 연구 사례 부족, 추가 검증 필요"
+      ]
+    },
+    {
+      "rank": 15,
+      "drug_name": "Avagacestat",
+      "category": "Category 3: 유방암 미적용",
+      "final_score": 0.0519022389837635,
+      "target": NaN,
+      "pathway": "Other",
+      "subtypes": "Unknown",
+      "tanimoto": 0.0,
+      "survival_score": 0.0,
+      "recommendation_reasons": [
+        "유방암 관련 타겟 (nan)"
+      ],
+      "limitations": [
+        "FDA 약물과 구조적 유사도 낮음",
+        "생존 데이터 부재",
+        "서브타입 매칭 불확실",
+        "유방암 연구 사례 부족, 추가 검증 필요"
+      ]
+    }
+  ]
+}

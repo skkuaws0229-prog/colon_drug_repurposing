@@ -1,0 +1,59 @@
+{
+  "timestamp": "2026-04-14 12:26:42",
+  "n_drugs_evaluated": 30,
+  "n_fda_approved_in_top30": 9,
+  "fda_approved_drugs": [
+    "Docetaxel",
+    "Paclitaxel",
+    "Docetaxel",
+    "Vinblastine",
+    "Vinorelbine",
+    "Epirubicin",
+    "Methotrexate",
+    "Fulvestrant",
+    "Irinotecan"
+  ],
+  "median_rank_of_approved": 6.0,
+  "enrichment_ratio": 7.1625,
+  "recall": {
+    "recall@10": 0.75,
+    "recall@20": 1.0,
+    "recall@30": 1.125
+  },
+  "precision": {
+    "precision@10": 0.6,
+    "precision@20": 0.4,
+    "precision@30": 0.3
+  },
+  "ndcg": {
+    "ndcg@10": 0.9740298100854944,
+    "ndcg@20": 0.9421613635462691,
+    "ndcg@30": 0.9267624626859388
+  },
+  "mean_average_precision": 0.7694041867954912,
+  "auc_roc": 0.8306878306878307,
+  "recovery_rate": 1.125,
+  "ic50_statistics": {
+    "mean": 0.3683367871999607,
+    "std": 1.6076461305603522,
+    "min": -4.081985813640771,
+    "max": 1.9093774722494912
+  },
+  "moa_distribution": {
+    "DNA replication": 7,
+    "Mitosis": 6,
+    "PI3K/MTOR signaling": 5,
+    "Apoptosis regulation": 4,
+    "Other": 3,
+    "Cell cycle": 2,
+    "Other kinases": 1,
+    "Protein stability and degradation": 1,
+    "Hormone-related": 1
+  },
+  "unique_pathways": 9,
+  "subtype_coverage": {
+    "ER+": 0,
+    "HER2+": 0,
+    "TNBC": 0
+  }
+}

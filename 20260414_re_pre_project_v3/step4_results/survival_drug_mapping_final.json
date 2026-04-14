@@ -1,0 +1,72 @@
+[
+  {
+    "drug_idx": 75,
+    "canonical_drug_id": "1180",
+    "drug_name": "Dinaciclib",
+    "p_value": 0.04662825283078248,
+    "method": "features_slim + Annotations"
+  },
+  {
+    "drug_idx": 209,
+    "canonical_drug_id": "2043",
+    "drug_name": "BIBR-1532",
+    "p_value": 0.010065410133408927,
+    "method": "features_slim + Annotations"
+  },
+  {
+    "drug_idx": 85,
+    "canonical_drug_id": "1248",
+    "drug_name": "Daporinad",
+    "p_value": 0.04998187231655204,
+    "method": "features_slim + Annotations"
+  },
+  {
+    "drug_idx": 240,
+    "canonical_drug_id": "2439",
+    "drug_name": "glutathione",
+    "p_value": 0.04071817203703984,
+    "method": "features_slim + Annotations"
+  },
+  {
+    "drug_idx": 109,
+    "canonical_drug_id": "1559",
+    "drug_name": "Luminespib",
+    "p_value": 0.09049659220936046,
+    "method": "features_slim + Annotations"
+  },
+  {
+    "drug_idx": 176,
+    "canonical_drug_id": "1908",
+    "drug_name": "Ulixertinib",
+    "p_value": 0.0324552783515794,
+    "method": "features_slim + Annotations"
+  },
+  {
+    "drug_idx": 32,
+    "canonical_drug_id": "1039",
+    "drug_name": "SL0101",
+    "p_value": 0.379141536238641,
+    "method": "features_slim + Top 30"
+  },
+  {
+    "drug_idx": 105,
+    "canonical_drug_id": "1549",
+    "drug_name": "Sapitinib",
+    "p_value": 0.3805961447333386,
+    "method": "features_slim + Annotations"
+  },
+  {
+    "drug_idx": 44,
+    "canonical_drug_id": "1057",
+    "drug_name": "Dactolisib",
+    "p_value": 0.08057607234077965,
+    "method": "features_slim + Annotations"
+  },
+  {
+    "drug_idx": 76,
+    "canonical_drug_id": "1190",
+    "drug_name": "Gemcitabine",
+    "p_value": 0.04533463307396843,
+    "method": "features_slim + Annotations"
+  }
+]

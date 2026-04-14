@@ -1,0 +1,30 @@
+{
+  "timestamp": "2026-04-14 13:30:08",
+  "n_total": 20,
+  "n_repurposing": 15,
+  "n_positive_control": 5,
+  "admet_coverage": {
+    "measured": 2,
+    "unmeasured": 18,
+    "pass": 2,
+    "warning": 0,
+    "fail": 0
+  },
+  "rdkit_coverage": {
+    "smiles_available": 18,
+    "qed_calculated": 18,
+    "lipinski_pass": 3
+  },
+  "diversity": {
+    "avg_tanimoto_similarity": 0.13111263293323497,
+    "n_compounds_compared": 18
+  },
+  "moa_duplicates": {
+    "Mitosis": 6,
+    "PI3K/MTOR signaling": 5,
+    "Other": 2,
+    "Cell cycle": 2,
+    "Apoptosis regulation": 2
+  },
+  "target_overlaps": 23
+}

@@ -1,0 +1,6 @@
+control_rank,drug_name,canonical_drug_id,final_score,ic50_score,tanimoto,target,target_matches,subtypes,pathway,category,survival_score,clinical_score,rank,target_score,best_fda_match,survival_p,safety_score,is_fda,normalized_name,is_fda_brca
+1,Vinblastine,1004,0.4960279434402367,0.7831820336896781,0.7387,Microtubule destabiliser,"ESR1, Microtubule","ER+, TNBC",Mitosis,Category 1: 유방암 치료제 (FDA 승인),0.0,1.0,,,,,,,,
+2,Docetaxel,1819,0.4083551575255391,0.983406080640686,0.0,Microtubule stabiliser,"ESR1, Microtubule","ER+, TNBC",Mitosis,Category 1: 유방암 치료제 (FDA 승인),0.0,1.0,,,,,,,,
+3,Paclitaxel,1080,0.3822159275518948,0.8962753140618716,0.0,Microtubule stabiliser,"ESR1, Microtubule","ER+, TNBC",Mitosis,Category 1: 유방암 치료제 (FDA 승인),0.0,1.0,,,,,,,,
+4,Vinorelbine,2048,0.3427252066714831,0.7646395777938327,0.0,Microtubule destabiliser,"ESR1, Microtubule","ER+, TNBC",Mitosis,Category 1: 유방암 치료제 (FDA 승인),0.0,1.0,,,,,,,,
+5,Topotecan,1808,0.2931350728332226,0.6215613538885197,0.0,TOP1,TOP1,TNBC,DNA replication,Category 1: 유방암 치료제 (FDA 승인),0.0,1.0,9.0,0.0333333333333333,,,0.0,1.0,topotecan,True

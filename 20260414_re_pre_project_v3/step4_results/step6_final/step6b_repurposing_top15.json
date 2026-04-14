@@ -1,0 +1,11 @@
+{
+  "timestamp": "2026-04-14 13:04:20",
+  "n_approved": 8,
+  "n_repurposing": 7,
+  "target_coverage": 17,
+  "subtype_coverage": {
+    "ER+": 9,
+    "HER2+": 2,
+    "TNBC": 7
+  }
+}

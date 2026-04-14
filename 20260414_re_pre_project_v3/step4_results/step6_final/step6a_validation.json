@@ -1,0 +1,35 @@
+{
+  "timestamp": "2026-04-14 13:04:20",
+  "n_fda_in_top30": 11,
+  "fda_drugs_list": [
+    "Docetaxel",
+    "Paclitaxel",
+    "Docetaxel",
+    "Vinblastine",
+    "Vinorelbine",
+    "Topotecan",
+    "Epirubicin",
+    "Mitoxantrone",
+    "Methotrexate",
+    "Irinotecan",
+    "Fulvestrant"
+  ],
+  "median_rank": 9.0,
+  "enrichment": 2.4081081081081077,
+  "recall": {
+    "recall@10": 0.5454545454545454,
+    "recall@20": 0.8181818181818182,
+    "recall@30": 1.0
+  },
+  "precision": {
+    "precision@10": 0.6,
+    "precision@20": 0.45,
+    "precision@30": 0.36666666666666664
+  },
+  "ndcg": {
+    "ndcg@10": 0.6547216238913564,
+    "ndcg@20": 0.7716003306355139,
+    "ndcg@30": 0.8596997760169196
+  },
+  "auc_roc": 0.8468899521531099
+}

@@ -1,0 +1,21 @@
+{
+  "timestamp": "2026-04-14 13:22:21",
+  "n_drugs": 30,
+  "final_score_stats": {
+    "max": 0.4960279434402367,
+    "min": 0.040475785227670015,
+    "mean": 0.19858989897830223
+  },
+  "survival_non_zero": 2,
+  "target_non_zero": 24,
+  "category_distribution": {
+    "Category 1: \uc720\ubc29\uc554 \uce58\ub8cc\uc81c (FDA \uc2b9\uc778)": 11,
+    "Category 3: \uc720\ubc29\uc554 \ubbf8\uc801\uc6a9": 10,
+    "Category 2: \uc720\ubc29\uc554 \uc5f0\uad6c \uc911": 9
+  },
+  "subtype_coverage": {
+    "ER+": 14,
+    "HER2+": 5,
+    "TNBC": 13
+  }
+}

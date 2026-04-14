@@ -1,0 +1,44 @@
+{
+  "timestamp": "2026-04-14 11:28:26",
+  "total_drugs": 15,
+  "top15_drugs": [
+    "Vinblastine",
+    "SB590885",
+    "Entinostat",
+    "Cediranib",
+    "GSK2801",
+    "Bicalutamide",
+    "AZ6102",
+    "BMS-345541",
+    "AZD1332",
+    "YK-4-279",
+    "AZD2014",
+    "ML323",
+    "PFI3",
+    "Nutlin-3a",
+    "AT13148"
+  ],
+  "scoring_weights": {
+    "IC50_rank": 0.25,
+    "Survival": 0.15,
+    "H3_Tanimoto": 0.15,
+    "H4_Target": 0.15,
+    "ADMET": 0.15,
+    "Clinical": 0.15
+  },
+  "category_distribution": {
+    "Category_1_치료제": 1,
+    "Category_2_연구중": 11,
+    "Category_3_미적용": 3
+  },
+  "top15_category_distribution": {
+    "Category_1_치료제": 1,
+    "Category_2_연구중": 11,
+    "Category_3_미적용": 3
+  },
+  "score_statistics": {
+    "mean_final_score": 0.34539999999999993,
+    "max_final_score": 0.6312,
+    "min_final_score": 0.1598
+  }
+}

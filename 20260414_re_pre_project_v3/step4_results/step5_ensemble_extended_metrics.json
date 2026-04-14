@@ -1,0 +1,97 @@
+{
+  "diversity": {
+    "ensemble_A": {
+      "mean_correlation": 0.9623760617734785,
+      "seed_correlations": [
+        0.9647202382135518,
+        0.9650877665343768,
+        0.961976643418077,
+        0.9617703042164439,
+        0.9583253564849423
+      ]
+    },
+    "ensemble_B": {
+      "mean_correlation": 0.9640116541546433,
+      "seed_correlations": [
+        0.9662886577392676,
+        0.9667745762437273,
+        0.9636233008380173,
+        0.9634359746793297,
+        0.959935761272875
+      ]
+    }
+  },
+  "ranking_metrics": {
+    "ensemble_A_equal": {
+      "precision": 0.7,
+      "recall": 0.7,
+      "ndcg": 0.788908612989262,
+      "ef": 148.54,
+      "map": 0.49988239012785285
+    },
+    "ensemble_A_weighted": {
+      "precision": 0.7,
+      "recall": 0.7,
+      "ndcg": 0.789647276721964,
+      "ef": 148.54,
+      "map": 0.49988239012785285
+    },
+    "ensemble_B_equal": {
+      "precision": 0.6,
+      "recall": 0.6,
+      "ndcg": 0.8158145737664513,
+      "ef": 127.32000000000001,
+      "map": 0.4171296216569435
+    },
+    "ensemble_B_weighted": {
+      "precision": 0.6,
+      "recall": 0.6,
+      "ndcg": 0.8149829942086508,
+      "ef": 127.32000000000001,
+      "map": 0.4160542718859415
+    }
+  },
+  "improvement_over_best": {
+    "best_individual_model": "CatBoost",
+    "best_individual_score": 0.870424996514845,
+    "ensemble_A_equal": {
+      "score": 0.8636806043466981,
+      "delta": -0.006744392168146818,
+      "improved": false
+    },
+    "ensemble_A_weighted": {
+      "score": 0.8640599404298346,
+      "delta": -0.006365056085010368,
+      "improved": false
+    },
+    "ensemble_B_equal": {
+      "score": 0.856917051625326,
+      "delta": -0.013507944889518897,
+      "improved": false
+    },
+    "ensemble_B_weighted": {
+      "score": 0.8574755216019911,
+      "delta": -0.012949474912853809,
+      "improved": false
+    }
+  },
+  "weight_distribution": {
+    "ensemble_A": {
+      "weights": {
+        "04": 0.3396863968850414,
+        "02": 0.3377123275531739,
+        "10": 0.32260127556178475
+      },
+      "entropy": 0.9997601976249754
+    },
+    "ensemble_B": {
+      "weights": {
+        "04": 0.25683204996211506,
+        "02": 0.25533948423702224,
+        "10": 0.24391423290043135,
+        "13": 0.24391423290043135
+      },
+      "entropy": 0.9997846799483114
+    }
+  }
+}

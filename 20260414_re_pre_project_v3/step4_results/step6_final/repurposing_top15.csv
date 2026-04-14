@@ -1,0 +1,16 @@
+rank,canonical_drug_id,drug_name,target,target_matches,target_score,pathway,subtypes,category,tanimoto,best_fda_match,survival_p,survival_score,clinical_score,safety_score,ic50_score,final_score,is_fda,normalized_name,is_fda_brca,repurposing_rank
+17,1441,AZD2014,"mTORC1, mTORC2",MTOR,0.0333333333333333,PI3K/MTOR signaling,"ER+, HER2+",Category 2: 유방암 연구 중,0.17,Alpelisib,0.049981872316552,0.950018127683448,0.5,10.0,0.2008905192537905,0.3409374479794934,0,azd2014,False,1
+2,1811,Dactinomycin,RNA polymerase,ESR1,0.0333333333333333,Other,ER+,Category 2: 유방암 연구 중,0.0,,,0.0,0.5,0.0,0.9079028959688552,0.3290375354573231,0,dactinomycin,False,2
+11,1039,SL0101,"RSK, AURKB, PIM1, PIM3",,0.0,Other kinases,Unknown,Category 3: 유방암 미적용,0.0,,0.379141536238641,0.620858463761359,0.0,0.0,0.5675846297367825,0.2944470816733066,0,sl0101,False,3
+7,1016,Temsirolimus,MTOR,MTOR,0.0333333333333333,PI3K/MTOR signaling,"ER+, HER2+",Category 2: 유방암 연구 중,0.0,,,0.0,0.5,0.0,0.7441488037555598,0.2799113077933346,0,temsirolimus,False,4
+12,1809,Teniposide,,,0.0,DNA replication,Unknown,Category 2: 유방암 연구 중,0.0,,,0.0,0.5,0.0,0.5430597511462874,0.2129179253438862,0,teniposide,False,5
+10,1708,CDK9_5576,CDK9,CDK9,0.0333333333333333,Cell cycle,Unknown,Category 3: 유방암 미적용,0.0,,,0.0,0.0,0.0,0.6120753315931166,0.1902892661446016,0,cdk95576,False,6
+18,1026,Tanespimycin,HSP90,HSP90,0.0333333333333333,Protein stability and degradation,Unknown,Category 2: 유방암 연구 중,0.0,,,0.0,0.5,0.0,0.1957471235396855,0.1153908037285723,0,tanespimycin,False,7
+19,1084,Rapamycin,MTORC1,MTOR,0.0333333333333333,PI3K/MTOR signaling,"ER+, HER2+",Category 2: 유방암 연구 중,0.0,,,0.0,0.5,0.0,0.1845863945466911,0.1120425850306739,0,rapamycin,False,8
+24,1053,MK-2206,"AKT1, AKT2",AKT1,0.0333333333333333,PI3K/MTOR signaling,"ER+, HER2+",Category 2: 유방암 연구 중,0.0,,,0.0,0.5,0.0,0.1525824531396143,0.1024414026085509,0,mk2206,False,9
+26,1058,Pictilisib,PI3K (class 1),PIK3CA,0.0333333333333333,PI3K/MTOR signaling,"ER+, HER2+",Category 2: 유방암 연구 중,0.0,,,0.0,0.5,0.0,0.137418680841991,0.0978922709192639,0,pictilisib,False,10
+15,1149,TW 37,"BCL2, BCL-XL, MCL1",BCL2,0.0333333333333333,Apoptosis regulation,TNBC,Category 3: 유방암 미적용,0.0,,,0.0,0.0,0.0,0.2325876798199309,0.0764429706126459,0,tw37,False,11
+16,1709,CDK9_5038,CDK9,CDK9,0.0333333333333333,Cell cycle,Unknown,Category 3: 유방암 미적용,0.0,,,0.0,0.0,0.0,0.2308172315342492,0.0759118361269414,0,cdk95038,False,12
+23,1849,Sabutoclax,"BCL2, BCL-XL, BFL1, MCL1",BCL2,0.0333333333333333,Apoptosis regulation,TNBC,Category 3: 유방암 미적용,0.0,,,0.0,0.0,0.0,0.1545357430273835,0.0530273895748817,0,sabutoclax,False,13
+30,1096,Tozasertib,"AURKA, AURKB, AURKC, others","ESR1, AURKA",0.0666666666666666,Mitosis,"ER+, TNBC",Category 3: 유방암 미적용,0.0,,,0.0,0.0,0.0,0.1290508060518091,0.052048575148876,0,tozasertib,False,14
+21,1072,Avagacestat,"Amyloid beta20, Amyloid beta40",,0.0,Other,Unknown,Category 3: 유방암 미적용,0.0,,,0.0,0.0,0.0,0.1730074632792117,0.0519022389837635,0,avagacestat,False,15
