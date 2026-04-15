@@ -1,0 +1,32 @@
+{
+  "timestamp": "2026-04-15T11:23:43.457177",
+  "ensemble": "Drug (51%) + Bilinear v2 (49%)",
+  "diversity": {
+    "oof_pearson": 0.9472148529127843,
+    "oof_spearman": 0.9243814655457373,
+    "holdout_pearson": 0.9519530095226767,
+    "holdout_spearman": 0.9313313479493814,
+    "oof_top30_jaccard": 0.42857142857142855,
+    "oof_top30_overlap": 18,
+    "holdout_top30_jaccard": 0.7142857142857143,
+    "holdout_top30_overlap": 25
+  },
+  "performance": {
+    "oof_spearman": -0.008552743551280008,
+    "oof_rmse": 3.558668953411491,
+    "holdout_spearman": -0.022153258119479376,
+    "holdout_rmse": 3.6787157660371377,
+    "holdout_p30": 0.0,
+    "holdout_ndcg30": 0.26308838840735554
+  },
+  "individual_models": {
+    "drug": {
+      "oof_spearman": 0.8645,
+      "holdout_spearman": 0.871
+    },
+    "bilinear_v2": {
+      "oof_spearman": 0.8298,
+      "holdout_spearman": 0.8522
+    }
+  }
+}

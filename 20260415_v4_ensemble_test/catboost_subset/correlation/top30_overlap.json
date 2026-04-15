@@ -1,0 +1,17 @@
+{
+  "CatBoost-Full_vs_CatBoost-Gene": {
+    "jaccard": 0.0,
+    "overlap_count": 0,
+    "total": 30
+  },
+  "CatBoost-Full_vs_CatBoost-Drug": {
+    "jaccard": 0.7647058823529411,
+    "overlap_count": 26,
+    "total": 30
+  },
+  "CatBoost-Gene_vs_CatBoost-Drug": {
+    "jaccard": 0.0,
+    "overlap_count": 0,
+    "total": 30
+  }
+}

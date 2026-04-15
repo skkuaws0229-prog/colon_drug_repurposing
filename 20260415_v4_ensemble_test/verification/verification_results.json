@@ -1,0 +1,34 @@
+{
+  "파일 메타데이터": {
+    "flatmlp_path": "/Users/skku_aws2_14/20260408_pre_project_biso_myprotocol/20260408_pre_project_biso_myprotocol/20260414_re_pre_project_v3/step4_results/model_10_oof.npy",
+    "crossattn_path": "/Users/skku_aws2_14/20260408_pre_project_biso_myprotocol/20260408_pre_project_biso_myprotocol/20260414_re_pre_project_v3/step4_results/model_13_oof.npy",
+    "flatmlp_size_bytes": 40864,
+    "crossattn_size_bytes": 40864,
+    "파일_크기_동일": true
+  },
+  "예측값 비교": {
+    "pearson_corr": 0.9894545213124916,
+    "spearman_corr": 0.9847739028306524,
+    "max_abs_diff": 1.1209495067596436,
+    "mean_abs_diff": 0.27771441243425776,
+    "top30_jaccard": 0.3953488372093023,
+    "top50_jaccard": 0.5384615384615384
+  },
+  "학습 로그": {
+    "flatmlp_loss_available": false,
+    "crossattn_loss_available": false
+  },
+  "Weight 파일": {
+    "flatmlp_weight_count": 0,
+    "crossattn_weight_count": 0,
+    "flatmlp_fold0_size": null,
+    "crossattn_fold0_size": null,
+    "weight_크기_동일": null
+  },
+  "분기 판단": {
+    "case": "Case 2",
+    "diagnosis": "구조적 중복 가능성",
+    "action": "Step 4.5-B 경량 분리 실험 진행",
+    "spearman_corr": 0.9847739028306524
+  }
+}

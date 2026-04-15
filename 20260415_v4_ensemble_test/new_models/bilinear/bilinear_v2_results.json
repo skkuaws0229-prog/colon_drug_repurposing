@@ -1,0 +1,43 @@
+{
+  "model": "Bilinear-v2",
+  "timestamp": "2026-04-14T23:41:46.288809",
+  "device": "mps",
+  "hyperparameters": {
+    "epochs": 200,
+    "learning_rate": 0.0001,
+    "batch_size": 64,
+    "max_grad_norm": 1.0
+  },
+  "improvements": [
+    "BatchNorm added",
+    "Gradient clipping (max_norm=1.0)",
+    "StandardScaler on Drug/Gene blocks",
+    "Learning rate reduced (1e-3 \u2192 1e-4)",
+    "Epochs doubled (100 \u2192 200)"
+  ],
+  "metrics": {
+    "train_spearman": 0.9780070843985709,
+    "oof_spearman": 0.829780340396629,
+    "oof_rmse": 1.4470667367267098,
+    "holdout_spearman": 0.8521976012091462,
+    "holdout_rmse": 1.3698223765985742,
+    "gap": 0.1482267440019419,
+    "fold_std": 0.018414588900536186
+  },
+  "fold_metrics": {
+    "fold_train_sps": [
+      0.9776100510551705,
+      0.9776014462864854,
+      0.9776431907200169,
+      0.9780381422200563,
+      0.9791425917111246
+    ],
+    "fold_oof_sps": [
+      0.8269178492828769,
+      0.8512001721594593,
+      0.8094599217278526,
+      0.84973166883834,
+      0.8093221394151249
+    ]
+  }
+}

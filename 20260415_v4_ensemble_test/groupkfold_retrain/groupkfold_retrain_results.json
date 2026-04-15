@@ -1,0 +1,72 @@
+{
+  "experiment": {
+    "date": "2026-04-15",
+    "method": "GroupKFold by canonical_drug_id, 5-fold retrain",
+    "v3_baseline": 0.491,
+    "total_samples": 6366,
+    "unique_drugs": 243
+  },
+  "models": {
+    "CatBoost-Full": {
+      "mean_spearman": 0.5189,
+      "std_spearman": 0.0619,
+      "rmse": 2.2787,
+      "vs_v3": 0.027900000000000036,
+      "fold_spearmans": [
+        0.5778,
+        0.4804,
+        0.4157,
+        0.5672,
+        0.5535
+      ]
+    },
+    "CatBoost-Drug": {
+      "mean_spearman": 0.521,
+      "std_spearman": 0.06,
+      "rmse": 2.2646,
+      "vs_v3": 0.030000000000000027,
+      "fold_spearmans": [
+        0.5711,
+        0.5041,
+        0.4137,
+        0.5799,
+        0.5364
+      ]
+    },
+    "Bilinear-v2": {
+      "mean_spearman": 0.4074,
+      "std_spearman": 0.1264,
+      "rmse": 2.8968,
+      "vs_v3": -0.08360000000000001,
+      "fold_spearmans": [
+        0.5331,
+        0.4821,
+        0.2003,
+        0.3226,
+        0.4988
+      ]
+    },
+    "Drug+Bilinear": {
+      "spearman": 0.5145,
+      "rmse": 2.3412,
+      "weights": {
+        "drug": 0.5612,
+        "bilinear": 0.4388
+      },
+      "vs_v3": 0.023499999999999965
+    }
+  },
+  "key_findings": {
+    "best_model": "CatBoost-Drug",
+    "best_spearman": 0.521,
+    "bilinear_better_than_drug": false,
+    "ensemble_improves": false
+  },
+  "conclusions": {
+    "bilinear_vs_drug_diff": -0.11360000000000003,
+    "ensemble_vs_drug_diff": -0.006500000000000061,
+    "bilinear_hurts_unseen_drugs": true,
+    "ensemble_does_not_improve_groupkfold": true,
+    "recommended_model": "CatBoost-Drug"
+  }
+}

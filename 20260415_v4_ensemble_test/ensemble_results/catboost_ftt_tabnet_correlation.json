@@ -1,0 +1,71 @@
+{
+  "models": [
+    "CatBoost",
+    "FT-Transformer",
+    "TabNet"
+  ],
+  "sample_count": 5092,
+  "pearson_matrix": {
+    "CatBoost": {
+      "CatBoost": 1.0,
+      "FT-Transformer": 0.9714684311444819,
+      "TabNet": 0.9757379194856209
+    },
+    "FT-Transformer": {
+      "CatBoost": 0.9714684311444819,
+      "FT-Transformer": 1.0,
+      "TabNet": 0.9585517299063897
+    },
+    "TabNet": {
+      "CatBoost": 0.9757379194856209,
+      "FT-Transformer": 0.9585517299063897,
+      "TabNet": 1.0
+    }
+  },
+  "spearman_matrix": {
+    "CatBoost": {
+      "CatBoost": 1.0,
+      "FT-Transformer": 0.9627383956517689,
+      "TabNet": 0.9551545421265055
+    },
+    "FT-Transformer": {
+      "CatBoost": 0.9627383956517689,
+      "FT-Transformer": 1.0,
+      "TabNet": 0.9396425706793912
+    },
+    "TabNet": {
+      "CatBoost": 0.9551545421265055,
+      "FT-Transformer": 0.9396425706793912,
+      "TabNet": 1.0
+    }
+  },
+  "top30_overlap_matrix": {
+    "CatBoost": {
+      "CatBoost": 1.0,
+      "FT-Transformer": 0.3333333333333333,
+      "TabNet": 0.4634146341463415
+    },
+    "FT-Transformer": {
+      "CatBoost": 0.3333333333333333,
+      "FT-Transformer": 1.0,
+      "TabNet": 0.36363636363636365
+    },
+    "TabNet": {
+      "CatBoost": 0.4634146341463415,
+      "FT-Transformer": 0.36363636363636365,
+      "TabNet": 1.0
+    }
+  },
+  "averages": {
+    "pearson": 0.9685860268454975,
+    "spearman": 0.9525118361525552,
+    "top30_jaccard": 0.3867947770386795
+  },
+  "diversity_verdict": "\u274c \ubd80\uc871 (\u2265 0.95)",
+  "comparison_to_previous": {
+    "previous_avg_corr": 0.968,
+    "new_avg_corr": 0.9685860268454975,
+    "difference": 0.0005860268454975781,
+    "improved": false
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "models": [
+    "CatBoost",
+    "SAINT"
+  ],
+  "sample_count": 5092,
+  "correlations": {
+    "pearson": 0.8012076446378509,
+    "pearson_pvalue": 0.0,
+    "spearman": 0.8213166837739386,
+    "spearman_pvalue": 0.0
+  },
+  "top_k_overlap": {
+    "top30_jaccard": 0.0,
+    "top30_overlap": 0,
+    "top50_jaccard": 0.02040816326530612,
+    "top50_overlap": 2
+  },
+  "diversity_verdict": "\u2705 \uc6b0\uc218 (< 0.90)",
+  "comparison_to_previous": {
+    "previous_avg_corr": 0.968,
+    "new_corr": 0.8213166837739386,
+    "difference": -0.14668331622606134,
+    "improved": true
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "파일 메타데이터": {
+    "flatmlp_oof_path": "20260414_re_pre_project_v3/step4_results/model_10_oof.npy",
+    "crossattn_oof_path": "20260414_re_pre_project_v3/step4_results/model_13_oof.npy",
+    "flatmlp_oof_size_bytes": 40864,
+    "crossattn_oof_size_bytes": 40864,
+    "oof_파일_크기_동일": true,
+    "flatmlp_oof_modified": "2026-04-14 00:40:40",
+    "crossattn_oof_modified": "2026-04-14 00:41:10",
+    "시간_차이_초": 30
+  },
+  "예측값 비교": {
+    "pearson_corr": 0.989455,
+    "spearman_corr": 0.984774,
+    "max_abs_diff": 1.120950,
+    "mean_abs_diff": 0.277714,
+    "top30_jaccard": 0.3953,
+    "top30_일치_개수": "17/30",
+    "top50_jaccard": 0.5385,
+    "top50_일치_개수": "35/50"
+  },
+  "학습 로그": {
+    "flatmlp_json_exists": true,
+    "crossattn_json_exists": true,
+    "fold_loss_저장됨": false,
+    "비고": "JSON에 oof_spearman/rmse만 저장, fold별 loss curve 없음"
+  },
+  "Weight 파일": {
+    "flatmlp_weight_path": "20260414_re_pre_project_v3/step4_results/model_10_model.pt",
+    "crossattn_weight_path": "20260414_re_pre_project_v3/step4_results/model_13_model.pt",
+    "flatmlp_weight_size_bytes": 5971968,
+    "crossattn_weight_size_bytes": 5971968,
+    "weight_크기_동일": true,
+    "weight_크기_MB": 5.7,
+    "비고": "⚠️ CrossAttention이 Attention layer로 더 커야 하는데 동일함 - 의심"
+  },
+  "모델 메타데이터": {
+    "flatmlp": {
+      "model": "FlatMLP",
+      "oof_spearman": 0.8458,
+      "oof_rmse": 1.2006,
+      "holdout_spearman": 0.8871,
+      "holdout_rmse": 1.1069
+    },
+    "crossattention": {
+      "model": "CrossAttention",
+      "oof_spearman": 0.8005,
+      "oof_rmse": 1.3751,
+      "holdout_spearman": 0.8593,
+      "holdout_rmse": 1.4652
+    }
+  },
+  "분기 판단": {
+    "case": "Case 2",
+    "diagnosis": "구조적 중복 가능성",
+    "action": "Step 4.5-B 경량 분리 실험 진행",
+    "spearman_corr": 0.984774,
+    "기준": "≥ 0.98",
+    "프로토콜_v3_보고": "1.000 (완전 중복)",
+    "v4_검증_결과": "0.9848 (높은 상관)"
+  },
+  "버그_가능성_분석": {
+    "파일_경로_분리": "✅ 정상",
+    "파일_수정시간": "✅ 정상 (30초 차이)",
+    "JSON_메타데이터": "✅ 다름",
+    "Weight_크기": "⚠️ 의심 (5.7MB로 동일)",
+    "학습_로그": "❓ 확인 불가",
+    "Prediction_덮어쓰기": "✅ 없음",
+    "종합_판정": "버그 가능성 중간"
+  },
+  "구조적_중복_분석": {
+    "같은_feature_set": "✅ 5,534개 동일",
+    "같은_전처리": "✅ X_train.npy 공유",
+    "같은_학습_설정": "✅ seed=42, 5-fold CV",
+    "순위_상관_높음": "⚠️ 0.9848",
+    "Weight_크기_동일": "⚠️ 의심",
+    "종합_판정": "구조적 중복 가능성 높음"
+  },
+  "다음_단계": {
+    "step": "Step 4.5-B",
+    "task": "Feature Subset 분리 실험",
+    "전략": "전략 1 - Feature Subset 분리",
+    "flatmlp_feature": "5,534개 전부 유지",
+    "crossattention_feature": "Drug 관련만 ~1,112개",
+    "목표": {
+      "correlation": "< 0.95",
+      "top30_overlap": "0.2 ~ 0.6",
+      "oof_spearman": "유지 또는 향상"
+    }
+  },
+  "검증_완료": {
+    "일시": "2026-04-15",
+    "프로토콜_버전": "v4.0",
+    "결과_저장": "20260415_v4_ensemble_test/verification/",
+    "보고서": [
+      "verify_overlap.py",
+      "verification_results.json",
+      "verification_summary.md",
+      "final_report.md"
+    ]
+  }
+}

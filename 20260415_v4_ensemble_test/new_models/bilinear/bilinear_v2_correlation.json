@@ -1,0 +1,10 @@
+{
+  "bilinear_v2_oof_spearman": 0.829780340396629,
+  "vs_catboost_full": {
+    "pearson": 0.9487750082849757,
+    "spearman": 0.9246873626851926,
+    "top30_jaccard": 0.22448979591836735,
+    "top30_overlap": 11
+  },
+  "ensemble_eligible": true
+}

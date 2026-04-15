@@ -1,0 +1,101 @@
+================================================================================
+RealCrossAttentionModel 재학습
+================================================================================
+
+Device: mps
+
+[1] 데이터 로드
+--------------------------------------------------------------------------------
+Drug features: 1127
+Gene features: 4402
+X_train shape: (6366, 5529)
+y_train shape: (6366,)
+CV samples: 5092
+Holdout samples: 1274
+
+[2] 5-Fold Cross-Validation 학습
+--------------------------------------------------------------------------------
+
+Fold 1/5:
+  Epoch 20/100, Loss: 6.6423
+  Epoch 40/100, Loss: 4.7760
+  Epoch 60/100, Loss: 2.9571
+  Epoch 80/100, Loss: 2.1854
+  Epoch 100/100, Loss: 1.8931
+  Train Sp: 0.8600, OOF Sp: 0.8365
+
+Fold 2/5:
+  Epoch 20/100, Loss: 7.8703
+  Epoch 40/100, Loss: 5.8417
+  Epoch 60/100, Loss: 3.9944
+  Epoch 80/100, Loss: 2.8809
+  Epoch 100/100, Loss: 2.2544
+  Train Sp: 0.8511, OOF Sp: 0.8376
+
+Fold 3/5:
+  Epoch 20/100, Loss: 7.4472
+  Epoch 40/100, Loss: 5.9462
+  Epoch 60/100, Loss: 4.2872
+  Epoch 80/100, Loss: 2.8158
+  Epoch 100/100, Loss: 2.2246
+  Train Sp: 0.8508, OOF Sp: 0.8334
+
+Fold 4/5:
+  Epoch 20/100, Loss: 7.0326
+  Epoch 40/100, Loss: 5.5648
+  Epoch 60/100, Loss: 3.3632
+  Epoch 80/100, Loss: 2.5585
+  Epoch 100/100, Loss: 2.0530
+  Train Sp: 0.8523, OOF Sp: 0.8484
+
+Fold 5/5:
+  Epoch 20/100, Loss: 7.0160
+  Epoch 40/100, Loss: 5.1588
+  Epoch 60/100, Loss: 3.2804
+  Epoch 80/100, Loss: 2.3902
+  Epoch 100/100, Loss: 1.9601
+  Train Sp: 0.8598, OOF Sp: 0.8181
+
+[3] 전체 메트릭
+--------------------------------------------------------------------------------
+Train Spearman:     0.8548
+OOF Spearman:       0.8349
+OOF RMSE:           1.3558
+Gap:                0.0199
+Train/OOF Ratio:    0.9767
+Fold Std:           0.0098
+
+성능 판정:
+--------------------------------------------------------------------------------
+✅ 성공 (OOF Sp ≥ 0.75)
+기존 CrossAttention OOF Sp: 0.824
+새 모델 OOF Sp:             0.8349
+차이:                       0.0109
+
+[4] Final Model 학습
+--------------------------------------------------------------------------------
+  Epoch 20/100, Loss: 6.3380
+  Epoch 40/100, Loss: 4.6613
+  Epoch 60/100, Loss: 2.9272
+  Epoch 80/100, Loss: 2.1265
+  Epoch 100/100, Loss: 1.8876
+
+Holdout Spearman: 0.8451
+Holdout RMSE:     1.2650
+
+[5] 결과 저장
+--------------------------------------------------------------------------------
+✓ Model: /Users/skku_aws2_14/20260408_pre_project_biso_myprotocol/20260408_pre_project_biso_myprotocol/20260415_v4_ensemble_test/crossattn_reimpl/real_crossattention_model.pt
+✓ OOF predictions: /Users/skku_aws2_14/20260408_pre_project_biso_myprotocol/20260408_pre_project_biso_myprotocol/20260415_v4_ensemble_test/crossattn_reimpl/real_crossattention_oof.npy
+✓ Train predictions: /Users/skku_aws2_14/20260408_pre_project_biso_myprotocol/20260408_pre_project_biso_myprotocol/20260415_v4_ensemble_test/crossattn_reimpl/real_crossattention_train.npy
+✓ Holdout predictions: /Users/skku_aws2_14/20260408_pre_project_biso_myprotocol/20260408_pre_project_biso_myprotocol/20260415_v4_ensemble_test/crossattn_reimpl/real_crossattention_holdout.npy
+✓ Metadata: /Users/skku_aws2_14/20260408_pre_project_biso_myprotocol/20260408_pre_project_biso_myprotocol/20260415_v4_ensemble_test/crossattn_reimpl/real_crossattention_results.json
+
+================================================================================
+재학습 완료!
+================================================================================
+
+최종 판정: ✅ 성공 (OOF Sp ≥ 0.75)
+
+OOF predictions 경로: /Users/skku_aws2_14/20260408_pre_project_biso_myprotocol/20260408_pre_project_biso_myprotocol/20260415_v4_ensemble_test/crossattn_reimpl/real_crossattention_oof.npy
+다음 단계: FlatMLP와 예측값 비교

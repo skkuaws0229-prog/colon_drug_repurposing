@@ -1,0 +1,55 @@
+{
+  "model": "RealCrossAttentionModel",
+  "device": "mps",
+  "architecture": {
+    "drug_dim": 1127,
+    "gene_dim": 4402,
+    "hidden_dim": 256,
+    "n_heads": 4,
+    "dropout": 0.3,
+    "total_parameters": 1942017
+  },
+  "training": {
+    "epochs": 100,
+    "learning_rate": 0.001,
+    "optimizer": "Adam",
+    "loss": "MSELoss",
+    "cv_folds": 5,
+    "random_seed": 42
+  },
+  "metrics": {
+    "train_spearman": 0.8548072214629364,
+    "oof_spearman": 0.8348710489908371,
+    "oof_rmse": 1.3557595579499269,
+    "holdout_spearman": 0.8451046920658158,
+    "holdout_rmse": 1.2649769084510176,
+    "gap": 0.019936172472099334,
+    "ratio": 0.9766775806620116,
+    "fold_std": 0.009758701160792251
+  },
+  "fold_metrics": {
+    "fold_train_sps": [
+      0.8600147129499857,
+      0.8511084601590126,
+      0.8507653465408397,
+      0.852305874801781,
+      0.8598417128630628
+    ],
+    "fold_oof_sps": [
+      0.8364876242696705,
+      0.8375767790572782,
+      0.8334418916442434,
+      0.84843804038955,
+      0.8181337682668793
+    ]
+  },
+  "comparison": {
+    "old_crossattention_oof_sp": 0.824,
+    "new_crossattention_oof_sp": 0.8348710489908371,
+    "difference": 0.010871048990837129
+  },
+  "verdict": {
+    "status": "success",
+    "message": "\u2705 \uc131\uacf5 (OOF Sp \u2265 0.75)"
+  }
+}

@@ -1,0 +1,138 @@
+====================================================================================================
+Step 5 앙상블 — v4 Comprehensive Analysis
+====================================================================================================
+
+[1] 데이터 로드
+----------------------------------------------------------------------------------------------------
+CatBoost OOF shape:     (5092,)
+FlatMLP OOF shape:      (5092,)
+CrossAttention OOF shape: (5092,)
+y_cv shape:             (5092,)
+
+Holdout samples:        1274
+
+[2] Diversity 분석 (3개 모델 간 예측 상관)
+----------------------------------------------------------------------------------------------------
+
+Pearson 상관 행렬:
+                         CatBoost      FlatMLP    CrossAttn
+CatBoost                   1.0000       0.9582       0.9678
+FlatMLP                    0.9582       1.0000       0.9782
+CrossAttention             0.9678       0.9782       1.0000
+
+평균 상관 (off-diagonal): 0.9680
+Diversity 판정: ❌ 부족 (≥ 0.95)
+
+[3] 개별 모델 OOF 성능
+----------------------------------------------------------------------------------------------------
+CatBoost            : Spearman=0.8624, RMSE=1.1471
+FlatMLP             : Spearman=0.8278, RMSE=1.3814
+CrossAttention      : Spearman=0.8349, RMSE=1.3558
+
+[4] 앙상블 조합별 평가
+----------------------------------------------------------------------------------------------------
+
+OOF Spearman 기반 가중치:
+  CatBoost            : 0.3415
+  FlatMLP             : 0.3278
+  CrossAttention      : 0.3306
+
+1. CatBoost
+----------------------------------------------------------------------------------------------------
+
+  [WEIGHTED]
+    가중치: {'CatBoost': 1.0}
+    OOF  Spearman: 0.8624, RMSE: 1.1471
+    Hold Spearman: 0.8709, RMSE: 1.1388
+    OOF  P@30: 0.3333, NDCG@30: 0.3865
+    Hold P@30: 0.6333, NDCG@30: 0.6718
+
+  [EQUAL]
+    가중치: {'CatBoost': 1.0}
+    OOF  Spearman: 0.8624, RMSE: 1.1471
+    Hold Spearman: 0.8709, RMSE: 1.1388
+    OOF  P@30: 0.3333, NDCG@30: 0.3865
+    Hold P@30: 0.6333, NDCG@30: 0.6718
+
+2. CatBoost+FlatMLP
+----------------------------------------------------------------------------------------------------
+
+  [WEIGHTED]
+    가중치: {'CatBoost': 0.5102542768592954, 'FlatMLP': 0.4897457231407045}
+    OOF  Spearman: 0.8522, RMSE: 1.2212
+    Hold Spearman: 0.8594, RMSE: 1.2229
+    OOF  P@30: 0.3333, NDCG@30: 0.4033
+    Hold P@30: 0.4333, NDCG@30: 0.4761
+
+  [EQUAL]
+    가중치: {'CatBoost': 0.5, 'FlatMLP': 0.5}
+    OOF  Spearman: 0.8518, RMSE: 1.2236
+    Hold Spearman: 0.8591, RMSE: 1.2254
+    OOF  P@30: 0.3333, NDCG@30: 0.4017
+    Hold P@30: 0.4333, NDCG@30: 0.4757
+
+3. CatBoost+FlatMLP+CrossAttn
+----------------------------------------------------------------------------------------------------
+
+  [WEIGHTED]
+    가중치: {'CatBoost': 0.34154510418710243, 'FlatMLP': 0.3278174463619541, 'CrossAttention': 0.33063744945094353}
+    OOF  Spearman: 0.8499, RMSE: 1.2477
+    Hold Spearman: 0.8575, RMSE: 1.2216
+    OOF  P@30: 0.2667, NDCG@30: 0.3354
+    Hold P@30: 0.5333, NDCG@30: 0.6047
+
+  [EQUAL]
+    가중치: {'CatBoost': 0.3333333333333333, 'FlatMLP': 0.3333333333333333, 'CrossAttention': 0.3333333333333333}
+    OOF  Spearman: 0.8496, RMSE: 1.2497
+    Hold Spearman: 0.8572, RMSE: 1.2233
+    OOF  P@30: 0.2667, NDCG@30: 0.3338
+    Hold P@30: 0.5000, NDCG@30: 0.5819
+
+[5] 조합 간 비교
+----------------------------------------------------------------------------------------------------
+
+Holdout Spearman 비교 (Weighted):
+Combination                                Holdout Sp Holdout RMSE     P@30  NDCG@30
+----------------------------------------------------------------------------------------------------
+1. CatBoost                                    0.8709       1.1388   0.6333   0.6718
+2. CatBoost+FlatMLP                            0.8594       1.2229   0.4333   0.4761
+3. CatBoost+FlatMLP+CrossAttn                  0.8575       1.2216   0.5333   0.6047
+
+개선율:
+  2-model vs CatBoost: -0.0115 (-1.32%)
+  3-model vs 2-model:  -0.0019 (-0.22%)
+  3-model vs CatBoost: -0.0134 (-1.54%)
+
+
+Top-30 Overlap (Jaccard, Weighted):
+  1. CatBoost                              vs 2. CatBoost+FlatMLP                     : 0.6250 (5/30)
+  1. CatBoost                              vs 3. CatBoost+FlatMLP+CrossAttn           : 0.6250 (5/30)
+  2. CatBoost+FlatMLP                      vs 3. CatBoost+FlatMLP+CrossAttn           : 1.0000 (7/30)
+
+[6] 최종 선택 기준
+====================================================================================================
+
+판단 기준:
+1. Holdout Spearman (일반화 성능)
+2. Holdout RMSE (예측 정확도)
+3. Top-30 quality (P@30, NDCG@30)
+4. 3-model이 2-model 대비 실제 이득
+
+3-model vs 2-model 판정: ❌ 2-model이 우수 (-0.0019)
+
+최고 성능 (Holdout Spearman 기준):
+  조합: 1. CatBoost
+  Holdout Spearman: 0.8709
+  Holdout RMSE:     1.1388
+  P@30:             0.6333
+  NDCG@30:          0.6718
+
+[7] 결과 저장
+----------------------------------------------------------------------------------------------------
+✓ JSON: /Users/skku_aws2_14/20260408_pre_project_biso_myprotocol/20260408_pre_project_biso_myprotocol/20260415_v4_ensemble_test/ensemble_results/ensemble_v4_comprehensive_results.json
+✓ Top-30/50 CSV 저장 완료
+✓ Summary: /Users/skku_aws2_14/20260408_pre_project_biso_myprotocol/20260408_pre_project_biso_myprotocol/20260415_v4_ensemble_test/ensemble_results/ensemble_v4_summary.txt
+
+====================================================================================================
+앙상블 분석 완료!
+====================================================================================================

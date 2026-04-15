@@ -1,0 +1,65 @@
+{
+  "models": [
+    "CatBoost-Full",
+    "CatBoost-Gene",
+    "CatBoost-Drug"
+  ],
+  "sample_count": 5092,
+  "pearson_matrix": {
+    "CatBoost-Full": {
+      "CatBoost-Full": 1.0,
+      "CatBoost-Gene": 0.2503644679174084,
+      "CatBoost-Drug": 0.9939935859005651
+    },
+    "CatBoost-Gene": {
+      "CatBoost-Full": 0.2503644679174084,
+      "CatBoost-Gene": 1.0,
+      "CatBoost-Drug": 0.23904285065237074
+    },
+    "CatBoost-Drug": {
+      "CatBoost-Full": 0.9939935859005651,
+      "CatBoost-Gene": 0.23904285065237074,
+      "CatBoost-Drug": 1.0
+    }
+  },
+  "spearman_matrix": {
+    "CatBoost-Full": {
+      "CatBoost-Full": 1.0,
+      "CatBoost-Gene": 0.312106823870334,
+      "CatBoost-Drug": 0.9895901920319841
+    },
+    "CatBoost-Gene": {
+      "CatBoost-Full": 0.312106823870334,
+      "CatBoost-Gene": 1.0,
+      "CatBoost-Drug": 0.2925519314595835
+    },
+    "CatBoost-Drug": {
+      "CatBoost-Full": 0.9895901920319841,
+      "CatBoost-Gene": 0.2925519314595835,
+      "CatBoost-Drug": 1.0
+    }
+  },
+  "top30_overlap_matrix": {
+    "CatBoost-Full": {
+      "CatBoost-Full": 1.0,
+      "CatBoost-Gene": 0.0,
+      "CatBoost-Drug": 0.7647058823529411
+    },
+    "CatBoost-Gene": {
+      "CatBoost-Full": 0.0,
+      "CatBoost-Gene": 1.0,
+      "CatBoost-Drug": 0.0
+    },
+    "CatBoost-Drug": {
+      "CatBoost-Full": 0.7647058823529411,
+      "CatBoost-Gene": 0.0,
+      "CatBoost-Drug": 1.0
+    }
+  },
+  "averages": {
+    "pearson": 0.49446696815678143,
+    "spearman": 0.5314163157873005,
+    "top30_jaccard": 0.2549019607843137
+  },
+  "diversity_verdict": "\u2705 \uc6b0\uc218 (< 0.90)"
+}

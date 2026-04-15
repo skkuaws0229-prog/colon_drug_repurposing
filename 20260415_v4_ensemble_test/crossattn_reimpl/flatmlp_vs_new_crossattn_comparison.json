@@ -1,0 +1,32 @@
+{
+  "comparison": "FlatMLP vs Real CrossAttention",
+  "samples": 5092,
+  "correlations": {
+    "pearson": 0.9781753461140821,
+    "spearman": 0.9781833639713422,
+    "old_spearman": 0.9848,
+    "improvement": 0.006616636028657807
+  },
+  "differences": {
+    "max_abs_diff": 2.830252170562744,
+    "mean_abs_diff": 0.3494023880764011,
+    "median_abs_diff": 0.2548612356185913,
+    "old_mean_abs_diff": 0.2777,
+    "improvement": 0.07170238807640111
+  },
+  "overlap": {
+    "top30_jaccard": 0.22448979591836735,
+    "top30_overlap": 11,
+    "top50_jaccard": 0.3888888888888889,
+    "top50_overlap": 28,
+    "old_top30_jaccard": 0.3953,
+    "improvement": -0.17081020408163264
+  },
+  "goals": {
+    "Spearman < 0.95": false,
+    "Top-30 Jaccard < 0.6": true,
+    "Spearman \uac1c\uc120 (0.9848 \ub300\ube44)": true,
+    "Mean diff \uc99d\uac00 (0.2777 \ub300\ube44)": true
+  },
+  "verdict": "\u26a0\ufe0f  \uc77c\ubd80 \ubaa9\ud45c \ubbf8\ub2ec\uc131"
+}

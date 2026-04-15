@@ -1,0 +1,63 @@
+{
+  "weight_files": {
+    "flatmlp": {
+      "path": "/Users/skku_aws2_14/20260408_pre_project_biso_myprotocol/20260408_pre_project_biso_myprotocol/20260414_re_pre_project_v3/step4_results/model_10_model.pt",
+      "file_size_bytes": 5930153,
+      "total_keys": 6,
+      "total_parameters": 1481729,
+      "state_dict_keys": [
+        "net.0.weight",
+        "net.0.bias",
+        "net.3.weight",
+        "net.3.bias",
+        "net.6.weight",
+        "net.6.bias"
+      ],
+      "layer_types": {
+        "Linear": 0,
+        "Attention": 0,
+        "MultiheadAttention": 0,
+        "Conv": 0,
+        "BatchNorm": 0,
+        "Dropout": 0,
+        "Embedding": 0,
+        "Other": 0
+      },
+      "has_attention": false
+    },
+    "crossattention": {
+      "path": "/Users/skku_aws2_14/20260408_pre_project_biso_myprotocol/20260408_pre_project_biso_myprotocol/20260414_re_pre_project_v3/step4_results/model_13_model.pt",
+      "file_size_bytes": 5930025,
+      "total_keys": 6,
+      "total_parameters": 1481729,
+      "state_dict_keys": [
+        "fc1.weight",
+        "fc1.bias",
+        "fc2.weight",
+        "fc2.bias",
+        "out.weight",
+        "out.bias"
+      ],
+      "layer_types": {
+        "Linear": 4,
+        "Attention": 0,
+        "MultiheadAttention": 0,
+        "Conv": 0,
+        "BatchNorm": 0,
+        "Dropout": 0,
+        "Embedding": 0,
+        "Other": 0
+      },
+      "has_attention": false
+    }
+  },
+  "comparison": {
+    "keys_identical": false,
+    "params_identical": true,
+    "param_difference": 0
+  },
+  "판정": {
+    "아키텍처": "⚠️ 파라미터 수 동일 (의심)",
+    "원인_추정": "우연히 같은 크기이거나 구조적 유사"
+  }
+}

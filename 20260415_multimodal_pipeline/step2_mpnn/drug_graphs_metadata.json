@@ -1,0 +1,19 @@
+{
+  "n_drugs": 243,
+  "n_failed": 0,
+  "node_feature_dim": 40,
+  "edge_feature_dim": 6,
+  "failed_drugs": [],
+  "stats": {
+    "num_nodes": {
+      "min": 5,
+      "max": 96,
+      "mean": 31.88065843621399
+    },
+    "num_edges": {
+      "min": 8,
+      "max": 202,
+      "mean": 69.67078189300412
+    }
+  }
+}

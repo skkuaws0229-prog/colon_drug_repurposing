@@ -1,0 +1,21 @@
+====================================================================================================
+Step 5 앙상블 v4 — Summary
+====================================================================================================
+
+Diversity:
+  평균 상관: 0.9680
+  판정: ❌ 부족 (≥ 0.95)
+
+Holdout Spearman (Weighted):
+  1. CatBoost                             : 0.8709
+  2. CatBoost+FlatMLP                     : 0.8594
+  3. CatBoost+FlatMLP+CrossAttn           : 0.8575
+
+개선율:
+  2-model vs CatBoost: -0.0115
+  3-model vs 2-model:  -0.0019
+  3-model vs CatBoost: -0.0134
+
+최종 선택: 1. CatBoost
+  Holdout Spearman: 0.8709
+  판정: ❌ 2-model이 우수 (-0.0019)

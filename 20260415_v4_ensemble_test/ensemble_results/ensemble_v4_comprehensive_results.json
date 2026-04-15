@@ -1,0 +1,2732 @@
+{
+  "diversity": {
+    "correlation_matrix": {
+      "CatBoost": {
+        "CatBoost": 1.0,
+        "FlatMLP": 0.9581709125198472,
+        "CrossAttention": 0.9677720429816485
+      },
+      "FlatMLP": {
+        "CatBoost": 0.9581709125198472,
+        "FlatMLP": 1.0,
+        "CrossAttention": 0.9781753461140821
+      },
+      "CrossAttention": {
+        "CatBoost": 0.9677720429816485,
+        "FlatMLP": 0.9781753461140821,
+        "CrossAttention": 1.0
+      }
+    },
+    "average_correlation": 0.9680394338718593,
+    "verdict": "\u274c \ubd80\uc871 (\u2265 0.95)"
+  },
+  "individual_oof_metrics": {
+    "CatBoost": {
+      "spearman": 0.8624132562233484,
+      "rmse": 1.1470506742304665
+    },
+    "FlatMLP": {
+      "spearman": 0.827750443200502,
+      "rmse": 1.3813761269985867
+    },
+    "CrossAttention": {
+      "spearman": 0.8348710489908371,
+      "rmse": 1.3557595579499269
+    }
+  },
+  "oof_spearman_weights": {
+    "CatBoost": 0.34154510418710243,
+    "FlatMLP": 0.3278174463619541,
+    "CrossAttention": 0.33063744945094353
+  },
+  "combinations": {
+    "1. CatBoost": {
+      "weighted": {
+        "weights": {
+          "CatBoost": 1.0
+        },
+        "oof_metrics": {
+          "spearman": 0.8624132562233484,
+          "kendall_tau": 0.6872238974181429,
+          "pearson": 0.9075244300603132,
+          "r2": 0.8207630555075731,
+          "rmse": 1.1470506742304665,
+          "mae": 0.8698937858615562,
+          "median_ae": 0.6999099992593205,
+          "p95_error": 2.295179077015188
+        },
+        "oof_ranking": {
+          "P@30": 0.3333333333333333,
+          "R@30": 0.3333333333333333,
+          "NDCG@30": 0.38652667029984283,
+          "EF@30": 56.577777777777776,
+          "MAP": 0.16586331795197948
+        },
+        "holdout_metrics": {
+          "spearman": 0.8708910968042847,
+          "kendall_tau": 0.6948819055462347,
+          "pearson": 0.9076526586081148,
+          "r2": 0.8208973601424331,
+          "rmse": 1.1388341776110202,
+          "mae": 0.852827152980219,
+          "median_ae": 0.6778846853407028,
+          "p95_error": 2.2002779667327417
+        },
+        "holdout_ranking": {
+          "P@30": 0.6333333333333333,
+          "R@30": 0.6333333333333333,
+          "NDCG@30": 0.6718039741553655,
+          "EF@30": 26.895555555555553,
+          "MAP": 0.4845479645903208
+        },
+        "top30_drugs": [
+          {
+            "rank": 1,
+            "drug_name": "1191",
+            "predicted_ic50": -5.8271608009473415
+          },
+          {
+            "rank": 2,
+            "drug_name": "1191",
+            "predicted_ic50": -5.286214345120992
+          },
+          {
+            "rank": 3,
+            "drug_name": "1817",
+            "predicted_ic50": -5.216240152284234
+          },
+          {
+            "rank": 4,
+            "drug_name": "1817",
+            "predicted_ic50": -5.158013813758416
+          },
+          {
+            "rank": 5,
+            "drug_name": "1191",
+            "predicted_ic50": -5.146725289430883
+          },
+          {
+            "rank": 6,
+            "drug_name": "1817",
+            "predicted_ic50": -5.096807302088658
+          },
+          {
+            "rank": 7,
+            "drug_name": "1817",
+            "predicted_ic50": -5.070937352217388
+          },
+          {
+            "rank": 8,
+            "drug_name": "1911",
+            "predicted_ic50": -4.929495300245025
+          },
+          {
+            "rank": 9,
+            "drug_name": "1191",
+            "predicted_ic50": -4.908288056638201
+          },
+          {
+            "rank": 10,
+            "drug_name": "1817",
+            "predicted_ic50": -4.902858974210053
+          },
+          {
+            "rank": 11,
+            "drug_name": "1191",
+            "predicted_ic50": -4.867193018518642
+          },
+          {
+            "rank": 12,
+            "drug_name": "1817",
+            "predicted_ic50": -4.866035650300457
+          },
+          {
+            "rank": 13,
+            "drug_name": "1007",
+            "predicted_ic50": -4.863703526977249
+          },
+          {
+            "rank": 14,
+            "drug_name": "1191",
+            "predicted_ic50": -4.860080487893482
+          },
+          {
+            "rank": 15,
+            "drug_name": "1817",
+            "predicted_ic50": -4.858027747022017
+          },
+          {
+            "rank": 16,
+            "drug_name": "1911",
+            "predicted_ic50": -4.838966297216083
+          },
+          {
+            "rank": 17,
+            "drug_name": "1819",
+            "predicted_ic50": -4.8347784419222775
+          },
+          {
+            "rank": 18,
+            "drug_name": "1817",
+            "predicted_ic50": -4.829796032361208
+          },
+          {
+            "rank": 19,
+            "drug_name": "1817",
+            "predicted_ic50": -4.816161709075057
+          },
+          {
+            "rank": 20,
+            "drug_name": "1817",
+            "predicted_ic50": -4.805266670823986
+          },
+          {
+            "rank": 21,
+            "drug_name": "1911",
+            "predicted_ic50": -4.765277908593253
+          },
+          {
+            "rank": 22,
+            "drug_name": "1941",
+            "predicted_ic50": -4.735223349942771
+          },
+          {
+            "rank": 23,
+            "drug_name": "1817",
+            "predicted_ic50": -4.717059589793258
+          },
+          {
+            "rank": 24,
+            "drug_name": "1191",
+            "predicted_ic50": -4.715793671659876
+          },
+          {
+            "rank": 25,
+            "drug_name": "1191",
+            "predicted_ic50": -4.695456606805702
+          },
+          {
+            "rank": 26,
+            "drug_name": "1191",
+            "predicted_ic50": -4.682251220761176
+          },
+          {
+            "rank": 27,
+            "drug_name": "1941",
+            "predicted_ic50": -4.674153967555736
+          },
+          {
+            "rank": 28,
+            "drug_name": "1191",
+            "predicted_ic50": -4.660174715936733
+          },
+          {
+            "rank": 29,
+            "drug_name": "1817",
+            "predicted_ic50": -4.638965514472146
+          },
+          {
+            "rank": 30,
+            "drug_name": "1191",
+            "predicted_ic50": -4.621899033786254
+          }
+        ],
+        "top50_drugs": [
+          {
+            "rank": 1,
+            "drug_name": "1191",
+            "predicted_ic50": -5.8271608009473415
+          },
+          {
+            "rank": 2,
+            "drug_name": "1191",
+            "predicted_ic50": -5.286214345120992
+          },
+          {
+            "rank": 3,
+            "drug_name": "1817",
+            "predicted_ic50": -5.216240152284234
+          },
+          {
+            "rank": 4,
+            "drug_name": "1817",
+            "predicted_ic50": -5.158013813758416
+          },
+          {
+            "rank": 5,
+            "drug_name": "1191",
+            "predicted_ic50": -5.146725289430883
+          },
+          {
+            "rank": 6,
+            "drug_name": "1817",
+            "predicted_ic50": -5.096807302088658
+          },
+          {
+            "rank": 7,
+            "drug_name": "1817",
+            "predicted_ic50": -5.070937352217388
+          },
+          {
+            "rank": 8,
+            "drug_name": "1911",
+            "predicted_ic50": -4.929495300245025
+          },
+          {
+            "rank": 9,
+            "drug_name": "1191",
+            "predicted_ic50": -4.908288056638201
+          },
+          {
+            "rank": 10,
+            "drug_name": "1817",
+            "predicted_ic50": -4.902858974210053
+          },
+          {
+            "rank": 11,
+            "drug_name": "1191",
+            "predicted_ic50": -4.867193018518642
+          },
+          {
+            "rank": 12,
+            "drug_name": "1817",
+            "predicted_ic50": -4.866035650300457
+          },
+          {
+            "rank": 13,
+            "drug_name": "1007",
+            "predicted_ic50": -4.863703526977249
+          },
+          {
+            "rank": 14,
+            "drug_name": "1191",
+            "predicted_ic50": -4.860080487893482
+          },
+          {
+            "rank": 15,
+            "drug_name": "1817",
+            "predicted_ic50": -4.858027747022017
+          },
+          {
+            "rank": 16,
+            "drug_name": "1911",
+            "predicted_ic50": -4.838966297216083
+          },
+          {
+            "rank": 17,
+            "drug_name": "1819",
+            "predicted_ic50": -4.8347784419222775
+          },
+          {
+            "rank": 18,
+            "drug_name": "1817",
+            "predicted_ic50": -4.829796032361208
+          },
+          {
+            "rank": 19,
+            "drug_name": "1817",
+            "predicted_ic50": -4.816161709075057
+          },
+          {
+            "rank": 20,
+            "drug_name": "1817",
+            "predicted_ic50": -4.805266670823986
+          },
+          {
+            "rank": 21,
+            "drug_name": "1911",
+            "predicted_ic50": -4.765277908593253
+          },
+          {
+            "rank": 22,
+            "drug_name": "1941",
+            "predicted_ic50": -4.735223349942771
+          },
+          {
+            "rank": 23,
+            "drug_name": "1817",
+            "predicted_ic50": -4.717059589793258
+          },
+          {
+            "rank": 24,
+            "drug_name": "1191",
+            "predicted_ic50": -4.715793671659876
+          },
+          {
+            "rank": 25,
+            "drug_name": "1191",
+            "predicted_ic50": -4.695456606805702
+          },
+          {
+            "rank": 26,
+            "drug_name": "1191",
+            "predicted_ic50": -4.682251220761176
+          },
+          {
+            "rank": 27,
+            "drug_name": "1941",
+            "predicted_ic50": -4.674153967555736
+          },
+          {
+            "rank": 28,
+            "drug_name": "1191",
+            "predicted_ic50": -4.660174715936733
+          },
+          {
+            "rank": 29,
+            "drug_name": "1817",
+            "predicted_ic50": -4.638965514472146
+          },
+          {
+            "rank": 30,
+            "drug_name": "1191",
+            "predicted_ic50": -4.621899033786254
+          },
+          {
+            "rank": 31,
+            "drug_name": "1191",
+            "predicted_ic50": -4.61180920255423
+          },
+          {
+            "rank": 32,
+            "drug_name": "1007",
+            "predicted_ic50": -4.610615057630515
+          },
+          {
+            "rank": 33,
+            "drug_name": "1817",
+            "predicted_ic50": -4.5948896685801435
+          },
+          {
+            "rank": 34,
+            "drug_name": "1817",
+            "predicted_ic50": -4.591828518298769
+          },
+          {
+            "rank": 35,
+            "drug_name": "1191",
+            "predicted_ic50": -4.555048213320281
+          },
+          {
+            "rank": 36,
+            "drug_name": "1080",
+            "predicted_ic50": -4.539840440579119
+          },
+          {
+            "rank": 37,
+            "drug_name": "1191",
+            "predicted_ic50": -4.510217927101951
+          },
+          {
+            "rank": 38,
+            "drug_name": "1191",
+            "predicted_ic50": -4.504610365802252
+          },
+          {
+            "rank": 39,
+            "drug_name": "1817",
+            "predicted_ic50": -4.477832119846657
+          },
+          {
+            "rank": 40,
+            "drug_name": "1191",
+            "predicted_ic50": -4.4758430979063615
+          },
+          {
+            "rank": 41,
+            "drug_name": "1191",
+            "predicted_ic50": -4.446243595976557
+          },
+          {
+            "rank": 42,
+            "drug_name": "1817",
+            "predicted_ic50": -4.408216770113516
+          },
+          {
+            "rank": 43,
+            "drug_name": "1191",
+            "predicted_ic50": -4.404407400227775
+          },
+          {
+            "rank": 44,
+            "drug_name": "1191",
+            "predicted_ic50": -4.381078927934428
+          },
+          {
+            "rank": 45,
+            "drug_name": "1819",
+            "predicted_ic50": -4.369437708314942
+          },
+          {
+            "rank": 46,
+            "drug_name": "1819",
+            "predicted_ic50": -4.366008000342232
+          },
+          {
+            "rank": 47,
+            "drug_name": "1817",
+            "predicted_ic50": -4.364101799215311
+          },
+          {
+            "rank": 48,
+            "drug_name": "1007",
+            "predicted_ic50": -4.346264423227352
+          },
+          {
+            "rank": 49,
+            "drug_name": "1911",
+            "predicted_ic50": -4.286466426703137
+          },
+          {
+            "rank": 50,
+            "drug_name": "1080",
+            "predicted_ic50": -4.2707222065106505
+          }
+        ]
+      },
+      "equal": {
+        "weights": {
+          "CatBoost": 1.0
+        },
+        "oof_metrics": {
+          "spearman": 0.8624132562233484,
+          "kendall_tau": 0.6872238974181429,
+          "pearson": 0.9075244300603132,
+          "r2": 0.8207630555075731,
+          "rmse": 1.1470506742304665,
+          "mae": 0.8698937858615562,
+          "median_ae": 0.6999099992593205,
+          "p95_error": 2.295179077015188
+        },
+        "oof_ranking": {
+          "P@30": 0.3333333333333333,
+          "R@30": 0.3333333333333333,
+          "NDCG@30": 0.38652667029984283,
+          "EF@30": 56.577777777777776,
+          "MAP": 0.16586331795197948
+        },
+        "holdout_metrics": {
+          "spearman": 0.8708910968042847,
+          "kendall_tau": 0.6948819055462347,
+          "pearson": 0.9076526586081148,
+          "r2": 0.8208973601424331,
+          "rmse": 1.1388341776110202,
+          "mae": 0.852827152980219,
+          "median_ae": 0.6778846853407028,
+          "p95_error": 2.2002779667327417
+        },
+        "holdout_ranking": {
+          "P@30": 0.6333333333333333,
+          "R@30": 0.6333333333333333,
+          "NDCG@30": 0.6718039741553655,
+          "EF@30": 26.895555555555553,
+          "MAP": 0.4845479645903208
+        },
+        "top30_drugs": [
+          {
+            "rank": 1,
+            "drug_name": "1191",
+            "predicted_ic50": -5.8271608009473415
+          },
+          {
+            "rank": 2,
+            "drug_name": "1191",
+            "predicted_ic50": -5.286214345120992
+          },
+          {
+            "rank": 3,
+            "drug_name": "1817",
+            "predicted_ic50": -5.216240152284234
+          },
+          {
+            "rank": 4,
+            "drug_name": "1817",
+            "predicted_ic50": -5.158013813758416
+          },
+          {
+            "rank": 5,
+            "drug_name": "1191",
+            "predicted_ic50": -5.146725289430883
+          },
+          {
+            "rank": 6,
+            "drug_name": "1817",
+            "predicted_ic50": -5.096807302088658
+          },
+          {
+            "rank": 7,
+            "drug_name": "1817",
+            "predicted_ic50": -5.070937352217388
+          },
+          {
+            "rank": 8,
+            "drug_name": "1911",
+            "predicted_ic50": -4.929495300245025
+          },
+          {
+            "rank": 9,
+            "drug_name": "1191",
+            "predicted_ic50": -4.908288056638201
+          },
+          {
+            "rank": 10,
+            "drug_name": "1817",
+            "predicted_ic50": -4.902858974210053
+          },
+          {
+            "rank": 11,
+            "drug_name": "1191",
+            "predicted_ic50": -4.867193018518642
+          },
+          {
+            "rank": 12,
+            "drug_name": "1817",
+            "predicted_ic50": -4.866035650300457
+          },
+          {
+            "rank": 13,
+            "drug_name": "1007",
+            "predicted_ic50": -4.863703526977249
+          },
+          {
+            "rank": 14,
+            "drug_name": "1191",
+            "predicted_ic50": -4.860080487893482
+          },
+          {
+            "rank": 15,
+            "drug_name": "1817",
+            "predicted_ic50": -4.858027747022017
+          },
+          {
+            "rank": 16,
+            "drug_name": "1911",
+            "predicted_ic50": -4.838966297216083
+          },
+          {
+            "rank": 17,
+            "drug_name": "1819",
+            "predicted_ic50": -4.8347784419222775
+          },
+          {
+            "rank": 18,
+            "drug_name": "1817",
+            "predicted_ic50": -4.829796032361208
+          },
+          {
+            "rank": 19,
+            "drug_name": "1817",
+            "predicted_ic50": -4.816161709075057
+          },
+          {
+            "rank": 20,
+            "drug_name": "1817",
+            "predicted_ic50": -4.805266670823986
+          },
+          {
+            "rank": 21,
+            "drug_name": "1911",
+            "predicted_ic50": -4.765277908593253
+          },
+          {
+            "rank": 22,
+            "drug_name": "1941",
+            "predicted_ic50": -4.735223349942771
+          },
+          {
+            "rank": 23,
+            "drug_name": "1817",
+            "predicted_ic50": -4.717059589793258
+          },
+          {
+            "rank": 24,
+            "drug_name": "1191",
+            "predicted_ic50": -4.715793671659876
+          },
+          {
+            "rank": 25,
+            "drug_name": "1191",
+            "predicted_ic50": -4.695456606805702
+          },
+          {
+            "rank": 26,
+            "drug_name": "1191",
+            "predicted_ic50": -4.682251220761176
+          },
+          {
+            "rank": 27,
+            "drug_name": "1941",
+            "predicted_ic50": -4.674153967555736
+          },
+          {
+            "rank": 28,
+            "drug_name": "1191",
+            "predicted_ic50": -4.660174715936733
+          },
+          {
+            "rank": 29,
+            "drug_name": "1817",
+            "predicted_ic50": -4.638965514472146
+          },
+          {
+            "rank": 30,
+            "drug_name": "1191",
+            "predicted_ic50": -4.621899033786254
+          }
+        ],
+        "top50_drugs": [
+          {
+            "rank": 1,
+            "drug_name": "1191",
+            "predicted_ic50": -5.8271608009473415
+          },
+          {
+            "rank": 2,
+            "drug_name": "1191",
+            "predicted_ic50": -5.286214345120992
+          },
+          {
+            "rank": 3,
+            "drug_name": "1817",
+            "predicted_ic50": -5.216240152284234
+          },
+          {
+            "rank": 4,
+            "drug_name": "1817",
+            "predicted_ic50": -5.158013813758416
+          },
+          {
+            "rank": 5,
+            "drug_name": "1191",
+            "predicted_ic50": -5.146725289430883
+          },
+          {
+            "rank": 6,
+            "drug_name": "1817",
+            "predicted_ic50": -5.096807302088658
+          },
+          {
+            "rank": 7,
+            "drug_name": "1817",
+            "predicted_ic50": -5.070937352217388
+          },
+          {
+            "rank": 8,
+            "drug_name": "1911",
+            "predicted_ic50": -4.929495300245025
+          },
+          {
+            "rank": 9,
+            "drug_name": "1191",
+            "predicted_ic50": -4.908288056638201
+          },
+          {
+            "rank": 10,
+            "drug_name": "1817",
+            "predicted_ic50": -4.902858974210053
+          },
+          {
+            "rank": 11,
+            "drug_name": "1191",
+            "predicted_ic50": -4.867193018518642
+          },
+          {
+            "rank": 12,
+            "drug_name": "1817",
+            "predicted_ic50": -4.866035650300457
+          },
+          {
+            "rank": 13,
+            "drug_name": "1007",
+            "predicted_ic50": -4.863703526977249
+          },
+          {
+            "rank": 14,
+            "drug_name": "1191",
+            "predicted_ic50": -4.860080487893482
+          },
+          {
+            "rank": 15,
+            "drug_name": "1817",
+            "predicted_ic50": -4.858027747022017
+          },
+          {
+            "rank": 16,
+            "drug_name": "1911",
+            "predicted_ic50": -4.838966297216083
+          },
+          {
+            "rank": 17,
+            "drug_name": "1819",
+            "predicted_ic50": -4.8347784419222775
+          },
+          {
+            "rank": 18,
+            "drug_name": "1817",
+            "predicted_ic50": -4.829796032361208
+          },
+          {
+            "rank": 19,
+            "drug_name": "1817",
+            "predicted_ic50": -4.816161709075057
+          },
+          {
+            "rank": 20,
+            "drug_name": "1817",
+            "predicted_ic50": -4.805266670823986
+          },
+          {
+            "rank": 21,
+            "drug_name": "1911",
+            "predicted_ic50": -4.765277908593253
+          },
+          {
+            "rank": 22,
+            "drug_name": "1941",
+            "predicted_ic50": -4.735223349942771
+          },
+          {
+            "rank": 23,
+            "drug_name": "1817",
+            "predicted_ic50": -4.717059589793258
+          },
+          {
+            "rank": 24,
+            "drug_name": "1191",
+            "predicted_ic50": -4.715793671659876
+          },
+          {
+            "rank": 25,
+            "drug_name": "1191",
+            "predicted_ic50": -4.695456606805702
+          },
+          {
+            "rank": 26,
+            "drug_name": "1191",
+            "predicted_ic50": -4.682251220761176
+          },
+          {
+            "rank": 27,
+            "drug_name": "1941",
+            "predicted_ic50": -4.674153967555736
+          },
+          {
+            "rank": 28,
+            "drug_name": "1191",
+            "predicted_ic50": -4.660174715936733
+          },
+          {
+            "rank": 29,
+            "drug_name": "1817",
+            "predicted_ic50": -4.638965514472146
+          },
+          {
+            "rank": 30,
+            "drug_name": "1191",
+            "predicted_ic50": -4.621899033786254
+          },
+          {
+            "rank": 31,
+            "drug_name": "1191",
+            "predicted_ic50": -4.61180920255423
+          },
+          {
+            "rank": 32,
+            "drug_name": "1007",
+            "predicted_ic50": -4.610615057630515
+          },
+          {
+            "rank": 33,
+            "drug_name": "1817",
+            "predicted_ic50": -4.5948896685801435
+          },
+          {
+            "rank": 34,
+            "drug_name": "1817",
+            "predicted_ic50": -4.591828518298769
+          },
+          {
+            "rank": 35,
+            "drug_name": "1191",
+            "predicted_ic50": -4.555048213320281
+          },
+          {
+            "rank": 36,
+            "drug_name": "1080",
+            "predicted_ic50": -4.539840440579119
+          },
+          {
+            "rank": 37,
+            "drug_name": "1191",
+            "predicted_ic50": -4.510217927101951
+          },
+          {
+            "rank": 38,
+            "drug_name": "1191",
+            "predicted_ic50": -4.504610365802252
+          },
+          {
+            "rank": 39,
+            "drug_name": "1817",
+            "predicted_ic50": -4.477832119846657
+          },
+          {
+            "rank": 40,
+            "drug_name": "1191",
+            "predicted_ic50": -4.4758430979063615
+          },
+          {
+            "rank": 41,
+            "drug_name": "1191",
+            "predicted_ic50": -4.446243595976557
+          },
+          {
+            "rank": 42,
+            "drug_name": "1817",
+            "predicted_ic50": -4.408216770113516
+          },
+          {
+            "rank": 43,
+            "drug_name": "1191",
+            "predicted_ic50": -4.404407400227775
+          },
+          {
+            "rank": 44,
+            "drug_name": "1191",
+            "predicted_ic50": -4.381078927934428
+          },
+          {
+            "rank": 45,
+            "drug_name": "1819",
+            "predicted_ic50": -4.369437708314942
+          },
+          {
+            "rank": 46,
+            "drug_name": "1819",
+            "predicted_ic50": -4.366008000342232
+          },
+          {
+            "rank": 47,
+            "drug_name": "1817",
+            "predicted_ic50": -4.364101799215311
+          },
+          {
+            "rank": 48,
+            "drug_name": "1007",
+            "predicted_ic50": -4.346264423227352
+          },
+          {
+            "rank": 49,
+            "drug_name": "1911",
+            "predicted_ic50": -4.286466426703137
+          },
+          {
+            "rank": 50,
+            "drug_name": "1080",
+            "predicted_ic50": -4.2707222065106505
+          }
+        ]
+      }
+    },
+    "2. CatBoost+FlatMLP": {
+      "weighted": {
+        "weights": {
+          "CatBoost": 0.5102542768592954,
+          "FlatMLP": 0.4897457231407045
+        },
+        "oof_metrics": {
+          "spearman": 0.8521809321019607,
+          "kendall_tau": 0.6742755639166212,
+          "pearson": 0.8958534420928677,
+          "r2": 0.7968530072229013,
+          "rmse": 1.2211641258153227,
+          "mae": 0.9309924450319775,
+          "median_ae": 0.7467153770139832,
+          "p95_error": 2.4265827764334182
+        },
+        "oof_ranking": {
+          "P@30": 0.3333333333333333,
+          "R@30": 0.3333333333333333,
+          "NDCG@30": 0.4032628502229803,
+          "EF@30": 56.577777777777776,
+          "MAP": 0.17844641381860388
+        },
+        "holdout_metrics": {
+          "spearman": 0.8594124255769917,
+          "kendall_tau": 0.6807592821566517,
+          "pearson": 0.8935839347797405,
+          "r2": 0.7934892763395156,
+          "rmse": 1.2228714422562563,
+          "mae": 0.9129718650697507,
+          "median_ae": 0.7038520600824341,
+          "p95_error": 2.420524248368063
+        },
+        "holdout_ranking": {
+          "P@30": 0.43333333333333335,
+          "R@30": 0.43333333333333335,
+          "NDCG@30": 0.4760998218120603,
+          "EF@30": 18.40222222222222,
+          "MAP": 0.2880840168771204
+        },
+        "top30_drugs": [
+          {
+            "rank": 1,
+            "drug_name": "1819",
+            "predicted_ic50": -4.647068733740225
+          },
+          {
+            "rank": 2,
+            "drug_name": "1911",
+            "predicted_ic50": -4.596770729419065
+          },
+          {
+            "rank": 3,
+            "drug_name": "1911",
+            "predicted_ic50": -4.52134593101787
+          },
+          {
+            "rank": 4,
+            "drug_name": "1007",
+            "predicted_ic50": -4.220290592816062
+          },
+          {
+            "rank": 5,
+            "drug_name": "1819",
+            "predicted_ic50": -4.198097313781804
+          },
+          {
+            "rank": 6,
+            "drug_name": "1819",
+            "predicted_ic50": -4.162248925323906
+          },
+          {
+            "rank": 7,
+            "drug_name": "1911",
+            "predicted_ic50": -4.14362905194734
+          },
+          {
+            "rank": 8,
+            "drug_name": "1080",
+            "predicted_ic50": -4.109831901598789
+          },
+          {
+            "rank": 9,
+            "drug_name": "1819",
+            "predicted_ic50": -4.096840048477695
+          },
+          {
+            "rank": 10,
+            "drug_name": "1007",
+            "predicted_ic50": -4.0940953865735255
+          },
+          {
+            "rank": 11,
+            "drug_name": "1817",
+            "predicted_ic50": -4.04455097670592
+          },
+          {
+            "rank": 12,
+            "drug_name": "1080",
+            "predicted_ic50": -4.019541233420675
+          },
+          {
+            "rank": 13,
+            "drug_name": "1007",
+            "predicted_ic50": -3.9900065741829382
+          },
+          {
+            "rank": 14,
+            "drug_name": "1007",
+            "predicted_ic50": -3.9827329616567475
+          },
+          {
+            "rank": 15,
+            "drug_name": "1911",
+            "predicted_ic50": -3.9742371965366767
+          },
+          {
+            "rank": 16,
+            "drug_name": "1811",
+            "predicted_ic50": -3.9538883882956375
+          },
+          {
+            "rank": 17,
+            "drug_name": "1911",
+            "predicted_ic50": -3.9367079368650812
+          },
+          {
+            "rank": 18,
+            "drug_name": "1817",
+            "predicted_ic50": -3.934511886971449
+          },
+          {
+            "rank": 19,
+            "drug_name": "1911",
+            "predicted_ic50": -3.8938125541130377
+          },
+          {
+            "rank": 20,
+            "drug_name": "1819",
+            "predicted_ic50": -3.8588237845508377
+          },
+          {
+            "rank": 21,
+            "drug_name": "1911",
+            "predicted_ic50": -3.846482671470218
+          },
+          {
+            "rank": 22,
+            "drug_name": "1080",
+            "predicted_ic50": -3.8321534324672593
+          },
+          {
+            "rank": 23,
+            "drug_name": "1817",
+            "predicted_ic50": -3.8169959503022186
+          },
+          {
+            "rank": 24,
+            "drug_name": "1817",
+            "predicted_ic50": -3.816760075380658
+          },
+          {
+            "rank": 25,
+            "drug_name": "1911",
+            "predicted_ic50": -3.808633986970923
+          },
+          {
+            "rank": 26,
+            "drug_name": "1191",
+            "predicted_ic50": -3.7689221043038708
+          },
+          {
+            "rank": 27,
+            "drug_name": "1911",
+            "predicted_ic50": -3.7470987719363484
+          },
+          {
+            "rank": 28,
+            "drug_name": "1811",
+            "predicted_ic50": -3.7281941926628477
+          },
+          {
+            "rank": 29,
+            "drug_name": "1817",
+            "predicted_ic50": -3.7072590112307564
+          },
+          {
+            "rank": 30,
+            "drug_name": "1007",
+            "predicted_ic50": -3.696875902777397
+          }
+        ],
+        "top50_drugs": [
+          {
+            "rank": 1,
+            "drug_name": "1819",
+            "predicted_ic50": -4.647068733740225
+          },
+          {
+            "rank": 2,
+            "drug_name": "1911",
+            "predicted_ic50": -4.596770729419065
+          },
+          {
+            "rank": 3,
+            "drug_name": "1911",
+            "predicted_ic50": -4.52134593101787
+          },
+          {
+            "rank": 4,
+            "drug_name": "1007",
+            "predicted_ic50": -4.220290592816062
+          },
+          {
+            "rank": 5,
+            "drug_name": "1819",
+            "predicted_ic50": -4.198097313781804
+          },
+          {
+            "rank": 6,
+            "drug_name": "1819",
+            "predicted_ic50": -4.162248925323906
+          },
+          {
+            "rank": 7,
+            "drug_name": "1911",
+            "predicted_ic50": -4.14362905194734
+          },
+          {
+            "rank": 8,
+            "drug_name": "1080",
+            "predicted_ic50": -4.109831901598789
+          },
+          {
+            "rank": 9,
+            "drug_name": "1819",
+            "predicted_ic50": -4.096840048477695
+          },
+          {
+            "rank": 10,
+            "drug_name": "1007",
+            "predicted_ic50": -4.0940953865735255
+          },
+          {
+            "rank": 11,
+            "drug_name": "1817",
+            "predicted_ic50": -4.04455097670592
+          },
+          {
+            "rank": 12,
+            "drug_name": "1080",
+            "predicted_ic50": -4.019541233420675
+          },
+          {
+            "rank": 13,
+            "drug_name": "1007",
+            "predicted_ic50": -3.9900065741829382
+          },
+          {
+            "rank": 14,
+            "drug_name": "1007",
+            "predicted_ic50": -3.9827329616567475
+          },
+          {
+            "rank": 15,
+            "drug_name": "1911",
+            "predicted_ic50": -3.9742371965366767
+          },
+          {
+            "rank": 16,
+            "drug_name": "1811",
+            "predicted_ic50": -3.9538883882956375
+          },
+          {
+            "rank": 17,
+            "drug_name": "1911",
+            "predicted_ic50": -3.9367079368650812
+          },
+          {
+            "rank": 18,
+            "drug_name": "1817",
+            "predicted_ic50": -3.934511886971449
+          },
+          {
+            "rank": 19,
+            "drug_name": "1911",
+            "predicted_ic50": -3.8938125541130377
+          },
+          {
+            "rank": 20,
+            "drug_name": "1819",
+            "predicted_ic50": -3.8588237845508377
+          },
+          {
+            "rank": 21,
+            "drug_name": "1911",
+            "predicted_ic50": -3.846482671470218
+          },
+          {
+            "rank": 22,
+            "drug_name": "1080",
+            "predicted_ic50": -3.8321534324672593
+          },
+          {
+            "rank": 23,
+            "drug_name": "1817",
+            "predicted_ic50": -3.8169959503022186
+          },
+          {
+            "rank": 24,
+            "drug_name": "1817",
+            "predicted_ic50": -3.816760075380658
+          },
+          {
+            "rank": 25,
+            "drug_name": "1911",
+            "predicted_ic50": -3.808633986970923
+          },
+          {
+            "rank": 26,
+            "drug_name": "1191",
+            "predicted_ic50": -3.7689221043038708
+          },
+          {
+            "rank": 27,
+            "drug_name": "1911",
+            "predicted_ic50": -3.7470987719363484
+          },
+          {
+            "rank": 28,
+            "drug_name": "1811",
+            "predicted_ic50": -3.7281941926628477
+          },
+          {
+            "rank": 29,
+            "drug_name": "1817",
+            "predicted_ic50": -3.7072590112307564
+          },
+          {
+            "rank": 30,
+            "drug_name": "1007",
+            "predicted_ic50": -3.696875902777397
+          },
+          {
+            "rank": 31,
+            "drug_name": "1817",
+            "predicted_ic50": -3.6911639763161297
+          },
+          {
+            "rank": 32,
+            "drug_name": "1819",
+            "predicted_ic50": -3.680339379017104
+          },
+          {
+            "rank": 33,
+            "drug_name": "1911",
+            "predicted_ic50": -3.67597810698289
+          },
+          {
+            "rank": 34,
+            "drug_name": "1817",
+            "predicted_ic50": -3.658979053146301
+          },
+          {
+            "rank": 35,
+            "drug_name": "1817",
+            "predicted_ic50": -3.6513744816934754
+          },
+          {
+            "rank": 36,
+            "drug_name": "1911",
+            "predicted_ic50": -3.6302107373629253
+          },
+          {
+            "rank": 37,
+            "drug_name": "1811",
+            "predicted_ic50": -3.5912763483660326
+          },
+          {
+            "rank": 38,
+            "drug_name": "1817",
+            "predicted_ic50": -3.580369565454691
+          },
+          {
+            "rank": 39,
+            "drug_name": "2048",
+            "predicted_ic50": -3.5683105297316677
+          },
+          {
+            "rank": 40,
+            "drug_name": "2048",
+            "predicted_ic50": -3.5481882272192493
+          },
+          {
+            "rank": 41,
+            "drug_name": "1191",
+            "predicted_ic50": -3.538616264626888
+          },
+          {
+            "rank": 42,
+            "drug_name": "1819",
+            "predicted_ic50": -3.537027604089219
+          },
+          {
+            "rank": 43,
+            "drug_name": "1817",
+            "predicted_ic50": -3.533709077553416
+          },
+          {
+            "rank": 44,
+            "drug_name": "1080",
+            "predicted_ic50": -3.5320734937884635
+          },
+          {
+            "rank": 45,
+            "drug_name": "1004",
+            "predicted_ic50": -3.5278384343989493
+          },
+          {
+            "rank": 46,
+            "drug_name": "1819",
+            "predicted_ic50": -3.526380733114241
+          },
+          {
+            "rank": 47,
+            "drug_name": "1811",
+            "predicted_ic50": -3.526251307124759
+          },
+          {
+            "rank": 48,
+            "drug_name": "1817",
+            "predicted_ic50": -3.502849960904224
+          },
+          {
+            "rank": 49,
+            "drug_name": "1811",
+            "predicted_ic50": -3.4969632218723814
+          },
+          {
+            "rank": 50,
+            "drug_name": "1817",
+            "predicted_ic50": -3.4878382411141224
+          }
+        ]
+      },
+      "equal": {
+        "weights": {
+          "CatBoost": 0.5,
+          "FlatMLP": 0.5
+        },
+        "oof_metrics": {
+          "spearman": 0.851834636677551,
+          "kendall_tau": 0.673845526671415,
+          "pearson": 0.8954102643559658,
+          "r2": 0.7960319469512873,
+          "rmse": 1.2236294300613273,
+          "mae": 0.9329079617799916,
+          "median_ae": 0.747476044492616,
+          "p95_error": 2.4423978773079544
+        },
+        "oof_ranking": {
+          "P@30": 0.3333333333333333,
+          "R@30": 0.3333333333333333,
+          "NDCG@30": 0.40174339539205584,
+          "EF@30": 56.577777777777776,
+          "MAP": 0.17588828354308228
+        },
+        "holdout_metrics": {
+          "spearman": 0.8590630364371618,
+          "kendall_tau": 0.6803399936522455,
+          "pearson": 0.8931059045549817,
+          "r2": 0.7926260815081468,
+          "rmse": 1.2254245192522584,
+          "mae": 0.9148455460260965,
+          "median_ae": 0.7021058631399537,
+          "p95_error": 2.4224058443594205
+        },
+        "holdout_ranking": {
+          "P@30": 0.43333333333333335,
+          "R@30": 0.43333333333333335,
+          "NDCG@30": 0.47565080261922726,
+          "EF@30": 18.40222222222222,
+          "MAP": 0.2870568320568321
+        },
+        "top30_drugs": [
+          {
+            "rank": 1,
+            "drug_name": "1819",
+            "predicted_ic50": -4.643138475187824
+          },
+          {
+            "rank": 2,
+            "drug_name": "1911",
+            "predicted_ic50": -4.589804155325759
+          },
+          {
+            "rank": 3,
+            "drug_name": "1911",
+            "predicted_ic50": -4.51469560817225
+          },
+          {
+            "rank": 4,
+            "drug_name": "1007",
+            "predicted_ic50": -4.20681883788285
+          },
+          {
+            "rank": 5,
+            "drug_name": "1819",
+            "predicted_ic50": -4.194581606372288
+          },
+          {
+            "rank": 6,
+            "drug_name": "1819",
+            "predicted_ic50": -4.162023792342203
+          },
+          {
+            "rank": 7,
+            "drug_name": "1911",
+            "predicted_ic50": -4.130612992420711
+          },
+          {
+            "rank": 8,
+            "drug_name": "1080",
+            "predicted_ic50": -4.100828399572702
+          },
+          {
+            "rank": 9,
+            "drug_name": "1819",
+            "predicted_ic50": -4.091132409302735
+          },
+          {
+            "rank": 10,
+            "drug_name": "1007",
+            "predicted_ic50": -4.088815481114409
+          },
+          {
+            "rank": 11,
+            "drug_name": "1817",
+            "predicted_ic50": -4.023060538787222
+          },
+          {
+            "rank": 12,
+            "drug_name": "1080",
+            "predicted_ic50": -4.01428201599794
+          },
+          {
+            "rank": 13,
+            "drug_name": "1007",
+            "predicted_ic50": -3.983590189026411
+          },
+          {
+            "rank": 14,
+            "drug_name": "1007",
+            "predicted_ic50": -3.977012297949779
+          },
+          {
+            "rank": 15,
+            "drug_name": "1911",
+            "predicted_ic50": -3.973828220866427
+          },
+          {
+            "rank": 16,
+            "drug_name": "1811",
+            "predicted_ic50": -3.9572632286845044
+          },
+          {
+            "rank": 17,
+            "drug_name": "1911",
+            "predicted_ic50": -3.935440983172692
+          },
+          {
+            "rank": 18,
+            "drug_name": "1817",
+            "predicted_ic50": -3.916280057251898
+          },
+          {
+            "rank": 19,
+            "drug_name": "1911",
+            "predicted_ic50": -3.885591182635626
+          },
+          {
+            "rank": 20,
+            "drug_name": "1819",
+            "predicted_ic50": -3.855965155718423
+          },
+          {
+            "rank": 21,
+            "drug_name": "1911",
+            "predicted_ic50": -3.8484650106089187
+          },
+          {
+            "rank": 22,
+            "drug_name": "1080",
+            "predicted_ic50": -3.8233868242735203
+          },
+          {
+            "rank": 23,
+            "drug_name": "1911",
+            "predicted_ic50": -3.8081290078704133
+          },
+          {
+            "rank": 24,
+            "drug_name": "1817",
+            "predicted_ic50": -3.7901993101095757
+          },
+          {
+            "rank": 25,
+            "drug_name": "1817",
+            "predicted_ic50": -3.787457816086575
+          },
+          {
+            "rank": 26,
+            "drug_name": "1911",
+            "predicted_ic50": -3.7424493384987207
+          },
+          {
+            "rank": 27,
+            "drug_name": "1811",
+            "predicted_ic50": -3.735504088179873
+          },
+          {
+            "rank": 28,
+            "drug_name": "1191",
+            "predicted_ic50": -3.7258267827101514
+          },
+          {
+            "rank": 29,
+            "drug_name": "1007",
+            "predicted_ic50": -3.6869238654873024
+          },
+          {
+            "rank": 30,
+            "drug_name": "1819",
+            "predicted_ic50": -3.6837702529004686
+          }
+        ],
+        "top50_drugs": [
+          {
+            "rank": 1,
+            "drug_name": "1819",
+            "predicted_ic50": -4.643138475187824
+          },
+          {
+            "rank": 2,
+            "drug_name": "1911",
+            "predicted_ic50": -4.589804155325759
+          },
+          {
+            "rank": 3,
+            "drug_name": "1911",
+            "predicted_ic50": -4.51469560817225
+          },
+          {
+            "rank": 4,
+            "drug_name": "1007",
+            "predicted_ic50": -4.20681883788285
+          },
+          {
+            "rank": 5,
+            "drug_name": "1819",
+            "predicted_ic50": -4.194581606372288
+          },
+          {
+            "rank": 6,
+            "drug_name": "1819",
+            "predicted_ic50": -4.162023792342203
+          },
+          {
+            "rank": 7,
+            "drug_name": "1911",
+            "predicted_ic50": -4.130612992420711
+          },
+          {
+            "rank": 8,
+            "drug_name": "1080",
+            "predicted_ic50": -4.100828399572702
+          },
+          {
+            "rank": 9,
+            "drug_name": "1819",
+            "predicted_ic50": -4.091132409302735
+          },
+          {
+            "rank": 10,
+            "drug_name": "1007",
+            "predicted_ic50": -4.088815481114409
+          },
+          {
+            "rank": 11,
+            "drug_name": "1817",
+            "predicted_ic50": -4.023060538787222
+          },
+          {
+            "rank": 12,
+            "drug_name": "1080",
+            "predicted_ic50": -4.01428201599794
+          },
+          {
+            "rank": 13,
+            "drug_name": "1007",
+            "predicted_ic50": -3.983590189026411
+          },
+          {
+            "rank": 14,
+            "drug_name": "1007",
+            "predicted_ic50": -3.977012297949779
+          },
+          {
+            "rank": 15,
+            "drug_name": "1911",
+            "predicted_ic50": -3.973828220866427
+          },
+          {
+            "rank": 16,
+            "drug_name": "1811",
+            "predicted_ic50": -3.9572632286845044
+          },
+          {
+            "rank": 17,
+            "drug_name": "1911",
+            "predicted_ic50": -3.935440983172692
+          },
+          {
+            "rank": 18,
+            "drug_name": "1817",
+            "predicted_ic50": -3.916280057251898
+          },
+          {
+            "rank": 19,
+            "drug_name": "1911",
+            "predicted_ic50": -3.885591182635626
+          },
+          {
+            "rank": 20,
+            "drug_name": "1819",
+            "predicted_ic50": -3.855965155718423
+          },
+          {
+            "rank": 21,
+            "drug_name": "1911",
+            "predicted_ic50": -3.8484650106089187
+          },
+          {
+            "rank": 22,
+            "drug_name": "1080",
+            "predicted_ic50": -3.8233868242735203
+          },
+          {
+            "rank": 23,
+            "drug_name": "1911",
+            "predicted_ic50": -3.8081290078704133
+          },
+          {
+            "rank": 24,
+            "drug_name": "1817",
+            "predicted_ic50": -3.7901993101095757
+          },
+          {
+            "rank": 25,
+            "drug_name": "1817",
+            "predicted_ic50": -3.787457816086575
+          },
+          {
+            "rank": 26,
+            "drug_name": "1911",
+            "predicted_ic50": -3.7424493384987207
+          },
+          {
+            "rank": 27,
+            "drug_name": "1811",
+            "predicted_ic50": -3.735504088179873
+          },
+          {
+            "rank": 28,
+            "drug_name": "1191",
+            "predicted_ic50": -3.7258267827101514
+          },
+          {
+            "rank": 29,
+            "drug_name": "1007",
+            "predicted_ic50": -3.6869238654873024
+          },
+          {
+            "rank": 30,
+            "drug_name": "1819",
+            "predicted_ic50": -3.6837702529004686
+          },
+          {
+            "rank": 31,
+            "drug_name": "1817",
+            "predicted_ic50": -3.682225585814133
+          },
+          {
+            "rank": 32,
+            "drug_name": "1911",
+            "predicted_ic50": -3.6755395077564965
+          },
+          {
+            "rank": 33,
+            "drug_name": "1817",
+            "predicted_ic50": -3.6665645590064297
+          },
+          {
+            "rank": 34,
+            "drug_name": "1817",
+            "predicted_ic50": -3.6275923217656825
+          },
+          {
+            "rank": 35,
+            "drug_name": "1817",
+            "predicted_ic50": -3.6267007372041635
+          },
+          {
+            "rank": 36,
+            "drug_name": "1911",
+            "predicted_ic50": -3.619918944843309
+          },
+          {
+            "rank": 37,
+            "drug_name": "1811",
+            "predicted_ic50": -3.592935203395231
+          },
+          {
+            "rank": 38,
+            "drug_name": "1817",
+            "predicted_ic50": -3.5591275830846274
+          },
+          {
+            "rank": 39,
+            "drug_name": "2048",
+            "predicted_ic50": -3.5581672035650413
+          },
+          {
+            "rank": 40,
+            "drug_name": "2048",
+            "predicted_ic50": -3.540200264260034
+          },
+          {
+            "rank": 41,
+            "drug_name": "1811",
+            "predicted_ic50": -3.5373421188032443
+          },
+          {
+            "rank": 42,
+            "drug_name": "1819",
+            "predicted_ic50": -3.535389247532209
+          },
+          {
+            "rank": 43,
+            "drug_name": "1819",
+            "predicted_ic50": -3.5305685136951497
+          },
+          {
+            "rank": 44,
+            "drug_name": "1080",
+            "predicted_ic50": -3.5224671212584777
+          },
+          {
+            "rank": 45,
+            "drug_name": "1004",
+            "predicted_ic50": -3.521417523937999
+          },
+          {
+            "rank": 46,
+            "drug_name": "1817",
+            "predicted_ic50": -3.510567261363575
+          },
+          {
+            "rank": 47,
+            "drug_name": "1811",
+            "predicted_ic50": -3.5036537147163886
+          },
+          {
+            "rank": 48,
+            "drug_name": "1191",
+            "predicted_ic50": -3.5020251241443585
+          },
+          {
+            "rank": 49,
+            "drug_name": "1817",
+            "predicted_ic50": -3.4848171034879654
+          },
+          {
+            "rank": 50,
+            "drug_name": "1911",
+            "predicted_ic50": -3.484602672992777
+          }
+        ]
+      }
+    },
+    "3. CatBoost+FlatMLP+CrossAttn": {
+      "weighted": {
+        "weights": {
+          "CatBoost": 0.34154510418710243,
+          "FlatMLP": 0.3278174463619541,
+          "CrossAttention": 0.33063744945094353
+        },
+        "oof_metrics": {
+          "spearman": 0.8498666491104887,
+          "kendall_tau": 0.6711474171379814,
+          "pearson": 0.8920557118162882,
+          "r2": 0.7879397721185474,
+          "rmse": 1.2476663165622526,
+          "mae": 0.9547356967354033,
+          "median_ae": 0.7644803023861582,
+          "p95_error": 2.498018420245735
+        },
+        "oof_ranking": {
+          "P@30": 0.26666666666666666,
+          "R@30": 0.26666666666666666,
+          "NDCG@30": 0.33535858810983493,
+          "EF@30": 45.26222222222222,
+          "MAP": 0.13342265222700003
+        },
+        "holdout_metrics": {
+          "spearman": 0.8574879779731083,
+          "kendall_tau": 0.6786135115752794,
+          "pearson": 0.8927522553588757,
+          "r2": 0.793904635997043,
+          "rmse": 1.2216410288542032,
+          "mae": 0.9065476823510743,
+          "median_ae": 0.727627602495213,
+          "p95_error": 2.4378905095478483
+        },
+        "holdout_ranking": {
+          "P@30": 0.5333333333333333,
+          "R@30": 0.5333333333333333,
+          "NDCG@30": 0.6047273126338669,
+          "EF@30": 22.648888888888887,
+          "MAP": 0.41004587827222566
+        },
+        "top30_drugs": [
+          {
+            "rank": 1,
+            "drug_name": "1819",
+            "predicted_ic50": -4.285875867893201
+          },
+          {
+            "rank": 2,
+            "drug_name": "1911",
+            "predicted_ic50": -4.2821277356435665
+          },
+          {
+            "rank": 3,
+            "drug_name": "1911",
+            "predicted_ic50": -4.243863075403493
+          },
+          {
+            "rank": 4,
+            "drug_name": "1819",
+            "predicted_ic50": -3.9623954923677758
+          },
+          {
+            "rank": 5,
+            "drug_name": "1819",
+            "predicted_ic50": -3.9065284260728896
+          },
+          {
+            "rank": 6,
+            "drug_name": "1811",
+            "predicted_ic50": -3.893380059860384
+          },
+          {
+            "rank": 7,
+            "drug_name": "1911",
+            "predicted_ic50": -3.881872746235854
+          },
+          {
+            "rank": 8,
+            "drug_name": "1911",
+            "predicted_ic50": -3.8336460448358443
+          },
+          {
+            "rank": 9,
+            "drug_name": "1007",
+            "predicted_ic50": -3.8325378338042304
+          },
+          {
+            "rank": 10,
+            "drug_name": "1007",
+            "predicted_ic50": -3.8323371086402798
+          },
+          {
+            "rank": 11,
+            "drug_name": "1819",
+            "predicted_ic50": -3.8211398149484834
+          },
+          {
+            "rank": 12,
+            "drug_name": "1911",
+            "predicted_ic50": -3.7755350574381823
+          },
+          {
+            "rank": 13,
+            "drug_name": "1817",
+            "predicted_ic50": -3.7393206817004514
+          },
+          {
+            "rank": 14,
+            "drug_name": "1007",
+            "predicted_ic50": -3.733640238280835
+          },
+          {
+            "rank": 15,
+            "drug_name": "1911",
+            "predicted_ic50": -3.7281965948601337
+          },
+          {
+            "rank": 16,
+            "drug_name": "1080",
+            "predicted_ic50": -3.720427955288895
+          },
+          {
+            "rank": 17,
+            "drug_name": "1911",
+            "predicted_ic50": -3.7048287762199648
+          },
+          {
+            "rank": 18,
+            "drug_name": "1911",
+            "predicted_ic50": -3.696136886384183
+          },
+          {
+            "rank": 19,
+            "drug_name": "1080",
+            "predicted_ic50": -3.6852087491647962
+          },
+          {
+            "rank": 20,
+            "drug_name": "1817",
+            "predicted_ic50": -3.6778344284557916
+          },
+          {
+            "rank": 21,
+            "drug_name": "1911",
+            "predicted_ic50": -3.668324122746327
+          },
+          {
+            "rank": 22,
+            "drug_name": "1817",
+            "predicted_ic50": -3.6556456717528643
+          },
+          {
+            "rank": 23,
+            "drug_name": "1007",
+            "predicted_ic50": -3.655620237873351
+          },
+          {
+            "rank": 24,
+            "drug_name": "1911",
+            "predicted_ic50": -3.646898188055081
+          },
+          {
+            "rank": 25,
+            "drug_name": "1191",
+            "predicted_ic50": -3.6455959528356807
+          },
+          {
+            "rank": 26,
+            "drug_name": "1191",
+            "predicted_ic50": -3.610910504314803
+          },
+          {
+            "rank": 27,
+            "drug_name": "1080",
+            "predicted_ic50": -3.5964114757699654
+          },
+          {
+            "rank": 28,
+            "drug_name": "1811",
+            "predicted_ic50": -3.5820698262180484
+          },
+          {
+            "rank": 29,
+            "drug_name": "1819",
+            "predicted_ic50": -3.5737080407875137
+          },
+          {
+            "rank": 30,
+            "drug_name": "1819",
+            "predicted_ic50": -3.572193872402213
+          }
+        ],
+        "top50_drugs": [
+          {
+            "rank": 1,
+            "drug_name": "1819",
+            "predicted_ic50": -4.285875867893201
+          },
+          {
+            "rank": 2,
+            "drug_name": "1911",
+            "predicted_ic50": -4.2821277356435665
+          },
+          {
+            "rank": 3,
+            "drug_name": "1911",
+            "predicted_ic50": -4.243863075403493
+          },
+          {
+            "rank": 4,
+            "drug_name": "1819",
+            "predicted_ic50": -3.9623954923677758
+          },
+          {
+            "rank": 5,
+            "drug_name": "1819",
+            "predicted_ic50": -3.9065284260728896
+          },
+          {
+            "rank": 6,
+            "drug_name": "1811",
+            "predicted_ic50": -3.893380059860384
+          },
+          {
+            "rank": 7,
+            "drug_name": "1911",
+            "predicted_ic50": -3.881872746235854
+          },
+          {
+            "rank": 8,
+            "drug_name": "1911",
+            "predicted_ic50": -3.8336460448358443
+          },
+          {
+            "rank": 9,
+            "drug_name": "1007",
+            "predicted_ic50": -3.8325378338042304
+          },
+          {
+            "rank": 10,
+            "drug_name": "1007",
+            "predicted_ic50": -3.8323371086402798
+          },
+          {
+            "rank": 11,
+            "drug_name": "1819",
+            "predicted_ic50": -3.8211398149484834
+          },
+          {
+            "rank": 12,
+            "drug_name": "1911",
+            "predicted_ic50": -3.7755350574381823
+          },
+          {
+            "rank": 13,
+            "drug_name": "1817",
+            "predicted_ic50": -3.7393206817004514
+          },
+          {
+            "rank": 14,
+            "drug_name": "1007",
+            "predicted_ic50": -3.733640238280835
+          },
+          {
+            "rank": 15,
+            "drug_name": "1911",
+            "predicted_ic50": -3.7281965948601337
+          },
+          {
+            "rank": 16,
+            "drug_name": "1080",
+            "predicted_ic50": -3.720427955288895
+          },
+          {
+            "rank": 17,
+            "drug_name": "1911",
+            "predicted_ic50": -3.7048287762199648
+          },
+          {
+            "rank": 18,
+            "drug_name": "1911",
+            "predicted_ic50": -3.696136886384183
+          },
+          {
+            "rank": 19,
+            "drug_name": "1080",
+            "predicted_ic50": -3.6852087491647962
+          },
+          {
+            "rank": 20,
+            "drug_name": "1817",
+            "predicted_ic50": -3.6778344284557916
+          },
+          {
+            "rank": 21,
+            "drug_name": "1911",
+            "predicted_ic50": -3.668324122746327
+          },
+          {
+            "rank": 22,
+            "drug_name": "1817",
+            "predicted_ic50": -3.6556456717528643
+          },
+          {
+            "rank": 23,
+            "drug_name": "1007",
+            "predicted_ic50": -3.655620237873351
+          },
+          {
+            "rank": 24,
+            "drug_name": "1911",
+            "predicted_ic50": -3.646898188055081
+          },
+          {
+            "rank": 25,
+            "drug_name": "1191",
+            "predicted_ic50": -3.6455959528356807
+          },
+          {
+            "rank": 26,
+            "drug_name": "1191",
+            "predicted_ic50": -3.610910504314803
+          },
+          {
+            "rank": 27,
+            "drug_name": "1080",
+            "predicted_ic50": -3.5964114757699654
+          },
+          {
+            "rank": 28,
+            "drug_name": "1811",
+            "predicted_ic50": -3.5820698262180484
+          },
+          {
+            "rank": 29,
+            "drug_name": "1819",
+            "predicted_ic50": -3.5737080407875137
+          },
+          {
+            "rank": 30,
+            "drug_name": "1819",
+            "predicted_ic50": -3.572193872402213
+          },
+          {
+            "rank": 31,
+            "drug_name": "1819",
+            "predicted_ic50": -3.546422042156716
+          },
+          {
+            "rank": 32,
+            "drug_name": "1911",
+            "predicted_ic50": -3.499147367999109
+          },
+          {
+            "rank": 33,
+            "drug_name": "1811",
+            "predicted_ic50": -3.4967641888256473
+          },
+          {
+            "rank": 34,
+            "drug_name": "1817",
+            "predicted_ic50": -3.49383143086919
+          },
+          {
+            "rank": 35,
+            "drug_name": "1811",
+            "predicted_ic50": -3.482215864174818
+          },
+          {
+            "rank": 36,
+            "drug_name": "1811",
+            "predicted_ic50": -3.4790073126647068
+          },
+          {
+            "rank": 37,
+            "drug_name": "1191",
+            "predicted_ic50": -3.475570110300979
+          },
+          {
+            "rank": 38,
+            "drug_name": "1941",
+            "predicted_ic50": -3.4631923389728456
+          },
+          {
+            "rank": 39,
+            "drug_name": "1819",
+            "predicted_ic50": -3.459623883388744
+          },
+          {
+            "rank": 40,
+            "drug_name": "1007",
+            "predicted_ic50": -3.4581356494251034
+          },
+          {
+            "rank": 41,
+            "drug_name": "1817",
+            "predicted_ic50": -3.4526556815895724
+          },
+          {
+            "rank": 42,
+            "drug_name": "1911",
+            "predicted_ic50": -3.4393115653177873
+          },
+          {
+            "rank": 43,
+            "drug_name": "1819",
+            "predicted_ic50": -3.4362772580362364
+          },
+          {
+            "rank": 44,
+            "drug_name": "1911",
+            "predicted_ic50": -3.430681402460939
+          },
+          {
+            "rank": 45,
+            "drug_name": "1911",
+            "predicted_ic50": -3.4301721553652817
+          },
+          {
+            "rank": 46,
+            "drug_name": "1007",
+            "predicted_ic50": -3.4214778971159587
+          },
+          {
+            "rank": 47,
+            "drug_name": "1911",
+            "predicted_ic50": -3.4210110165487486
+          },
+          {
+            "rank": 48,
+            "drug_name": "1817",
+            "predicted_ic50": -3.386912419737932
+          },
+          {
+            "rank": 49,
+            "drug_name": "1817",
+            "predicted_ic50": -3.3801131219964002
+          },
+          {
+            "rank": 50,
+            "drug_name": "2048",
+            "predicted_ic50": -3.3788343862544767
+          }
+        ]
+      },
+      "equal": {
+        "weights": {
+          "CatBoost": 0.3333333333333333,
+          "FlatMLP": 0.3333333333333333,
+          "CrossAttention": 0.3333333333333333
+        },
+        "oof_metrics": {
+          "spearman": 0.8495715172092407,
+          "kendall_tau": 0.6707772487306438,
+          "pearson": 0.8916878722562773,
+          "r2": 0.787232511141418,
+          "rmse": 1.2497451862476163,
+          "mae": 0.956322057751954,
+          "median_ae": 0.7665623098981165,
+          "p95_error": 2.504262776995019
+        },
+        "oof_ranking": {
+          "P@30": 0.26666666666666666,
+          "R@30": 0.26666666666666666,
+          "NDCG@30": 0.33378299967637315,
+          "EF@30": 45.26222222222222,
+          "MAP": 0.13203376333811115
+        },
+        "holdout_metrics": {
+          "spearman": 0.8571864571562702,
+          "kendall_tau": 0.6782386183242811,
+          "pearson": 0.8924243333427242,
+          "r2": 0.793331844900685,
+          "rmse": 1.2233374755210005,
+          "mae": 0.9078329491752076,
+          "median_ae": 0.7260237039118282,
+          "p95_error": 2.4426638489915864
+        },
+        "holdout_ranking": {
+          "P@30": 0.5,
+          "R@30": 0.5,
+          "NDCG@30": 0.5818692220904392,
+          "EF@30": 21.23333333333333,
+          "MAP": 0.39005628031102524
+        },
+        "top30_drugs": [
+          {
+            "rank": 1,
+            "drug_name": "1819",
+            "predicted_ic50": -4.28031067514963
+          },
+          {
+            "rank": 2,
+            "drug_name": "1911",
+            "predicted_ic50": -4.275743698778042
+          },
+          {
+            "rank": 3,
+            "drug_name": "1911",
+            "predicted_ic50": -4.236341226561777
+          },
+          {
+            "rank": 4,
+            "drug_name": "1819",
+            "predicted_ic50": -3.960615879744859
+          },
+          {
+            "rank": 5,
+            "drug_name": "1819",
+            "predicted_ic50": -3.9011716093807376
+          },
+          {
+            "rank": 6,
+            "drug_name": "1811",
+            "predicted_ic50": -3.8951365930436976
+          },
+          {
+            "rank": 7,
+            "drug_name": "1911",
+            "predicted_ic50": -3.8808469934611223
+          },
+          {
+            "rank": 8,
+            "drug_name": "1007",
+            "predicted_ic50": -3.831682326665597
+          },
+          {
+            "rank": 9,
+            "drug_name": "1911",
+            "predicted_ic50": -3.8224411958952196
+          },
+          {
+            "rank": 10,
+            "drug_name": "1007",
+            "predicted_ic50": -3.820395084859115
+          },
+          {
+            "rank": 11,
+            "drug_name": "1819",
+            "predicted_ic50": -3.8157224511994854
+          },
+          {
+            "rank": 12,
+            "drug_name": "1911",
+            "predicted_ic50": -3.7733762832459057
+          },
+          {
+            "rank": 13,
+            "drug_name": "1007",
+            "predicted_ic50": -3.7271812959830104
+          },
+          {
+            "rank": 14,
+            "drug_name": "1817",
+            "predicted_ic50": -3.7225049988551775
+          },
+          {
+            "rank": 15,
+            "drug_name": "1911",
+            "predicted_ic50": -3.7213653150706825
+          },
+          {
+            "rank": 16,
+            "drug_name": "1080",
+            "predicted_ic50": -3.7144829617863055
+          },
+          {
+            "rank": 17,
+            "drug_name": "1911",
+            "predicted_ic50": -3.7013845014989437
+          },
+          {
+            "rank": 18,
+            "drug_name": "1911",
+            "predicted_ic50": -3.6962325871558237
+          },
+          {
+            "rank": 19,
+            "drug_name": "1080",
+            "predicted_ic50": -3.6757442092325494
+          },
+          {
+            "rank": 20,
+            "drug_name": "1911",
+            "predicted_ic50": -3.6679693157738216
+          },
+          {
+            "rank": 21,
+            "drug_name": "1817",
+            "predicted_ic50": -3.6635870312455276
+          },
+          {
+            "rank": 22,
+            "drug_name": "1911",
+            "predicted_ic50": -3.64524280710648
+          },
+          {
+            "rank": 23,
+            "drug_name": "1007",
+            "predicted_ic50": -3.6442309362633942
+          },
+          {
+            "rank": 24,
+            "drug_name": "1817",
+            "predicted_ic50": -3.634797170614113
+          },
+          {
+            "rank": 25,
+            "drug_name": "1191",
+            "predicted_ic50": -3.627134603714433
+          },
+          {
+            "rank": 26,
+            "drug_name": "1080",
+            "predicted_ic50": -3.588644925848281
+          },
+          {
+            "rank": 27,
+            "drug_name": "1191",
+            "predicted_ic50": -3.5880787744809073
+          },
+          {
+            "rank": 28,
+            "drug_name": "1811",
+            "predicted_ic50": -3.5857516509801854
+          },
+          {
+            "rank": 29,
+            "drug_name": "1819",
+            "predicted_ic50": -3.5729148805111777
+          },
+          {
+            "rank": 30,
+            "drug_name": "1819",
+            "predicted_ic50": -3.5679510556046807
+          }
+        ],
+        "top50_drugs": [
+          {
+            "rank": 1,
+            "drug_name": "1819",
+            "predicted_ic50": -4.28031067514963
+          },
+          {
+            "rank": 2,
+            "drug_name": "1911",
+            "predicted_ic50": -4.275743698778042
+          },
+          {
+            "rank": 3,
+            "drug_name": "1911",
+            "predicted_ic50": -4.236341226561777
+          },
+          {
+            "rank": 4,
+            "drug_name": "1819",
+            "predicted_ic50": -3.960615879744859
+          },
+          {
+            "rank": 5,
+            "drug_name": "1819",
+            "predicted_ic50": -3.9011716093807376
+          },
+          {
+            "rank": 6,
+            "drug_name": "1811",
+            "predicted_ic50": -3.8951365930436976
+          },
+          {
+            "rank": 7,
+            "drug_name": "1911",
+            "predicted_ic50": -3.8808469934611223
+          },
+          {
+            "rank": 8,
+            "drug_name": "1007",
+            "predicted_ic50": -3.831682326665597
+          },
+          {
+            "rank": 9,
+            "drug_name": "1911",
+            "predicted_ic50": -3.8224411958952196
+          },
+          {
+            "rank": 10,
+            "drug_name": "1007",
+            "predicted_ic50": -3.820395084859115
+          },
+          {
+            "rank": 11,
+            "drug_name": "1819",
+            "predicted_ic50": -3.8157224511994854
+          },
+          {
+            "rank": 12,
+            "drug_name": "1911",
+            "predicted_ic50": -3.7733762832459057
+          },
+          {
+            "rank": 13,
+            "drug_name": "1007",
+            "predicted_ic50": -3.7271812959830104
+          },
+          {
+            "rank": 14,
+            "drug_name": "1817",
+            "predicted_ic50": -3.7225049988551775
+          },
+          {
+            "rank": 15,
+            "drug_name": "1911",
+            "predicted_ic50": -3.7213653150706825
+          },
+          {
+            "rank": 16,
+            "drug_name": "1080",
+            "predicted_ic50": -3.7144829617863055
+          },
+          {
+            "rank": 17,
+            "drug_name": "1911",
+            "predicted_ic50": -3.7013845014989437
+          },
+          {
+            "rank": 18,
+            "drug_name": "1911",
+            "predicted_ic50": -3.6962325871558237
+          },
+          {
+            "rank": 19,
+            "drug_name": "1080",
+            "predicted_ic50": -3.6757442092325494
+          },
+          {
+            "rank": 20,
+            "drug_name": "1911",
+            "predicted_ic50": -3.6679693157738216
+          },
+          {
+            "rank": 21,
+            "drug_name": "1817",
+            "predicted_ic50": -3.6635870312455276
+          },
+          {
+            "rank": 22,
+            "drug_name": "1911",
+            "predicted_ic50": -3.64524280710648
+          },
+          {
+            "rank": 23,
+            "drug_name": "1007",
+            "predicted_ic50": -3.6442309362633942
+          },
+          {
+            "rank": 24,
+            "drug_name": "1817",
+            "predicted_ic50": -3.634797170614113
+          },
+          {
+            "rank": 25,
+            "drug_name": "1191",
+            "predicted_ic50": -3.627134603714433
+          },
+          {
+            "rank": 26,
+            "drug_name": "1080",
+            "predicted_ic50": -3.588644925848281
+          },
+          {
+            "rank": 27,
+            "drug_name": "1191",
+            "predicted_ic50": -3.5880787744809073
+          },
+          {
+            "rank": 28,
+            "drug_name": "1811",
+            "predicted_ic50": -3.5857516509801854
+          },
+          {
+            "rank": 29,
+            "drug_name": "1819",
+            "predicted_ic50": -3.5729148805111777
+          },
+          {
+            "rank": 30,
+            "drug_name": "1819",
+            "predicted_ic50": -3.5679510556046807
+          },
+          {
+            "rank": 31,
+            "drug_name": "1819",
+            "predicted_ic50": -3.549377304596205
+          },
+          {
+            "rank": 32,
+            "drug_name": "1811",
+            "predicted_ic50": -3.4970994782990505
+          },
+          {
+            "rank": 33,
+            "drug_name": "1911",
+            "predicted_ic50": -3.4912175353419097
+          },
+          {
+            "rank": 34,
+            "drug_name": "1811",
+            "predicted_ic50": -3.4892506914559873
+          },
+          {
+            "rank": 35,
+            "drug_name": "1811",
+            "predicted_ic50": -3.4833212360143353
+          },
+          {
+            "rank": 36,
+            "drug_name": "1817",
+            "predicted_ic50": -3.4715603964409967
+          },
+          {
+            "rank": 37,
+            "drug_name": "1819",
+            "predicted_ic50": -3.4601115078642284
+          },
+          {
+            "rank": 38,
+            "drug_name": "1007",
+            "predicted_ic50": -3.4495543665423156
+          },
+          {
+            "rank": 39,
+            "drug_name": "1941",
+            "predicted_ic50": -3.4459281510301345
+          },
+          {
+            "rank": 40,
+            "drug_name": "1191",
+            "predicted_ic50": -3.4444480225290164
+          },
+          {
+            "rank": 41,
+            "drug_name": "1911",
+            "predicted_ic50": -3.4379229433924823
+          },
+          {
+            "rank": 42,
+            "drug_name": "1819",
+            "predicted_ic50": -3.4368881008329084
+          },
+          {
+            "rank": 43,
+            "drug_name": "1911",
+            "predicted_ic50": -3.436827440712455
+          },
+          {
+            "rank": 44,
+            "drug_name": "1817",
+            "predicted_ic50": -3.4318205717706416
+          },
+          {
+            "rank": 45,
+            "drug_name": "1911",
+            "predicted_ic50": -3.4286629899823486
+          },
+          {
+            "rank": 46,
+            "drug_name": "1007",
+            "predicted_ic50": -3.424616527480641
+          },
+          {
+            "rank": 47,
+            "drug_name": "1911",
+            "predicted_ic50": -3.41905833518434
+          },
+          {
+            "rank": 48,
+            "drug_name": "1817",
+            "predicted_ic50": -3.375909850540813
+          },
+          {
+            "rank": 49,
+            "drug_name": "1817",
+            "predicted_ic50": -3.373945207028069
+          },
+          {
+            "rank": 50,
+            "drug_name": "2048",
+            "predicted_ic50": -3.3705272570580904
+          }
+        ]
+      }
+    }
+  },
+  "comparison": {
+    "holdout_spearman": {
+      "1. CatBoost": 0.8708910968042847,
+      "2. CatBoost+FlatMLP": 0.8594124255769917,
+      "3. CatBoost+FlatMLP+CrossAttn": 0.8574879779731083
+    },
+    "improvement_2_vs_1": -0.011478671227292958,
+    "improvement_3_vs_2": -0.001924447603883439,
+    "improvement_3_vs_1": -0.013403118831176397
+  },
+  "final_selection": {
+    "best_combination": "1. CatBoost",
+    "holdout_spearman": 0.8708910968042847,
+    "holdout_rmse": 1.1388341776110202,
+    "p@30": 0.6333333333333333,
+    "ndcg@30": 0.6718039741553655,
+    "verdict_3vs2": "\u274c 2-model\uc774 \uc6b0\uc218 (-0.0019)"
+  }
+}

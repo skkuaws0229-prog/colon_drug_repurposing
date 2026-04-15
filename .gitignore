@@ -3,6 +3,9 @@
 */.env
 **/.env
 
+# Claude Code
+.claude/
+
 # Python
 __pycache__/
 *.pyc
@@ -17,6 +20,18 @@ __pycache__/
 *.csv
 tmp/
 
-# 모델 바이너리
-results/*.pt
-results/*.pkl
+# 모델 바이너리 및 학습 결과
+*.npy
+*.pt
+*.pkl
+catboost_info/
+*.log
+.nextflow/
+.nextflow.log*
+
+# 임시 캐시
+*_cache.npy
+*.pyc.*.npy
+
+# Streamlit
+.streamlit/

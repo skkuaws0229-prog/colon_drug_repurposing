@@ -1,0 +1,69 @@
+{
+  "verification": {
+    "group_basis": "canonical_drug_id",
+    "cv_samples": 5092,
+    "unique_drugs_cv": 242,
+    "unique_drugs_full": 243,
+    "fold_overlap_check": [
+      {
+        "fold": 1,
+        "train_samples": 4075,
+        "val_samples": 1017,
+        "train_drugs": 191,
+        "val_drugs": 51,
+        "overlap_drugs": 0,
+        "val_spearman": 0.8647330725106379
+      },
+      {
+        "fold": 2,
+        "train_samples": 4076,
+        "val_samples": 1016,
+        "train_drugs": 192,
+        "val_drugs": 50,
+        "overlap_drugs": 0,
+        "val_spearman": 0.8549577740072694
+      },
+      {
+        "fold": 3,
+        "train_samples": 4073,
+        "val_samples": 1019,
+        "train_drugs": 195,
+        "val_drugs": 47,
+        "overlap_drugs": 0,
+        "val_spearman": 0.8686551233428529
+      },
+      {
+        "fold": 4,
+        "train_samples": 4072,
+        "val_samples": 1020,
+        "train_drugs": 195,
+        "val_drugs": 47,
+        "overlap_drugs": 0,
+        "val_spearman": 0.8514213014316963
+      },
+      {
+        "fold": 5,
+        "train_samples": 4072,
+        "val_samples": 1020,
+        "train_drugs": 195,
+        "val_drugs": 47,
+        "overlap_drugs": 0,
+        "val_spearman": 0.8517130220911289
+      }
+    ]
+  },
+  "v4_method": {
+    "description": "CV 5092 \uc0d8\ud50c\ub9cc \uc0ac\uc6a9 (shuffled 80/20 split)",
+    "mean_spearman": 0.858296058676717,
+    "std_spearman": 0.007077968214886253
+  },
+  "v3_method": {
+    "description": "\uc804\uccb4 6366 \uc0d8\ud50c \uc0ac\uc6a9",
+    "mean_spearman": 0.8597225101904232,
+    "std_spearman": 0.03191592493236788
+  },
+  "comparison": {
+    "v4_vs_v3_diff": -0.0014264515137062395,
+    "overlap_found": false
+  }
+}

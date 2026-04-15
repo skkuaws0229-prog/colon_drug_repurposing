@@ -1,0 +1,30 @@
+{
+  "timestamp": "2026-04-15T00:43:15.424340",
+  "files": {
+    "drug_features_catalog": "/Users/skku_aws2_14/20260408_pre_project_biso_myprotocol/20260408_pre_project_biso_myprotocol/20260414_re_pre_project_v3/step4_results/20260414_re_pre_project_v3/20260414_re_pre_project_v3/data/drug_info/drug_features_catalog.parquet",
+    "features_slim": "/Users/skku_aws2_14/20260408_pre_project_biso_myprotocol/20260408_pre_project_biso_myprotocol/20260414_re_pre_project_v3/features_slim.parquet",
+    "y_train": "/Users/skku_aws2_14/20260408_pre_project_biso_myprotocol/20260408_pre_project_biso_myprotocol/20260414_re_pre_project_v3/step4_results/y_train.npy"
+  },
+  "counts": {
+    "total_drugs_in_catalog": 295,
+    "has_smiles": 243,
+    "rdkit_valid": 243,
+    "rdkit_invalid": null,
+    "has_ic50_data": 243,
+    "trainable_for_chemprop": 243
+  },
+  "percentages": {
+    "smiles_coverage": 82.37288135593221,
+    "rdkit_success_rate": 100.0,
+    "ic50_coverage": 82.37288135593221,
+    "trainable_coverage": 82.37288135593221
+  },
+  "flow": {
+    "1_catalog_total": 295,
+    "2_has_smiles": 243,
+    "3_rdkit_valid": 243,
+    "4_has_ic50": 243,
+    "5_trainable": 243
+  },
+  "rdkit_installed": true
+}
