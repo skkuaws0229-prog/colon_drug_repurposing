@@ -1,0 +1,251 @@
+﻿<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CRC Split 결과 정리보드</title>
+  <style>
+    :root {
+      --ink: #102232;
+      --muted: #567086;
+      --paper: #f4efe5;
+      --panel: #ffffff;
+      --line: #d7cdb8;
+      --blue: #1f78ff;
+      --teal: #11907d;
+      --good: #2f9d4c;
+      --warn: #c57d14;
+      --bad: #cf3e3e;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(1200px 600px at -5% -5%, rgba(31, 120, 255, 0.16), transparent 62%),
+        radial-gradient(1000px 600px at 110% 0%, rgba(17, 144, 125, 0.16), transparent 58%),
+        var(--paper);
+    }
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 20px 16px 28px; }
+    .hero {
+      background: linear-gradient(130deg, #ffffff, #f6fbff);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 8px 26px rgba(15, 39, 60, 0.08);
+      margin-bottom: 12px;
+    }
+    .title { margin: 0; font-size: 1.6rem; }
+    .desc { margin: 8px 0 0; color: var(--muted); font-size: 0.9rem; }
+    .chips { margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; }
+    .chip {
+      font-size: 0.72rem;
+      border: 1px solid #c8d8e9;
+      background: #eaf4ff;
+      color: #1e3d57;
+      border-radius: 8px;
+      padding: 4px 8px;
+      font-weight: 700;
+    }
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .kpi {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px;
+      min-height: 78px;
+    }
+    .kpi .label { color: var(--muted); font-size: 0.68rem; }
+    .kpi .value { margin-top: 4px; font-size: 1.15rem; font-weight: 700; line-height: 1.1; }
+    .good { color: var(--good); }
+    .warn { color: var(--warn); }
+    .bad { color: var(--bad); }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+    .h2 { margin: 0; font-size: 1.02rem; font-weight: 700; }
+    .sub { margin: 6px 0 10px; font-size: 0.74rem; color: var(--muted); }
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.76rem; }
+    th, td {
+      padding: 7px 6px;
+      border-bottom: 1px solid #ece2cf;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      color: #647d91;
+      background: #faf5ec;
+      font-size: 0.67rem;
+      font-weight: 700;
+    }
+    .status {
+      display: inline-block;
+      font-size: 0.64rem;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 2px 8px;
+    }
+    .s-pass { color: #0a6736; background: #d8f5e4; border: 1px solid #b8e9cc; }
+    .s-fail { color: #8a2222; background: #ffe2e2; border: 1px solid #ffc4c4; }
+    .mono { font-family: ui-monospace, "Consolas", monospace; font-size: 0.72rem; }
+    .box {
+      background: #fff7f7;
+      border: 1px solid #f0c9c9;
+      color: #6b1f1f;
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 0.75rem;
+      line-height: 1.5;
+    }
+    .okbox {
+      background: #f3fbff;
+      border: 1px solid #cde3ef;
+      color: #18415d;
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 0.75rem;
+      line-height: 1.5;
+    }
+    @media (max-width: 980px) {
+      .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .split { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1 class="title">CRC Split 결과 정리보드</h1>
+      <p class="desc">run_id: <span class="mono">20260420_crc_split_v2</span> 기준으로 colon/rectal 코호트 상태를 한 번에 보여줍니다.</p>
+      <div class="chips">
+        <span class="chip">코호트 2개 분리 실행</span>
+        <span class="chip">Rectal: Step7까지 완료</span>
+        <span class="chip">Colon: Ensemble 메모리 오류로 중단</span>
+      </div>
+    </section>
+
+    <section class="kpis">
+      <div class="kpi"><div class="label">전체 Cell Line</div><div class="value">46</div></div>
+      <div class="kpi"><div class="label">Colon Cell Line</div><div class="value">39</div></div>
+      <div class="kpi"><div class="label">Rectal Cell Line</div><div class="value">5</div></div>
+      <div class="kpi"><div class="label">Rectal Ensemble Spearman</div><div class="value warn">0.461</div></div>
+      <div class="kpi"><div class="label">Rectal Ensemble RMSE</div><div class="value warn">2.095</div></div>
+      <div class="kpi"><div class="label">Rectal 최종 후보</div><div class="value good">15</div></div>
+    </section>
+
+    <section class="panel">
+      <h2 class="h2">코호트별 FE/QC 요약</h2>
+      <p class="sub">join_qc_report + run_summary 기준</p>
+      <table>
+        <thead>
+          <tr>
+            <th>코호트</th><th>라벨 Pair</th><th>Join Rate(샘플)</th><th>Feature Rows x Cols</th><th>Unique Drug</th><th>SMILES 누락</th><th>상태</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>colon</td><td>10,598</td><td>52.61%</td><td>5,576 x 17,920</td><td>295</td><td>52 (17.63%)</td><td><span class="status s-fail">모델 단계 중단</span></td>
+          </tr>
+          <tr>
+            <td>rectal</td><td>1,380</td><td>79.64%</td><td>1,099 x 17,877</td><td>281</td><td>52 (18.51%)</td><td><span class="status s-pass">Step7 완료</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="split">
+      <div class="panel">
+        <h2 class="h2">Colon 중단 원인</h2>
+        <p class="sub">pipeline_status.json 기준</p>
+        <div class="box">
+          <b>Ensemble 단계 실패</b><br>
+          <span class="mono">CatBoostError: bad allocation</span><br><br>
+          이 영향으로 <span class="mono">top30_drugs.csv</span>가 생성되지 않아 Step6/Step7도 연쇄 실패했습니다.
+        </div>
+      </div>
+      <div class="panel">
+        <h2 class="h2">Rectal 파이프라인 상태</h2>
+        <p class="sub">ML/DL/Graph/Ensemble/Step6/Step7</p>
+        <div class="okbox">
+          <b>전 단계 정상 완료</b><br>
+          ML 8개, DL 5개, Graph 2개 모델 완료 후 Ensemble/Step6/Step7까지 성공했습니다.
+        </div>
+      </div>
+    </section>
+
+    <section class="split">
+      <div class="panel">
+        <h2 class="h2">Rectal Step6 요약</h2>
+        <p class="sub">METABRIC external validation</p>
+        <table>
+          <thead><tr><th>지표</th><th>값</th></tr></thead>
+          <tbody>
+            <tr><td>Target Expressed</td><td>29 / 30</td></tr>
+            <tr><td>Precision@15</td><td>0.60</td></tr>
+            <tr><td>Precision@20</td><td>0.55</td></tr>
+            <tr><td>Top15 후보 수</td><td>15</td></tr>
+          </tbody>
+        </table>
+        <p class="sub" style="margin-top:10px">Top 5 (Step6)</p>
+        <table>
+          <thead><tr><th>#</th><th>약물</th><th>검증점수</th><th>Pathway</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Epirubicin</td><td>9.45</td><td>DNA replication</td></tr>
+            <tr><td>2</td><td>Dactinomycin</td><td>7.90</td><td>Other</td></tr>
+            <tr><td>3</td><td>Topotecan</td><td>9.30</td><td>DNA replication</td></tr>
+            <tr><td>4</td><td>Vinblastine</td><td>9.25</td><td>Mitosis</td></tr>
+            <tr><td>5</td><td>Dinaciclib</td><td>9.20</td><td>Cell cycle</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="panel">
+        <h2 class="h2">Rectal Step7 요약</h2>
+        <p class="sub">ADMET gate</p>
+        <table>
+          <thead><tr><th>지표</th><th>값</th></tr></thead>
+          <tbody>
+            <tr><td>Assay 수</td><td>22</td></tr>
+            <tr><td>입력 약물</td><td>15</td></tr>
+            <tr><td>출력 약물</td><td>15</td></tr>
+            <tr><td>카테고리</td><td>Approved 4 / Candidate 11</td></tr>
+          </tbody>
+        </table>
+        <p class="sub" style="margin-top:10px">Top 5 (Step7)</p>
+        <table>
+          <thead><tr><th>#</th><th>약물</th><th>Combined</th><th>Category</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Dactinomycin</td><td>14.0</td><td>Approved</td></tr>
+            <tr><td>2</td><td>Vinblastine</td><td>13.0</td><td>Approved</td></tr>
+            <tr><td>3</td><td>Epirubicin</td><td>12.5</td><td>Candidate</td></tr>
+            <tr><td>4</td><td>Topotecan</td><td>11.5</td><td>Candidate</td></tr>
+            <tr><td>5</td><td>Paclitaxel</td><td>11.0</td><td>Approved</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2 class="h2">파일 경로</h2>
+      <p class="sub mono">
+        runs/20260420_crc_split_v2/run_summary.json<br>
+        runs/20260420_crc_split_v2/colon/model_results/pipeline_status.json<br>
+        runs/20260420_crc_split_v2/rectal/model_results/pipeline_status.json<br>
+        runs/20260420_crc_split_v2/rectal/model_results/metabric_results/step6_metabric_results.json<br>
+        runs/20260420_crc_split_v2/rectal/model_results/admet_results/step7_admet_results.json
+      </p>
+    </section>
+  </div>
+</body>
+</html>

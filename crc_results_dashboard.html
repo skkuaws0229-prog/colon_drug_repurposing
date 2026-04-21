@@ -1,0 +1,391 @@
+﻿<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CRC Integrated Run Report | 20260418_crc_v1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #eef3f8;
+      --ink: #0f2030;
+      --ink-soft: #41586e;
+      --panel: #ffffff;
+      --line: #d7e1ea;
+      --brand: #0f5e9c;
+      --brand-soft: #e9f3fb;
+      --ok: #1f8f57;
+      --warn: #a06a1e;
+      --bad: #b73c3c;
+      --shadow: 0 12px 30px rgba(23, 44, 66, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "IBM Plex Sans KR", "Malgun Gothic", sans-serif;
+      background:
+        radial-gradient(1100px 500px at -5% -10%, rgba(15, 94, 156, 0.14), transparent 62%),
+        radial-gradient(900px 500px at 110% -5%, rgba(21, 130, 108, 0.12), transparent 58%),
+        var(--bg);
+    }
+
+    .wrap {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 24px 16px 36px;
+    }
+
+    .hero {
+      background: linear-gradient(145deg, #ffffff, #f4f9fe);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .kicker {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--brand);
+      background: var(--brand-soft);
+      border: 1px solid #bdd7ee;
+      border-radius: 999px;
+      padding: 4px 10px;
+      margin-bottom: 8px;
+      letter-spacing: 0.2px;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: "Source Serif 4", serif;
+      font-size: 1.72rem;
+      line-height: 1.2;
+      letter-spacing: 0.15px;
+    }
+
+    .subtitle {
+      margin: 8px 0 0;
+      color: var(--ink-soft);
+      font-size: 0.9rem;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    .btn {
+      text-decoration: none;
+      font-size: 0.75rem;
+      font-weight: 700;
+      border-radius: 10px;
+      padding: 8px 11px;
+      border: 1px solid #c8d9e7;
+      color: #1e3c57;
+      background: #f5f9fd;
+    }
+
+    .btn.primary {
+      border-color: #3177ad;
+      color: #fff;
+      background: linear-gradient(135deg, #0f5e9c, #0c7a87);
+    }
+
+    .tags {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      font-size: 0.7rem;
+      color: #2e4b63;
+      background: #edf3f9;
+      border: 1px solid #d2dce7;
+      border-radius: 8px;
+      padding: 4px 8px;
+      font-weight: 600;
+    }
+
+    .kpi-grid {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .kpi {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 11px;
+      min-height: 84px;
+    }
+
+    .kpi .label {
+      color: var(--ink-soft);
+      font-size: 0.68rem;
+    }
+
+    .kpi .value {
+      margin-top: 5px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    .ok { color: var(--ok); }
+    .warn { color: var(--warn); }
+
+    .panel {
+      margin-top: 12px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: 0 5px 14px rgba(17, 41, 64, 0.05);
+      padding: 14px;
+    }
+
+    .h2 {
+      margin: 0;
+      font-size: 1.02rem;
+      font-weight: 700;
+    }
+
+    .sub {
+      margin: 6px 0 10px;
+      color: var(--ink-soft);
+      font-size: 0.74rem;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.76rem;
+    }
+
+    th, td {
+      padding: 8px 7px;
+      border-bottom: 1px solid #e8edf3;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f4f8fc;
+      color: #5a738a;
+      font-size: 0.66rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 700;
+    }
+
+    .status {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 0.64rem;
+      font-weight: 700;
+      border: 1px solid transparent;
+    }
+
+    .pass { color: #116239; background: #dff4e8; border-color: #bde7cd; }
+
+    .layout-3 {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      gap: 12px;
+    }
+
+    .weight-row {
+      display: grid;
+      grid-template-columns: 128px 1fr 50px;
+      gap: 8px;
+      align-items: center;
+      font-size: 0.73rem;
+      margin: 7px 0;
+    }
+
+    .bar-bg {
+      height: 9px;
+      border-radius: 999px;
+      background: #dce7f2;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #1f78ff, #14a381);
+    }
+
+    .mono {
+      font-family: ui-monospace, "Consolas", monospace;
+      font-size: 0.72rem;
+    }
+
+    .note {
+      background: #f8fbfd;
+      border: 1px solid #d9e6f0;
+      border-left: 3px solid #2e78b0;
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 0.75rem;
+      line-height: 1.6;
+      color: #365068;
+    }
+
+    @media (max-width: 1080px) {
+      .kpi-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .layout-3 { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 760px) {
+      .hero-top { flex-direction: column; }
+      .actions { justify-content: flex-start; }
+      .kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .split { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="hero-top">
+        <div>
+          <span class="kicker">Executive Report</span>
+          <h1>CRC 통합 실행 결과 보드</h1>
+          <p class="subtitle">run_id <span class="mono">20260418_crc_v1</span> | 분리 전 단일 통합 실행 기준</p>
+        </div>
+        <div class="actions">
+          <a class="btn primary" href="colon_pipeline_dashboard.html">통합 상세 대시보드</a>
+          <a class="btn" href="crc_results_dashboard_split.html">분할 결과 보드</a>
+          <a class="btn" href="index.html">홈</a>
+        </div>
+      </div>
+      <div class="tags">
+        <span class="tag">End-to-end 완료 (Step7)</span>
+        <span class="tag">METABRIC 외부 검증 포함</span>
+        <span class="tag">ADMET 22 assay 반영</span>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi"><div class="label">라벨 Pair</div><div class="value">12,538</div></div>
+        <div class="kpi"><div class="label">최종 Pair Rows</div><div class="value">6,675</div></div>
+        <div class="kpi"><div class="label">Feature Cols</div><div class="value">18,288</div></div>
+        <div class="kpi"><div class="label">Ensemble Spearman</div><div class="value ok">0.824</div></div>
+        <div class="kpi"><div class="label">Ensemble RMSE</div><div class="value ok">1.293</div></div>
+        <div class="kpi"><div class="label">최종 후보 수</div><div class="value warn">15</div></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2 class="h2">운영 품질 요약</h2>
+      <p class="sub">fe_inputs/manifest + step6/step7 산출물 집계</p>
+      <table>
+        <thead>
+          <tr><th>항목</th><th>값</th><th>해석</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>샘플 조인율</td><td>53.24%</td><td>라벨 기준 sample 매칭</td></tr>
+          <tr><td>약물 조인율</td><td>100%</td><td>drug key 매칭은 완전</td></tr>
+          <tr><td>SMILES 누락</td><td>52 / 295 (17.63%)</td><td>chem 피처 일부 fallback</td></tr>
+          <tr><td>Step6 타깃 발현</td><td>29 / 30</td><td>외부 검증 커버리지 양호</td></tr>
+          <tr><td>Step6 Precision@15 / @20</td><td>0.80 / 0.75</td><td>상위 랭킹 농축도 양호</td></tr>
+          <tr><td>Step7 Category</td><td>Approved 9 / Candidate 5 / Caution 1</td><td><span class="status pass">완료</span></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="split">
+      <div class="panel">
+        <h2 class="h2">Step6 Top 5</h2>
+        <p class="sub">METABRIC validation score 기준</p>
+        <table>
+          <thead><tr><th>#</th><th>약물</th><th>검증점수</th><th>Pathway</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Bortezomib</td><td>9.40</td><td>Protein stability and degradation</td></tr>
+            <tr><td>2</td><td>Dactinomycin</td><td>7.85</td><td>Other</td></tr>
+            <tr><td>3</td><td>Vinorelbine</td><td>9.25</td><td>Mitosis</td></tr>
+            <tr><td>4</td><td>Dactinomycin</td><td>7.70</td><td>Other</td></tr>
+            <tr><td>5</td><td>Docetaxel</td><td>9.10</td><td>Mitosis</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="panel">
+        <h2 class="h2">Step7 Top 5</h2>
+        <p class="sub">ADMET combined score 기준</p>
+        <table>
+          <thead><tr><th>#</th><th>약물</th><th>Combined</th><th>Category</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Vinorelbine</td><td>14.5</td><td>Approved</td></tr>
+            <tr><td>2</td><td>Dactinomycin</td><td>14.0</td><td>Approved</td></tr>
+            <tr><td>3</td><td>Staurosporine</td><td>13.5</td><td>Candidate</td></tr>
+            <tr><td>4</td><td>Dactinomycin</td><td>13.0</td><td>Approved</td></tr>
+            <tr><td>5</td><td>SN-38</td><td>13.0</td><td>Candidate</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel layout-3">
+      <div>
+        <h2 class="h2">Ensemble Weight</h2>
+        <p class="sub">최종 블렌딩 기여도</p>
+        <div class="weight-row"><div>CatBoost</div><div class="bar-bg"><div class="bar-fill" style="width:16.84%"></div></div><div>16.84</div></div>
+        <div class="weight-row"><div>LightGBM</div><div class="bar-bg"><div class="bar-fill" style="width:16.69%"></div></div><div>16.69</div></div>
+        <div class="weight-row"><div>XGBoost</div><div class="bar-bg"><div class="bar-fill" style="width:16.72%"></div></div><div>16.72</div></div>
+        <div class="weight-row"><div>FlatMLP</div><div class="bar-bg"><div class="bar-fill" style="width:16.62%"></div></div><div>16.62</div></div>
+        <div class="weight-row"><div>ResidualMLP</div><div class="bar-bg"><div class="bar-fill" style="width:16.45%"></div></div><div>16.45</div></div>
+        <div class="weight-row"><div>Cross-Attention</div><div class="bar-bg"><div class="bar-fill" style="width:16.68%"></div></div><div>16.68</div></div>
+      </div>
+
+      <div>
+        <h2 class="h2">모델 하이라이트</h2>
+        <p class="sub">ML/DL 중 최고 Spearman</p>
+        <div class="note">
+          <b>Best Single Model: 3_XGBoost</b><br>
+          Spearman 0.813, RMSE 1.335<br>
+          앙상블 적용 후 Spearman 0.824로 추가 개선.
+        </div>
+      </div>
+
+      <div>
+        <h2 class="h2">근거 파일</h2>
+        <p class="sub">보고서 재현 경로</p>
+        <div class="note mono">
+          runs/20260418_crc_v1/fe_inputs/join_qc_report.json<br>
+          runs/20260418_crc_v1/features/manifest.json<br>
+          runs/20260418_crc_v1/pair_features/feature_manifest.json<br>
+          models/ensemble_results/ensemble_results.json<br>
+          models/metabric_results/step6_metabric_results.json<br>
+          models/admet_results/step7_admet_results.json
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
