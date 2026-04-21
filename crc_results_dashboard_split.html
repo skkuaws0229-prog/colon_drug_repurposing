@@ -1,251 +1,531 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CRC Split 결과 정리보드</title>
+  <title>CRC 분리 결과 대시보드</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --ink: #102232;
-      --muted: #567086;
-      --paper: #f4efe5;
+      --bg: #f6f8fc;
+      --ink: #102238;
+      --muted: #5d6e86;
+      --line: #d8e1ef;
       --panel: #ffffff;
-      --line: #d7cdb8;
-      --blue: #1f78ff;
-      --teal: #11907d;
-      --good: #2f9d4c;
-      --warn: #c57d14;
-      --bad: #cf3e3e;
+      --good: #1f9b52;
+      --warn: #d17b1f;
+      --bad: #d23f3f;
+      --shadow: 0 10px 26px rgba(25, 44, 74, 0.09);
     }
     * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
     body {
-      margin: 0;
-      font-family: "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+      font-family: "IBM Plex Sans KR", "Malgun Gothic", sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(1200px 600px at -5% -5%, rgba(31, 120, 255, 0.16), transparent 62%),
-        radial-gradient(1000px 600px at 110% 0%, rgba(17, 144, 125, 0.16), transparent 58%),
-        var(--paper);
+        radial-gradient(900px 440px at 0% -10%, rgba(38, 109, 255, 0.16), transparent 66%),
+        radial-gradient(900px 440px at 100% -8%, rgba(29, 164, 143, 0.16), transparent 66%),
+        var(--bg);
     }
-    .wrap { max-width: 1280px; margin: 0 auto; padding: 20px 16px 28px; }
-    .hero {
-      background: linear-gradient(130deg, #ffffff, #f6fbff);
+    .wrap { max-width: 1360px; margin: 0 auto; padding: 20px 16px 28px; }
+    .hero, .panel {
+      background: var(--panel);
       border: 1px solid var(--line);
       border-radius: 16px;
-      padding: 16px;
-      box-shadow: 0 8px 26px rgba(15, 39, 60, 0.08);
-      margin-bottom: 12px;
+      box-shadow: var(--shadow);
+      padding: 14px;
     }
-    .title { margin: 0; font-size: 1.6rem; }
-    .desc { margin: 8px 0 0; color: var(--muted); font-size: 0.9rem; }
+    .panel { margin-top: 12px; box-shadow: 0 4px 12px rgba(25, 44, 74, 0.06); }
+    .tag {
+      display: inline-block;
+      border: 1px solid #b7d2fb;
+      background: #e9f1ff;
+      color: #18467e;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 8px;
+    }
+    h1 {
+      margin: 0;
+      font-family: "Space Grotesk", "IBM Plex Sans KR", sans-serif;
+      font-size: 1.82rem;
+      line-height: 1.15;
+    }
+    .desc { margin: 8px 0 0; font-size: 0.9rem; color: var(--muted); }
     .chips { margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; }
     .chip {
+      border: 1px solid #d4dfef;
+      background: #f3f7ff;
+      color: #2a4461;
       font-size: 0.72rem;
-      border: 1px solid #c8d8e9;
-      background: #eaf4ff;
-      color: #1e3d57;
+      font-weight: 700;
       border-radius: 8px;
       padding: 4px 8px;
-      font-weight: 700;
     }
+    .h2 { margin: 0; font-size: 1rem; font-weight: 700; }
+    .sub { margin: 6px 0 10px; color: var(--muted); font-size: 0.75rem; }
     .kpis {
+      margin-top: 12px;
       display: grid;
-      grid-template-columns: repeat(6, minmax(0, 1fr));
+      grid-template-columns: repeat(7, minmax(0, 1fr));
       gap: 10px;
-      margin-bottom: 12px;
     }
     .kpi {
-      background: var(--panel);
       border: 1px solid var(--line);
       border-radius: 12px;
       padding: 10px;
-      min-height: 78px;
+      background: #fff;
+      min-height: 86px;
     }
-    .kpi .label { color: var(--muted); font-size: 0.68rem; }
-    .kpi .value { margin-top: 4px; font-size: 1.15rem; font-weight: 700; line-height: 1.1; }
+    .kpi .label { font-size: 0.68rem; color: var(--muted); }
+    .kpi .value {
+      margin-top: 4px;
+      font-size: 1.16rem;
+      font-weight: 700;
+      font-family: "Space Grotesk", "IBM Plex Sans KR", sans-serif;
+    }
     .good { color: var(--good); }
     .warn { color: var(--warn); }
     .bad { color: var(--bad); }
-    .panel {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 14px;
-      margin-bottom: 12px;
-    }
-    .h2 { margin: 0; font-size: 1.02rem; font-weight: 700; }
-    .sub { margin: 6px 0 10px; font-size: 0.74rem; color: var(--muted); }
-    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
     table { width: 100%; border-collapse: collapse; font-size: 0.76rem; }
     th, td {
-      padding: 7px 6px;
-      border-bottom: 1px solid #ece2cf;
       text-align: left;
+      padding: 7px 6px;
+      border-bottom: 1px solid #edf2f8;
       vertical-align: top;
     }
     th {
-      color: #647d91;
-      background: #faf5ec;
+      background: #f7f9fe;
+      color: #5f7696;
       font-size: 0.67rem;
       font-weight: 700;
     }
+
     .status {
       display: inline-block;
-      font-size: 0.64rem;
-      font-weight: 700;
       border-radius: 999px;
       padding: 2px 8px;
+      font-size: 0.64rem;
+      font-weight: 700;
     }
-    .s-pass { color: #0a6736; background: #d8f5e4; border: 1px solid #b8e9cc; }
-    .s-fail { color: #8a2222; background: #ffe2e2; border: 1px solid #ffc4c4; }
-    .mono { font-family: ui-monospace, "Consolas", monospace; font-size: 0.72rem; }
+    .s-pass { color: #0e6e3e; background: #def8e8; border: 1px solid #b9eacb; }
+    .s-fail { color: #8f2424; background: #ffe6e6; border: 1px solid #ffc6c6; }
+    .s-skip { color: #895a13; background: #fff2da; border: 1px solid #f2d5a3; }
+
+    .grid2 {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .cohort {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .cohort-head {
+      color: #fff;
+      padding: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: "Space Grotesk", "IBM Plex Sans KR", sans-serif;
+      font-weight: 700;
+    }
+    .cohort-head.colon { background: linear-gradient(135deg, #266dff, #4f4ad3); }
+    .cohort-head.rectal { background: linear-gradient(135deg, #1da48f, #2c84ab); }
+    .cohort-body { padding: 12px; display: grid; gap: 10px; }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+    }
+    .mini {
+      border: 1px solid #e4ebf6;
+      border-radius: 10px;
+      background: #fbfdff;
+      padding: 8px;
+      min-height: 70px;
+    }
+    .mini .label { font-size: 0.66rem; color: #677b96; }
+    .mini .value {
+      margin-top: 2px;
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: "Space Grotesk", "IBM Plex Sans KR", sans-serif;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
     .box {
-      background: #fff7f7;
-      border: 1px solid #f0c9c9;
-      color: #6b1f1f;
+      border: 1px solid #e2e9f5;
       border-radius: 10px;
+      background: #f9fbff;
       padding: 10px;
-      font-size: 0.75rem;
-      line-height: 1.5;
     }
-    .okbox {
-      background: #f3fbff;
-      border: 1px solid #cde3ef;
-      color: #18415d;
-      border-radius: 10px;
+    .box .ttl { margin: 0; font-size: 0.78rem; font-weight: 700; color: #1d3653; }
+    .kv {
+      margin-top: 7px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      font-size: 0.73rem;
+      color: #455b74;
+      align-items: center;
+    }
+    .kv span:last-child {
+      font-weight: 700;
+      color: #133250;
+      font-family: "Space Grotesk", "IBM Plex Sans KR", sans-serif;
+    }
+
+    .bars { margin-top: 6px; display: grid; gap: 7px; }
+    .bar-row {
+      display: grid;
+      grid-template-columns: 128px 1fr 52px;
+      gap: 8px;
+      align-items: center;
+      font-size: 0.7rem;
+      color: #465a72;
+    }
+    .bar {
+      height: 9px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: #dde8f7;
+    }
+    .bar span {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, #266dff, #1da48f);
+    }
+
+    .stage-panel {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
       padding: 10px;
-      font-size: 0.75rem;
-      line-height: 1.5;
     }
-    @media (max-width: 980px) {
+    .stage-title {
+      margin: 0 0 8px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #173657;
+    }
+
+    .mono { font-family: ui-monospace, "Cascadia Code", "Consolas", monospace; }
+    .foot { margin-top: 12px; color: #5f7088; font-size: 0.72rem; }
+
+    @media (max-width: 1150px) {
+      .kpis { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .grid2 { grid-template-columns: 1fr; }
+      .mini-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .info-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 680px) {
       .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .split { grid-template-columns: 1fr; }
+      .mini-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
   <div class="wrap">
     <section class="hero">
-      <h1 class="title">CRC Split 결과 정리보드</h1>
-      <p class="desc">run_id: <span class="mono">20260420_crc_split_v2</span> 기준으로 colon/rectal 코호트 상태를 한 번에 보여줍니다.</p>
-      <div class="chips">
-        <span class="chip">코호트 2개 분리 실행</span>
-        <span class="chip">Rectal: Step7까지 완료</span>
-        <span class="chip">Colon: Ensemble 메모리 오류로 중단</span>
-      </div>
+      <span class="tag">CRC 약물 재창출</span>
+      <h1>결장/직장 분리 결과 대시보드</h1>
+      <p class="desc" id="heroDesc">데이터 로딩 중...</p>
+      <div class="chips" id="heroChips"></div>
     </section>
 
-    <section class="kpis">
-      <div class="kpi"><div class="label">전체 Cell Line</div><div class="value">46</div></div>
-      <div class="kpi"><div class="label">Colon Cell Line</div><div class="value">39</div></div>
-      <div class="kpi"><div class="label">Rectal Cell Line</div><div class="value">5</div></div>
-      <div class="kpi"><div class="label">Rectal Ensemble Spearman</div><div class="value warn">0.461</div></div>
-      <div class="kpi"><div class="label">Rectal Ensemble RMSE</div><div class="value warn">2.095</div></div>
-      <div class="kpi"><div class="label">Rectal 최종 후보</div><div class="value good">15</div></div>
-    </section>
+    <section class="kpis" id="kpis"></section>
 
     <section class="panel">
-      <h2 class="h2">코호트별 FE/QC 요약</h2>
-      <p class="sub">join_qc_report + run_summary 기준</p>
+      <h2 class="h2">통합 CRC vs 분리 Colon 비교</h2>
+      <p class="sub">통합 baseline(20260418)과 분리 colon(20260420)의 입력 구성을 분리해서 비교합니다.</p>
       <table>
         <thead>
           <tr>
-            <th>코호트</th><th>라벨 Pair</th><th>Join Rate(샘플)</th><th>Feature Rows x Cols</th><th>Unique Drug</th><th>SMILES 누락</th><th>상태</th>
+            <th>지표</th>
+            <th>통합 CRC Baseline</th>
+            <th>분리 Colon</th>
+            <th>차이</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>colon</td><td>10,598</td><td>52.61%</td><td>5,576 x 17,920</td><td>295</td><td>52 (17.63%)</td><td><span class="status s-fail">모델 단계 중단</span></td>
-          </tr>
-          <tr>
-            <td>rectal</td><td>1,380</td><td>79.64%</td><td>1,099 x 17,877</td><td>281</td><td>52 (18.51%)</td><td><span class="status s-pass">Step7 완료</span></td>
-          </tr>
-        </tbody>
+        <tbody id="integratedCompareRows"></tbody>
       </table>
     </section>
 
-    <section class="split">
-      <div class="panel">
-        <h2 class="h2">Colon 중단 원인</h2>
-        <p class="sub">pipeline_status.json 기준</p>
-        <div class="box">
-          <b>Ensemble 단계 실패</b><br>
-          <span class="mono">CatBoostError: bad allocation</span><br><br>
-          이 영향으로 <span class="mono">top30_drugs.csv</span>가 생성되지 않아 Step6/Step7도 연쇄 실패했습니다.
-        </div>
-      </div>
-      <div class="panel">
-        <h2 class="h2">Rectal 파이프라인 상태</h2>
-        <p class="sub">ML/DL/Graph/Ensemble/Step6/Step7</p>
-        <div class="okbox">
-          <b>전 단계 정상 완료</b><br>
-          ML 8개, DL 5개, Graph 2개 모델 완료 후 Ensemble/Step6/Step7까지 성공했습니다.
-        </div>
-      </div>
-    </section>
-
-    <section class="split">
-      <div class="panel">
-        <h2 class="h2">Rectal Step6 요약</h2>
-        <p class="sub">METABRIC external validation</p>
-        <table>
-          <thead><tr><th>지표</th><th>값</th></tr></thead>
-          <tbody>
-            <tr><td>Target Expressed</td><td>29 / 30</td></tr>
-            <tr><td>Precision@15</td><td>0.60</td></tr>
-            <tr><td>Precision@20</td><td>0.55</td></tr>
-            <tr><td>Top15 후보 수</td><td>15</td></tr>
-          </tbody>
-        </table>
-        <p class="sub" style="margin-top:10px">Top 5 (Step6)</p>
-        <table>
-          <thead><tr><th>#</th><th>약물</th><th>검증점수</th><th>Pathway</th></tr></thead>
-          <tbody>
-            <tr><td>1</td><td>Epirubicin</td><td>9.45</td><td>DNA replication</td></tr>
-            <tr><td>2</td><td>Dactinomycin</td><td>7.90</td><td>Other</td></tr>
-            <tr><td>3</td><td>Topotecan</td><td>9.30</td><td>DNA replication</td></tr>
-            <tr><td>4</td><td>Vinblastine</td><td>9.25</td><td>Mitosis</td></tr>
-            <tr><td>5</td><td>Dinaciclib</td><td>9.20</td><td>Cell cycle</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="panel">
-        <h2 class="h2">Rectal Step7 요약</h2>
-        <p class="sub">ADMET gate</p>
-        <table>
-          <thead><tr><th>지표</th><th>값</th></tr></thead>
-          <tbody>
-            <tr><td>Assay 수</td><td>22</td></tr>
-            <tr><td>입력 약물</td><td>15</td></tr>
-            <tr><td>출력 약물</td><td>15</td></tr>
-            <tr><td>카테고리</td><td>Approved 4 / Candidate 11</td></tr>
-          </tbody>
-        </table>
-        <p class="sub" style="margin-top:10px">Top 5 (Step7)</p>
-        <table>
-          <thead><tr><th>#</th><th>약물</th><th>Combined</th><th>Category</th></tr></thead>
-          <tbody>
-            <tr><td>1</td><td>Dactinomycin</td><td>14.0</td><td>Approved</td></tr>
-            <tr><td>2</td><td>Vinblastine</td><td>13.0</td><td>Approved</td></tr>
-            <tr><td>3</td><td>Epirubicin</td><td>12.5</td><td>Candidate</td></tr>
-            <tr><td>4</td><td>Topotecan</td><td>11.5</td><td>Candidate</td></tr>
-            <tr><td>5</td><td>Paclitaxel</td><td>11.0</td><td>Approved</td></tr>
-          </tbody>
-        </table>
-      </div>
+    <section class="panel">
+      <h2 class="h2">파이프라인 완료 상태</h2>
+      <p class="sub">Step4(ML/DL/Graph)부터 Step7(ADMET)까지 코호트별 상태</p>
+      <table>
+        <thead>
+          <tr>
+            <th>코호트</th>
+            <th>ML</th>
+            <th>DL</th>
+            <th>Graph</th>
+            <th>앙상블</th>
+            <th>Step6</th>
+            <th>Step7</th>
+            <th>모드</th>
+          </tr>
+        </thead>
+        <tbody id="statusRows"></tbody>
+      </table>
     </section>
 
     <section class="panel">
-      <h2 class="h2">파일 경로</h2>
-      <p class="sub mono">
-        runs/20260420_crc_split_v2/run_summary.json<br>
-        runs/20260420_crc_split_v2/colon/model_results/pipeline_status.json<br>
-        runs/20260420_crc_split_v2/rectal/model_results/pipeline_status.json<br>
-        runs/20260420_crc_split_v2/rectal/model_results/metabric_results/step6_metabric_results.json<br>
-        runs/20260420_crc_split_v2/rectal/model_results/admet_results/step7_admet_results.json
-      </p>
+      <h2 class="h2">Stage별 Table / Feature 정리</h2>
+      <p class="sub">각 단계에서 어떤 테이블이 입력/출력되고, 피처가 어떻게 구성됐는지 코호트별로 표시합니다.</p>
+      <div class="grid2">
+        <div class="stage-panel">
+          <h3 class="stage-title">결장(COLON) Stage 흐름</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Stage</th>
+                <th>입력 테이블</th>
+                <th>출력 테이블</th>
+                <th>행 요약</th>
+                <th>피처 요약</th>
+                <th>비고</th>
+              </tr>
+            </thead>
+            <tbody id="stageRowsColon"></tbody>
+          </table>
+        </div>
+        <div class="stage-panel">
+          <h3 class="stage-title">직장(RECTAL) Stage 흐름</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Stage</th>
+                <th>입력 테이블</th>
+                <th>출력 테이블</th>
+                <th>행 요약</th>
+                <th>피처 요약</th>
+                <th>비고</th>
+              </tr>
+            </thead>
+            <tbody id="stageRowsRectal"></tbody>
+          </table>
+        </div>
+      </div>
     </section>
+
+    <section class="grid2" id="cohortPanels"></section>
+    <p class="foot mono" id="footText"></p>
   </div>
+
+  <script src="./crc_results_dashboard_split_data.js"></script>
+  <script>
+    (function () {
+      const data = window.CRC_SPLIT_DASHBOARD_DATA;
+      if (!data) {
+        document.getElementById("heroDesc").textContent = "데이터 파일을 찾을 수 없습니다. build_crc_split_dashboard_data.ps1 를 먼저 실행하세요.";
+        return;
+      }
+
+      const fmt = (v, digits = 3) => {
+        if (v === null || v === undefined || Number.isNaN(Number(v))) return "-";
+        return Number(v).toFixed(digits);
+      };
+      const pct = (v, digits = 1) => {
+        if (v === null || v === undefined || Number.isNaN(Number(v))) return "-";
+        return (Number(v) * 100).toFixed(digits) + "%";
+      };
+      const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (m) =>
+        ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[m]));
+
+      const colon = data.cohorts.colon;
+      const rectal = data.cohorts.rectal;
+
+      document.getElementById("heroDesc").textContent =
+        `run_id ${data.run_id} 기준 결과입니다. 생성 시각: ${data.generated_at}`;
+
+      document.getElementById("heroChips").innerHTML = [
+        `<span class="chip">마스터 테이블 행 수: ${data.master_table.rows}</span>`,
+        `<span class="chip">결장 cell line(raw): ${data.master_table.cohort_counts.colon}</span>`,
+        `<span class="chip">직장 cell line(raw): ${data.master_table.cohort_counts.rectal}</span>`,
+        `<span class="chip">분리 결장 샘플(조인 후): ${colon.labels.unique_samples}</span>`,
+        `<span class="chip">분리 직장 샘플(조인 후): ${rectal.labels.unique_samples}</span>`
+      ].join("");
+
+      const kpiItems = [
+        ["마스터 Cell Line", data.master_table.rows, ""],
+        ["결장 Spearman", fmt(colon.ensemble.spearman), colon.ensemble.spearman >= 0.55 ? "good" : "warn"],
+        ["직장 Spearman", fmt(rectal.ensemble.spearman), rectal.ensemble.spearman >= 0.45 ? "good" : "warn"],
+        ["결장 Step6 P@15", pct(colon.step6.precision_at_15), "warn"],
+        ["직장 Step6 P@15", pct(rectal.step6.precision_at_15), "good"],
+        ["결장 최종 약물 수", colon.step7.n_output, "good"],
+        ["직장 최종 약물 수", rectal.step7.n_output, "good"]
+      ];
+      document.getElementById("kpis").innerHTML = kpiItems.map(([label, value, cls]) =>
+        `<div class="kpi"><div class="label">${esc(label)}</div><div class="value ${cls}">${esc(value)}</div></div>`
+      ).join("");
+
+      const baseline = data.baseline_integrated_crc;
+      if (baseline) {
+        const rows = [
+          ["feature 행 수", baseline.features_rows, colon.features.rows],
+          ["feature 열 수", baseline.features_cols, colon.features.cols],
+          ["label 행 수", baseline.labels_rows, colon.labels.rows],
+          ["샘플 고유 수", baseline.labels_unique_samples, colon.labels.unique_samples],
+          ["약물 고유 수", baseline.labels_unique_drugs, colon.labels.unique_drugs],
+          ["pair 행 수", baseline.pair_rows, colon.pair_features.pair_features_newfe_v2_rows],
+          ["샘플 join 비율", pct(baseline.join_rate_samples), "-"]
+        ];
+        document.getElementById("integratedCompareRows").innerHTML = rows.map(([k, v1, v2]) => {
+          let diff = "-";
+          if (typeof v1 === "number" && typeof v2 === "number") diff = (v2 - v1).toString();
+          return `<tr><td>${esc(k)}</td><td class="mono">${esc(v1)}</td><td class="mono">${esc(v2)}</td><td class="mono">${esc(diff)}</td></tr>`;
+        }).join("");
+      } else {
+        document.getElementById("integratedCompareRows").innerHTML =
+          `<tr><td colspan="4">통합 CRC baseline 파일을 찾지 못해 비교를 표시하지 못했습니다.</td></tr>`;
+      }
+
+      const statusCell = (ok, t = "완료", f = "실패") =>
+        ok ? `<span class="status s-pass">${t}</span>` : `<span class="status s-fail">${f}</span>`;
+      const modelCell = (n, skippedReason, resultsExists) => {
+        if (n > 0) return `<span class="status s-pass">${n}개 완료</span>`;
+        if (skippedReason === "start_at_post_step4" && resultsExists) {
+          return `<span class="status s-skip">재개(기존결과)</span>`;
+        }
+        if (skippedReason) return `<span class="status s-skip">건너뜀(${esc(skippedReason)})</span>`;
+        return `<span class="status s-skip">미실행</span>`;
+      };
+
+      document.getElementById("statusRows").innerHTML = [
+        ["colon", colon],
+        ["rectal", rectal]
+      ].map(([name, c]) => `
+        <tr>
+          <td><b>${esc(name)}</b></td>
+          <td>${modelCell(c.pipeline.ml_ok_count, c.pipeline.ml_skipped_reason, c.pipeline.ml_results_exists)}</td>
+          <td>${modelCell(c.pipeline.dl_ok_count, c.pipeline.dl_skipped_reason, c.pipeline.dl_results_exists)}</td>
+          <td>${modelCell(c.pipeline.graph_ok_count, c.pipeline.graph_skipped_reason, c.pipeline.graph_results_exists)}</td>
+          <td>${statusCell(c.pipeline.ensemble_ok)}</td>
+          <td>${statusCell(c.pipeline.step6_ok)}</td>
+          <td>${statusCell(c.pipeline.step7_ok)}</td>
+          <td><span class="mono">${esc(c.pipeline.run_mode || "-")}</span></td>
+        </tr>
+      `).join("");
+
+      function renderStageRows(stageTables) {
+        const stageMap = {
+          "Stage0 Raw Cohort Split": "Stage0 원천 코호트 분리",
+          "Stage1 FE Input Build": "Stage1 FE 입력 생성",
+          "Stage2 Training Feature Matrix": "Stage2 학습 Feature 행렬",
+          "Stage3 Pair Feature Engineering": "Stage3 Pair Feature 엔지니어링",
+          "Stage4 Model Bank (ML/DL/Graph)": "Stage4 모델 뱅크(ML/DL/Graph)",
+          "Stage5 Ensemble": "Stage5 앙상블",
+          "Stage6 External Validation": "Stage6 외부 검증",
+          "Stage7 ADMET Gate": "Stage7 ADMET 게이트"
+        };
+        return (stageTables || []).map((s) => `
+          <tr>
+            <td><b>${esc(stageMap[s.stage] || s.stage)}</b></td>
+            <td>${esc(s.input_tables)}</td>
+            <td>${esc(s.output_tables)}</td>
+            <td class="mono">${esc(s.row_summary)}</td>
+            <td>${esc(s.feature_summary)}</td>
+            <td>${esc(s.note)}</td>
+          </tr>
+        `).join("");
+      }
+      document.getElementById("stageRowsColon").innerHTML = renderStageRows(colon.stage_tables);
+      document.getElementById("stageRowsRectal").innerHTML = renderStageRows(rectal.stage_tables);
+
+      function weightBars(weights) {
+        const items = Object.entries(weights || {}).sort((a, b) => b[1] - a[1]);
+        if (!items.length) return `<div class="sub">가중치 정보 없음</div>`;
+        const max = Math.max(...items.map(([_, v]) => Number(v)));
+        return `<div class="bars">${items.map(([k, v]) => {
+          const r = max > 0 ? (Number(v) / max) * 100 : 0;
+          return `<div class="bar-row"><span>${esc(k)}</span><div class="bar"><span style="width:${r.toFixed(1)}%"></span></div><span class="mono">${fmt(v, 3)}</span></div>`;
+        }).join("")}</div>`;
+      }
+
+      function top5Table(rows) {
+        if (!rows || !rows.length) return `<p class="sub">Top 후보 데이터가 없습니다.</p>`;
+        return `<table>
+          <thead><tr><th>#</th><th>약물</th><th>경로</th><th>예측 IC50</th><th>점수</th><th>분류</th></tr></thead>
+          <tbody>${rows.map((r) => `
+            <tr>
+              <td>${esc(r.final_rank)}</td>
+              <td>${esc(r.drug_name)}</td>
+              <td>${esc(r.pathway)}</td>
+              <td class="mono">${fmt(r.pred_ic50, 3)}</td>
+              <td class="mono">${fmt(r.combined_score, 2)}</td>
+              <td>${esc(r.category)}</td>
+            </tr>
+          `).join("")}</tbody>
+        </table>`;
+      }
+
+      function cohortPanel(c, cls, titleKr) {
+        return `
+          <article class="cohort">
+            <header class="cohort-head ${cls}">
+              <div>${esc(titleKr)} (${esc(c.cohort.toUpperCase())})</div>
+              ${c.pipeline.step7_ok ? '<span class="status s-pass">STEP7 완료</span>' : '<span class="status s-fail">미완료</span>'}
+            </header>
+            <div class="cohort-body">
+              <div class="mini-grid">
+                <div class="mini"><div class="label">Label 행 수</div><div class="value mono">${esc(c.labels.rows)}</div></div>
+                <div class="mini"><div class="label">고유 샘플 수</div><div class="value mono">${esc(c.labels.unique_samples)}</div></div>
+                <div class="mini"><div class="label">고유 약물 수</div><div class="value mono">${esc(c.labels.unique_drugs)}</div></div>
+                <div class="mini"><div class="label">Feature Shape</div><div class="value mono">${esc(c.features.rows)} x ${esc(c.features.cols)}</div></div>
+              </div>
+
+              <div class="info-grid">
+                <section class="box">
+                  <p class="ttl">Step5 앙상블</p>
+                  <div class="kv"><span>베이스 모델 수</span><span>${esc(c.ensemble.n_models)}</span></div>
+                  <div class="kv"><span>Spearman</span><span>${fmt(c.ensemble.spearman)}</span></div>
+                  <div class="kv"><span>RMSE</span><span>${fmt(c.ensemble.rmse)}</span></div>
+                  <div class="kv"><span>R2</span><span>${fmt(c.ensemble.r2)}</span></div>
+                  ${weightBars(c.ensemble.weights)}
+                </section>
+                <section class="box">
+                  <p class="ttl">Step6/7 검증 및 ADMET</p>
+                  <div class="kv"><span>Step6 검증셋</span><span>${esc(c.step6.type)}</span></div>
+                  <div class="kv"><span>타깃 발현</span><span>${esc(c.step6.target_expressed)}</span></div>
+                  <div class="kv"><span>P@15</span><span>${pct(c.step6.precision_at_15)}</span></div>
+                  <div class="kv"><span>P@20</span><span>${pct(c.step6.precision_at_20)}</span></div>
+                  <div class="kv"><span>Step7 assay 수</span><span>${esc(c.step7.n_assays)}</span></div>
+                  <div class="kv"><span>최종 약물 수</span><span>${esc(c.step7.n_output)}</span></div>
+                  <div class="kv"><span>승인 / 후보</span><span>${esc(c.step7.approved_count)} / ${esc(c.step7.candidate_count)}</span></div>
+                </section>
+              </div>
+
+              <section class="box">
+                <p class="ttl">Step7 최종 후보 Top 5</p>
+                ${top5Table(c.step7.top5)}
+              </section>
+            </div>
+          </article>
+        `;
+      }
+
+      document.getElementById("cohortPanels").innerHTML =
+        cohortPanel(colon, "colon", "결장") + cohortPanel(rectal, "rectal", "직장");
+      document.getElementById("footText").textContent =
+        `데이터 경로: runs/${data.run_id}/colon/*, runs/${data.run_id}/rectal/*`;
+    })();
+  </script>
 </body>
 </html>
