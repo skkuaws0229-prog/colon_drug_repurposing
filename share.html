@@ -1,0 +1,613 @@
+﻿<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CRC 분리 결과 대시보드</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --line: #d7e2ef;
+      --text: #13253a;
+      --muted: #5b6f86;
+      --ok: #177245;
+      --warn: #996114;
+      --bad: #a52a2a;
+      --blue: #1f6feb;
+      --teal: #188f7e;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "IBM Plex Sans KR", "Malgun Gothic", sans-serif; background: var(--bg); color: var(--text); }
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 16px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px; margin-bottom: 12px; }
+    h1, h2, h3 { margin: 0; }
+    h1 { font-size: 1.6rem; }
+    .sub { margin-top: 6px; color: var(--muted); font-size: 0.9rem; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .chip { border: 1px solid #c8d8ef; background: #eef5ff; color: #204a73; border-radius: 999px; padding: 4px 10px; font-size: 0.75rem; }
+    .kpis { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; }
+    .kpi { border: 1px solid var(--line); border-radius: 10px; padding: 10px; background: #fbfdff; }
+    .kpi .k { color: var(--muted); font-size: 0.75rem; }
+    .kpi .v { font-size: 1.1rem; font-weight: 700; margin-top: 4px; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+    th, td { border-bottom: 1px solid #ebf0f6; text-align: left; padding: 7px 6px; vertical-align: top; }
+    th { background: #f6f9fe; color: #506b89; font-size: 0.74rem; }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .pill { border-radius: 999px; padding: 2px 8px; font-size: 0.72rem; font-weight: 700; display: inline-block; }
+    .ok { background: #dcf5e8; color: var(--ok); border: 1px solid #b9e5cd; }
+    .bad { background: #ffe6e6; color: var(--bad); border: 1px solid #ffc7c7; }
+    .mono { font-family: ui-monospace, "Cascadia Code", Consolas, monospace; }
+    .cohortHead { color: #fff; border-radius: 10px; padding: 10px; margin-bottom: 8px; font-weight: 700; }
+    .colon { background: linear-gradient(135deg, var(--blue), #4c56cf); }
+    .rectal { background: linear-gradient(135deg, var(--teal), #2b86ad); }
+    @media (max-width: 980px) { .kpis { grid-template-columns: repeat(2, minmax(0,1fr)); } .grid2 { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="card">
+      <h1>CRC 분리 결과 대시보드</h1>
+      <div class="sub" id="meta">데이터 로딩 중...</div>
+      <div class="chips" id="chips"></div>
+    </section>
+
+    <section class="card">
+      <h2>핵심 지표</h2>
+      <div class="kpis" id="kpis" style="margin-top:10px;"></div>
+    </section>
+
+    <section class="card">
+      <h2>외부검증 데이터셋</h2>
+      <div class="sub">코호트별 Step6에서 실제 사용한 검증 데이터셋</div>
+      <table style="margin-top:8px;">
+        <thead><tr><th>코호트</th><th>Step6 검증셋</th><th>세부 데이터</th></tr></thead>
+        <tbody id="externalRows"></tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>파이프라인 상태</h2>
+      <table style="margin-top:8px;">
+        <thead><tr><th>코호트</th><th>ML</th><th>DL</th><th>Graph</th><th>Ensemble</th><th>Step6</th><th>Step7</th></tr></thead>
+        <tbody id="statusRows"></tbody>
+      </table>
+    </section>
+
+    <section class="grid2" id="cohortCards"></section>
+  </div>
+
+  <script>
+window.CRC_SPLIT_DASHBOARD_DATA = {
+    "run_id":  "20260420_crc_split_v2",
+    "generated_at":  "2026-04-22 03:32:26",
+    "baseline_integrated_crc":  {
+                                    "run_id":  "20260418_crc_v1",
+                                    "features_rows":  6675,
+                                    "features_cols":  18288,
+                                    "labels_rows":  6675,
+                                    "labels_unique_samples":  46,
+                                    "labels_unique_drugs":  295,
+                                    "join_rate_samples":  0.53238156005742543,
+                                    "pair_rows":  6675
+                                },
+    "master_table":  {
+                         "path":  "runs\\20260420_crc_split_v2\\raw_meta\\master_cellline_cohort_table.csv",
+                         "rows":  46,
+                         "cohort_counts":  {
+                                               "colon":  39,
+                                               "rectal":  5,
+                                               "unknown":  2
+                                           }
+                     },
+    "cohorts":  {
+                    "colon":  {
+                                  "cohort":  "colon",
+                                  "split_counts":  {
+                                                       "label_before":  12538,
+                                                       "label_after":  10598,
+                                                       "sample_before":  20443404,
+                                                       "sample_after":  354552,
+                                                       "drug_before":  295,
+                                                       "drug_after":  295,
+                                                       "lincs_before":  101,
+                                                       "lincs_after":  101,
+                                                       "target_before":  485,
+                                                       "target_after":  485
+                                                   },
+                                  "features":  {
+                                                   "rows":  5576,
+                                                   "cols":  17920
+                                               },
+                                  "labels":  {
+                                                 "rows":  5576,
+                                                 "unique_samples":  20,
+                                                 "unique_drugs":  295
+                                             },
+                                  "pair_features":  {
+                                                        "pairs":  5576,
+                                                        "pair_features_newfe_rows":  5576,
+                                                        "pair_features_newfe_v2_rows":  5576
+                                                    },
+                                  "chem_qc":  {
+                                                  "drug_rows":  295,
+                                                  "invalid_smiles_count":  295,
+                                                  "invalid_smiles_ratio":  1.0,
+                                                  "rdkit_enabled":  false,
+                                                  "rdkit_error":  "rdkit_disabled_for_stability_in_current_runtime",
+                                                  "chem_fallback_mode":  "all_zero_morgan_and_nan_descriptors_then_final_numeric_fillna_zero"
+                                              },
+                                  "pipeline":  {
+                                                   "ml_ok_count":  0,
+                                                   "dl_ok_count":  0,
+                                                   "graph_ok_count":  0,
+                                                   "ml_skipped_reason":  "start_at_post_step4",
+                                                   "dl_skipped_reason":  "start_at_post_step4",
+                                                   "graph_skipped_reason":  "start_at_post_step4",
+                                                   "ml_results_exists":  true,
+                                                   "dl_results_exists":  true,
+                                                   "graph_results_exists":  true,
+                                                   "ensemble_ok":  true,
+                                                   "step6_ok":  true,
+                                                   "step7_ok":  true,
+                                                   "ensemble_error":  null,
+                                                   "step6_error":  null,
+                                                   "step7_error":  null,
+                                                   "run_mode":  "full"
+                                               },
+                                  "ensemble":  {
+                                                   "n_models":  6,
+                                                   "spearman":  0.56396214974424164,
+                                                   "rmse":  2.2226494658423546,
+                                                   "pearson":  0.60236765139301784,
+                                                   "r2":  0.35352344421978177,
+                                                   "weights":  {
+                                                                   "CatBoost":  0.19470120127363327,
+                                                                   "LightGBM":  0.1840521706370514,
+                                                                   "XGBoost":  0.18993873634511832,
+                                                                   "FlatMLP":  0.12718194144202577,
+                                                                   "ResidualMLP":  0.14059057586382584,
+                                                                   "Cross-Attention":  0.16353537443834534
+                                                               }
+                                               },
+                                  "step6":  {
+                                                "type":  "TCGA-COAD + GSE39582",
+                                                "top15_count":  15,
+                                                "target_expressed":  "29/30",
+                                                "precision_at_15":  0.13333333333333333,
+                                                "precision_at_20":  0.2
+                                            },
+                                  "step7":  {
+                                                "n_assays":  22,
+                                                "n_input":  15,
+                                                "n_output":  15,
+                                                "candidate_count":  15,
+                                                "approved_count":  0,
+                                                "top5":  [
+                                                             {
+                                                                 "final_rank":  "1",
+                                                                 "drug_name":  "Epirubicin",
+                                                                 "target":  "Anthracycline",
+                                                                 "pathway":  "DNA replication",
+                                                                 "pred_ic50":  "-0.8728906",
+                                                                 "combined_score":  "12.5",
+                                                                 "category":  "Candidate"
+                                                             },
+                                                             {
+                                                                 "final_rank":  "2",
+                                                                 "drug_name":  "Dinaciclib",
+                                                                 "target":  "CDK1, CDK2, CDK5, CDK9",
+                                                                 "pathway":  "Cell cycle",
+                                                                 "pred_ic50":  "-0.2938245",
+                                                                 "combined_score":  "12.0",
+                                                                 "category":  "Candidate"
+                                                             },
+                                                             {
+                                                                 "final_rank":  "3",
+                                                                 "drug_name":  "Staurosporine",
+                                                                 "target":  "Broad spectrum kinase inhibitor",
+                                                                 "pathway":  "RTK signaling",
+                                                                 "pred_ic50":  "0.10231618",
+                                                                 "combined_score":  "11.5",
+                                                                 "category":  "Candidate"
+                                                             },
+                                                             {
+                                                                 "final_rank":  "4",
+                                                                 "drug_name":  "Topotecan",
+                                                                 "target":  "TOP1",
+                                                                 "pathway":  "DNA replication",
+                                                                 "pred_ic50":  "0.20960614",
+                                                                 "combined_score":  "11.0",
+                                                                 "category":  "Candidate"
+                                                             },
+                                                             {
+                                                                 "final_rank":  "5",
+                                                                 "drug_name":  "TW 37",
+                                                                 "target":  "BCL2, BCL-XL, MCL1",
+                                                                 "pathway":  "Apoptosis regulation",
+                                                                 "pred_ic50":  "0.47597197",
+                                                                 "combined_score":  "10.5",
+                                                                 "category":  "Candidate"
+                                                             }
+                                                         ]
+                                            },
+                                  "stage_tables":  [
+                                                       {
+                                                           "stage":  "Stage0 Raw Cohort Split",
+                                                           "input_tables":  "label, sample, drug, lincs, drug_target (raw full)",
+                                                           "output_tables":  "raw_inputs/*.parquet",
+                                                           "row_summary":  "label 12538 -\u003e 10598, sample 20443404 -\u003e 354552",
+                                                           "feature_summary":  "cohort retention 84.53%",
+                                                           "note":  "rule mode: any"
+                                                       },
+                                                       {
+                                                           "stage":  "Stage1 FE Input Build",
+                                                           "input_tables":  "raw_inputs/label + sample + drug",
+                                                           "output_tables":  "fe_inputs/sample_features, drug_features, labels",
+                                                           "row_summary":  "label_pair=10598, sample_rows=20, drug_rows=295",
+                                                           "feature_summary":  "sample_cols=17932, drug_cols=5",
+                                                           "note":  "sample join_rate=52.61%"
+                                                       },
+                                                       {
+                                                           "stage":  "Stage2 Training Feature Matrix",
+                                                           "input_tables":  "fe_inputs/sample_features + drug_features + labels",
+                                                           "output_tables":  "features/features.parquet + features/labels.parquet",
+                                                           "row_summary":  "features_rows=5576, labels_rows=5576",
+                                                           "feature_summary":  "features_cols=17920",
+                                                           "note":  "dropped_low_variance_columns=17"
+                                                       },
+                                                       {
+                                                           "stage":  "Stage3 Pair Feature Engineering",
+                                                           "input_tables":  "features + pair sources(lincs, target, chem)",
+                                                           "output_tables":  "pair_features/pair_features_newfe_v2.parquet",
+                                                           "row_summary":  "pairs=5576",
+                                                           "feature_summary":  "lincs_metrics=5, target_cols=10",
+                                                           "note":  "invalid_smiles_ratio=100%"
+                                                       },
+                                                       {
+                                                           "stage":  "Stage4 Model Bank (ML/DL/Graph)",
+                                                           "input_tables":  "features + pair_features + labels",
+                                                           "output_tables":  "model_results/ml_results.json, dl_results.json, graph_results.json",
+                                                           "row_summary":  "ML=0, DL=0, Graph=0",
+                                                           "feature_summary":  "same model input matrix from Stage2+3",
+                                                           "note":  "skip_flags: ml=start_at_post_step4, dl=start_at_post_step4, graph=start_at_post_step4"
+                                                       },
+                                                       {
+                                                           "stage":  "Stage5 Ensemble",
+                                                           "input_tables":  "Stage4 model outputs",
+                                                           "output_tables":  "ensemble_results.json + top30_drugs.csv + top15_drugs.csv",
+                                                           "row_summary":  "top30=30, top15=15",
+                                                           "feature_summary":  "ensemble_n_models=6, spearman=0.564",
+                                                           "note":  "method=spearman_weighted_average"
+                                                       },
+                                                       {
+                                                           "stage":  "Stage6 External Validation",
+                                                           "input_tables":  "top30_drugs + external cohort datasets",
+                                                           "output_tables":  "top15_validated.csv + step6 results json",
+                                                           "row_summary":  "validated_top15=15",
+                                                           "feature_summary":  "target_expressed=29/30, P@15=0.1333",
+                                                           "note":  "set=TCGA-COAD + GSE39582"
+                                                       },
+                                                       {
+                                                           "stage":  "Stage7 ADMET Gate",
+                                                           "input_tables":  "top15_validated + drug safety profiles",
+                                                           "output_tables":  "final_drug_candidates.csv + step7_admet_results.json",
+                                                           "row_summary":  "input=15, output=15, assays=22",
+                                                           "feature_summary":  "approved=0, candidate=15",
+                                                           "note":  "final score = efficacy + safety composite"
+                                                       }
+                                                   ]
+                              },
+                    "rectal":  {
+                                   "cohort":  "rectal",
+                                   "split_counts":  {
+                                                        "label_before":  12538,
+                                                        "label_after":  1380,
+                                                        "sample_before":  20443404,
+                                                        "sample_after":  70998,
+                                                        "drug_before":  295,
+                                                        "drug_after":  281,
+                                                        "lincs_before":  101,
+                                                        "lincs_after":  92,
+                                                        "target_before":  485,
+                                                        "target_after":  459
+                                                    },
+                                   "features":  {
+                                                    "rows":  1099,
+                                                    "cols":  17877
+                                                },
+                                   "labels":  {
+                                                  "rows":  1099,
+                                                  "unique_samples":  4,
+                                                  "unique_drugs":  281
+                                              },
+                                   "pair_features":  {
+                                                         "pairs":  1099,
+                                                         "pair_features_newfe_rows":  1099,
+                                                         "pair_features_newfe_v2_rows":  1099
+                                                     },
+                                   "chem_qc":  {
+                                                   "drug_rows":  281,
+                                                   "invalid_smiles_count":  281,
+                                                   "invalid_smiles_ratio":  1.0,
+                                                   "rdkit_enabled":  false,
+                                                   "rdkit_error":  "rdkit_disabled_for_stability_in_current_runtime",
+                                                   "chem_fallback_mode":  "all_zero_morgan_and_nan_descriptors_then_final_numeric_fillna_zero"
+                                               },
+                                   "pipeline":  {
+                                                    "ml_ok_count":  0,
+                                                    "dl_ok_count":  0,
+                                                    "graph_ok_count":  0,
+                                                    "ml_skipped_reason":  "start_at_post_step4",
+                                                    "dl_skipped_reason":  "start_at_post_step4",
+                                                    "graph_skipped_reason":  "start_at_post_step4",
+                                                    "ml_results_exists":  true,
+                                                    "dl_results_exists":  true,
+                                                    "graph_results_exists":  true,
+                                                    "ensemble_ok":  true,
+                                                    "step6_ok":  true,
+                                                    "step7_ok":  true,
+                                                    "ensemble_error":  null,
+                                                    "step6_error":  null,
+                                                    "step7_error":  null,
+                                                    "run_mode":  "full"
+                                                },
+                                   "ensemble":  {
+                                                    "n_models":  6,
+                                                    "spearman":  0.334835048063721,
+                                                    "rmse":  2.2627472123520582,
+                                                    "pearson":  0.34350954217730612,
+                                                    "r2":  0.11183287706353706,
+                                                    "weights":  {
+                                                                    "CatBoost":  0.22785527559441385,
+                                                                    "LightGBM":  0.22524212639979788,
+                                                                    "XGBoost":  0.183998076128594,
+                                                                    "FlatMLP":  0.084084116263265354,
+                                                                    "ResidualMLP":  0.098926360684584422,
+                                                                    "Cross-Attention":  0.17989404492934449
+                                                                }
+                                                },
+                                   "step6":  {
+                                                 "type":  "TCGA-READ",
+                                                 "top15_count":  15,
+                                                 "target_expressed":  "28/30",
+                                                 "precision_at_15":  0.13333333333333333,
+                                                 "precision_at_20":  0.15
+                                             },
+                                   "step7":  {
+                                                 "n_assays":  22,
+                                                 "n_input":  15,
+                                                 "n_output":  15,
+                                                 "candidate_count":  15,
+                                                 "approved_count":  0,
+                                                 "top5":  [
+                                                              {
+                                                                  "final_rank":  "1",
+                                                                  "drug_name":  "Epirubicin",
+                                                                  "target":  "Anthracycline",
+                                                                  "pathway":  "DNA replication",
+                                                                  "pred_ic50":  "0.8965457",
+                                                                  "combined_score":  "12.5",
+                                                                  "category":  "Candidate"
+                                                              },
+                                                              {
+                                                                  "final_rank":  "2",
+                                                                  "drug_name":  "Topotecan",
+                                                                  "target":  "TOP1",
+                                                                  "pathway":  "DNA replication",
+                                                                  "pred_ic50":  "0.94606453",
+                                                                  "combined_score":  "12.0",
+                                                                  "category":  "Candidate"
+                                                              },
+                                                              {
+                                                                  "final_rank":  "3",
+                                                                  "drug_name":  "RO-3306",
+                                                                  "target":  "CDK1",
+                                                                  "pathway":  "Cell cycle",
+                                                                  "pred_ic50":  "1.4102241",
+                                                                  "combined_score":  "11.5",
+                                                                  "category":  "Candidate"
+                                                              },
+                                                              {
+                                                                  "final_rank":  "4",
+                                                                  "drug_name":  "Camptothecin",
+                                                                  "target":  "TOP1",
+                                                                  "pathway":  "DNA replication",
+                                                                  "pred_ic50":  "1.9321699",
+                                                                  "combined_score":  "11.0",
+                                                                  "category":  "Candidate"
+                                                              },
+                                                              {
+                                                                  "final_rank":  "5",
+                                                                  "drug_name":  "Bromosporine",
+                                                                  "target":  "CECR2, BRD2, BRD4, BRD9",
+                                                                  "pathway":  "Chromatin other",
+                                                                  "pred_ic50":  "2.1688204",
+                                                                  "combined_score":  "10.5",
+                                                                  "category":  "Candidate"
+                                                              }
+                                                          ]
+                                             },
+                                   "stage_tables":  [
+                                                        {
+                                                            "stage":  "Stage0 Raw Cohort Split",
+                                                            "input_tables":  "label, sample, drug, lincs, drug_target (raw full)",
+                                                            "output_tables":  "raw_inputs/*.parquet",
+                                                            "row_summary":  "label 12538 -\u003e 1380, sample 20443404 -\u003e 70998",
+                                                            "feature_summary":  "cohort retention 11.01%",
+                                                            "note":  "rule mode: any"
+                                                        },
+                                                        {
+                                                            "stage":  "Stage1 FE Input Build",
+                                                            "input_tables":  "raw_inputs/label + sample + drug",
+                                                            "output_tables":  "fe_inputs/sample_features, drug_features, labels",
+                                                            "row_summary":  "label_pair=1380, sample_rows=4, drug_rows=281",
+                                                            "feature_summary":  "sample_cols=17932, drug_cols=5",
+                                                            "note":  "sample join_rate=79.64%"
+                                                        },
+                                                        {
+                                                            "stage":  "Stage2 Training Feature Matrix",
+                                                            "input_tables":  "fe_inputs/sample_features + drug_features + labels",
+                                                            "output_tables":  "features/features.parquet + features/labels.parquet",
+                                                            "row_summary":  "features_rows=1099, labels_rows=1099",
+                                                            "feature_summary":  "features_cols=17877",
+                                                            "note":  "dropped_low_variance_columns=60"
+                                                        },
+                                                        {
+                                                            "stage":  "Stage3 Pair Feature Engineering",
+                                                            "input_tables":  "features + pair sources(lincs, target, chem)",
+                                                            "output_tables":  "pair_features/pair_features_newfe_v2.parquet",
+                                                            "row_summary":  "pairs=1099",
+                                                            "feature_summary":  "lincs_metrics=5, target_cols=10",
+                                                            "note":  "invalid_smiles_ratio=100%"
+                                                        },
+                                                        {
+                                                            "stage":  "Stage4 Model Bank (ML/DL/Graph)",
+                                                            "input_tables":  "features + pair_features + labels",
+                                                            "output_tables":  "model_results/ml_results.json, dl_results.json, graph_results.json",
+                                                            "row_summary":  "ML=0, DL=0, Graph=0",
+                                                            "feature_summary":  "same model input matrix from Stage2+3",
+                                                            "note":  "skip_flags: ml=start_at_post_step4, dl=start_at_post_step4, graph=start_at_post_step4"
+                                                        },
+                                                        {
+                                                            "stage":  "Stage5 Ensemble",
+                                                            "input_tables":  "Stage4 model outputs",
+                                                            "output_tables":  "ensemble_results.json + top30_drugs.csv + top15_drugs.csv",
+                                                            "row_summary":  "top30=30, top15=15",
+                                                            "feature_summary":  "ensemble_n_models=6, spearman=0.3348",
+                                                            "note":  "method=spearman_weighted_average"
+                                                        },
+                                                        {
+                                                            "stage":  "Stage6 External Validation",
+                                                            "input_tables":  "top30_drugs + external cohort datasets",
+                                                            "output_tables":  "top15_validated.csv + step6 results json",
+                                                            "row_summary":  "validated_top15=15",
+                                                            "feature_summary":  "target_expressed=28/30, P@15=0.1333",
+                                                            "note":  "set=TCGA-READ"
+                                                        },
+                                                        {
+                                                            "stage":  "Stage7 ADMET Gate",
+                                                            "input_tables":  "top15_validated + drug safety profiles",
+                                                            "output_tables":  "final_drug_candidates.csv + step7_admet_results.json",
+                                                            "row_summary":  "input=15, output=15, assays=22",
+                                                            "feature_summary":  "approved=0, candidate=15",
+                                                            "note":  "final score = efficacy + safety composite"
+                                                        }
+                                                    ]
+                               }
+                }
+};
+
+
+</script>
+  <script>
+    (function () {
+      const data = window.CRC_SPLIT_DASHBOARD_DATA;
+      const byId = (id) => document.getElementById(id);
+      if (!data) {
+        byId("meta").textContent = "데이터를 찾지 못했습니다.";
+        return;
+      }
+
+      const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (m) => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
+      const fmt = (v, n=3) => (v === null || v === undefined || Number.isNaN(Number(v))) ? "-" : Number(v).toFixed(n);
+      const pct = (v, n=1) => (v === null || v === undefined || Number.isNaN(Number(v))) ? "-" : (Number(v) * 100).toFixed(n) + "%";
+      const ok = (b) => b ? '<span class="pill ok">완료</span>' : '<span class="pill bad">실패</span>';
+
+      const colon = data.cohorts?.colon || {};
+      const rectal = data.cohorts?.rectal || {};
+
+      byId("meta").textContent = `run_id ${data.run_id} | 생성 ${data.generated_at}`;
+      byId("chips").innerHTML = [
+        `마스터 cell line ${data.master_table?.rows ?? '-'}`,
+        `colon raw ${data.master_table?.cohort_counts?.colon ?? '-'}`,
+        `rectal raw ${data.master_table?.cohort_counts?.rectal ?? '-'}`,
+        `colon step6 ${colon.step6?.type ?? '-'}`,
+        `rectal step6 ${rectal.step6?.type ?? '-'}`
+      ].map((x) => `<span class="chip">${esc(x)}</span>`).join("");
+
+      byId("kpis").innerHTML = [
+        ["Colon Spearman", fmt(colon.ensemble?.spearman)],
+        ["Rectal Spearman", fmt(rectal.ensemble?.spearman)],
+        ["Colon P@15", pct(colon.step6?.precision_at_15)],
+        ["Rectal P@15", pct(rectal.step6?.precision_at_15)],
+        ["Colon 최종 후보 수", colon.step7?.n_output ?? "-"],
+        ["Rectal 최종 후보 수", rectal.step7?.n_output ?? "-"],
+        ["Colon 승인 수", colon.step7?.approved_count ?? "-"],
+        ["Rectal 승인 수", rectal.step7?.approved_count ?? "-"]
+      ].map(([k, v]) => `<div class="kpi"><div class="k">${esc(k)}</div><div class="v">${esc(v)}</div></div>`).join("");
+
+      const extDetail = (typeText) => {
+        const t = String(typeText || "").toUpperCase();
+        if (t.includes("TCGA-READ")) return "tcga_coadread_data_mrna_seq_v2_rsem.txt + clinical_patient/sample (READ filter)";
+        if (t.includes("TCGA-COAD")) return "tcga_coadread_data_mrna_seq_v2_rsem.txt + clinical_patient/sample (COAD filter) + GSE39582_series_matrix.txt.gz";
+        if (t.includes("METABRIC")) return "METABRIC expression + clinical tables";
+        return "-";
+      };
+
+      byId("externalRows").innerHTML = [
+        ["COLON", colon.step6?.type, extDetail(colon.step6?.type)],
+        ["RECTAL", rectal.step6?.type, extDetail(rectal.step6?.type)]
+      ].map(([c, t, d]) => `<tr><td><b>${esc(c)}</b></td><td>${esc(t || '-')}</td><td class="mono">${esc(d)}</td></tr>`).join("");
+
+      const modelCell = (n, skipped, exists) => {
+        if (Number(n) > 0) return `<span class="pill ok">${n} 완료</span>`;
+        if (skipped === "start_at_post_step4" && exists) return `<span class="pill">재개(기존결과)</span>`;
+        if (skipped) return `<span class="pill">skip</span>`;
+        return `<span class="pill">-</span>`;
+      };
+
+      byId("statusRows").innerHTML = [
+        ["colon", colon],
+        ["rectal", rectal]
+      ].map(([name, c]) => `
+        <tr>
+          <td><b>${esc(name)}</b></td>
+          <td>${modelCell(c.pipeline?.ml_ok_count, c.pipeline?.ml_skipped_reason, c.pipeline?.ml_results_exists)}</td>
+          <td>${modelCell(c.pipeline?.dl_ok_count, c.pipeline?.dl_skipped_reason, c.pipeline?.dl_results_exists)}</td>
+          <td>${modelCell(c.pipeline?.graph_ok_count, c.pipeline?.graph_skipped_reason, c.pipeline?.graph_results_exists)}</td>
+          <td>${ok(Boolean(c.pipeline?.ensemble_ok))}</td>
+          <td>${ok(Boolean(c.pipeline?.step6_ok))}</td>
+          <td>${ok(Boolean(c.pipeline?.step7_ok))}</td>
+        </tr>
+      `).join("");
+
+      const top5 = (rows) => {
+        const list = Array.isArray(rows) ? rows.slice(0, 5) : [];
+        if (!list.length) return `<div class="sub">데이터 없음</div>`;
+        return `<table><thead><tr><th>#</th><th>Drug</th><th>Pathway</th><th>Pred IC50</th><th>Score</th><th>분류</th></tr></thead><tbody>${list.map((r) => `<tr><td>${esc(r.final_rank)}</td><td>${esc(r.drug_name)}</td><td>${esc(r.pathway)}</td><td class="mono">${fmt(r.pred_ic50,3)}</td><td class="mono">${fmt(r.combined_score,2)}</td><td>${esc(r.category)}</td></tr>`).join("")}</tbody></table>`;
+      };
+
+      const cohortCard = (nameKr, cls, c) => `
+        <section class="card">
+          <div class="cohortHead ${cls}">${esc(nameKr)} (${esc((c.cohort || '').toUpperCase())})</div>
+          <div class="grid2">
+            <div>
+              <table>
+                <tbody>
+                  <tr><th>labels rows</th><td class="mono">${esc(c.labels?.rows ?? '-')}</td></tr>
+                  <tr><th>unique samples</th><td class="mono">${esc(c.labels?.unique_samples ?? '-')}</td></tr>
+                  <tr><th>unique drugs</th><td class="mono">${esc(c.labels?.unique_drugs ?? '-')}</td></tr>
+                  <tr><th>feature shape</th><td class="mono">${esc(c.features?.rows ?? '-')} x ${esc(c.features?.cols ?? '-')}</td></tr>
+                  <tr><th>step6 type</th><td>${esc(c.step6?.type ?? '-')}</td></tr>
+                  <tr><th>step6 P@15</th><td>${pct(c.step6?.precision_at_15)}</td></tr>
+                  <tr><th>step7 output</th><td>${esc(c.step7?.n_output ?? '-')}</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div>
+              <h3>Top5 최종 후보</h3>
+              ${top5(c.step7?.top5)}
+            </div>
+          </div>
+        </section>
+      `;
+
+      byId("cohortCards").innerHTML =
+        cohortCard("결장", "colon", colon) +
+        cohortCard("직장", "rectal", rectal);
+    })();
+  </script>
+</body>
+</html>
+
