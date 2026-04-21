@@ -1,0 +1,52 @@
+﻿name: Deploy CRC Dashboard to Pages
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "crc_results_dashboard.html"
+      - "crc_results_dashboard_split.html"
+      - "colon_pipeline_dashboard.html"
+      - "colon_pipeline_dashboard_data.js"
+      - ".github/workflows/deploy-pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build static site payload
+        run: |
+          set -euo pipefail
+          mkdir -p _site
+          cp crc_results_dashboard.html _site/crc_results_dashboard.html
+          cp crc_results_dashboard_split.html _site/crc_results_dashboard_split.html
+          cp colon_pipeline_dashboard.html _site/colon_pipeline_dashboard.html
+          cp colon_pipeline_dashboard_data.js _site/colon_pipeline_dashboard_data.js
+          cp crc_results_dashboard.html _site/index.html
+          touch _site/.nojekyll
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
