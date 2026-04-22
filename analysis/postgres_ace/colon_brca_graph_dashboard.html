@@ -1,0 +1,709 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Colon-BRCA Graph Dashboard</title>
+  <style>
+    :root {
+      --bg: #f8f6f1;
+      --panel: #ffffff;
+      --ink: #182028;
+      --muted: #566474;
+      --line: #d9dedf;
+      --accent: #0e6e64;
+      --accent-soft: #d8f2ee;
+      --accent-2: #d97706;
+      --accent-2-soft: #fde7c8;
+      --shadow: 0 12px 28px rgba(26, 40, 52, 0.08);
+      --node-disease: #0e6e64;
+      --node-drug-colon: #1f7a8c;
+      --node-drug-brca: #c2410c;
+      --node-pathway: #7c3aed;
+      --node-target: #334155;
+      --edge-has: #78909c;
+      --edge-pathway: #9c27b0;
+      --edge-target: #0284c7;
+      --edge-shared: #ea580c;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 6% 5%, #fff2d8 0%, transparent 36%),
+        radial-gradient(circle at 95% 0%, #d8f2ee 0%, transparent 32%),
+        var(--bg);
+      font-family: "Segoe UI Variable Text", "Noto Sans KR", "Pretendard", sans-serif;
+    }
+
+    .page {
+      max-width: 1480px;
+      margin: 0 auto;
+      padding: 18px 16px 24px;
+      animation: rise 420ms ease-out;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #0f172a, #0e6e64 58%, #d97706 132%);
+      border-radius: 18px;
+      color: #f6fffd;
+      padding: 18px;
+      box-shadow: 0 16px 32px rgba(17, 24, 39, 0.2);
+      margin-bottom: 14px;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: 27px;
+      letter-spacing: 0.2px;
+    }
+
+    .hero p {
+      margin: 7px 0 0;
+      color: #d1f4ef;
+      font-size: 14px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 340px 1fr 310px;
+      gap: 12px;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .panel-head {
+      padding: 14px 14px 10px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, #ffffff, #fbfcfc);
+    }
+
+    .panel-head h2 {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .panel-body {
+      padding: 12px 14px 14px;
+    }
+
+    .grid-kpi {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .kpi {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fbfcfe;
+      padding: 10px;
+    }
+
+    .kpi .label {
+      color: var(--muted);
+      font-size: 11px;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.55px;
+    }
+
+    .kpi .value {
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .row {
+      margin-bottom: 10px;
+    }
+
+    .label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    select, input[type="text"], input[type="file"] {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 8px 10px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 13px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .chip {
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-size: 12px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .chip.active {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      color: #0d514a;
+    }
+
+    .legend {
+      display: grid;
+      gap: 6px;
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 999px;
+      flex: 0 0 auto;
+    }
+
+    .line {
+      width: 14px;
+      height: 0;
+      border-top: 2px solid #999;
+      flex: 0 0 auto;
+    }
+
+    .canvas-wrap {
+      height: calc(100vh - 170px);
+      min-height: 640px;
+      overflow: auto;
+      background:
+        linear-gradient(180deg, rgba(250, 251, 252, 0.7), rgba(247, 249, 250, 0.7)),
+        repeating-linear-gradient(
+          0deg,
+          transparent 0,
+          transparent 27px,
+          rgba(207, 216, 220, 0.22) 28px
+        );
+    }
+
+    svg {
+      display: block;
+      width: 1300px;
+      min-height: 780px;
+    }
+
+    .edge {
+      fill: none;
+      stroke-opacity: 0.55;
+      transition: opacity 160ms ease-out;
+    }
+
+    .edge.dim {
+      opacity: 0.14;
+    }
+
+    .node circle {
+      stroke: #fff;
+      stroke-width: 1.3;
+      cursor: pointer;
+      transition: transform 120ms ease-out;
+      transform-origin: center;
+    }
+
+    .node:hover circle { transform: scale(1.06); }
+    .node text { font-size: 11px; fill: #26313b; pointer-events: none; }
+    .node.dim { opacity: 0.18; }
+    .node.selected circle { stroke: #0f172a; stroke-width: 2.2; }
+
+    .empty-note {
+      color: var(--muted);
+      font-size: 13px;
+      padding: 6px 0;
+    }
+
+    .detail-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 0 0 4px;
+      line-height: 1.2;
+    }
+
+    .detail-type {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      margin-bottom: 12px;
+      background: #ecf0f4;
+      color: #304257;
+    }
+
+    .kv-list {
+      display: grid;
+      gap: 7px;
+      font-size: 13px;
+    }
+
+    .kv {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 7px 8px;
+      background: #fbfcfe;
+    }
+
+    .kv b {
+      display: block;
+      color: #243341;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      margin-bottom: 2px;
+    }
+
+    .foot {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 10px;
+      line-height: 1.45;
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 1200px) {
+      .layout { grid-template-columns: 320px 1fr; }
+      .panel.detail-panel { grid-column: 1 / -1; }
+    }
+
+    @media (max-width: 840px) {
+      .layout { grid-template-columns: 1fr; }
+      .canvas-wrap { height: 540px; min-height: 520px; }
+      .grid-kpi { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <h1>Colon vs BRCA Repurposing Graph</h1>
+      <p>Interactive network view for disease, drug, pathway, and target relationships.</p>
+    </section>
+
+    <section class="layout">
+      <article class="panel">
+        <div class="panel-head"><h2>Controls</h2></div>
+        <div class="panel-body">
+          <div class="grid-kpi">
+            <div class="kpi"><div class="label">Nodes</div><div class="value" id="kpiNodes">-</div></div>
+            <div class="kpi"><div class="label">Edges</div><div class="value" id="kpiEdges">-</div></div>
+            <div class="kpi"><div class="label">Drugs</div><div class="value" id="kpiDrugs">-</div></div>
+            <div class="kpi"><div class="label">Overlap</div><div class="value" id="kpiOverlap">-</div></div>
+          </div>
+
+          <div class="row">
+            <label class="label" for="diseaseFilter">Disease Scope</label>
+            <select id="diseaseFilter">
+              <option value="both">Both</option>
+              <option value="colon">Colon only</option>
+              <option value="brca">BRCA only</option>
+            </select>
+          </div>
+
+          <div class="row">
+            <label class="label" for="searchBox">Search Node</label>
+            <input id="searchBox" type="text" placeholder="drug, pathway, target..." />
+          </div>
+
+          <div class="row">
+            <span class="label">Edge Types</span>
+            <div class="chips" id="edgeChips"></div>
+          </div>
+
+          <div class="row">
+            <label class="label" for="jsonFile">Load JSON (optional)</label>
+            <input id="jsonFile" type="file" accept=".json,application/json" />
+          </div>
+
+          <div class="legend">
+            <div class="legend-item"><span class="dot" style="background:var(--node-disease)"></span> Disease node</div>
+            <div class="legend-item"><span class="dot" style="background:var(--node-drug-colon)"></span> Drug node (colon)</div>
+            <div class="legend-item"><span class="dot" style="background:var(--node-drug-brca)"></span> Drug node (brca)</div>
+            <div class="legend-item"><span class="dot" style="background:var(--node-pathway)"></span> Pathway node</div>
+            <div class="legend-item"><span class="dot" style="background:var(--node-target)"></span> Target node</div>
+            <div class="legend-item"><span class="line" style="border-top-color:var(--edge-has)"></span> has_candidate</div>
+            <div class="legend-item"><span class="line" style="border-top-color:var(--edge-pathway)"></span> in_pathway</div>
+            <div class="legend-item"><span class="line" style="border-top-color:var(--edge-target)"></span> targets</div>
+            <div class="legend-item"><span class="line" style="border-top-color:var(--edge-shared)"></span> shared_candidate</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head"><h2>Network</h2></div>
+        <div class="canvas-wrap">
+          <svg id="graphSvg" viewBox="0 0 1300 860" xmlns="http://www.w3.org/2000/svg"></svg>
+        </div>
+      </article>
+
+      <article class="panel detail-panel">
+        <div class="panel-head"><h2>Node Detail</h2></div>
+        <div class="panel-body" id="detailBody">
+          <p class="empty-note">Click any node in the graph to inspect metadata.</p>
+        </div>
+      </article>
+    </section>
+  </div>
+
+  <script src="./colon_brca_graph_data.js"></script>
+  <script>
+    const defaultData = window.GRAPH_DATA || { meta: { counts: {} }, nodes: [], edges: [] };
+
+    const ui = {
+      svg: document.getElementById("graphSvg"),
+      detail: document.getElementById("detailBody"),
+      diseaseFilter: document.getElementById("diseaseFilter"),
+      searchBox: document.getElementById("searchBox"),
+      edgeChips: document.getElementById("edgeChips"),
+      jsonFile: document.getElementById("jsonFile"),
+      kpiNodes: document.getElementById("kpiNodes"),
+      kpiEdges: document.getElementById("kpiEdges"),
+      kpiDrugs: document.getElementById("kpiDrugs"),
+      kpiOverlap: document.getElementById("kpiOverlap")
+    };
+
+    const EDGE_COLORS = {
+      has_candidate: "var(--edge-has)",
+      in_pathway: "var(--edge-pathway)",
+      targets: "var(--edge-target)",
+      shared_candidate: "var(--edge-shared)"
+    };
+
+    const NODE_COLORS = {
+      disease: "var(--node-disease)",
+      pathway: "var(--node-pathway)",
+      target: "var(--node-target)"
+    };
+
+    const state = {
+      data: normalizeData(defaultData),
+      enabledEdgeTypes: new Set(["has_candidate", "in_pathway", "targets", "shared_candidate"]),
+      diseaseScope: "both",
+      query: "",
+      selectedNodeId: null
+    };
+
+    function normalizeData(raw) {
+      const nodes = Array.isArray(raw.nodes) ? raw.nodes : [];
+      const edges = Array.isArray(raw.edges) ? raw.edges : [];
+      const nodeById = new Map(nodes.map((n) => [n.id, n]));
+      const cleanEdges = edges.filter((e) => nodeById.has(e.source) && nodeById.has(e.target));
+      return { meta: raw.meta || { counts: {} }, nodes, edges: cleanEdges, nodeById };
+    }
+
+    function escapeHtml(v) {
+      return String(v)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;");
+    }
+
+    function diseaseOf(node) {
+      return node?.attrs?.disease || "";
+    }
+
+    function matchesQuery(node, query) {
+      if (!query) return true;
+      const q = query.toLowerCase();
+      const attrsText = Object.values(node.attrs || {}).join(" ").toLowerCase();
+      return node.label.toLowerCase().includes(q) || node.id.toLowerCase().includes(q) || attrsText.includes(q);
+    }
+
+    function computeFiltered() {
+      const nodes = state.data.nodes;
+      const edges = state.data.edges.filter((e) => state.enabledEdgeTypes.has(e.type));
+      const visibleNodeIds = new Set();
+
+      if (state.diseaseScope === "both") {
+        nodes.forEach((n) => visibleNodeIds.add(n.id));
+      } else {
+        nodes.forEach((n) => {
+          if (n.type === "disease" && diseaseOf(n) === state.diseaseScope) visibleNodeIds.add(n.id);
+          if (n.type === "drug" && diseaseOf(n) === state.diseaseScope) visibleNodeIds.add(n.id);
+        });
+        edges.forEach((e) => {
+          if (visibleNodeIds.has(e.source) || visibleNodeIds.has(e.target)) {
+            visibleNodeIds.add(e.source);
+            visibleNodeIds.add(e.target);
+          }
+        });
+      }
+
+      const visibleEdges = edges.filter((e) => visibleNodeIds.has(e.source) && visibleNodeIds.has(e.target));
+      const visibleNodes = nodes.filter((n) => visibleNodeIds.has(n.id));
+
+      return { visibleNodes, visibleEdges };
+    }
+
+    function sortByRankThenLabel(a, b) {
+      const ar = Number(a.attrs?.rank ?? 99999);
+      const br = Number(b.attrs?.rank ?? 99999);
+      if (ar !== br) return ar - br;
+      return a.label.localeCompare(b.label);
+    }
+
+    function layoutNodes(nodes, edges) {
+      const height = 820;
+      const byType = {
+        disease: [],
+        drug_colon: [],
+        drug_brca: [],
+        pathway: [],
+        target: []
+      };
+
+      nodes.forEach((n) => {
+        if (n.type === "drug") {
+          if (diseaseOf(n) === "colon") byType.drug_colon.push(n);
+          else if (diseaseOf(n) === "brca") byType.drug_brca.push(n);
+        } else if (n.type === "disease") byType.disease.push(n);
+        else if (n.type === "pathway") byType.pathway.push(n);
+        else if (n.type === "target") byType.target.push(n);
+      });
+
+      byType.drug_colon.sort(sortByRankThenLabel);
+      byType.drug_brca.sort(sortByRankThenLabel);
+      byType.pathway.sort((a, b) => a.label.localeCompare(b.label));
+      byType.target.sort((a, b) => a.label.localeCompare(b.label));
+
+      const hasColon = byType.drug_colon.length > 0 || byType.disease.some((d) => diseaseOf(d) === "colon");
+      const hasBrca = byType.drug_brca.length > 0 || byType.disease.some((d) => diseaseOf(d) === "brca");
+
+      const x = {
+        disease: 95,
+        drug_colon: hasColon && hasBrca ? 310 : 360,
+        drug_brca: hasColon && hasBrca ? 525 : 360,
+        pathway: hasColon && hasBrca ? 800 : 760,
+        target: hasColon && hasBrca ? 1080 : 1050
+      };
+
+      const pos = {};
+
+      const place = (arr, xPos, top, bottom) => {
+        if (!arr.length) return;
+        const span = Math.max(bottom - top, 120);
+        const step = span / (arr.length + 1);
+        arr.forEach((n, i) => {
+          pos[n.id] = { x: xPos, y: Math.round(top + step * (i + 1)) };
+        });
+      };
+
+      const diseaseOrder = byType.disease.sort((a, b) => {
+        const ad = diseaseOf(a), bd = diseaseOf(b);
+        return ad.localeCompare(bd);
+      });
+      place(diseaseOrder, x.disease, 110, 260);
+      place(byType.drug_colon, x.drug_colon, 70, height - 40);
+      place(byType.drug_brca, x.drug_brca, 70, height - 40);
+      place(byType.pathway, x.pathway, 50, height - 20);
+      place(byType.target, x.target, 40, height - 10);
+
+      nodes.forEach((n, idx) => {
+        if (!pos[n.id]) pos[n.id] = { x: 120 + (idx % 7) * 38, y: 360 + Math.floor(idx / 7) * 30 };
+      });
+
+      return pos;
+    }
+
+    function nodeColor(node) {
+      if (node.type === "drug") {
+        return diseaseOf(node) === "colon" ? "var(--node-drug-colon)" : "var(--node-drug-brca)";
+      }
+      return NODE_COLORS[node.type] || "#64748b";
+    }
+
+    function nodeRadius(node) {
+      if (node.type === "disease") return 16;
+      if (node.type === "drug") return 8;
+      if (node.type === "pathway") return 7;
+      return 6;
+    }
+
+    function buildEdgePath(edge, pos) {
+      const s = pos[edge.source];
+      const t = pos[edge.target];
+      if (!s || !t) return "";
+      if (edge.type === "shared_candidate") {
+        const mx = (s.x + t.x) / 2;
+        const my = Math.min(s.y, t.y) - 32;
+        return `M ${s.x} ${s.y} Q ${mx} ${my} ${t.x} ${t.y}`;
+      }
+      return `M ${s.x} ${s.y} L ${t.x} ${t.y}`;
+    }
+
+    function renderDetail(node) {
+      if (!node) {
+        ui.detail.innerHTML = `<p class="empty-note">Click any node in the graph to inspect metadata.</p>`;
+        return;
+      }
+
+      const rows = Object.entries(node.attrs || {})
+        .sort((a, b) => a[0].localeCompare(b[0]))
+        .map(([k, v]) => `<div class="kv"><b>${escapeHtml(k)}</b>${escapeHtml(v)}</div>`)
+        .join("");
+
+      ui.detail.innerHTML = `
+        <h3 class="detail-title">${escapeHtml(node.label)}</h3>
+        <span class="detail-type">${escapeHtml(node.type)}</span>
+        <div class="kv-list">
+          <div class="kv"><b>Node ID</b>${escapeHtml(node.id)}</div>
+          ${rows || '<div class="kv"><b>Info</b>No extra attributes</div>'}
+        </div>
+      `;
+    }
+
+    function render() {
+      const { visibleNodes, visibleEdges } = computeFiltered();
+      const positions = layoutNodes(visibleNodes, visibleEdges);
+      const query = state.query.trim().toLowerCase();
+
+      const matched = new Set(visibleNodes.filter((n) => matchesQuery(n, query)).map((n) => n.id));
+      const shouldDimByQuery = query.length > 0;
+
+      ui.kpiNodes.textContent = String(visibleNodes.length);
+      ui.kpiEdges.textContent = String(visibleEdges.length);
+      ui.kpiDrugs.textContent = String(visibleNodes.filter((n) => n.type === "drug").length);
+      ui.kpiOverlap.textContent = String(state.data.meta?.counts?.overlap_drug_count ?? "-");
+
+      const edgeSvg = visibleEdges.map((edge) => {
+        const s = positions[edge.source], t = positions[edge.target];
+        if (!s || !t) return "";
+        const dim = shouldDimByQuery && !(matched.has(edge.source) || matched.has(edge.target));
+        const stroke = EDGE_COLORS[edge.type] || "#78909c";
+        const width = edge.type === "shared_candidate" ? 2.2 : 1.2;
+        return `<path class="edge ${dim ? "dim" : ""}" d="${buildEdgePath(edge, positions)}"
+          stroke="${stroke}" stroke-width="${width}" />`;
+      }).join("");
+
+      const nodeSvg = visibleNodes.map((node) => {
+        const p = positions[node.id];
+        const selected = state.selectedNodeId === node.id;
+        const dim = shouldDimByQuery && !matched.has(node.id);
+        const fill = nodeColor(node);
+        const r = nodeRadius(node);
+        const labelX = p.x + (node.type === "target" ? -10 : 12);
+        const anchor = node.type === "target" ? "end" : "start";
+        const safeLabel = escapeHtml(node.label.length > 30 ? node.label.slice(0, 30) + "..." : node.label);
+        return `
+          <g class="node ${selected ? "selected" : ""} ${dim ? "dim" : ""}" data-id="${escapeHtml(node.id)}">
+            <circle cx="${p.x}" cy="${p.y}" r="${r}" fill="${fill}" />
+            <text x="${labelX}" y="${p.y + 4}" text-anchor="${anchor}">${safeLabel}</text>
+          </g>
+        `;
+      }).join("");
+
+      ui.svg.innerHTML = `
+        <g>${edgeSvg}</g>
+        <g>${nodeSvg}</g>
+      `;
+
+      ui.svg.querySelectorAll(".node").forEach((el) => {
+        el.addEventListener("click", () => {
+          const nodeId = el.getAttribute("data-id");
+          state.selectedNodeId = nodeId;
+          renderDetail(state.data.nodeById.get(nodeId));
+          render();
+        });
+      });
+    }
+
+    function renderEdgeChips() {
+      const edgeTypes = ["has_candidate", "in_pathway", "targets", "shared_candidate"];
+      ui.edgeChips.innerHTML = edgeTypes.map((type) => `
+        <button type="button" class="chip ${state.enabledEdgeTypes.has(type) ? "active" : ""}" data-edge="${type}">
+          ${type}
+        </button>
+      `).join("");
+
+      ui.edgeChips.querySelectorAll(".chip").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const type = btn.getAttribute("data-edge");
+          if (state.enabledEdgeTypes.has(type)) state.enabledEdgeTypes.delete(type);
+          else state.enabledEdgeTypes.add(type);
+          renderEdgeChips();
+          render();
+        });
+      });
+    }
+
+    function resetSelectionIfHidden() {
+      if (!state.selectedNodeId) return;
+      const { visibleNodes } = computeFiltered();
+      const visibleIds = new Set(visibleNodes.map((n) => n.id));
+      if (!visibleIds.has(state.selectedNodeId)) {
+        state.selectedNodeId = null;
+        renderDetail(null);
+      }
+    }
+
+    ui.diseaseFilter.addEventListener("change", () => {
+      state.diseaseScope = ui.diseaseFilter.value;
+      resetSelectionIfHidden();
+      render();
+    });
+
+    ui.searchBox.addEventListener("input", () => {
+      state.query = ui.searchBox.value;
+      render();
+    });
+
+    ui.jsonFile.addEventListener("change", async (event) => {
+      const file = event.target.files?.[0];
+      if (!file) return;
+      try {
+        const text = await file.text();
+        const parsed = JSON.parse(text);
+        state.data = normalizeData(parsed);
+        state.selectedNodeId = null;
+        renderDetail(null);
+        renderEdgeChips();
+        render();
+      } catch (err) {
+        alert("Could not parse JSON file.");
+      }
+    });
+
+    renderEdgeChips();
+    renderDetail(null);
+    render();
+  </script>
+</body>
+</html>

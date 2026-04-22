@@ -1,0 +1,1654 @@
+﻿window.GRAPH_DATA = {
+    "meta":  {
+                 "name":  "Colon vs BRCA Repurposing Graph",
+                 "sources":  [
+                                 "models/admet_results/final_drug_candidates.csv",
+                                 "20260414_re_pre_project_v3/step4_results/step6_final/repurposing_top15.csv"
+                             ],
+                 "counts":  {
+                                "node_total":  70,
+                                "edge_total":  102,
+                                "node_by_type":  {
+                                                     "disease":  2,
+                                                     "pathway":  9,
+                                                     "target":  31,
+                                                     "drug":  28
+                                                 },
+                                "edge_by_type":  {
+                                                     "in_pathway":  28,
+                                                     "shared_candidate":  2,
+                                                     "has_candidate":  28,
+                                                     "targets":  44
+                                                 },
+                                "overlap_drug_count":  2
+                            },
+                 "overlap_drug_norms":  [
+                                            "dactinomycin",
+                                            "rapamycin"
+                                        ]
+             },
+    "nodes":  [
+                  {
+                      "id":  "target:bcl2",
+                      "type":  "target",
+                      "label":  "BCL2",
+                      "attrs":  {
+                                    "target_norm":  "bcl2"
+                                }
+                  },
+                  {
+                      "id":  "target:aurka",
+                      "type":  "target",
+                      "label":  "AURKA",
+                      "attrs":  {
+                                    "target_norm":  "aurka"
+                                }
+                  },
+                  {
+                      "id":  "target:aurkc",
+                      "type":  "target",
+                      "label":  "AURKC",
+                      "attrs":  {
+                                    "target_norm":  "aurkc"
+                                }
+                  },
+                  {
+                      "id":  "target:amyloidbeta20",
+                      "type":  "target",
+                      "label":  "Amyloid beta20",
+                      "attrs":  {
+                                    "target_norm":  "amyloidbeta20"
+                                }
+                  },
+                  {
+                      "id":  "drug:colon:bortezomib",
+                      "type":  "drug",
+                      "label":  "Bortezomib",
+                      "attrs":  {
+                                    "rank":  7,
+                                    "category":  "Approved",
+                                    "disease":  "colon",
+                                    "drug_name_norm":  "bortezomib",
+                                    "combined_score":  12.79,
+                                    "drug_ref_id":  "1191"
+                                }
+                  },
+                  {
+                      "id":  "drug:brca:cdk95038",
+                      "type":  "drug",
+                      "label":  "CDK9_5038",
+                      "attrs":  {
+                                    "rank":  12,
+                                    "category":  "Category 3: 유방암 미적용",
+                                    "disease":  "brca",
+                                    "drug_name_norm":  "cdk95038",
+                                    "combined_score":  0.0759118361269414,
+                                    "drug_ref_id":  "1709"
+                                }
+                  },
+                  {
+                      "id":  "drug:brca:tozasertib",
+                      "type":  "drug",
+                      "label":  "Tozasertib",
+                      "attrs":  {
+                                    "rank":  14,
+                                    "category":  "Category 3: 유방암 미적용",
+                                    "disease":  "brca",
+                                    "drug_name_norm":  "tozasertib",
+                                    "combined_score":  0.052048575148876,
+                                    "drug_ref_id":  "1096"
+                                }
+                  },
+                  {
+                      "id":  "drug:brca:tw37",
+                      "type":  "drug",
+                      "label":  "TW 37",
+                      "attrs":  {
+                                    "rank":  11,
+                                    "category":  "Category 3: 유방암 미적용",
+                                    "disease":  "brca",
+                                    "drug_name_norm":  "tw37",
+                                    "combined_score":  0.0764429706126459,
+                                    "drug_ref_id":  "1149"
+                                }
+                  },
+                  {
+                      "id":  "drug:colon:paclitaxel",
+                      "type":  "drug",
+                      "label":  "Paclitaxel",
+                      "attrs":  {
+                                    "rank":  12,
+                                    "category":  "Approved",
+                                    "disease":  "colon",
+                                    "drug_name_norm":  "paclitaxel",
+                                    "combined_score":  10.83,
+                                    "drug_ref_id":  "1080"
+                                }
+                  },
+                  {
+                      "id":  "target:others",
+                      "type":  "target",
+                      "label":  "others",
+                      "attrs":  {
+                                    "target_norm":  "others"
+                                }
+                  },
+                  {
+                      "id":  "target:pim1",
+                      "type":  "target",
+                      "label":  "PIM1",
+                      "attrs":  {
+                                    "target_norm":  "pim1"
+                                }
+                  },
+                  {
+                      "id":  "pathway:dnareplication",
+                      "type":  "pathway",
+                      "label":  "DNA replication",
+                      "attrs":  {
+                                    "pathway_norm":  "dnareplication"
+                                }
+                  },
+                  {
+                      "id":  "target:broadspectrumkinaseinhibitor",
+                      "type":  "target",
+                      "label":  "Broad spectrum kinase inhibitor",
+                      "attrs":  {
+                                    "target_norm":  "broadspectrumkinaseinhibitor"
+                                }
+                  },
+                  {
+                      "id":  "pathway:mitosis",
+                      "type":  "pathway",
+                      "label":  "Mitosis",
+                      "attrs":  {
+                                    "pathway_norm":  "mitosis"
+                                }
+                  },
+                  {
+                      "id":  "target:cdk1",
+                      "type":  "target",
+                      "label":  "CDK1",
+                      "attrs":  {
+                                    "target_norm":  "cdk1"
+                                }
+                  },
+                  {
+                      "id":  "disease:colon",
+                      "type":  "disease",
+                      "label":  "COLON",
+                      "attrs":  {
+                                    "disease":  "colon"
+                                }
+                  },
+                  {
+                      "id":  "disease:brca",
+                      "type":  "disease",
+                      "label":  "BRCA",
+                      "attrs":  {
+                                    "disease":  "brca"
+                                }
+                  },
+                  {
+                      "id":  "drug:colon:dactinomycin",
+                      "type":  "drug",
+                      "label":  "Dactinomycin",
+                      "attrs":  {
+                                    "rank":  4,
+                                    "category":  "Approved",
+                                    "disease":  "colon",
+                                    "drug_name_norm":  "dactinomycin",
+                                    "combined_score":  13,
+                                    "drug_ref_id":  "1811"
+                                }
+                  },
+                  {
+                      "id":  "target:rnapolymerase",
+                      "type":  "target",
+                      "label":  "RNA polymerase",
+                      "attrs":  {
+                                    "target_norm":  "rnapolymerase"
+                                }
+                  },
+                  {
+                      "id":  "target:akt2",
+                      "type":  "target",
+                      "label":  "AKT2",
+                      "attrs":  {
+                                    "target_norm":  "akt2"
+                                }
+                  },
+                  {
+                      "id":  "drug:brca:dactinomycin",
+                      "type":  "drug",
+                      "label":  "Dactinomycin",
+                      "attrs":  {
+                                    "rank":  2,
+                                    "category":  "Category 2: 유방암 연구 중",
+                                    "disease":  "brca",
+                                    "drug_name_norm":  "dactinomycin",
+                                    "combined_score":  0.32903753545732312,
+                                    "drug_ref_id":  "1811"
+                                }
+                  },
+                  {
+                      "id":  "target:anthracycline",
+                      "type":  "target",
+                      "label":  "Anthracycline",
+                      "attrs":  {
+                                    "target_norm":  "anthracycline"
+                                }
+                  },
+                  {
+                      "id":  "target:akt1",
+                      "type":  "target",
+                      "label":  "AKT1",
+                      "attrs":  {
+                                    "target_norm":  "akt1"
+                                }
+                  },
+                  {
+                      "id":  "drug:brca:sl0101",
+                      "type":  "drug",
+                      "label":  "SL0101",
+                      "attrs":  {
+                                    "rank":  3,
+                                    "category":  "Category 3: 유방암 미적용",
+                                    "disease":  "brca",
+                                    "drug_name_norm":  "sl0101",
+                                    "combined_score":  0.29444708167330658,
+                                    "drug_ref_id":  "1039"
+                                }
+                  },
+                  {
+                      "id":  "drug:brca:cdk95576",
+                      "type":  "drug",
+                      "label":  "CDK9_5576",
+                      "attrs":  {
+                                    "rank":  6,
+                                    "category":  "Category 3: 유방암 미적용",
+                                    "disease":  "brca",
+                                    "drug_name_norm":  "cdk95576",
+                                    "combined_score":  0.19028926614460159,
+                                    "drug_ref_id":  "1708"
+                                }
+                  },
+                  {
+                      "id":  "drug:brca:sabutoclax",
+                      "type":  "drug",
+                      "label":  "Sabutoclax",
+                      "attrs":  {
+                                    "rank":  13,
+                                    "category":  "Category 3: 유방암 미적용",
+                                    "disease":  "brca",
+                                    "drug_name_norm":  "sabutoclax",
+                                    "combined_score":  0.0530273895748817,
+                                    "drug_ref_id":  "1849"
+                                }
+                  },
+                  {
+                      "id":  "drug:brca:temsirolimus",
+                      "type":  "drug",
+                      "label":  "Temsirolimus",
+                      "attrs":  {
+                                    "rank":  4,
+                                    "category":  "Category 2: 유방암 연구 중",
+                                    "disease":  "brca",
+                                    "drug_name_norm":  "temsirolimus",
+                                    "combined_score":  0.27991130779333462,
+                                    "drug_ref_id":  "1016"
+                                }
+                  },
+                  {
+                      "id":  "drug:colon:docetaxel",
+                      "type":  "drug",
+                      "label":  "Docetaxel",
+                      "attrs":  {
+                                    "rank":  11,
+                                    "category":  "Approved",
+                                    "disease":  "colon",
+                                    "drug_name_norm":  "docetaxel",
+                                    "combined_score":  11.33,
+                                    "drug_ref_id":  "1819"
+                                }
+                  },
+                  {
+                      "id":  "target:bfl1",
+                      "type":  "target",
+                      "label":  "BFL1",
+                      "attrs":  {
+                                    "target_norm":  "bfl1"
+                                }
+                  },
+                  {
+                      "id":  "drug:colon:vinblastine",
+                      "type":  "drug",
+                      "label":  "Vinblastine",
+                      "attrs":  {
+                                    "rank":  6,
+                                    "category":  "Approved",
+                                    "disease":  "colon",
+                                    "drug_name_norm":  "vinblastine",
+                                    "combined_score":  12.83,
+                                    "drug_ref_id":  "1004"
+                                }
+                  },
+                  {
+                      "id":  "target:cdk2",
+                      "type":  "target",
+                      "label":  "CDK2",
+                      "attrs":  {
+                                    "target_norm":  "cdk2"
+                                }
+                  },
+                  {
+                      "id":  "target:hsp90",
+                      "type":  "target",
+                      "label":  "HSP90",
+                      "attrs":  {
+                                    "target_norm":  "hsp90"
+                                }
+                  },
+                  {
+                      "id":  "drug:colon:dinaciclib",
+                      "type":  "drug",
+                      "label":  "Dinaciclib",
+                      "attrs":  {
+                                    "rank":  8,
+                                    "category":  "Candidate",
+                                    "disease":  "colon",
+                                    "drug_name_norm":  "dinaciclib",
+                                    "combined_score":  12.5,
+                                    "drug_ref_id":  "1180"
+                                }
+                  },
+                  {
+                      "id":  "drug:colon:sn38",
+                      "type":  "drug",
+                      "label":  "SN-38",
+                      "attrs":  {
+                                    "rank":  5,
+                                    "category":  "Candidate",
+                                    "disease":  "colon",
+                                    "drug_name_norm":  "sn38",
+                                    "combined_score":  13,
+                                    "drug_ref_id":  "1494"
+                                }
+                  },
+                  {
+                      "id":  "target:cdk9",
+                      "type":  "target",
+                      "label":  "CDK9",
+                      "attrs":  {
+                                    "target_norm":  "cdk9"
+                                }
+                  },
+                  {
+                      "id":  "target:microtubuledestabiliser",
+                      "type":  "target",
+                      "label":  "Microtubule destabiliser",
+                      "attrs":  {
+                                    "target_norm":  "microtubuledestabiliser"
+                                }
+                  },
+                  {
+                      "id":  "target:mtor",
+                      "type":  "target",
+                      "label":  "MTOR",
+                      "attrs":  {
+                                    "target_norm":  "mtor"
+                                }
+                  },
+                  {
+                      "id":  "target:top1",
+                      "type":  "target",
+                      "label":  "TOP1",
+                      "attrs":  {
+                                    "target_norm":  "top1"
+                                }
+                  },
+                  {
+                      "id":  "drug:brca:pictilisib",
+                      "type":  "drug",
+                      "label":  "Pictilisib",
+                      "attrs":  {
+                                    "rank":  10,
+                                    "category":  "Category 2: 유방암 연구 중",
+                                    "disease":  "brca",
+                                    "drug_name_norm":  "pictilisib",
+                                    "combined_score":  0.0978922709192639,
+                                    "drug_ref_id":  "1058"
+                                }
+                  },
+                  {
+                      "id":  "drug:colon:vinorelbine",
+                      "type":  "drug",
+                      "label":  "Vinorelbine",
+                      "attrs":  {
+                                    "rank":  1,
+                                    "category":  "Approved",
+                                    "disease":  "colon",
+                                    "drug_name_norm":  "vinorelbine",
+                                    "combined_score":  14.5,
+                                    "drug_ref_id":  "2048"
+                                }
+                  },
+                  {
+                      "id":  "drug:brca:tanespimycin",
+                      "type":  "drug",
+                      "label":  "Tanespimycin",
+                      "attrs":  {
+                                    "rank":  7,
+                                    "category":  "Category 2: 유방암 연구 중",
+                                    "disease":  "brca",
+                                    "drug_name_norm":  "tanespimycin",
+                                    "combined_score":  0.1153908037285723,
+                                    "drug_ref_id":  "1026"
+                                }
+                  },
+                  {
+                      "id":  "drug:colon:camptothecin",
+                      "type":  "drug",
+                      "label":  "Camptothecin",
+                      "attrs":  {
+                                    "rank":  10,
+                                    "category":  "Candidate",
+                                    "disease":  "colon",
+                                    "drug_name_norm":  "camptothecin",
+                                    "combined_score":  11.5,
+                                    "drug_ref_id":  "1003"
+                                }
+                  },
+                  {
+                      "id":  "pathway:rtksignaling",
+                      "type":  "pathway",
+                      "label":  "RTK signaling",
+                      "attrs":  {
+                                    "pathway_norm":  "rtksignaling"
+                                }
+                  },
+                  {
+                      "id":  "drug:brca:teniposide",
+                      "type":  "drug",
+                      "label":  "Teniposide",
+                      "attrs":  {
+                                    "rank":  5,
+                                    "category":  "Category 2: 유방암 연구 중",
+                                    "disease":  "brca",
+                                    "drug_name_norm":  "teniposide",
+                                    "combined_score":  0.21291792534388621,
+                                    "drug_ref_id":  "1809"
+                                }
+                  },
+                  {
+                      "id":  "drug:brca:rapamycin",
+                      "type":  "drug",
+                      "label":  "Rapamycin",
+                      "attrs":  {
+                                    "rank":  8,
+                                    "category":  "Category 2: 유방암 연구 중",
+                                    "disease":  "brca",
+                                    "drug_name_norm":  "rapamycin",
+                                    "combined_score":  0.11204258503067389,
+                                    "drug_ref_id":  "1084"
+                                }
+                  },
+                  {
+                      "id":  "drug:brca:avagacestat",
+                      "type":  "drug",
+                      "label":  "Avagacestat",
+                      "attrs":  {
+                                    "rank":  15,
+                                    "category":  "Category 3: 유방암 미적용",
+                                    "disease":  "brca",
+                                    "drug_name_norm":  "avagacestat",
+                                    "combined_score":  0.0519022389837635,
+                                    "drug_ref_id":  "1072"
+                                }
+                  },
+                  {
+                      "id":  "pathway:apoptosisregulation",
+                      "type":  "pathway",
+                      "label":  "Apoptosis regulation",
+                      "attrs":  {
+                                    "pathway_norm":  "apoptosisregulation"
+                                }
+                  },
+                  {
+                      "id":  "target:pi3kclass1",
+                      "type":  "target",
+                      "label":  "PI3K (class 1)",
+                      "attrs":  {
+                                    "target_norm":  "pi3kclass1"
+                                }
+                  },
+                  {
+                      "id":  "pathway:other",
+                      "type":  "pathway",
+                      "label":  "Other",
+                      "attrs":  {
+                                    "pathway_norm":  "other"
+                                }
+                  },
+                  {
+                      "id":  "pathway:otherkinases",
+                      "type":  "pathway",
+                      "label":  "Other kinases",
+                      "attrs":  {
+                                    "pathway_norm":  "otherkinases"
+                                }
+                  },
+                  {
+                      "id":  "target:aurkb",
+                      "type":  "target",
+                      "label":  "AURKB",
+                      "attrs":  {
+                                    "target_norm":  "aurkb"
+                                }
+                  },
+                  {
+                      "id":  "target:rsk",
+                      "type":  "target",
+                      "label":  "RSK",
+                      "attrs":  {
+                                    "target_norm":  "rsk"
+                                }
+                  },
+                  {
+                      "id":  "target:bclxl",
+                      "type":  "target",
+                      "label":  "BCL-XL",
+                      "attrs":  {
+                                    "target_norm":  "bclxl"
+                                }
+                  },
+                  {
+                      "id":  "drug:colon:epirubicin",
+                      "type":  "drug",
+                      "label":  "Epirubicin",
+                      "attrs":  {
+                                    "rank":  15,
+                                    "category":  "Caution",
+                                    "disease":  "colon",
+                                    "drug_name_norm":  "epirubicin",
+                                    "combined_score":  3.33,
+                                    "drug_ref_id":  "1511"
+                                }
+                  },
+                  {
+                      "id":  "target:pim3",
+                      "type":  "target",
+                      "label":  "PIM3",
+                      "attrs":  {
+                                    "target_norm":  "pim3"
+                                }
+                  },
+                  {
+                      "id":  "target:mtorc1",
+                      "type":  "target",
+                      "label":  "MTORC1",
+                      "attrs":  {
+                                    "target_norm":  "mtorc1"
+                                }
+                  },
+                  {
+                      "id":  "drug:colon:luminespib",
+                      "type":  "drug",
+                      "label":  "Luminespib",
+                      "attrs":  {
+                                    "rank":  14,
+                                    "category":  "Candidate",
+                                    "disease":  "colon",
+                                    "drug_name_norm":  "luminespib",
+                                    "combined_score":  6,
+                                    "drug_ref_id":  "1559"
+                                }
+                  },
+                  {
+                      "id":  "target:amyloidbeta40",
+                      "type":  "target",
+                      "label":  "Amyloid beta40",
+                      "attrs":  {
+                                    "target_norm":  "amyloidbeta40"
+                                }
+                  },
+                  {
+                      "id":  "target:mcl1",
+                      "type":  "target",
+                      "label":  "MCL1",
+                      "attrs":  {
+                                    "target_norm":  "mcl1"
+                                }
+                  },
+                  {
+                      "id":  "drug:colon:rapamycin",
+                      "type":  "drug",
+                      "label":  "Rapamycin",
+                      "attrs":  {
+                                    "rank":  13,
+                                    "category":  "Approved",
+                                    "disease":  "colon",
+                                    "drug_name_norm":  "rapamycin",
+                                    "combined_score":  9.71,
+                                    "drug_ref_id":  "1084"
+                                }
+                  },
+                  {
+                      "id":  "target:microtubulestabiliser",
+                      "type":  "target",
+                      "label":  "Microtubule stabiliser",
+                      "attrs":  {
+                                    "target_norm":  "microtubulestabiliser"
+                                }
+                  },
+                  {
+                      "id":  "target:mtorc2",
+                      "type":  "target",
+                      "label":  "mTORC2",
+                      "attrs":  {
+                                    "target_norm":  "mtorc2"
+                                }
+                  },
+                  {
+                      "id":  "target:proteasome",
+                      "type":  "target",
+                      "label":  "Proteasome",
+                      "attrs":  {
+                                    "target_norm":  "proteasome"
+                                }
+                  },
+                  {
+                      "id":  "pathway:cellcycle",
+                      "type":  "pathway",
+                      "label":  "Cell cycle",
+                      "attrs":  {
+                                    "pathway_norm":  "cellcycle"
+                                }
+                  },
+                  {
+                      "id":  "pathway:pi3kmtorsignaling",
+                      "type":  "pathway",
+                      "label":  "PI3K/MTOR signaling",
+                      "attrs":  {
+                                    "pathway_norm":  "pi3kmtorsignaling"
+                                }
+                  },
+                  {
+                      "id":  "target:cdk5",
+                      "type":  "target",
+                      "label":  "CDK5",
+                      "attrs":  {
+                                    "target_norm":  "cdk5"
+                                }
+                  },
+                  {
+                      "id":  "drug:colon:staurosporine",
+                      "type":  "drug",
+                      "label":  "Staurosporine",
+                      "attrs":  {
+                                    "rank":  3,
+                                    "category":  "Candidate",
+                                    "disease":  "colon",
+                                    "drug_name_norm":  "staurosporine",
+                                    "combined_score":  13.5,
+                                    "drug_ref_id":  "1034"
+                                }
+                  },
+                  {
+                      "id":  "pathway:proteinstabilityanddegradation",
+                      "type":  "pathway",
+                      "label":  "Protein stability and degradation",
+                      "attrs":  {
+                                    "pathway_norm":  "proteinstabilityanddegradation"
+                                }
+                  },
+                  {
+                      "id":  "drug:brca:mk2206",
+                      "type":  "drug",
+                      "label":  "MK-2206",
+                      "attrs":  {
+                                    "rank":  9,
+                                    "category":  "Category 2: 유방암 연구 중",
+                                    "disease":  "brca",
+                                    "drug_name_norm":  "mk2206",
+                                    "combined_score":  0.1024414026085509,
+                                    "drug_ref_id":  "1053"
+                                }
+                  },
+                  {
+                      "id":  "drug:brca:azd2014",
+                      "type":  "drug",
+                      "label":  "AZD2014",
+                      "attrs":  {
+                                    "rank":  1,
+                                    "category":  "Category 2: 유방암 연구 중",
+                                    "disease":  "brca",
+                                    "drug_name_norm":  "azd2014",
+                                    "combined_score":  0.34093744797949338,
+                                    "drug_ref_id":  "1441"
+                                }
+                  }
+              ],
+    "edges":  [
+                  {
+                      "source":  "drug:colon:paclitaxel",
+                      "target":  "target:microtubulestabiliser",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:colon:docetaxel",
+                      "target":  "target:microtubulestabiliser",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:cdk95038",
+                      "target":  "target:cdk9",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:colon:staurosporine",
+                      "target":  "pathway:rtksignaling",
+                      "type":  "in_pathway",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "disease:colon",
+                      "target":  "drug:colon:docetaxel",
+                      "type":  "has_candidate",
+                      "weight":  12.33,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:tozasertib",
+                      "target":  "target:aurka",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:temsirolimus",
+                      "target":  "target:mtor",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:pictilisib",
+                      "target":  "pathway:pi3kmtorsignaling",
+                      "type":  "in_pathway",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:colon:epirubicin",
+                      "target":  "target:anthracycline",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "disease:colon",
+                      "target":  "drug:colon:epirubicin",
+                      "type":  "has_candidate",
+                      "weight":  3.33,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "disease:colon",
+                      "target":  "drug:colon:vinorelbine",
+                      "type":  "has_candidate",
+                      "weight":  14.5,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:colon:rapamycin",
+                      "target":  "drug:brca:rapamycin",
+                      "type":  "shared_candidate",
+                      "weight":  1,
+                      "attrs":  {
+                                    "drug_name_norm":  "rapamycin"
+                                }
+                  },
+                  {
+                      "source":  "drug:colon:luminespib",
+                      "target":  "pathway:proteinstabilityanddegradation",
+                      "type":  "in_pathway",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:colon:dinaciclib",
+                      "target":  "target:cdk1",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "disease:colon",
+                      "target":  "drug:colon:dinaciclib",
+                      "type":  "has_candidate",
+                      "weight":  12.5,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:tw37",
+                      "target":  "target:bclxl",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:colon:vinblastine",
+                      "target":  "pathway:mitosis",
+                      "type":  "in_pathway",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:tozasertib",
+                      "target":  "target:aurkb",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "disease:brca",
+                      "target":  "drug:brca:sl0101",
+                      "type":  "has_candidate",
+                      "weight":  0.29444708167330658,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:mk2206",
+                      "target":  "pathway:pi3kmtorsignaling",
+                      "type":  "in_pathway",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:tanespimycin",
+                      "target":  "target:hsp90",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:colon:dactinomycin",
+                      "target":  "pathway:other",
+                      "type":  "in_pathway",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "disease:brca",
+                      "target":  "drug:brca:teniposide",
+                      "type":  "has_candidate",
+                      "weight":  0.21291792534388621,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "disease:brca",
+                      "target":  "drug:brca:cdk95038",
+                      "type":  "has_candidate",
+                      "weight":  0.0759118361269414,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:colon:dinaciclib",
+                      "target":  "target:cdk9",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:avagacestat",
+                      "target":  "pathway:other",
+                      "type":  "in_pathway",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:colon:bortezomib",
+                      "target":  "pathway:proteinstabilityanddegradation",
+                      "type":  "in_pathway",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:tw37",
+                      "target":  "target:mcl1",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "disease:brca",
+                      "target":  "drug:brca:temsirolimus",
+                      "type":  "has_candidate",
+                      "weight":  0.27991130779333462,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:tw37",
+                      "target":  "target:bcl2",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:cdk95038",
+                      "target":  "pathway:cellcycle",
+                      "type":  "in_pathway",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:tozasertib",
+                      "target":  "target:others",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:rapamycin",
+                      "target":  "target:mtorc1",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:colon:bortezomib",
+                      "target":  "target:proteasome",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:colon:dactinomycin",
+                      "target":  "drug:brca:dactinomycin",
+                      "type":  "shared_candidate",
+                      "weight":  1,
+                      "attrs":  {
+                                    "drug_name_norm":  "dactinomycin"
+                                }
+                  },
+                  {
+                      "source":  "disease:brca",
+                      "target":  "drug:brca:avagacestat",
+                      "type":  "has_candidate",
+                      "weight":  0.0519022389837635,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:cdk95576",
+                      "target":  "target:cdk9",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:sabutoclax",
+                      "target":  "target:bcl2",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:dactinomycin",
+                      "target":  "pathway:other",
+                      "type":  "in_pathway",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:colon:docetaxel",
+                      "target":  "pathway:mitosis",
+                      "type":  "in_pathway",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "disease:brca",
+                      "target":  "drug:brca:cdk95576",
+                      "type":  "has_candidate",
+                      "weight":  0.19028926614460159,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "disease:brca",
+                      "target":  "drug:brca:azd2014",
+                      "type":  "has_candidate",
+                      "weight":  0.34093744797949338,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:azd2014",
+                      "target":  "pathway:pi3kmtorsignaling",
+                      "type":  "in_pathway",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:colon:rapamycin",
+                      "target":  "pathway:pi3kmtorsignaling",
+                      "type":  "in_pathway",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:pictilisib",
+                      "target":  "target:pi3kclass1",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:sabutoclax",
+                      "target":  "pathway:apoptosisregulation",
+                      "type":  "in_pathway",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "disease:brca",
+                      "target":  "drug:brca:sabutoclax",
+                      "type":  "has_candidate",
+                      "weight":  0.0530273895748817,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "disease:colon",
+                      "target":  "drug:colon:rapamycin",
+                      "type":  "has_candidate",
+                      "weight":  9.71,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:cdk95576",
+                      "target":  "pathway:cellcycle",
+                      "type":  "in_pathway",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "disease:brca",
+                      "target":  "drug:brca:tozasertib",
+                      "type":  "has_candidate",
+                      "weight":  0.052048575148876,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:sl0101",
+                      "target":  "target:pim3",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:avagacestat",
+                      "target":  "target:amyloidbeta40",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "disease:brca",
+                      "target":  "drug:brca:pictilisib",
+                      "type":  "has_candidate",
+                      "weight":  0.0978922709192639,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:sl0101",
+                      "target":  "target:pim1",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:colon:dactinomycin",
+                      "target":  "target:rnapolymerase",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:tanespimycin",
+                      "target":  "pathway:proteinstabilityanddegradation",
+                      "type":  "in_pathway",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "disease:brca",
+                      "target":  "drug:brca:tw37",
+                      "type":  "has_candidate",
+                      "weight":  0.0764429706126459,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "disease:colon",
+                      "target":  "drug:colon:vinblastine",
+                      "type":  "has_candidate",
+                      "weight":  12.83,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "disease:colon",
+                      "target":  "drug:colon:dactinomycin",
+                      "type":  "has_candidate",
+                      "weight":  14,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:colon:epirubicin",
+                      "target":  "pathway:dnareplication",
+                      "type":  "in_pathway",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:colon:sn38",
+                      "target":  "target:top1",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "disease:colon",
+                      "target":  "drug:colon:sn38",
+                      "type":  "has_candidate",
+                      "weight":  13,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:colon:staurosporine",
+                      "target":  "target:broadspectrumkinaseinhibitor",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "disease:colon",
+                      "target":  "drug:colon:bortezomib",
+                      "type":  "has_candidate",
+                      "weight":  12.79,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "disease:brca",
+                      "target":  "drug:brca:tanespimycin",
+                      "type":  "has_candidate",
+                      "weight":  0.1153908037285723,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:colon:vinblastine",
+                      "target":  "target:microtubuledestabiliser",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:teniposide",
+                      "target":  "pathway:dnareplication",
+                      "type":  "in_pathway",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:mk2206",
+                      "target":  "target:akt2",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:colon:camptothecin",
+                      "target":  "pathway:dnareplication",
+                      "type":  "in_pathway",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:tw37",
+                      "target":  "pathway:apoptosisregulation",
+                      "type":  "in_pathway",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:colon:luminespib",
+                      "target":  "target:hsp90",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:mk2206",
+                      "target":  "target:akt1",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:sabutoclax",
+                      "target":  "target:mcl1",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:sabutoclax",
+                      "target":  "target:bfl1",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "disease:colon",
+                      "target":  "drug:colon:staurosporine",
+                      "type":  "has_candidate",
+                      "weight":  13.5,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "disease:colon",
+                      "target":  "drug:colon:paclitaxel",
+                      "type":  "has_candidate",
+                      "weight":  10.83,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:azd2014",
+                      "target":  "target:mtorc2",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "disease:brca",
+                      "target":  "drug:brca:rapamycin",
+                      "type":  "has_candidate",
+                      "weight":  0.11204258503067389,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "disease:brca",
+                      "target":  "drug:brca:mk2206",
+                      "type":  "has_candidate",
+                      "weight":  0.1024414026085509,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:tozasertib",
+                      "target":  "target:aurkc",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:dactinomycin",
+                      "target":  "target:rnapolymerase",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:colon:vinorelbine",
+                      "target":  "target:microtubuledestabiliser",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:avagacestat",
+                      "target":  "target:amyloidbeta20",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:colon:dinaciclib",
+                      "target":  "target:cdk5",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:rapamycin",
+                      "target":  "pathway:pi3kmtorsignaling",
+                      "type":  "in_pathway",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "disease:colon",
+                      "target":  "drug:colon:camptothecin",
+                      "type":  "has_candidate",
+                      "weight":  11.5,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "disease:colon",
+                      "target":  "drug:colon:luminespib",
+                      "type":  "has_candidate",
+                      "weight":  6,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:colon:dinaciclib",
+                      "target":  "pathway:cellcycle",
+                      "type":  "in_pathway",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:colon:paclitaxel",
+                      "target":  "pathway:mitosis",
+                      "type":  "in_pathway",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:colon:dinaciclib",
+                      "target":  "target:cdk2",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:sl0101",
+                      "target":  "target:aurkb",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:sl0101",
+                      "target":  "pathway:otherkinases",
+                      "type":  "in_pathway",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:temsirolimus",
+                      "target":  "pathway:pi3kmtorsignaling",
+                      "type":  "in_pathway",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:colon:camptothecin",
+                      "target":  "target:top1",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "disease:brca",
+                      "target":  "drug:brca:dactinomycin",
+                      "type":  "has_candidate",
+                      "weight":  0.32903753545732312,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:sl0101",
+                      "target":  "target:rsk",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:colon:sn38",
+                      "target":  "pathway:dnareplication",
+                      "type":  "in_pathway",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:colon:rapamycin",
+                      "target":  "target:mtorc1",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:tozasertib",
+                      "target":  "pathway:mitosis",
+                      "type":  "in_pathway",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:colon:vinorelbine",
+                      "target":  "pathway:mitosis",
+                      "type":  "in_pathway",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "colon_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:sabutoclax",
+                      "target":  "target:bclxl",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  },
+                  {
+                      "source":  "drug:brca:azd2014",
+                      "target":  "target:mtorc1",
+                      "type":  "targets",
+                      "weight":  null,
+                      "attrs":  {
+                                    "source":  "brca_csv"
+                                }
+                  }
+              ]
+}
+;
+
