@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AlphaFold 3D Viewer (Remote)</title>
+  <script src="https://3Dmol.org/build/3Dmol-min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Noto Sans KR", Arial, sans-serif;
+      background: linear-gradient(135deg, #f3f8ff, #eef7f1);
+      color: #1f2937;
+    }
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 12px;
+    }
+    .card {
+      background: rgba(255,255,255,0.94);
+      border: 1px solid #dbe4ee;
+      border-radius: 12px;
+      box-shadow: 0 8px 26px rgba(25,35,60,0.08);
+    }
+    .toolbar {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 8px;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    .viewer {
+      height: 58vh;
+      min-height: 340px;
+      border: 1px solid #d6e1ed;
+      background: #0b1220;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .meta {
+      margin-top: 10px;
+      padding: 10px;
+      font-size: 14px;
+      line-height: 1.45;
+      max-height: 32vh;
+      overflow: auto;
+    }
+    .status {
+      margin-top: 8px;
+      font-size: 13px;
+      color: #374151;
+    }
+    .k { display: inline-block; min-width: 110px; color: #4b5563; font-weight: 600; }
+    select, button {
+      border-radius: 10px;
+      border: 1px solid #cfd9e7;
+      padding: 8px 10px;
+      background: #fff;
+      font-size: 14px;
+    }
+    @media (max-width: 900px) {
+      .toolbar { grid-template-columns: 1fr; }
+      .viewer { height: 52vh; min-height: 300px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card toolbar">
+      <select id="entrySelect"></select>
+      <select id="styleSelect">
+        <option value="cartoon_plddt">Cartoon (pLDDT Color)</option>
+        <option value="cartoon_chain">Cartoon (Chain Color)</option>
+        <option value="stick">Stick</option>
+        <option value="sphere">Sphere</option>
+      </select>
+      <button id="spinBtn">Spin: Off</button>
+    </div>
+    <div id="viewer" class="card viewer"></div>
+    <div class="card meta" id="meta"></div>
+    <div class="status" id="status"></div>
+  </div>
+  <script>
+    const entries = [{"label": "Rank 1 | AZD2014 | MTOR | P42345", "rank": 1, "drug_name": "AZD2014", "target_gene_symbol": "MTOR", "uniprot_id": "P42345", "alphafold_mean_plddt": 78.56789273919196, "site_confidence": 0.718218095600605, "predicted_binding_site_residues": "VAL:A2330;ILE:A2356;PRO:A2141;ARG:A2378;HIS:A1454;ASN:A2219;VAL:A1139;LEU:A656;VAL:A2019;ARG:A1391;ILE:A1973;TRP:A2549;LEU:A396;LEU:A172;ASP:A2276;LEU:A1907;ILE:A885;PHE:A2362;THR:A714;GLN:A2223;LEU:A1016;ASP:A2357;LEU:A437;LYS:A2218", "pdb_url": "https://alphafold.ebi.ac.uk/files/AF-P42345-F1-model_v6.pdb"}, {"label": "Rank 2 | Dactinomycin | ESR1 | B5LY05", "rank": 2, "drug_name": "Dactinomycin", "target_gene_symbol": "ESR1", "uniprot_id": "B5LY05", "alphafold_mean_plddt": 64.00463203463191, "site_confidence": 0.5979167272647222, "predicted_binding_site_residues": "LEU:A90;LEU:A104;TYR:A91;LEU:A51;LEU:A101;ILE:A20;MET:A87;LEU:A109;GLN:A63;GLY:A59;LEU:A105;ALA:A58;LEU:A62;THR:A61;THR:A48;TYR:A24;VAL:A99;LEU:A69;GLN:A21;ALA:A111;ASN:A84;PRO:A100;VAL:A23;HIS:A53", "pdb_url": "https://alphafold.ebi.ac.uk/files/AF-B5LY05-F1-model_v6.pdb"}, {"label": "Rank 4 | Temsirolimus | MTOR | P42345", "rank": 4, "drug_name": "Temsirolimus", "target_gene_symbol": "MTOR", "uniprot_id": "P42345", "alphafold_mean_plddt": 78.56789273919196, "site_confidence": 0.718218095600605, "predicted_binding_site_residues": "VAL:A2330;ILE:A2356;PRO:A2141;ARG:A2378;HIS:A1454;ASN:A2219;VAL:A1139;LEU:A656;VAL:A2019;ARG:A1391;ILE:A1973;TRP:A2549;LEU:A396;LEU:A172;ASP:A2276;LEU:A1907;ILE:A885;PHE:A2362;THR:A714;GLN:A2223;LEU:A1016;ASP:A2357;LEU:A437;LYS:A2218", "pdb_url": "https://alphafold.ebi.ac.uk/files/AF-P42345-F1-model_v6.pdb"}, {"label": "Rank 6 | CDK9_5576 | CDK9 | B5BU53", "rank": 6, "drug_name": "CDK9_5576", "target_gene_symbol": "CDK9", "uniprot_id": "B5BU53", "alphafold_mean_plddt": 86.34854339873674, "site_confidence": 0.692186618844668, "predicted_binding_site_residues": "ASP:A167;MET:A130;GLY:A207;PRO:A197;MET:A219;ALA:A166;PRO:A196;ALA:A152;ALA:A301;VAL:A129;PRO:A208;ASP:A285;LEU:A123;TRP:A223;SER:A226;ASP:A318;ILE:A67;HIS:A147;ARG:A188;LEU:A51;ALA:A173;MET:A222;LEU:A137;PHE:A105", "pdb_url": "https://alphafold.ebi.ac.uk/files/AF-B5BU53-F1-model_v6.pdb"}, {"label": "Rank 7 | Tanespimycin | HSP90AA1 | G3V2J8", "rank": 7, "drug_name": "Tanespimycin", "target_gene_symbol": "HSP90AA1", "uniprot_id": "G3V2J8", "alphafold_mean_plddt": 77.11826732673264, "site_confidence": 0.6857921332120895, "predicted_binding_site_residues": "ILE:A49;VAL:A117;GLU:A75;ILE:A149;PHE:A44;LYS:A116;GLY:A97;ARG:A60;ASN:A51;LEU:A119;LEU:A48;GLY:A146;ILE:A134;LEU:A45;GLU:A127;PHE:A144;GLU:A42;TYR:A128;LYS:A41;LEU:A76;LYS:A84;ILE:A145;LEU:A151;LYS:A74", "pdb_url": "https://alphafold.ebi.ac.uk/files/AF-G3V2J8-F1-model_v6.pdb"}, {"label": "Rank 8 | Rapamycin | MTOR | P42345", "rank": 8, "drug_name": "Rapamycin", "target_gene_symbol": "MTOR", "uniprot_id": "P42345", "alphafold_mean_plddt": 78.56789273919196, "site_confidence": 0.718218095600605, "predicted_binding_site_residues": "VAL:A2330;ILE:A2356;PRO:A2141;ARG:A2378;HIS:A1454;ASN:A2219;VAL:A1139;LEU:A656;VAL:A2019;ARG:A1391;ILE:A1973;TRP:A2549;LEU:A396;LEU:A172;ASP:A2276;LEU:A1907;ILE:A885;PHE:A2362;THR:A714;GLN:A2223;LEU:A1016;ASP:A2357;LEU:A437;LYS:A2218", "pdb_url": "https://alphafold.ebi.ac.uk/files/AF-P42345-F1-model_v6.pdb"}, {"label": "Rank 9 | MK-2206 | AKT1 | B0LPE5", "rank": 9, "drug_name": "MK-2206", "target_gene_symbol": "AKT1", "uniprot_id": "B0LPE5", "alphafold_mean_plddt": 80.63779025261528, "site_confidence": 0.6612269009153048, "predicted_binding_site_residues": "MET:A147;GLY:A254;ASP:A248;PHE:A425;GLY:A410;MET:A339;ASP:A292;GLU:A314;PHE:A469;PHE:A368;THR:A371;THR:A433;THR:A435;LEU:A277;SER:A422;VAL:A258;THR:A146;THR:A291;ILE:A411;GLN:A428;ARG:A367;LEU:A384;TRP:A332;TYR:A253", "pdb_url": "https://alphafold.ebi.ac.uk/files/AF-B0LPE5-F1-model_v6.pdb"}, {"label": "Rank 10 | Pictilisib | PIK3CA | C9J951", "rank": 10, "drug_name": "Pictilisib", "target_gene_symbol": "PIK3CA", "uniprot_id": "C9J951", "alphafold_mean_plddt": 71.34083832335327, "site_confidence": 0.6279771413121905, "predicted_binding_site_residues": "LEU:A15;PRO:A5;GLY:A8;HIS:A14;SER:A6;PRO:A17;MET:A16;GLY:A12;ARG:A4;MET:A1;ARG:A19;PRO:A2;PRO:A18;PRO:A3;LEU:A21;ILE:A20;ILE:A13;LEU:A10;SER:A7;TRP:A11;GLU:A9", "pdb_url": "https://alphafold.ebi.ac.uk/files/AF-C9J951-F1-model_v6.pdb"}, {"label": "Rank 11 | TW 37 | BCL2 | A0N771", "rank": 11, "drug_name": "TW 37", "target_gene_symbol": "BCL2", "uniprot_id": "A0N771", "alphafold_mean_plddt": 72.9551111111111, "site_confidence": 0.0, "predicted_binding_site_residues": "nan", "pdb_url": "https://alphafold.ebi.ac.uk/files/AF-A0N771-F1-model_v6.pdb"}, {"label": "Rank 12 | CDK9_5038 | CDK9 | B5BU53", "rank": 12, "drug_name": "CDK9_5038", "target_gene_symbol": "CDK9", "uniprot_id": "B5BU53", "alphafold_mean_plddt": 86.34854339873674, "site_confidence": 0.692186618844668, "predicted_binding_site_residues": "ASP:A167;MET:A130;GLY:A207;PRO:A197;MET:A219;ALA:A166;PRO:A196;ALA:A152;ALA:A301;VAL:A129;PRO:A208;ASP:A285;LEU:A123;TRP:A223;SER:A226;ASP:A318;ILE:A67;HIS:A147;ARG:A188;LEU:A51;ALA:A173;MET:A222;LEU:A137;PHE:A105", "pdb_url": "https://alphafold.ebi.ac.uk/files/AF-B5BU53-F1-model_v6.pdb"}, {"label": "Rank 13 | Sabutoclax | BCL2 | A0N771", "rank": 13, "drug_name": "Sabutoclax", "target_gene_symbol": "BCL2", "uniprot_id": "A0N771", "alphafold_mean_plddt": 72.9551111111111, "site_confidence": 0.0, "predicted_binding_site_residues": "nan", "pdb_url": "https://alphafold.ebi.ac.uk/files/AF-A0N771-F1-model_v6.pdb"}, {"label": "Rank 14 | Tozasertib | ESR1 | B5LY05", "rank": 14, "drug_name": "Tozasertib", "target_gene_symbol": "ESR1", "uniprot_id": "B5LY05", "alphafold_mean_plddt": 64.00463203463191, "site_confidence": 0.5979167272647222, "predicted_binding_site_residues": "LEU:A90;LEU:A104;TYR:A91;LEU:A51;LEU:A101;ILE:A20;MET:A87;LEU:A109;GLN:A63;GLY:A59;LEU:A105;ALA:A58;LEU:A62;THR:A61;THR:A48;TYR:A24;VAL:A99;LEU:A69;GLN:A21;ALA:A111;ASN:A84;PRO:A100;VAL:A23;HIS:A53", "pdb_url": "https://alphafold.ebi.ac.uk/files/AF-B5LY05-F1-model_v6.pdb"}, {"label": "Rank 14 | Tozasertib | AURKA | A3KFJ0", "rank": 14, "drug_name": "Tozasertib", "target_gene_symbol": "AURKA", "uniprot_id": "A3KFJ0", "alphafold_mean_plddt": 72.75113464991051, "site_confidence": 0.6765503386656443, "predicted_binding_site_residues": "ALA:A273;ASP:A274;LEU:A130;LEU:A293;LEU:A244;PRO:A297;ARG:A255;LYS:A258;HIS:A254;PHE:A329;HIS:A190;ARG:A189;PRO:A191;GLY:A316;TYR:A212;GLY:A276;LEU:A312;ALA:A203;HIS:A187;GLN:A185;ILE:A237;GLY:A140;PRO:A259;GLU:A308", "pdb_url": "https://alphafold.ebi.ac.uk/files/AF-A3KFJ0-F1-model_v6.pdb"}];
+    const entrySelect = document.getElementById("entrySelect");
+    const styleSelect = document.getElementById("styleSelect");
+    const spinBtn = document.getElementById("spinBtn");
+    const statusEl = document.getElementById("status");
+    const meta = document.getElementById("meta");
+    let spinOn = false;
+
+    if (!entries.length) {
+      document.getElementById("viewer").innerHTML = '<div style="padding:16px;background:#fff;color:#111">No entry found.</div>';
+      throw new Error("No entries");
+    }
+    for (let i = 0; i < entries.length; i++) {
+      const op = document.createElement("option");
+      op.value = String(i);
+      op.textContent = entries[i].label;
+      entrySelect.appendChild(op);
+    }
+
+    if (!window.$3Dmol) {
+      document.getElementById("viewer").innerHTML = '<div style="padding:16px;background:#fff;color:#111">3Dmol load failed.</div>';
+      throw new Error("3Dmol load failed");
+    }
+    const viewer = $3Dmol.createViewer("viewer", { backgroundColor: "white", antialias: true });
+
+    function applyStyle(mode) {
+      viewer.setStyle({}, {});
+      if (mode === "cartoon_chain") {
+        viewer.setStyle({}, { cartoon: { color: "spectrum" } });
+      } else if (mode === "stick") {
+        viewer.setStyle({}, { stick: { colorscheme: "Jmol" } });
+      } else if (mode === "sphere") {
+        viewer.setStyle({}, { sphere: { colorscheme: "Jmol", scale: 0.28 } });
+      } else {
+        viewer.setStyle({}, { cartoon: { colorscheme: { prop: "b", gradient: "rwb", min: 0, max: 100 } } });
+      }
+    }
+
+    function parseSiteSelection(txt) {
+      const sels = [];
+      const t = (txt || "").trim();
+      if (!t) return sels;
+      for (const token of t.split(";")) {
+        const x = token.trim();
+        if (!x) continue;
+        const parts = x.split(":");
+        if (parts.length < 2) continue;
+        const rc = parts[1];
+        const chain = rc[0];
+        const resi = parseInt(rc.slice(1), 10);
+        if (!Number.isFinite(resi)) continue;
+        sels.push({ chain, resi });
+      }
+      return sels;
+    }
+
+    function highlightSite(txt) {
+      const sels = parseSiteSelection(txt);
+      for (const sel of sels) {
+        viewer.setStyle(sel, { stick: { radius: 0.2, color: "gold" } });
+      }
+      return sels;
+    }
+
+    async function render(index) {
+      const e = entries[index];
+      statusEl.textContent = "Loading structure...";
+      try {
+        const resp = await fetch(e.pdb_url);
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+        const pdb = await resp.text();
+        viewer.clear();
+        viewer.addModel(pdb, "pdb");
+        applyStyle(styleSelect.value);
+        const sels = highlightSite(e.predicted_binding_site_residues);
+        if (sels.length > 0) {
+          viewer.zoomTo(sels);
+        } else {
+          viewer.zoomTo();
+        }
+        viewer.spin(spinOn);
+        viewer.render();
+        statusEl.textContent = "Loaded";
+      } catch (err) {
+        statusEl.textContent = "Load failed: " + String(err);
+      }
+
+      meta.innerHTML = `
+        <div><span class="k">Rank</span> ${e.rank || "-"}</div>
+        <div><span class="k">Drug</span> ${e.drug_name || "-"}</div>
+        <div><span class="k">Target</span> ${e.target_gene_symbol || "-"}</div>
+        <div><span class="k">UniProt</span> ${e.uniprot_id || "-"}</div>
+        <div><span class="k">Mean pLDDT</span> ${(e.alphafold_mean_plddt || 0).toFixed(2)}</div>
+        <div><span class="k">Site Conf</span> ${(e.site_confidence || 0).toFixed(3)}</div>
+        <div><span class="k">PDB URL</span> ${e.pdb_url || "-"}</div>
+        <div><span class="k">Site Residues</span> ${(e.predicted_binding_site_residues || "-")}</div>
+      `;
+    }
+
+    entrySelect.addEventListener("change", () => render(Number(entrySelect.value)));
+    styleSelect.addEventListener("change", () => {
+      applyStyle(styleSelect.value);
+      viewer.render();
+    });
+    spinBtn.addEventListener("click", () => {
+      spinOn = !spinOn;
+      viewer.spin(spinOn);
+      spinBtn.textContent = `Spin: ${spinOn ? "On" : "Off"}`;
+      viewer.render();
+    });
+
+    render(0);
+  </script>
+</body>
+</html>
