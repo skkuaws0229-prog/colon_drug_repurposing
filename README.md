@@ -38,6 +38,7 @@ flowchart LR
 - `runs/`: run-scoped outputs, manifests, and QC reports
 - `analysis/`: cross-pipeline analysis and operational documentation
 - `infra/aws/`: Terraform/AWS Batch execution baseline
+- `docs/docker_recovery_compose_protocol.md`: reproducible Docker Desktop recovery + Superset compose bring-up protocol
 
 ## Reproducibility
 ### Local/Default
@@ -73,4 +74,3 @@ For outbound sharing:
 
 ## Contact
 If this project matches your hiring needs, please contact via GitHub profile message or repository issue.
-
