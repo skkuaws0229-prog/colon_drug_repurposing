@@ -1,0 +1,7 @@
+disease_id,disease_name,gene_symbol
+MONDO:0007254,Colorectal cancer,EGFR
+MONDO:0007254,Colorectal cancer,KDR
+MONDO:0007254,Colorectal cancer,PTGS2
+MONDO:0007254,Colorectal cancer,KIT
+MONDO:0007254,Colorectal cancer,PIK3CA
+MONDO:0007254,Colorectal cancer,KRAS
