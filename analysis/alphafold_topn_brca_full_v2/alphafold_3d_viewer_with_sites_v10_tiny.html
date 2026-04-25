@@ -93,6 +93,42 @@
       font-size: 13px;
       color: #1f2937;
     }
+    .summary {
+      padding: 12px;
+      background: linear-gradient(160deg, #f8fafc, #f1f5f9);
+      border: 1px solid #dbe4ee;
+      border-radius: 12px;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .summary-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      text-transform: uppercase;
+      color: #111827;
+      margin-bottom: 8px;
+    }
+    .summary-line {
+      color: #1f2937;
+      margin-top: 4px;
+      word-break: break-word;
+    }
+    .summary-line b {
+      color: #0f172a;
+    }
+    .summary-conclusion {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      background: #ffffff;
+      border: 1px solid #dce6f2;
+      color: #1e293b;
+    }
+    .summary-conclusion strong {
+      font-weight: 700;
+      color: #0f172a;
+    }
     .viewer-overlay {
       position: absolute;
       top: 12px;
@@ -249,6 +285,7 @@
           <button id="spinBtn">Spin: Off</button>
         </div>
         <div class="status" id="status">Initializing viewer...</div>
+        <div class="card summary" id="quickSummary"></div>
         <div class="card meta" id="meta"></div>
       </div>
       <div id="viewer" class="card viewer"></div>
@@ -260,6 +297,7 @@
     const styleSelect = document.getElementById("styleSelect");
     const spinBtn = document.getElementById("spinBtn");
     const statusEl = document.getElementById("status");
+    const quickSummary = document.getElementById("quickSummary");
     const meta = document.getElementById("meta");
     const viewerDiv = document.getElementById("viewer");
     let spinOn = false;
@@ -267,13 +305,15 @@
     window.addEventListener("error", (ev) => {
       const msg = ev && ev.message ? ev.message : "Unknown script error";
       statusEl.textContent = "Runtime error: " + msg;
+      quickSummary.innerHTML = '<div class="summary-title">Quick Read</div><div class="summary-line">Runtime error occurred. Check status and browser console.</div>';
       if (!meta.innerHTML || meta.innerHTML.trim() === "") {
-        meta.innerHTML = `<div><b>Runtime error</b>: ${escapeHtml(msg)}</div>`;
+        meta.textContent = "Runtime error: " + msg;
       }
     });
 
     if (!entries.length) {
       statusEl.textContent = "No structure entries found.";
+      quickSummary.innerHTML = '<div class="summary-title">Quick Read</div><div class="summary-line">No entry is available.</div>';
       viewerDiv.innerHTML = '<div style="padding:20px;color:#111;background:#fff">No structure entries found.</div>';
       meta.innerHTML = '<b>No structure data was loaded.</b> Please verify the input CSV and alphafold_pdb_path fields.';
       throw new Error("No entries");
@@ -288,6 +328,7 @@
 
     if (!window.$3Dmol) {
       statusEl.textContent = "3Dmol.js failed to load.";
+      quickSummary.innerHTML = '<div class="summary-title">Quick Read</div><div class="summary-line">3D viewer engine was not loaded.</div>';
       viewerDiv.innerHTML = '<div style="padding:18px;background:#fff;color:#111">3Dmol.js failed to load. Check whether 3Dmol-min.js exists in the same folder.</div>';
       meta.innerHTML = '<b>Cause</b>: External CDN may be blocked in this environment, or local 3Dmol script is missing.';
       throw new Error("3Dmol load failed");
@@ -482,6 +523,40 @@
       return {siteResidues, evidence};
     }
 
+    function formatResidueLabel(residue) {
+      return `${residue.aa}:${residue.chain}${residue.resi}`;
+    }
+
+    function classifyEvidence(siteConf, sitePlddt) {
+      if (siteConf >= 0.75 && sitePlddt >= 85) return "high";
+      if (siteConf >= 0.55 && sitePlddt >= 70) return "medium";
+      return "low";
+    }
+
+    function updateQuickSummary(e, usedMode, siteInfo) {
+      const siteConf = safeNum(e.site_confidence) || 0;
+      const meanPlddt = safeNum(e.alphafold_mean_plddt) || 0;
+      const siteMeanPlddt = siteInfo.evidence.siteMeanPlddt == null ? meanPlddt : siteInfo.evidence.siteMeanPlddt;
+      const level = classifyEvidence(siteConf, siteMeanPlddt);
+      const topResidues = siteInfo.siteResidues.slice(0, 4).map(formatResidueLabel);
+      const topResidueText = topResidues.length ? topResidues.join(", ") : "-";
+      const coveragePct = Math.round((siteInfo.evidence.coverageRatio || 0) * 100);
+      let conclusion = "Predicted site evidence is limited. Use this as exploratory support only.";
+      if (level === "high") {
+        conclusion = "Predicted site evidence is strong and visually consistent for hypothesis generation.";
+      } else if (level === "medium") {
+        conclusion = "Predicted site evidence is moderate. Useful for prioritization, but still needs validation.";
+      }
+      quickSummary.innerHTML = `
+        <div class="summary-title">Quick Read</div>
+        <div class="summary-line"><b>Protein:</b> ${escapeHtml(e.target_gene_symbol || "-")} (UniProt ${escapeHtml(e.uniprot_id || "-")})</div>
+        <div class="summary-line"><b>Compound:</b> ${escapeHtml(e.drug_name || "-")} (Rank ${escapeHtml(e.rank || "-")})</div>
+        <div class="summary-line"><b>Predicted Site:</b> ${escapeHtml(topResidueText)}${siteInfo.siteResidues.length > 4 ? " ..." : ""}</div>
+        <div class="summary-line"><b>Confidence:</b> SiteConf ${siteConf.toFixed(3)} | Site pLDDT ${siteMeanPlddt.toFixed(1)} | Coverage ${coveragePct}% | Mode ${escapeHtml(usedMode)}</div>
+        <div class="summary-conclusion"><strong>Interpretation:</strong> ${escapeHtml(conclusion)}</div>
+      `;
+    }
+
     function updateViewerOverlay(e, usedMode, siteInfo) {
       const siteConf = safeNum(e.site_confidence) || 0;
       const meanPlddt = safeNum(e.alphafold_mean_plddt);
@@ -615,6 +690,7 @@
           }
         }
       }
+      updateQuickSummary(e, usedMode, siteInfo);
       updateViewerOverlay(e, usedMode, siteInfo);
       updateMetaPanel(e, usedMode, siteInfo);
     }
