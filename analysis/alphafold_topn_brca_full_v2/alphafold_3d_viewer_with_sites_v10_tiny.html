@@ -847,6 +847,9 @@
       const siteCount = siteInfo.siteResidues.length || 0;
       const coveragePct = Math.round((siteInfo.evidence.coverageRatio || 0) * 100);
       const proteinInfo = siteInfo.proteinInfo || [];
+      const renderedAtoms = siteInfo.evidence.renderedAtoms || (safeNum(e.atom_kept) || 0);
+      const atomTotal = safeNum(e.atom_total) || renderedAtoms;
+      const atomSource = siteInfo.renderSource || (usedMode === "full_atoms" ? "full_file" : "inline_compact");
       const evidenceScore = computeEvidenceScore(siteConf, effectivePlddt, coveragePct);
       const interpretation = buildInterpretation(siteConf, effectivePlddt, coveragePct, represented, siteCount, evidenceScore);
       const keyResidues = (siteInfo.evidence.positioned || [])
@@ -1029,4 +1032,3 @@
   </script>
 </body>
 </html>
-
