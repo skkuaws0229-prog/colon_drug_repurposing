@@ -169,6 +169,7 @@
     .dot-site { background: #facc15; }
     .dot-core { background: #f59e0b; }
     .dot-label { background: #111827; }
+    .dot-focus { background: #cbd5e1; }
     .meta-block + .meta-block {
       margin-top: 14px;
       padding-top: 12px;
@@ -322,8 +323,9 @@
     viewerLegend.className = "viewer-legend";
     viewerLegend.innerHTML = `
       <div class="legend-item"><span class="legend-dot dot-site"></span>Predicted site residues</div>
-      <div class="legend-item"><span class="legend-dot dot-core"></span>Site centroid</div>
-      <div class="legend-item"><span class="legend-dot dot-label"></span>Key residue labels</div>
+      <div class="legend-item"><span class="legend-dot dot-core"></span>Site centroid (orange)</div>
+      <div class="legend-item"><span class="legend-dot dot-label"></span>Key residue markers (black)</div>
+      <div class="legend-item"><span class="legend-dot dot-focus"></span>Non-site dim mask (focus mode)</div>
     `;
     viewerDiv.appendChild(viewerOverlay);
     viewerDiv.appendChild(viewerLegend);
@@ -495,12 +497,39 @@
       center.x /= positioned.length;
       center.y /= positioned.length;
       center.z /= positioned.length;
+      const radius = Math.max(2.4, Math.min(4.2, positioned.length * 0.09));
       viewer.addSphere({
         center,
-        radius: Math.max(2.4, Math.min(4.2, positioned.length * 0.09)),
+        radius: radius,
         color: "#f59e0b",
-        opacity: 0.22
+        opacity: 0.42
       });
+      viewer.addSphere({
+        center,
+        radius: Math.max(0.9, radius * 0.35),
+        color: "#fb923c",
+        opacity: 0.88
+      });
+    }
+
+    function drawKeyMarkers(positioned) {
+      const maxDots = Math.min(positioned.length, 8);
+      for (let i = 0; i < maxDots; i++) {
+        const item = positioned[i];
+        const pos = {x: item.anchor.x, y: item.anchor.y, z: item.anchor.z};
+        viewer.addSphere({
+          center: pos,
+          radius: 0.65,
+          color: "#111827",
+          opacity: 0.95
+        });
+        viewer.addSphere({
+          center: pos,
+          radius: 0.82,
+          color: "#f8fafc",
+          opacity: 0.55
+        });
+      }
     }
 
     function drawSiteLabels(positioned) {
@@ -532,6 +561,7 @@
       }
       const evidence = computeSiteEvidence(siteResidues);
       drawSiteCentroid(evidence.positioned);
+      drawKeyMarkers(evidence.positioned);
       drawSiteLabels(evidence.positioned);
       return {siteResidues, evidence};
     }
@@ -619,6 +649,7 @@
       const coveragePct = Math.round((siteInfo.evidence.coverageRatio || 0) * 100);
       const evidenceScore = computeEvidenceScore(siteConf, effectivePlddt, coveragePct);
       const interpretation = buildInterpretation(siteConf, effectivePlddt, coveragePct, represented, siteCount, evidenceScore);
+      const markerReady = represented > 0;
       viewerOverlay.innerHTML = `
         <div class="overlay-title">Rank ${escapeHtml(e.rank || "-")} | ${escapeHtml(e.drug_name || "-")} -> ${escapeHtml(e.target_gene_symbol || "-")}</div>
         <div class="overlay-badges">
@@ -630,8 +661,9 @@
           <span class="ov-badge ${focusOn ? "ov-high" : "ov-low"}">Focus: ${focusOn ? "On" : "Off"}</span>
         </div>
         <div class="overlay-sub">
-          Gold sticks mark predicted binding-site residues. Amber sphere marks the site centroid.
-          Labels show key residues used for visual confirmation. ${escapeHtml(interpretation.short)}
+          Gold sticks mark predicted binding-site residues. Orange sphere is site centroid. Black dots are key residue markers.
+          ${markerReady ? "Gray region in focus mode means non-site dim mask." : "Centroid/black markers are hidden when no site residue is mapped in the current model."}
+          ${escapeHtml(interpretation.short)}
         </div>
       `;
     }
@@ -686,7 +718,7 @@
             ${validation.steps.map(step => `<li>${escapeHtml(step)}</li>`).join("")}
           </ul>
           <div class="hint">
-            Drag to rotate, wheel to zoom. Toggle Site Focus to dim non-site regions and center the camera on the predicted pocket.
+            Drag to rotate, wheel to zoom. Orange = centroid, black dots = key residues, gray in focus mode = non-site dim mask.
           </div>
         </div>
       `;
