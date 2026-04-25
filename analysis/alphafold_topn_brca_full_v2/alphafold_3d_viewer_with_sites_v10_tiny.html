@@ -93,6 +93,123 @@
       font-size: 13px;
       color: #1f2937;
     }
+    .viewer-overlay {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 20;
+      max-width: min(440px, calc(100% - 24px));
+      background: rgba(17, 24, 39, 0.74);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      padding: 10px 12px;
+      color: #f9fafb;
+      backdrop-filter: blur(4px);
+      pointer-events: none;
+    }
+    .overlay-title {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      letter-spacing: 0.2px;
+    }
+    .overlay-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+    .ov-badge {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 3px 8px;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.25;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+    .ov-high { background: rgba(22, 163, 74, 0.22); border-color: rgba(134, 239, 172, 0.45); color: #dcfce7; }
+    .ov-mid { background: rgba(245, 158, 11, 0.2); border-color: rgba(252, 211, 77, 0.48); color: #fef3c7; }
+    .ov-low { background: rgba(239, 68, 68, 0.2); border-color: rgba(252, 165, 165, 0.42); color: #fee2e2; }
+    .overlay-sub {
+      font-size: 11px;
+      line-height: 1.45;
+      color: rgba(255, 255, 255, 0.9);
+    }
+    .viewer-legend {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid #dbe4ee;
+      font-size: 11px;
+      color: #1f2937;
+      pointer-events: none;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      white-space: nowrap;
+    }
+    .legend-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(17, 24, 39, 0.25);
+      flex: 0 0 auto;
+    }
+    .dot-site { background: #facc15; }
+    .dot-core { background: #f59e0b; }
+    .dot-label { background: #111827; }
+    .meta-block + .meta-block {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed #d6deea;
+    }
+    .meta-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 8px;
+      letter-spacing: 0.2px;
+      text-transform: uppercase;
+    }
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px 10px;
+    }
+    .meta-note {
+      margin-top: 8px;
+      font-size: 12px;
+      color: #374151;
+      line-height: 1.45;
+      background: #f7fafc;
+      border: 1px solid #dbe4ee;
+      border-radius: 10px;
+      padding: 8px 10px;
+    }
+    .site-list {
+      margin-top: 8px;
+      font-size: 12px;
+      line-height: 1.5;
+      color: #374151;
+      word-break: break-word;
+      max-height: 120px;
+      overflow: auto;
+      background: #fbfdff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 8px 10px;
+    }
     @media (max-width: 980px) {
       .layout {
         grid-template-columns: 1fr;
@@ -107,6 +224,12 @@
       }
       .meta {
         max-height: 42vh;
+      }
+      .meta-grid {
+        grid-template-columns: 1fr;
+      }
+      .viewer-overlay {
+        max-width: calc(100% - 24px);
       }
     }
   </style>
@@ -141,10 +264,18 @@
     const viewerDiv = document.getElementById("viewer");
     let spinOn = false;
 
+    window.addEventListener("error", (ev) => {
+      const msg = ev && ev.message ? ev.message : "Unknown script error";
+      statusEl.textContent = "Runtime error: " + msg;
+      if (!meta.innerHTML || meta.innerHTML.trim() === "") {
+        meta.innerHTML = `<div><b>Runtime error</b>: ${escapeHtml(msg)}</div>`;
+      }
+    });
+
     if (!entries.length) {
       statusEl.textContent = "No structure entries found.";
       viewerDiv.innerHTML = '<div style="padding:20px;color:#111;background:#fff">No structure entries found.</div>';
-      meta.innerHTML = '<b>구조 데이터가 없습니다.</b> 입력 CSV와 alphafold_status/alphafold_pdb_path를 확인하세요.';
+      meta.innerHTML = '<b>No structure data was loaded.</b> Please verify the input CSV and alphafold_pdb_path fields.';
       throw new Error("No entries");
     }
 
@@ -157,8 +288,8 @@
 
     if (!window.$3Dmol) {
       statusEl.textContent = "3Dmol.js failed to load.";
-      viewerDiv.innerHTML = '<div style="padding:18px;background:#fff;color:#111">3Dmol.js 로딩 실패: 같은 폴더에 3Dmol-min.js가 있는지 확인해주세요.</div>';
-      meta.innerHTML = '<b>원인</b>: IAB에서 외부 CDN이 차단되었거나 로컬 스크립트가 없습니다.';
+      viewerDiv.innerHTML = '<div style="padding:18px;background:#fff;color:#111">3Dmol.js failed to load. Check whether 3Dmol-min.js exists in the same folder.</div>';
+      meta.innerHTML = '<b>Cause</b>: External CDN may be blocked in this environment, or local 3Dmol script is missing.';
       throw new Error("3Dmol load failed");
     }
 
@@ -166,6 +297,17 @@
       backgroundColor: "white",
       antialias: false
     });
+    const viewerOverlay = document.createElement("div");
+    viewerOverlay.className = "viewer-overlay";
+    const viewerLegend = document.createElement("div");
+    viewerLegend.className = "viewer-legend";
+    viewerLegend.innerHTML = `
+      <div class="legend-item"><span class="legend-dot dot-site"></span>Predicted site residues</div>
+      <div class="legend-item"><span class="legend-dot dot-core"></span>Site centroid</div>
+      <div class="legend-item"><span class="legend-dot dot-label"></span>Key residue labels</div>
+    `;
+    viewerDiv.appendChild(viewerOverlay);
+    viewerDiv.appendChild(viewerLegend);
     viewer.resize();
     window.addEventListener("resize", () => {
       try {
@@ -173,6 +315,48 @@
         viewer.render();
       } catch (e) {}
     });
+
+    function safeNum(v) {
+      const n = Number(v);
+      return Number.isFinite(n) ? n : null;
+    }
+
+    function escapeHtml(x) {
+      return String(x == null ? "" : x)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function parseSiteResidues(siteText) {
+      const out = [];
+      const tokens = String(siteText || "").split(";").map(x => x.trim()).filter(Boolean);
+      for (const token of tokens) {
+        const m = token.match(/^([A-Z]{3}):([A-Za-z])(\d+)$/);
+        if (!m) continue;
+        out.push({
+          aa: m[1],
+          chain: m[2],
+          resi: Number(m[3]),
+          token
+        });
+      }
+      return out;
+    }
+
+    function tierBySiteConf(v) {
+      if (v >= 0.75) return {label: "High SiteConf", className: "ov-high"};
+      if (v >= 0.55) return {label: "Medium SiteConf", className: "ov-mid"};
+      return {label: "Low SiteConf", className: "ov-low"};
+    }
+
+    function tierByPlddt(v) {
+      if (v >= 90) return {label: "Very High pLDDT", className: "ov-high"};
+      if (v >= 70) return {label: "Good pLDDT", className: "ov-mid"};
+      return {label: "Low pLDDT", className: "ov-low"};
+    }
 
     function applyStyle(mode) {
       viewer.setStyle({}, {});
@@ -220,49 +404,204 @@
       return out.join("\n") + (out.length ? "\n" : "");
     }
 
-    function highlightSite(e) {
-      const txt = (e.predicted_binding_site_residues || "").trim();
-      if (!txt) return;
-      const tokens = txt.split(";").map(x => x.trim()).filter(Boolean);
-      for (const t of tokens) {
-        const parts = t.split(":");
-        if (parts.length < 2) continue;
-        const rc = parts[1]; // e.g., A123
-        const chain = rc[0];
-        const resi = parseInt(rc.slice(1), 10);
-        if (!Number.isFinite(resi)) continue;
-        viewer.setStyle({chain: chain, resi: resi}, {stick: {radius: 0.2, color: "gold"}});
+    function computeSiteEvidence(siteResidues) {
+      const chains = new Set();
+      let plddtSum = 0;
+      let plddtN = 0;
+      const positioned = [];
+      for (const residue of siteResidues) {
+        chains.add(residue.chain);
+        let atoms = viewer.selectedAtoms({chain: residue.chain, resi: residue.resi, atom: "CA"});
+        if (!atoms || !atoms.length) atoms = viewer.selectedAtoms({chain: residue.chain, resi: residue.resi});
+        if (!atoms || !atoms.length) continue;
+        const meanB = atoms.reduce((acc, atom) => acc + (safeNum(atom.b) || 0), 0) / atoms.length;
+        if (Number.isFinite(meanB)) {
+          plddtSum += meanB;
+          plddtN += 1;
+        }
+        positioned.push({residue, anchor: atoms[0]});
       }
+      const representedCount = positioned.length;
+      const siteCount = siteResidues.length;
+      return {
+        chainCount: chains.size,
+        representedCount,
+        siteCount,
+        coverageRatio: siteCount ? representedCount / siteCount : 0,
+        siteMeanPlddt: plddtN ? (plddtSum / plddtN) : null,
+        positioned
+      };
+    }
+
+    function drawSiteCentroid(positioned) {
+      if (!positioned.length) return;
+      const center = positioned.reduce((acc, item) => {
+        acc.x += item.anchor.x;
+        acc.y += item.anchor.y;
+        acc.z += item.anchor.z;
+        return acc;
+      }, {x: 0, y: 0, z: 0});
+      center.x /= positioned.length;
+      center.y /= positioned.length;
+      center.z /= positioned.length;
+      viewer.addSphere({
+        center,
+        radius: Math.max(2.4, Math.min(4.2, positioned.length * 0.09)),
+        color: "#f59e0b",
+        opacity: 0.22
+      });
+    }
+
+    function drawSiteLabels(positioned) {
+      const maxLabels = Math.min(positioned.length, 6);
+      for (let i = 0; i < maxLabels; i++) {
+        const item = positioned[i];
+        viewer.addLabel(`${item.residue.chain}${item.residue.resi}`, {
+          position: {x: item.anchor.x, y: item.anchor.y, z: item.anchor.z},
+          backgroundColor: "#111827",
+          backgroundOpacity: 0.7,
+          fontColor: "#f9fafb",
+          fontSize: 11,
+          inFront: true,
+          showBackground: true
+        });
+      }
+    }
+
+    function highlightSite(e) {
+      const siteResidues = parseSiteResidues(e.predicted_binding_site_residues);
+      for (const residue of siteResidues) {
+        viewer.setStyle(
+          {chain: residue.chain, resi: residue.resi},
+          {stick: {radius: 0.22, color: "gold"}}
+        );
+      }
+      const evidence = computeSiteEvidence(siteResidues);
+      drawSiteCentroid(evidence.positioned);
+      drawSiteLabels(evidence.positioned);
+      return {siteResidues, evidence};
+    }
+
+    function updateViewerOverlay(e, usedMode, siteInfo) {
+      const siteConf = safeNum(e.site_confidence) || 0;
+      const meanPlddt = safeNum(e.alphafold_mean_plddt);
+      const siteMeanPlddt = siteInfo.evidence.siteMeanPlddt;
+      const effectivePlddt = siteMeanPlddt == null ? (meanPlddt || 0) : siteMeanPlddt;
+      const confTier = tierBySiteConf(siteConf);
+      const plddtTier = tierByPlddt(effectivePlddt);
+      const coveragePct = Math.round((siteInfo.evidence.coverageRatio || 0) * 100);
+      viewerOverlay.innerHTML = `
+        <div class="overlay-title">Rank ${escapeHtml(e.rank || "-")} | ${escapeHtml(e.drug_name || "-")} -> ${escapeHtml(e.target_gene_symbol || "-")}</div>
+        <div class="overlay-badges">
+          <span class="ov-badge ${confTier.className}">${confTier.label}: ${siteConf.toFixed(3)}</span>
+          <span class="ov-badge ${plddtTier.className}">Site pLDDT: ${effectivePlddt.toFixed(1)}</span>
+          <span class="ov-badge ov-mid">Coverage: ${coveragePct}%</span>
+          <span class="ov-badge ov-mid">Mode: ${escapeHtml(usedMode)}</span>
+        </div>
+        <div class="overlay-sub">
+          Gold sticks mark predicted binding-site residues. Amber sphere marks the site centroid.
+          Labels show key residues used for visual confirmation.
+        </div>
+      `;
+    }
+
+    function updateMetaPanel(e, usedMode, siteInfo) {
+      const siteConf = safeNum(e.site_confidence) || 0;
+      const meanPlddt = safeNum(e.alphafold_mean_plddt) || 0;
+      const siteMeanPlddt = siteInfo.evidence.siteMeanPlddt;
+      const represented = siteInfo.evidence.representedCount || 0;
+      const coveragePct = Math.round((siteInfo.evidence.coverageRatio || 0) * 100);
+      meta.innerHTML = `
+        <div class="meta-block">
+          <div class="meta-title">Overview</div>
+          <div class="meta-grid">
+            <div><span class="k">Rank</span> ${escapeHtml(e.rank || "-")}</div>
+            <div><span class="k">Drug</span> ${escapeHtml(e.drug_name || "-")}</div>
+            <div><span class="k">Target</span> ${escapeHtml(e.target_gene_symbol || "-")}</div>
+            <div><span class="k">UniProt</span> ${escapeHtml(e.uniprot_id || "-")}</div>
+            <div><span class="k">Model Mode</span> ${escapeHtml(usedMode)}</div>
+            <div><span class="k">Atoms</span> ${escapeHtml(e.atom_kept || 0)} / ${escapeHtml(e.atom_total || 0)}</div>
+          </div>
+          <div class="meta-note">
+            Readout rule of thumb: strong visual evidence usually means both SiteConf and pLDDT are high,
+            and represented-site coverage is stable.
+          </div>
+        </div>
+        <div class="meta-block">
+          <div class="meta-title">Evidence</div>
+          <div class="meta-grid">
+            <div><span class="k">Mean pLDDT</span> ${meanPlddt.toFixed(2)}</div>
+            <div><span class="k">Site pLDDT</span> ${siteMeanPlddt == null ? "-" : siteMeanPlddt.toFixed(2)}</div>
+            <div><span class="k">Site Conf</span> ${siteConf.toFixed(3)}</div>
+            <div><span class="k">Site Chains</span> ${escapeHtml(siteInfo.evidence.chainCount || 0)}</div>
+            <div><span class="k">Site Residues</span> ${escapeHtml(siteInfo.siteResidues.length)}</div>
+            <div><span class="k">Represented</span> ${represented} (${coveragePct}%)</div>
+          </div>
+          <div class="site-list">
+            <b>Predicted site residues</b><br />
+            ${escapeHtml(e.predicted_binding_site_residues || "-")}
+          </div>
+          <div class="hint">
+            Drag to rotate, wheel to zoom. In pLDDT mode, residue confidence is still color-encoded on the full structure.
+          </div>
+        </div>
+      `;
     }
 
     function tryRenderModel(pdbText, styleMode, e, doHighlight) {
       viewer.clear();
       viewer.addModel(pdbText, "pdb");
       applyStyle(styleMode);
-      if (doHighlight) highlightSite(e);
+      const fallbackInfo = {
+        siteResidues: parseSiteResidues(e.predicted_binding_site_residues),
+        evidence: {
+          siteCount: 0,
+          representedCount: 0,
+          chainCount: 0,
+          coverageRatio: 0,
+          siteMeanPlddt: null,
+          positioned: []
+        }
+      };
+      const siteInfo = doHighlight ? highlightSite(e) : fallbackInfo;
+      if (!doHighlight) {
+        siteInfo.evidence = computeSiteEvidence(siteInfo.siteResidues);
+      }
       viewer.zoomTo();
       viewer.spin(spinOn);
       viewer.resize();
       viewer.render();
+      return siteInfo;
     }
 
     function render(index) {
       const e = entries[index];
       let usedMode = e.compact_mode || "primary";
+      let siteInfo = {
+        siteResidues: parseSiteResidues(e.predicted_binding_site_residues),
+        evidence: {
+          siteCount: 0,
+          representedCount: 0,
+          chainCount: 0,
+          coverageRatio: 0,
+          siteMeanPlddt: null,
+          positioned: []
+        }
+      };
       statusEl.textContent = "Rendering structure...";
       try {
-        tryRenderModel(e.pdb, styleSelect.value, e, true);
+        siteInfo = tryRenderModel(e.pdb, styleSelect.value, e, true);
         statusEl.textContent = "Loaded.";
       } catch (errPrimary) {
         try {
           const bb = filterPdb(e.pdb, "backbone");
-          tryRenderModel(bb, "stick", e, true);
+          siteInfo = tryRenderModel(bb, "stick", e, true);
           usedMode = "fallback_backbone";
           statusEl.textContent = "Fallback Loaded (backbone).";
         } catch (errBackbone) {
           try {
             const ca = filterPdb(e.pdb, "ca");
-            tryRenderModel(ca, "stick", e, false);
+            siteInfo = tryRenderModel(ca, "stick", e, false);
             usedMode = "fallback_ca";
             statusEl.textContent = "Fallback Loaded (CA-only).";
           } catch (errCa) {
@@ -276,19 +615,8 @@
           }
         }
       }
-      meta.innerHTML = `
-        <div><span class="k">Rank</span> ${e.rank || "-"}</div>
-        <div><span class="k">Drug</span> ${e.drug_name || "-"}</div>
-        <div><span class="k">Target</span> ${e.target_gene_symbol || "-"}</div>
-        <div><span class="k">UniProt</span> ${e.uniprot_id || "-"}</div>
-        <div><span class="k">Mean pLDDT</span> ${(e.alphafold_mean_plddt || 0).toFixed(2)}</div>
-        <div><span class="k">Site Conf</span> ${(e.site_confidence || 0).toFixed(3)}</div>
-        <div><span class="k">PDB Path</span> ${e.pdb_path || "-"}</div>
-        <div><span class="k">Model Mode</span> ${usedMode}</div>
-        <div><span class="k">Atoms</span> ${(e.atom_kept || 0)} / ${(e.atom_total || 0)}</div>
-        <div><span class="k">Site Residues</span> ${(e.predicted_binding_site_residues || "-")}</div>
-        <div class="hint">마우스 드래그로 회전, 휠로 확대/축소. Cartoon (pLDDT Color)는 B-factor(pLDDT) 기반입니다. 포켓 후보 잔기는 gold stick으로 표시됩니다.</div>
-      `;
+      updateViewerOverlay(e, usedMode, siteInfo);
+      updateMetaPanel(e, usedMode, siteInfo);
     }
 
     entrySelect.addEventListener("change", () => render(Number(entrySelect.value)));
@@ -321,3 +649,4 @@
   </script>
 </body>
 </html>
+
