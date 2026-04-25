@@ -44,7 +44,7 @@
     }
     .top {
       display: grid;
-      grid-template-columns: 1fr 1fr auto auto;
+      grid-template-columns: 1fr 1fr auto auto auto;
       gap: 10px;
       align-items: center;
       padding: 12px;
@@ -170,6 +170,8 @@
     .dot-core { background: #f59e0b; }
     .dot-label { background: #111827; }
     .dot-focus { background: #cbd5e1; }
+    .dot-nt { background: #06b6d4; }
+    .dot-ct { background: #ec4899; }
     .meta-block + .meta-block {
       margin-top: 14px;
       padding-top: 12px;
@@ -206,6 +208,16 @@
       word-break: break-word;
       max-height: 120px;
       overflow: auto;
+      background: #fbfdff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 8px 10px;
+    }
+    .chain-list {
+      margin-top: 8px;
+      font-size: 12px;
+      line-height: 1.5;
+      color: #374151;
       background: #fbfdff;
       border: 1px solid #e2e8f0;
       border-radius: 10px;
@@ -265,6 +277,7 @@
           </select>
           <button id="spinBtn">Spin: Off</button>
           <button id="focusBtn">Site Focus: Off</button>
+          <button id="proteinBtn">Protein Labels: On</button>
         </div>
         <div class="status" id="status">Initializing viewer...</div>
         <div class="card meta" id="meta"></div>
@@ -278,11 +291,13 @@
     const styleSelect = document.getElementById("styleSelect");
     const spinBtn = document.getElementById("spinBtn");
     const focusBtn = document.getElementById("focusBtn");
+    const proteinBtn = document.getElementById("proteinBtn");
     const statusEl = document.getElementById("status");
     const meta = document.getElementById("meta");
     const viewerDiv = document.getElementById("viewer");
     let spinOn = false;
     let focusOn = false;
+    let proteinLabelsOn = true;
 
     window.addEventListener("error", (ev) => {
       const msg = ev && ev.message ? ev.message : "Unknown script error";
@@ -326,6 +341,8 @@
       <div class="legend-item"><span class="legend-dot dot-core"></span>Site centroid (orange)</div>
       <div class="legend-item"><span class="legend-dot dot-label"></span>Key residue markers (black)</div>
       <div class="legend-item"><span class="legend-dot dot-focus"></span>Non-site dim mask (focus mode)</div>
+      <div class="legend-item"><span class="legend-dot dot-nt"></span>N-terminus marker</div>
+      <div class="legend-item"><span class="legend-dot dot-ct"></span>C-terminus marker</div>
     `;
     viewerDiv.appendChild(viewerOverlay);
     viewerDiv.appendChild(viewerLegend);
@@ -391,6 +408,80 @@
       }));
       if (!groups.length) return {};
       return groups.length === 1 ? groups[0] : {or: groups};
+    }
+
+    function computeProteinInfo() {
+      const caAtoms = viewer.selectedAtoms({atom: "CA"}) || [];
+      const byChain = {};
+      for (const atom of caAtoms) {
+        const chain = String(atom.chain || "?");
+        if (!byChain[chain]) byChain[chain] = [];
+        byChain[chain].push(atom);
+      }
+      const chains = Object.keys(byChain).sort();
+      const out = [];
+      for (const chain of chains) {
+        const atoms = byChain[chain].slice().sort((a, b) => Number(a.resi || 0) - Number(b.resi || 0));
+        if (!atoms.length) continue;
+        const start = atoms[0];
+        const end = atoms[atoms.length - 1];
+        const mid = atoms[Math.floor(atoms.length / 2)];
+        out.push({
+          chain,
+          residueCount: atoms.length,
+          startResi: Number(start.resi || 0),
+          endResi: Number(end.resi || 0),
+          startPos: {x: start.x, y: start.y, z: start.z},
+          endPos: {x: end.x, y: end.y, z: end.z},
+          midPos: {x: mid.x, y: mid.y, z: mid.z}
+        });
+      }
+      return out;
+    }
+
+    function drawProteinIdentityLabels(proteinInfo, targetSymbol) {
+      if (!proteinLabelsOn) return;
+      for (const chainInfo of proteinInfo) {
+        viewer.addSphere({
+          center: chainInfo.startPos,
+          radius: 0.72,
+          color: "#06b6d4",
+          opacity: 0.9
+        });
+        viewer.addSphere({
+          center: chainInfo.endPos,
+          radius: 0.72,
+          color: "#ec4899",
+          opacity: 0.9
+        });
+        viewer.addLabel(`N ${chainInfo.chain}${chainInfo.startResi}`, {
+          position: chainInfo.startPos,
+          backgroundColor: "#0e7490",
+          backgroundOpacity: 0.72,
+          fontColor: "#ecfeff",
+          fontSize: 11,
+          inFront: true,
+          showBackground: true
+        });
+        viewer.addLabel(`C ${chainInfo.chain}${chainInfo.endResi}`, {
+          position: chainInfo.endPos,
+          backgroundColor: "#9d174d",
+          backgroundOpacity: 0.72,
+          fontColor: "#fdf2f8",
+          fontSize: 11,
+          inFront: true,
+          showBackground: true
+        });
+        viewer.addLabel(`${targetSymbol || "Target"} | chain ${chainInfo.chain}`, {
+          position: chainInfo.midPos,
+          backgroundColor: "#0f172a",
+          backgroundOpacity: 0.68,
+          fontColor: "#f8fafc",
+          fontSize: 11,
+          inFront: true,
+          showBackground: true
+        });
+      }
     }
 
     function applyFocusMask(mode) {
@@ -671,6 +762,7 @@
       const represented = siteInfo.evidence.representedCount || 0;
       const siteCount = siteInfo.siteResidues.length || 0;
       const coveragePct = Math.round((siteInfo.evidence.coverageRatio || 0) * 100);
+      const proteinInfo = siteInfo.proteinInfo || [];
       const evidenceScore = computeEvidenceScore(siteConf, effectivePlddt, coveragePct);
       const interpretation = buildInterpretation(siteConf, effectivePlddt, coveragePct, represented, siteCount, evidenceScore);
       const markerReady = represented > 0;
@@ -681,12 +773,15 @@
           <span class="ov-badge ${plddtTier.className}">Site pLDDT: ${effectivePlddt.toFixed(1)}</span>
           <span class="ov-badge ov-mid">Coverage: ${coveragePct}%</span>
           <span class="ov-badge ov-mid">Score: ${evidenceScore}/100</span>
+          <span class="ov-badge ov-mid">Chains: ${proteinInfo.length || 0}</span>
           <span class="ov-badge ov-mid">Mode: ${escapeHtml(usedMode)}</span>
           <span class="ov-badge ${focusOn ? "ov-high" : "ov-low"}">Focus: ${focusOn ? "On" : "Off"}</span>
+          <span class="ov-badge ${proteinLabelsOn ? "ov-high" : "ov-low"}">Protein Labels: ${proteinLabelsOn ? "On" : "Off"}</span>
         </div>
         <div class="overlay-sub">
           Gold sticks mark predicted binding-site residues. Orange sphere is site centroid. Black dots are key residue markers.
           ${markerReady ? "Gray region in focus mode means non-site dim mask." : "Centroid/black markers are hidden when no site residue is mapped in the current model."}
+          Cyan = N-terminus, Pink = C-terminus, chain label is shown at the chain midpoint.
           ${escapeHtml(interpretation.short)}
         </div>
       `;
@@ -700,6 +795,7 @@
       const represented = siteInfo.evidence.representedCount || 0;
       const siteCount = siteInfo.siteResidues.length || 0;
       const coveragePct = Math.round((siteInfo.evidence.coverageRatio || 0) * 100);
+      const proteinInfo = siteInfo.proteinInfo || [];
       const evidenceScore = computeEvidenceScore(siteConf, effectivePlddt, coveragePct);
       const interpretation = buildInterpretation(siteConf, effectivePlddt, coveragePct, represented, siteCount, evidenceScore);
       const keyResidues = (siteInfo.evidence.positioned || [])
@@ -714,12 +810,22 @@
             <div><span class="k">Drug</span> ${escapeHtml(e.drug_name || "-")}</div>
             <div><span class="k">Target</span> ${escapeHtml(e.target_gene_symbol || "-")}</div>
             <div><span class="k">UniProt</span> ${escapeHtml(e.uniprot_id || "-")}</div>
+            <div><span class="k">Protein Chains</span> ${proteinInfo.length || 0}</div>
             <div><span class="k">Model Mode</span> ${escapeHtml(usedMode)}</div>
             <div><span class="k">Site Focus</span> ${focusOn ? "On" : "Off"}</div>
+            <div><span class="k">Protein Labels</span> ${proteinLabelsOn ? "On" : "Off"}</div>
             <div><span class="k">Atoms</span> ${escapeHtml(e.atom_kept || 0)} / ${escapeHtml(e.atom_total || 0)}</div>
           </div>
           <div class="meta-note">
             <b>Interpretation:</b> ${escapeHtml(interpretation.detail)}
+          </div>
+        </div>
+        <div class="meta-block">
+          <div class="meta-title">Protein Identity</div>
+          <div class="chain-list">
+            <b>Target protein:</b> ${escapeHtml(e.target_gene_symbol || "-")} (UniProt ${escapeHtml(e.uniprot_id || "-")})<br />
+            <b>Chain map:</b><br />
+            ${proteinInfo.length ? proteinInfo.map(c => `Chain ${escapeHtml(c.chain)}: residues ${escapeHtml(c.startResi)}-${escapeHtml(c.endResi)} (${escapeHtml(c.residueCount)} CA atoms)`).join("<br />") : "No chain mapping available in current render mode."}
           </div>
         </div>
         <div class="meta-block">
@@ -742,7 +848,7 @@
             ${validation.steps.map(step => `<li>${escapeHtml(step)}</li>`).join("")}
           </ul>
           <div class="hint">
-            Drag to rotate, wheel to zoom. Orange = centroid, black dots = key residues, gray in focus mode = non-site dim mask.
+            Drag to rotate, wheel to zoom. Orange = centroid, black dots = key residues, cyan = N-terminus, pink = C-terminus, gray in focus mode = non-site dim mask.
           </div>
         </div>
       `;
@@ -767,6 +873,8 @@
       if (!doHighlight) {
         siteInfo.evidence = computeSiteEvidence(siteInfo.siteResidues);
       }
+      siteInfo.proteinInfo = computeProteinInfo();
+      drawProteinIdentityLabels(siteInfo.proteinInfo, e.target_gene_symbol);
       const focusSel = focusOn ? buildSiteSelection(siteInfo.siteResidues) : {};
       viewer.zoomTo(focusSel);
       viewer.spin(spinOn);
@@ -833,6 +941,11 @@
     focusBtn.addEventListener("click", () => {
       focusOn = !focusOn;
       focusBtn.textContent = `Site Focus: ${focusOn ? "On" : "Off"}`;
+      render(Number(entrySelect.value));
+    });
+    proteinBtn.addEventListener("click", () => {
+      proteinLabelsOn = !proteinLabelsOn;
+      proteinBtn.textContent = `Protein Labels: ${proteinLabelsOn ? "On" : "Off"}`;
       render(Number(entrySelect.value));
     });
 
