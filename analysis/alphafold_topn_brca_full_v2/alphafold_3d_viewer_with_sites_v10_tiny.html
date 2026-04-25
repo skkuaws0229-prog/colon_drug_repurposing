@@ -298,6 +298,8 @@
     let spinOn = false;
     let focusOn = false;
     let proteinLabelsOn = true;
+    const fullPdbCache = new Map();
+    const preferFullAtoms = true;
 
     window.addEventListener("error", (ev) => {
       const msg = ev && ev.message ? ev.message : "Unknown script error";
@@ -482,6 +484,52 @@
           showBackground: true
         });
       }
+    }
+
+    function deriveStructureUrl(pdbPath) {
+      const raw = String(pdbPath || "").trim();
+      if (!raw) return null;
+      const norm = raw.replace(/\\/g, "/");
+      const fileName = norm.split("/").pop();
+      if (!fileName) return null;
+      return `./structures/${fileName}`;
+    }
+
+    async function getPreferredPdbText(e) {
+      const fallback = {
+        pdbText: e.pdb,
+        source: "inline_compact",
+        fromFull: false
+      };
+      if (!preferFullAtoms) return fallback;
+
+      const key = String(e.uniprot_id || e.id || "");
+      if (key && fullPdbCache.has(key)) return fullPdbCache.get(key);
+
+      const url = deriveStructureUrl(e.pdb_path);
+      if (!url) {
+        if (key) fullPdbCache.set(key, fallback);
+        return fallback;
+      }
+
+      try {
+        const res = await fetch(url, {cache: "force-cache"});
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const text = await res.text();
+        const atomCount = (text.match(/^ATOM  /gm) || []).length;
+        if (atomCount > 0) {
+          const result = {
+            pdbText: text,
+            source: "full_file",
+            fromFull: true
+          };
+          if (key) fullPdbCache.set(key, result);
+          return result;
+        }
+      } catch (err) {}
+
+      if (key) fullPdbCache.set(key, fallback);
+      return fallback;
     }
 
     function applyFocusMask(mode) {
@@ -763,6 +811,9 @@
       const siteCount = siteInfo.siteResidues.length || 0;
       const coveragePct = Math.round((siteInfo.evidence.coverageRatio || 0) * 100);
       const proteinInfo = siteInfo.proteinInfo || [];
+      const renderedAtoms = siteInfo.evidence.renderedAtoms || (safeNum(e.atom_kept) || 0);
+      const atomTotal = safeNum(e.atom_total) || renderedAtoms;
+      const atomSource = siteInfo.renderSource || (usedMode === "full_atoms" ? "full_file" : "inline_compact");
       const evidenceScore = computeEvidenceScore(siteConf, effectivePlddt, coveragePct);
       const interpretation = buildInterpretation(siteConf, effectivePlddt, coveragePct, represented, siteCount, evidenceScore);
       const markerReady = represented > 0;
@@ -814,7 +865,8 @@
             <div><span class="k">Model Mode</span> ${escapeHtml(usedMode)}</div>
             <div><span class="k">Site Focus</span> ${focusOn ? "On" : "Off"}</div>
             <div><span class="k">Protein Labels</span> ${proteinLabelsOn ? "On" : "Off"}</div>
-            <div><span class="k">Atoms</span> ${escapeHtml(e.atom_kept || 0)} / ${escapeHtml(e.atom_total || 0)}</div>
+            <div><span class="k">Atoms</span> ${escapeHtml(renderedAtoms)} / ${escapeHtml(atomTotal)}</div>
+            <div><span class="k">Atom Source</span> ${escapeHtml(atomSource)}</div>
           </div>
           <div class="meta-note">
             <b>Interpretation:</b> ${escapeHtml(interpretation.detail)}
@@ -854,7 +906,7 @@
       `;
     }
 
-    function tryRenderModel(pdbText, styleMode, e, doHighlight) {
+    function tryRenderModel(pdbText, styleMode, e, doHighlight, sourceTag) {
       viewer.clear();
       viewer.addModel(pdbText, "pdb");
       applyStyle(styleMode);
@@ -875,6 +927,8 @@
       }
       siteInfo.proteinInfo = computeProteinInfo();
       drawProteinIdentityLabels(siteInfo.proteinInfo, e.target_gene_symbol);
+      siteInfo.evidence.renderedAtoms = (viewer.selectedAtoms({}) || []).length;
+      siteInfo.renderSource = sourceTag || "inline_compact";
       const focusSel = focusOn ? buildSiteSelection(siteInfo.siteResidues) : {};
       viewer.zoomTo(focusSel);
       viewer.spin(spinOn);
@@ -883,9 +937,9 @@
       return siteInfo;
     }
 
-    function render(index) {
+    async function render(index) {
       const e = entries[index];
-      let usedMode = e.compact_mode || "primary";
+      let usedMode = e.compact_mode || "inline_compact";
       let siteInfo = {
         siteResidues: parseSiteResidues(e.predicted_binding_site_residues),
         evidence: {
@@ -894,23 +948,30 @@
           chainCount: 0,
           coverageRatio: 0,
           siteMeanPlddt: null,
-          positioned: []
-        }
+          positioned: [],
+          renderedAtoms: 0
+        },
+        renderSource: "inline_compact"
       };
-      statusEl.textContent = "Rendering structure...";
+
+      statusEl.textContent = "Loading full-atom structure...";
+      const preferred = await getPreferredPdbText(e);
+      const primaryPdb = preferred.pdbText || e.pdb;
+      usedMode = preferred.fromFull ? "full_atoms" : (e.compact_mode || "inline_compact");
+
       try {
-        siteInfo = tryRenderModel(e.pdb, styleSelect.value, e, true);
-        statusEl.textContent = "Loaded.";
+        siteInfo = tryRenderModel(primaryPdb, styleSelect.value, e, true, preferred.source);
+        statusEl.textContent = preferred.fromFull ? "Loaded (full atoms)." : "Loaded (inline compact).";
       } catch (errPrimary) {
         try {
-          const bb = filterPdb(e.pdb, "backbone");
-          siteInfo = tryRenderModel(bb, "stick", e, true);
+          const bb = filterPdb(primaryPdb, "backbone");
+          siteInfo = tryRenderModel(bb, "stick", e, true, "fallback_backbone");
           usedMode = "fallback_backbone";
           statusEl.textContent = "Fallback Loaded (backbone).";
         } catch (errBackbone) {
           try {
-            const ca = filterPdb(e.pdb, "ca");
-            siteInfo = tryRenderModel(ca, "stick", e, false);
+            const ca = filterPdb(primaryPdb, "ca");
+            siteInfo = tryRenderModel(ca, "stick", e, false, "fallback_ca");
             usedMode = "fallback_ca";
             statusEl.textContent = "Fallback Loaded (CA-only).";
           } catch (errCa) {
