@@ -44,7 +44,7 @@
     }
     .top {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr auto auto;
       gap: 10px;
       align-items: center;
       padding: 12px;
@@ -210,6 +210,22 @@
       border-radius: 10px;
       padding: 8px 10px;
     }
+    .validation-head {
+      margin-top: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #1f2937;
+    }
+    .validation-list {
+      margin: 6px 0 0;
+      padding-left: 18px;
+      color: #374151;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+    .validation-list li {
+      margin-top: 4px;
+    }
     @media (max-width: 980px) {
       .layout {
         grid-template-columns: 1fr;
@@ -247,6 +263,7 @@
             <option value="sphere">Sphere</option>
           </select>
           <button id="spinBtn">Spin: Off</button>
+          <button id="focusBtn">Site Focus: Off</button>
         </div>
         <div class="status" id="status">Initializing viewer...</div>
         <div class="card meta" id="meta"></div>
@@ -259,10 +276,12 @@
     const entrySelect = document.getElementById("entrySelect");
     const styleSelect = document.getElementById("styleSelect");
     const spinBtn = document.getElementById("spinBtn");
+    const focusBtn = document.getElementById("focusBtn");
     const statusEl = document.getElementById("status");
     const meta = document.getElementById("meta");
     const viewerDiv = document.getElementById("viewer");
     let spinOn = false;
+    let focusOn = false;
 
     window.addEventListener("error", (ev) => {
       const msg = ev && ev.message ? ev.message : "Unknown script error";
@@ -356,6 +375,38 @@
       if (v >= 90) return {label: "Very High pLDDT", className: "ov-high"};
       if (v >= 70) return {label: "Good pLDDT", className: "ov-mid"};
       return {label: "Low pLDDT", className: "ov-low"};
+    }
+
+    function buildSiteSelection(siteResidues) {
+      const byChain = {};
+      for (const residue of siteResidues) {
+        if (!byChain[residue.chain]) byChain[residue.chain] = [];
+        byChain[residue.chain].push(residue.resi);
+      }
+      const groups = Object.keys(byChain).map(chain => ({
+        chain,
+        resi: byChain[chain]
+      }));
+      if (!groups.length) return {};
+      return groups.length === 1 ? groups[0] : {or: groups};
+    }
+
+    function applyFocusMask(mode) {
+      if (mode === "sphere") {
+        viewer.setStyle({}, {
+          sphere: {color: "#cbd5e1", scale: 0.22, opacity: 0.16}
+        });
+        return;
+      }
+      if (mode === "stick") {
+        viewer.setStyle({}, {
+          stick: {color: "#cbd5e1", radius: 0.12, opacity: 0.15}
+        });
+        return;
+      }
+      viewer.setStyle({}, {
+        cartoon: {color: "#cbd5e1", opacity: 0.2}
+      });
     }
 
     function applyStyle(mode) {
@@ -468,8 +519,11 @@
       }
     }
 
-    function highlightSite(e) {
+    function highlightSite(e, styleMode, focusMode) {
       const siteResidues = parseSiteResidues(e.predicted_binding_site_residues);
+      if (focusMode) {
+        applyFocusMask(styleMode);
+      }
       for (const residue of siteResidues) {
         viewer.setStyle(
           {chain: residue.chain, resi: residue.resi},
@@ -488,23 +542,68 @@
       return "low";
     }
 
-    function buildInterpretation(siteConf, sitePlddt, coveragePct, representedCount, siteCount) {
+    function computeEvidenceScore(siteConf, sitePlddt, coveragePct) {
+      const conf = Math.max(0, Math.min(1, siteConf));
+      const plddt = Math.max(0, Math.min(1, sitePlddt / 100));
+      const coverage = Math.max(0, Math.min(1, coveragePct / 100));
+      return Math.round((0.5 * conf + 0.35 * plddt + 0.15 * coverage) * 100);
+    }
+
+    function buildInterpretation(siteConf, sitePlddt, coveragePct, representedCount, siteCount, evidenceScore) {
       const level = classifyEvidence(siteConf, sitePlddt);
       if (level === "high") {
         return {
-          short: "High-confidence structural hypothesis for this predicted pocket.",
-          detail: `SiteConf ${siteConf.toFixed(3)}, Site pLDDT ${sitePlddt.toFixed(1)}, mapped residues ${representedCount}/${siteCount} (${coveragePct}%). Prioritize for docking and wet-lab follow-up; this is still model-based evidence, not direct binding proof.`
+          short: `High-confidence pocket hypothesis (evidence score ${evidenceScore}/100).`,
+          detail: `Evidence score ${evidenceScore}/100 from SiteConf ${siteConf.toFixed(3)}, Site pLDDT ${sitePlddt.toFixed(1)}, and mapped residues ${representedCount}/${siteCount} (${coveragePct}%). This supports high-priority validation, but direct binding proof still requires assay data.`
         };
       }
       if (level === "medium") {
         return {
-          short: "Moderate-confidence pocket hypothesis with usable prioritization value.",
-          detail: `SiteConf ${siteConf.toFixed(3)} and Site pLDDT ${sitePlddt.toFixed(1)} support a plausible pocket, with ${representedCount}/${siteCount} mapped residues (${coveragePct}%). Use for ranking and triage, then confirm with docking/biochemical assays before making binding claims.`
+          short: `Moderate-confidence pocket hypothesis (evidence score ${evidenceScore}/100).`,
+          detail: `Evidence score ${evidenceScore}/100 with SiteConf ${siteConf.toFixed(3)}, Site pLDDT ${sitePlddt.toFixed(1)}, and residue mapping ${representedCount}/${siteCount} (${coveragePct}%). Use this for ranking and triage, then require orthogonal docking plus biochemical confirmation before binding claims.`
         };
       }
       return {
-        short: "Low-confidence pocket signal; exploratory only.",
-        detail: `Current metrics (SiteConf ${siteConf.toFixed(3)}, Site pLDDT ${sitePlddt.toFixed(1)}, mapped residues ${representedCount}/${siteCount}, ${coveragePct}%) indicate high uncertainty. Treat as hypothesis generation input and require stronger orthogonal validation.`
+        short: `Low-confidence pocket signal (evidence score ${evidenceScore}/100).`,
+        detail: `Evidence score ${evidenceScore}/100 with SiteConf ${siteConf.toFixed(3)}, Site pLDDT ${sitePlddt.toFixed(1)}, and mapping ${representedCount}/${siteCount} (${coveragePct}%) indicates high uncertainty. Treat this as hypothesis generation only and gate wet-lab work behind stricter in-silico checks.`
+      };
+    }
+
+    function buildValidationPlan(siteConf, sitePlddt, coveragePct, representedCount, siteCount, keyResidues) {
+      const level = classifyEvidence(siteConf, sitePlddt);
+      const evidenceScore = computeEvidenceScore(siteConf, sitePlddt, coveragePct);
+      const keyText = keyResidues.length ? keyResidues.join(", ") : "top mapped residues";
+      const mappingReady = siteCount > 0 && (representedCount / siteCount) >= 0.6;
+      if (level === "high" && mappingReady) {
+        return {
+          headline: `Validation track: High-priority confirmatory path (score ${evidenceScore}/100)`,
+          steps: [
+            "Docking consensus: run at least 3 engines (for example Vina, Gnina, PLANTS). Pass if at least 2 engines place top poses within 4.0 A of site centroid and keep at least 3 site contacts.",
+            "MD stability: run 3 replicas x 100 ns. Pass if ligand heavy-atom RMSD stays <= 2.5 A and key-contact occupancy is >= 40% for at least 3 residues.",
+            `Mutagenesis: alanine-scan 3 residues (${keyText}). Pass if at least 2 mutants show >= 3-fold weaker KD/IC50 versus WT.`,
+            "Biophysical binding: confirm by SPR/ITC/MST. Practical gate: KD <= 10 uM with reproducible replicate fit."
+          ]
+        };
+      }
+      if (level === "medium" && mappingReady) {
+        return {
+          headline: `Validation track: Standard triage-to-confirm path (score ${evidenceScore}/100)`,
+          steps: [
+            "Docking triage: run at least 3 engines. Pass if at least 2 engines converge within 5.0 A of centroid and maintain at least 2 site contacts.",
+            "MD screening: run 3 replicas x 50 ns. Pass if ligand RMSD <= 3.5 A and key-contact occupancy is >= 30% for at least 2 residues.",
+            `Targeted mutagenesis: test 2 to 3 residues (${keyText}). Pass if mutants show >= 2-fold affinity/activity shift.`,
+            "Primary assay gate: SPR/MST or enzyme assay. Suggested go/no-go: KD or IC50 <= 30 uM before broader profiling."
+          ]
+        };
+      }
+      return {
+        headline: `Validation track: De-risking path required before strong claims (score ${evidenceScore}/100)`,
+        steps: [
+          "Pocket cross-check first: run at least 2 independent pocket tools. Continue only if centroid overlap is <= 6.0 A and residue overlap is >= 40%.",
+          "Broad docking exploration: multiple engines and protonation states. Continue only when a reproducible pose family is recovered in at least 2 settings.",
+          "Short MD sanity check: 3 replicas x 20 to 50 ns. Continue only if at least 2 site contacts stay >= 20% occupancy.",
+          `Then run minimal wet-lab check on ${keyText}; expand only if mutant sensitivity and binding trend are consistent.`
+        ]
       };
     }
 
@@ -518,14 +617,17 @@
       const represented = siteInfo.evidence.representedCount || 0;
       const siteCount = siteInfo.siteResidues.length || 0;
       const coveragePct = Math.round((siteInfo.evidence.coverageRatio || 0) * 100);
-      const interpretation = buildInterpretation(siteConf, effectivePlddt, coveragePct, represented, siteCount);
+      const evidenceScore = computeEvidenceScore(siteConf, effectivePlddt, coveragePct);
+      const interpretation = buildInterpretation(siteConf, effectivePlddt, coveragePct, represented, siteCount, evidenceScore);
       viewerOverlay.innerHTML = `
         <div class="overlay-title">Rank ${escapeHtml(e.rank || "-")} | ${escapeHtml(e.drug_name || "-")} -> ${escapeHtml(e.target_gene_symbol || "-")}</div>
         <div class="overlay-badges">
           <span class="ov-badge ${confTier.className}">${confTier.label}: ${siteConf.toFixed(3)}</span>
           <span class="ov-badge ${plddtTier.className}">Site pLDDT: ${effectivePlddt.toFixed(1)}</span>
           <span class="ov-badge ov-mid">Coverage: ${coveragePct}%</span>
+          <span class="ov-badge ov-mid">Score: ${evidenceScore}/100</span>
           <span class="ov-badge ov-mid">Mode: ${escapeHtml(usedMode)}</span>
+          <span class="ov-badge ${focusOn ? "ov-high" : "ov-low"}">Focus: ${focusOn ? "On" : "Off"}</span>
         </div>
         <div class="overlay-sub">
           Gold sticks mark predicted binding-site residues. Amber sphere marks the site centroid.
@@ -542,7 +644,12 @@
       const represented = siteInfo.evidence.representedCount || 0;
       const siteCount = siteInfo.siteResidues.length || 0;
       const coveragePct = Math.round((siteInfo.evidence.coverageRatio || 0) * 100);
-      const interpretation = buildInterpretation(siteConf, effectivePlddt, coveragePct, represented, siteCount);
+      const evidenceScore = computeEvidenceScore(siteConf, effectivePlddt, coveragePct);
+      const interpretation = buildInterpretation(siteConf, effectivePlddt, coveragePct, represented, siteCount, evidenceScore);
+      const keyResidues = (siteInfo.evidence.positioned || [])
+        .slice(0, 3)
+        .map(item => `${item.residue.aa} ${item.residue.chain}${item.residue.resi}`);
+      const validation = buildValidationPlan(siteConf, effectivePlddt, coveragePct, represented, siteCount, keyResidues);
       meta.innerHTML = `
         <div class="meta-block">
           <div class="meta-title">Overview</div>
@@ -552,6 +659,7 @@
             <div><span class="k">Target</span> ${escapeHtml(e.target_gene_symbol || "-")}</div>
             <div><span class="k">UniProt</span> ${escapeHtml(e.uniprot_id || "-")}</div>
             <div><span class="k">Model Mode</span> ${escapeHtml(usedMode)}</div>
+            <div><span class="k">Site Focus</span> ${focusOn ? "On" : "Off"}</div>
             <div><span class="k">Atoms</span> ${escapeHtml(e.atom_kept || 0)} / ${escapeHtml(e.atom_total || 0)}</div>
           </div>
           <div class="meta-note">
@@ -567,13 +675,18 @@
             <div><span class="k">Site Chains</span> ${escapeHtml(siteInfo.evidence.chainCount || 0)}</div>
             <div><span class="k">Site Residues</span> ${escapeHtml(siteInfo.siteResidues.length)}</div>
             <div><span class="k">Represented</span> ${represented} (${coveragePct}%)</div>
+            <div><span class="k">Evidence Score</span> ${evidenceScore}/100</div>
           </div>
           <div class="site-list">
             <b>Predicted site residues</b><br />
             ${escapeHtml(e.predicted_binding_site_residues || "-")}
           </div>
+          <div class="validation-head">${escapeHtml(validation.headline)}</div>
+          <ul class="validation-list">
+            ${validation.steps.map(step => `<li>${escapeHtml(step)}</li>`).join("")}
+          </ul>
           <div class="hint">
-            Drag to rotate, wheel to zoom. In pLDDT mode, residue confidence is still color-encoded on the full structure.
+            Drag to rotate, wheel to zoom. Toggle Site Focus to dim non-site regions and center the camera on the predicted pocket.
           </div>
         </div>
       `;
@@ -594,11 +707,12 @@
           positioned: []
         }
       };
-      const siteInfo = doHighlight ? highlightSite(e) : fallbackInfo;
+      const siteInfo = doHighlight ? highlightSite(e, styleMode, focusOn) : fallbackInfo;
       if (!doHighlight) {
         siteInfo.evidence = computeSiteEvidence(siteInfo.siteResidues);
       }
-      viewer.zoomTo();
+      const focusSel = focusOn ? buildSiteSelection(siteInfo.siteResidues) : {};
+      viewer.zoomTo(focusSel);
       viewer.spin(spinOn);
       viewer.resize();
       viewer.render();
@@ -659,6 +773,11 @@
       viewer.spin(spinOn);
       spinBtn.textContent = `Spin: ${spinOn ? "On" : "Off"}`;
       viewer.render();
+    });
+    focusBtn.addEventListener("click", () => {
+      focusOn = !focusOn;
+      focusBtn.textContent = `Site Focus: ${focusOn ? "On" : "Off"}`;
+      render(Number(entrySelect.value));
     });
 
     function pickInitialIndex() {
