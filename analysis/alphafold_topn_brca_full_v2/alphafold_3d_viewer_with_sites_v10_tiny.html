@@ -487,7 +487,7 @@
     }
 
     function drawSiteCentroid(positioned) {
-      if (!positioned.length) return;
+      if (!positioned.length) return null;
       const center = positioned.reduce((acc, item) => {
         acc.x += item.anchor.x;
         acc.y += item.anchor.y;
@@ -510,24 +510,48 @@
         color: "#fb923c",
         opacity: 0.88
       });
+      return center;
     }
 
-    function drawKeyMarkers(positioned) {
-      const maxDots = Math.min(positioned.length, 8);
+    function drawKeyMarkers(positioned, center) {
+      const maxDots = Math.min(positioned.length, 10);
       for (let i = 0; i < maxDots; i++) {
         const item = positioned[i];
-        const pos = {x: item.anchor.x, y: item.anchor.y, z: item.anchor.z};
-        viewer.addSphere({
-          center: pos,
-          radius: 0.65,
+        const base = {x: item.anchor.x, y: item.anchor.y, z: item.anchor.z};
+        let dir = {x: 0, y: 0, z: 1};
+        if (center) {
+          const vx = base.x - center.x;
+          const vy = base.y - center.y;
+          const vz = base.z - center.z;
+          const norm = Math.sqrt(vx * vx + vy * vy + vz * vz);
+          if (norm > 1e-6) {
+            dir = {x: vx / norm, y: vy / norm, z: vz / norm};
+          }
+        }
+        const stemLen = 1.35;
+        const tip = {
+          x: base.x + dir.x * stemLen,
+          y: base.y + dir.y * stemLen,
+          z: base.z + dir.z * stemLen
+        };
+        viewer.addCylinder({
+          start: base,
+          end: tip,
+          radius: 0.16,
           color: "#111827",
           opacity: 0.95
         });
         viewer.addSphere({
-          center: pos,
-          radius: 0.82,
+          center: tip,
+          radius: 0.78,
+          color: "#111827",
+          opacity: 0.95
+        });
+        viewer.addSphere({
+          center: tip,
+          radius: 0.95,
           color: "#f8fafc",
-          opacity: 0.55
+          opacity: 0.58
         });
       }
     }
@@ -560,8 +584,8 @@
         );
       }
       const evidence = computeSiteEvidence(siteResidues);
-      drawSiteCentroid(evidence.positioned);
-      drawKeyMarkers(evidence.positioned);
+      const centroid = drawSiteCentroid(evidence.positioned);
+      drawKeyMarkers(evidence.positioned, centroid);
       drawSiteLabels(evidence.positioned);
       return {siteResidues, evidence};
     }
