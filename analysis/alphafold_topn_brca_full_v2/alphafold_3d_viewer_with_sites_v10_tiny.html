@@ -239,83 +239,6 @@
     .validation-list li {
       margin-top: 4px;
     }
-    .af-summary {
-      padding: 0;
-      overflow: hidden;
-    }
-    .af-tabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0;
-      border-bottom: 1px solid #dbe4ee;
-      background: #f5f8fc;
-    }
-    .af-tab {
-      padding: 10px 14px;
-      font-size: 13px;
-      color: #334155;
-      border-right: 1px solid #e2e8f0;
-      background: #f5f8fc;
-      font-weight: 600;
-    }
-    .af-tab.active {
-      background: #ffffff;
-      color: #0f172a;
-    }
-    .af-body {
-      padding: 12px;
-    }
-    .af-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px 14px;
-      font-size: 13px;
-      line-height: 1.5;
-    }
-    .af-k {
-      color: #475569;
-      font-weight: 600;
-      min-width: 110px;
-      display: inline-block;
-    }
-    .af-dist {
-      margin-top: 8px;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 6px;
-      font-size: 12px;
-    }
-    .af-row {
-      display: grid;
-      grid-template-columns: 110px 1fr auto;
-      align-items: center;
-      gap: 8px;
-    }
-    .af-bar {
-      height: 10px;
-      border-radius: 999px;
-      background: #e2e8f0;
-      overflow: hidden;
-    }
-    .af-fill {
-      display: block;
-      height: 100%;
-      border-radius: 999px;
-    }
-    .af-vh { background: #1d4ed8; }
-    .af-h { background: #38bdf8; }
-    .af-l { background: #facc15; }
-    .af-vl { background: #f97316; }
-    .af-sub {
-      margin-top: 10px;
-      font-size: 12px;
-      color: #475569;
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 10px;
-      padding: 8px 10px;
-      line-height: 1.45;
-    }
     @media (max-width: 980px) {
       .layout {
         grid-template-columns: 1fr;
@@ -333,12 +256,6 @@
       }
       .meta-grid {
         grid-template-columns: 1fr;
-      }
-      .af-grid {
-        grid-template-columns: 1fr;
-      }
-      .af-row {
-        grid-template-columns: 88px 1fr auto;
       }
       .viewer-overlay {
         max-width: calc(100% - 24px);
@@ -363,15 +280,6 @@
           <button id="proteinBtn">Protein Labels: On</button>
         </div>
         <div class="status" id="status">Initializing viewer...</div>
-        <div class="card af-summary">
-          <div class="af-tabs">
-            <div class="af-tab active">Summary and Model Confidence</div>
-            <div class="af-tab">Domains</div>
-            <div class="af-tab">Annotations</div>
-            <div class="af-tab">Similar Proteins</div>
-          </div>
-          <div class="af-body" id="afSummaryContent">Loading summary...</div>
-        </div>
         <div class="card meta" id="meta"></div>
       </div>
       <div id="viewer" class="card viewer"></div>
@@ -386,7 +294,6 @@
     const proteinBtn = document.getElementById("proteinBtn");
     const statusEl = document.getElementById("status");
     const meta = document.getElementById("meta");
-    const afSummaryContent = document.getElementById("afSummaryContent");
     const viewerDiv = document.getElementById("viewer");
     let spinOn = false;
     let focusOn = false;
@@ -477,38 +384,6 @@
         });
       }
       return out;
-    }
-
-    function computePlddtDistribution() {
-      const atoms = viewer.selectedAtoms({atom: "CA"}) || [];
-      if (!atoms.length) {
-        return {
-          total: 0,
-          veryHigh: 0,
-          high: 0,
-          low: 0,
-          veryLow: 0
-        };
-      }
-      let veryHigh = 0;
-      let high = 0;
-      let low = 0;
-      let veryLow = 0;
-      for (const atom of atoms) {
-        const b = safeNum(atom.b);
-        if (b == null) continue;
-        if (b > 90) veryHigh += 1;
-        else if (b > 70) high += 1;
-        else if (b > 50) low += 1;
-        else veryLow += 1;
-      }
-      const total = veryHigh + high + low + veryLow;
-      return {total, veryHigh, high, low, veryLow};
-    }
-
-    function pct(n, total) {
-      if (!total) return "0.0";
-      return ((n * 100) / total).toFixed(1);
     }
 
     function tierBySiteConf(v) {
@@ -1034,61 +909,6 @@
       `;
     }
 
-    function updateAfSummaryPanel(e, siteInfo) {
-      if (!afSummaryContent) return;
-      const proteinInfo = siteInfo.proteinInfo || [];
-      const dist = computePlddtDistribution();
-      const meanPlddt = safeNum(e.alphafold_mean_plddt) || 0;
-      const siteConf = safeNum(e.site_confidence) || 0;
-      const represented = siteInfo.evidence.representedCount || 0;
-      const siteCount = siteInfo.siteResidues.length || 0;
-      const domains = proteinInfo.length
-        ? proteinInfo.map(c => `Chain ${c.chain}: ${c.startResi}-${c.endResi}`).join(" | ")
-        : "Not detected in current render mode";
-      const annotationPreview = siteCount
-        ? siteInfo.siteResidues.slice(0, 8).map(r => `${r.aa}:${r.chain}${r.resi}`).join(", ")
-        : "No mapped site residues";
-
-      afSummaryContent.innerHTML = `
-        <div class="af-grid">
-          <div><span class="af-k">Protein</span>${escapeHtml(e.target_gene_symbol || "-")}</div>
-          <div><span class="af-k">UniProt</span>${escapeHtml(e.uniprot_id || "-")}</div>
-          <div><span class="af-k">Drug</span>${escapeHtml(e.drug_name || "-")}</div>
-          <div><span class="af-k">Rank</span>${escapeHtml(e.rank || "-")}</div>
-          <div><span class="af-k">Avg pLDDT</span>${meanPlddt.toFixed(2)}</div>
-          <div><span class="af-k">Site Confidence</span>${siteConf.toFixed(3)}</div>
-          <div><span class="af-k">Site Residues</span>${represented}/${siteCount} mapped</div>
-          <div><span class="af-k">Domains</span>${escapeHtml(domains)}</div>
-        </div>
-        <div class="af-dist">
-          <div class="af-row">
-            <div>Very high</div>
-            <div class="af-bar"><span class="af-fill af-vh" style="width:${pct(dist.veryHigh, dist.total)}%"></span></div>
-            <div>${pct(dist.veryHigh, dist.total)}%</div>
-          </div>
-          <div class="af-row">
-            <div>High</div>
-            <div class="af-bar"><span class="af-fill af-h" style="width:${pct(dist.high, dist.total)}%"></span></div>
-            <div>${pct(dist.high, dist.total)}%</div>
-          </div>
-          <div class="af-row">
-            <div>Low</div>
-            <div class="af-bar"><span class="af-fill af-l" style="width:${pct(dist.low, dist.total)}%"></span></div>
-            <div>${pct(dist.low, dist.total)}%</div>
-          </div>
-          <div class="af-row">
-            <div>Very low</div>
-            <div class="af-bar"><span class="af-fill af-vl" style="width:${pct(dist.veryLow, dist.total)}%"></span></div>
-            <div>${pct(dist.veryLow, dist.total)}%</div>
-          </div>
-        </div>
-        <div class="af-sub">
-          <b>Annotations:</b> ${escapeHtml(annotationPreview)}<br />
-          <b>Similar proteins:</b> Placeholder section (can connect UniProt/BLAST API next).
-        </div>
-      `;
-    }
-
     function tryRenderModel(pdbText, styleMode, e, doHighlight, sourceTag) {
       viewer.clear();
       viewer.addModel(pdbText, "pdb");
@@ -1170,7 +990,6 @@
       }
       updateViewerOverlay(e, usedMode, siteInfo);
       updateMetaPanel(e, usedMode, siteInfo);
-      updateAfSummaryPanel(e, siteInfo);
     }
 
     entrySelect.addEventListener("change", () => render(Number(entrySelect.value)));
