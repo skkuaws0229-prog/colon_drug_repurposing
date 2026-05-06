@@ -1,0 +1,12 @@
+pandas
+boto3
+s3fs
+sqlalchemy
+psycopg2-binary
+pyarrow
+neo4j
+fastapi
+uvicorn
+requests
+pyyaml
+

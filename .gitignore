@@ -1,37 +1,120 @@
-# 환경변수
-.env
-*/.env
-**/.env
-
-# Claude Code
-.claude/
-
+# =========================================================
 # Python
+# =========================================================
 __pycache__/
-*.pyc
-*.pyo
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+ENV/
+pip-wheel-metadata/
 .pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
 
-# OS
+# =========================================================
+# Environment / secrets
+# =========================================================
+.env
+*.env
+.env.*
+!.env.example
+
+# =========================================================
+# OS / IDE
+# =========================================================
 .DS_Store
+Thumbs.db
+*.lnk
+.vscode/
+.idea/
 
-# 임시/대용량
-*.parquet
-*.csv
-tmp/
-
-# 모델 바이너리 및 학습 결과
-*.npy
-*.pt
-*.pkl
-catboost_info/
+# =========================================================
+# Logs / cache
+# =========================================================
 *.log
+.cache/
+.npm-cache/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# =========================================================
+# Local outputs and generated artifacts
+# =========================================================
+outputs/
+runs/
+downloads/
+reports/
+tmp_geo_check/
+dashboard_marts/
+curated_s3_analysis/
+brca_priority_data/
+
+# =========================================================
+# Generated data / model artifacts
+# =========================================================
+*.csv
+*.tsv
+*.parquet
+*.feather
+*.pkl
+*.pickle
+*.joblib
+*.h5
+*.hdf5
+*.zip
+*.tar
+*.gz
+*.xlsx
+*.xls
+
+# =========================================================
+# Local database / service state
+# =========================================================
+*.sqlite
+*.sqlite3
+*.db
+data/
+logs/
+plugins/
+import/
+
+# =========================================================
+# Local tunnel / process files
+# =========================================================
+.public_tunnel_url.txt
+*.pid.txt
+.cloudflared_*.txt
+cloudflared.exe
+
+# =========================================================
+# Nextflow / workflow runtime
+# =========================================================
 .nextflow/
 .nextflow.log*
+work/
+.nextflow-scratch/
 
-# 임시 캐시
-*_cache.npy
-*.pyc.*.npy
+# =========================================================
+# Node / frontend
+# =========================================================
+node_modules/
+dist/
+build/
 
-# Streamlit
-.streamlit/
+# =========================================================
+# Large/generated analysis folders
+# Keep source scripts/docs, exclude heavy local generated bundles
+# =========================================================
+analysis/alphafold_topn_brca*/
+analysis/**/structures/
+analysis/**/.public_tunnel_url.txt
+analysis/**/*.pid.txt
+
+# =========================================================
+# Keep important source/config/docs
+# =========================================================
+!requirements
