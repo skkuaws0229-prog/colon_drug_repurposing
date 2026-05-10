@@ -1,0 +1,91 @@
+﻿name: Disease Pipeline Preflight
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      disease:
+        description: "Disease code"
+        required: true
+        default: "STAD"
+        type: choice
+        options:
+          - STAD
+          - LUAD
+          - LIHC
+          - PAAD
+          - HNSC
+          - COAD
+          - BRCA
+
+jobs:
+  preflight:
+    runs-on: windows-latest
+
+    defaults:
+      run:
+        shell: powershell
+
+    env:
+      PYTHONUTF8: "1"
+      DISEASE: ${{ github.event.inputs.disease || 'STAD' }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if (Test-Path requirements.txt) {
+            pip install -r requirements.txt
+          } else {
+            Write-Host "requirements.txt not found; skipping dependency install"
+          }
+
+      - name: Syntax check Python scripts
+        run: |
+          if (Test-Path scripts) {
+            python -m compileall scripts
+          } else {
+            Write-Host "scripts directory not found; skipping"
+          }
+
+      - name: Syntax check PowerShell scripts
+        run: |
+          if (Test-Path scripts) {
+            Get-ChildItem -Path scripts -Filter *.ps1 -Recurse | ForEach-Object {
+              Write-Host "Checking $($_.FullName)"
+              $content = Get-Content $_.FullName -Raw
+              [ScriptBlock]::Create($content) | Out-Null
+            }
+          } else {
+            Write-Host "scripts directory not found; skipping"
+          }
+
+      - name: Validate disease configs
+        run: |
+          if (Test-Path .\scripts\config\validate_disease_configs.py) {
+            python .\scripts\config\validate_disease_configs.py
+          } else {
+            Write-Host "validate_disease_configs.py not found; skipping"
+          }
+
+      - name: Upload validation outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: preflight-outputs-${{ env.DISEASE }}
+          path: |
+            outputs/config_validation/**
+            docs/**
+          if-no-files-found: ignore

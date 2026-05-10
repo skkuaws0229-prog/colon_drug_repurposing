@@ -1,0 +1,97 @@
+﻿name: STAD Finish Pipeline Self Hosted
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: "Type RUN_STAD_FINISH to run gated STAD PostgreSQL/Neo4j finish pipeline"
+        required: true
+        default: "NO"
+
+jobs:
+  stad-finish:
+    if: ${{ github.event.inputs.confirm == 'RUN_STAD_FINISH' }}
+    runs-on: [self-hosted, Windows]
+
+    defaults:
+      run:
+        shell: powershell
+
+    env:
+      PROJECT_ROOT: C:\work\drug-project
+      POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
+      POSTGRES_PORT: ${{ secrets.POSTGRES_PORT }}
+      POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+      POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+      POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+      NEO4J_URI: ${{ secrets.NEO4J_URI }}
+      NEO4J_USER: ${{ secrets.NEO4J_USER }}
+      NEO4J_PASSWORD: ${{ secrets.NEO4J_PASSWORD }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Confirm secrets are present without printing values
+        run: |
+          $required = @(
+            "POSTGRES_PASSWORD",
+            "NEO4J_PASSWORD"
+          )
+
+          foreach ($name in $required) {
+            if ([string]::IsNullOrWhiteSpace([Environment]::GetEnvironmentVariable($name))) {
+              throw "Required secret/env var is missing: $name"
+            }
+          }
+
+          Write-Host "Required secrets are present."
+
+      - name: Sync repository to canonical project root
+        run: |
+          Write-Host "Workspace: $PWD"
+          Write-Host "Project root: $env:PROJECT_ROOT"
+
+          if ($env:PROJECT_ROOT -like "*OneDrive*") {
+            throw "Refusing to use OneDrive path: $env:PROJECT_ROOT"
+          }
+
+          if (!(Test-Path $env:PROJECT_ROOT)) {
+            New-Item -ItemType Directory -Path $env:PROJECT_ROOT | Out-Null
+          }
+
+          robocopy . $env:PROJECT_ROOT /E /XD .git outputs data_cache __pycache__ .venv venv env /XF .env *.log *.tmp
+
+          if ($LASTEXITCODE -le 7) {
+            Write-Host "robocopy completed with acceptable exit code $LASTEXITCODE"
+            exit 0
+          } else {
+            throw "robocopy failed with exit code $LASTEXITCODE"
+          }
+
+      - name: Confirm canonical root
+        run: |
+          cd $env:PROJECT_ROOT
+          $current = (Get-Location).Path
+          Write-Host "Current path: $current"
+
+          if ($current -ne "C:\work\drug-project") {
+            throw "Wrong project root: $current"
+          }
+
+      - name: Run STAD finisher
+        run: |
+          cd $env:PROJECT_ROOT
+          powershell -ExecutionPolicy Bypass -File C:\work\drug-project\scripts\load\run_stad_postgres_neo4j_finish_pipeline.ps1
+
+      - name: Upload STAD reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stad-finish-reports
+          path: |
+            C:\work\drug-project\outputs\config_validation\stad_*report*.json
+            C:\work\drug-project\outputs\config_validation\stad_*preview*.json
+            C:\work\drug-project\docs\stad_*report*.md
+            C:\work\drug-project\docs\stad_*preview*.md
+          if-no-files-found: ignore

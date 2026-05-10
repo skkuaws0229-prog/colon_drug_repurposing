@@ -21,6 +21,11 @@ pip-wheel-metadata/
 *.env
 .env.*
 !.env.example
+*.secret
+*.password
+*credentials*
+.aws/
+.aws_credentials*
 
 # =========================================================
 # OS / IDE
@@ -81,6 +86,12 @@ data/
 logs/
 plugins/
 import/
+raw/
+curated/
+curated_date/
+glue/
+reference/
+shared_inputs/
 
 # =========================================================
 # Local tunnel / process files
@@ -131,3 +142,8 @@ data_cache/
 # Large / recursive experiment outputs
 20260415_v4_ensemble_test/
 **/20260415_v4_ensemble_test/
+
+# =========================================================
+# OneDrive/local accidental artifacts
+# =========================================================
+OneDrive/
