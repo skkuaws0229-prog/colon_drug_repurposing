@@ -127,3 +127,7 @@ data_cache/
 .tmp_pydeps/
 catboost_info/
 data_cache/
+
+# Large / recursive experiment outputs
+20260415_v4_ensemble_test/
+**/20260415_v4_ensemble_test/
