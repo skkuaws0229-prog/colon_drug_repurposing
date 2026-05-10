@@ -1,0 +1,8 @@
+gene_symbol,pathway_id,pathway_name
+EGFR,REACT:R-HSA-177929,Signaling by EGFR
+KDR,REACT:R-HSA-194138,Signaling by VEGF
+PTGS2,REACT:R-HSA-216212,COX reactions
+KIT,REACT:R-HSA-1430728,Kit receptor signaling
+PIK3CA,REACT:R-HSA-1257604,PI3K cascade
+KRAS,REACT:R-HSA-5673001,MAPK pathway
+RAF1,REACT:R-HSA-5673001,MAPK pathway
