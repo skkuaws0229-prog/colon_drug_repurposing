@@ -1,0 +1,80 @@
+﻿name: Standard Pipeline Safe Check
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  safe-check:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check required files
+        shell: pwsh
+        run: |
+          if (!(Test-Path ".\scripts\run_standard_pipeline.ps1")) {
+            throw "Missing scripts/run_standard_pipeline.ps1"
+          }
+          if (!(Test-Path ".\docs\brac_coad_standard_pipeline.md")) {
+            throw "Missing docs/brac_coad_standard_pipeline.md"
+          }
+          Write-Host "REQUIRED_FILES_OK"
+
+      - name: PowerShell syntax check
+        shell: pwsh
+        run: |
+          $errors = $null
+          [System.Management.Automation.PSParser]::Tokenize(
+            (Get-Content ".\scripts\run_standard_pipeline.ps1" -Raw),
+            [ref]$errors
+          ) | Out-Null
+
+          if ($errors -and $errors.Count -gt 0) {
+            $errors | Format-List
+            throw "PowerShell syntax check failed"
+          }
+
+          Write-Host "SYNTAX_OK"
+
+      - name: Verify no hard-coded secrets
+        shell: pwsh
+        run: |
+          $files = @(
+            ".\scripts\run_standard_pipeline.ps1",
+            ".\docs\brac_coad_standard_pipeline.md"
+          )
+
+          $patterns = @(
+            "PGPASSWORD=",
+            "NEO4J_PASSWORD=",
+            "postgres://",
+            "bolt://neo4j:",
+            "password="
+          )
+
+          foreach ($file in $files) {
+            $content = Get-Content $file -Raw
+            foreach ($pattern in $patterns) {
+              if ($content -match [regex]::Escape($pattern)) {
+                throw "Potential hard-coded secret found in $file : $pattern"
+              }
+            }
+          }
+
+          Write-Host "NO_HARDCODED_SECRETS_FOUND"
+
+      - name: Verify documented modes
+        shell: pwsh
+        run: |
+          $doc = Get-Content ".\docs\brac_coad_standard_pipeline.md" -Raw
+
+          foreach ($term in @("DryRun", "FullSafe", "Postgres", "ValidatePostgres", "Neo4jPreview", "Neo4jExecute", "Neo4jValidate")) {
+            if ($doc -notmatch $term) {
+              throw "Missing mode in docs: $term"
+            }
+          }
+
+          Write-Host "DOC_MODES_OK"
