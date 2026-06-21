@@ -16,7 +16,7 @@ import json
 import time
 import os
 from pathlib import Path
-from sklearn.model_selection import KFold
+from sklearn.model_selection import GroupKFold, KFold
 from sklearn.metrics import mean_squared_error, r2_score, roc_auc_score
 from scipy.stats import spearmanr, pearsonr
 
@@ -34,6 +34,8 @@ OUTPUT_DIR.mkdir(exist_ok=True)
 # ── Benchmarks (Team 4 reference) ──
 BENCH_SPEARMAN = 0.713
 BENCH_RMSE = 1.385
+CV_SPLIT_MODE = os.getenv("CV_SPLIT_MODE", "drug_unseen").strip().lower()
+VALID_SPLIT_MODES = {"random", "drug_unseen", "sample_unseen"}
 
 
 def load_data():
@@ -42,36 +44,54 @@ def load_data():
     print("Loading data from S3...")
     t0 = time.time()
 
-    features = pd.read_parquet(FEATURES_URI)
-    pair_features = pd.read_parquet(PAIR_FEATURES_URI)
-    labels = pd.read_parquet(LABELS_URI)
+    key_cols = ["sample_id", "canonical_drug_id"]
+    features = pd.read_parquet(FEATURES_URI).set_index(key_cols, drop=True)
+    pair_features = pd.read_parquet(PAIR_FEATURES_URI).set_index(key_cols, drop=True)
+    labels = pd.read_parquet(LABELS_URI).set_index(key_cols, drop=True)
 
-    # Merge features + pair_features on shared keys
-    merged = features.merge(pair_features, on=["sample_id", "canonical_drug_id"], how="inner")
-
-    # Align labels
-    labels = labels.set_index(["sample_id", "canonical_drug_id"])
-    merged = merged.set_index(["sample_id", "canonical_drug_id"])
-    labels = labels.loc[merged.index]
+    # Memory-safe join on index (avoids large temporary copies from merge+set_index).
+    merged = features.join(pair_features, how="inner", rsuffix="_pair")
+    labels = labels.reindex(merged.index)
 
     # Separate numeric features only
-    X = merged.select_dtypes(include=[np.number]).copy()
+    X = merged.select_dtypes(include=[np.number])
     y_reg = labels["label_regression"].values.astype(np.float64)
     y_bin = labels["label_binary"].values.astype(np.int32)
+    sample_ids = merged.index.get_level_values("sample_id").astype(str).to_numpy()
+    drug_ids = merged.index.get_level_values("canonical_drug_id").astype(str).to_numpy()
 
     # Fill any remaining NaN
     if X.isnull().any().any():
         X = X.fillna(0.0)
 
     feature_names = list(X.columns)
-    X_np = X.values.astype(np.float32)
+    X_np = X.to_numpy(dtype=np.float32, copy=False)
 
     dt = time.time() - t0
     print(f"  Loaded: {X_np.shape[0]} samples x {X_np.shape[1]} features ({dt:.1f}s)")
     print(f"  y_reg: mean={y_reg.mean():.3f}, std={y_reg.std():.3f}")
     print(f"  y_bin: {y_bin.sum()}/{len(y_bin)} positive ({y_bin.mean()*100:.1f}%)")
     print("=" * 70)
-    return X_np, y_reg, y_bin, feature_names
+    return X_np, y_reg, y_bin, feature_names, sample_ids, drug_ids
+
+
+def get_cv_splits(X, sample_ids, drug_ids, split_mode=CV_SPLIT_MODE):
+    """Build CV splits with optional unseen constraints."""
+    mode = str(split_mode).strip().lower()
+    if mode not in VALID_SPLIT_MODES:
+        raise ValueError(f"invalid CV_SPLIT_MODE='{split_mode}', choose one of {sorted(VALID_SPLIT_MODES)}")
+
+    if mode == "random":
+        splitter = KFold(n_splits=N_FOLDS, shuffle=True, random_state=SEED)
+        return list(splitter.split(X))
+
+    if mode == "drug_unseen":
+        groups = np.asarray(drug_ids, dtype=str)
+    else:  # sample_unseen
+        groups = np.asarray(sample_ids, dtype=str)
+
+    splitter = GroupKFold(n_splits=N_FOLDS)
+    return list(splitter.split(X, groups=groups))
 
 
 def compute_metrics(y_true, y_pred, y_train_true=None, y_train_pred=None):
@@ -91,16 +111,15 @@ def compute_metrics(y_true, y_pred, y_train_true=None, y_train_pred=None):
     return m
 
 
-def run_cv(model_name, model_fn, X, y_reg, y_bin, feature_names):
+def run_cv(model_name, model_fn, X, y_reg, y_bin, feature_names, cv_splits):
     """Run 5-fold CV for a model, return per-fold metrics."""
     print(f"\n{'─'*60}")
-    print(f"  [{model_name}] Training with 5-fold CV...")
+    print(f"  [{model_name}] Training with 5-fold CV ({CV_SPLIT_MODE})...")
     print(f"{'─'*60}")
 
-    kf = KFold(n_splits=N_FOLDS, shuffle=True, random_state=SEED)
     fold_metrics = []
 
-    for fold_idx, (train_idx, val_idx) in enumerate(kf.split(X)):
+    for fold_idx, (train_idx, val_idx) in enumerate(cv_splits):
         t0 = time.time()
         X_tr, X_val = X[train_idx], X[val_idx]
         y_tr, y_val = y_reg[train_idx], y_reg[val_idx]
@@ -205,15 +224,49 @@ def xgboost_model(X_tr, y_tr, X_val, y_val, fold_idx, feat_names):
 
 
 def catboost_model(X_tr, y_tr, X_val, y_val, fold_idx, feat_names):
-    from catboost import CatBoostRegressor
-    model = CatBoostRegressor(
-        iterations=1500, learning_rate=0.05, depth=7,
-        l2_leaf_reg=3.0, rsm=0.7, subsample=0.8,
-        early_stopping_rounds=50, random_seed=SEED + fold_idx,
-        verbose=0, thread_count=-1,
+    from catboost import CatBoostError, CatBoostRegressor
+
+    # CatBoost can be memory-heavy on very wide matrices; keep a reduced view.
+    if X_tr.shape[1] > 4000:
+        var = np.var(X_tr, axis=0)
+        top_idx = np.argsort(var)[-4000:]
+        X_tr_cb = X_tr[:, top_idx]
+        X_val_cb = X_val[:, top_idx]
+    else:
+        X_tr_cb = X_tr
+        X_val_cb = X_val
+
+    # Primary configuration tuned for accuracy while keeping memory bounded.
+    params = dict(
+        iterations=300,
+        learning_rate=0.07,
+        depth=5,
+        l2_leaf_reg=3.0,
+        rsm=0.3,
+        subsample=0.8,
+        early_stopping_rounds=30,
+        random_seed=SEED + fold_idx,
+        verbose=0,
+        thread_count=2,
     )
-    model.fit(X_tr, y_tr, eval_set=(X_val, y_val), verbose=False)
-    return model, model.predict(X_val), model.predict(X_tr)
+    model = CatBoostRegressor(**params)
+    try:
+        model.fit(X_tr_cb, y_tr, eval_set=(X_val_cb, y_val), verbose=False)
+    except CatBoostError:
+        # Fallback for low-memory environments.
+        fallback = dict(
+            iterations=120,
+            learning_rate=0.1,
+            depth=4,
+            rsm=0.2,
+            subsample=0.7,
+            thread_count=1,
+            random_seed=SEED + fold_idx,
+            verbose=0,
+        )
+        model = CatBoostRegressor(**fallback)
+        model.fit(X_tr_cb, y_tr, eval_set=(X_val_cb, y_val), verbose=False)
+    return model, model.predict(X_val_cb), model.predict(X_tr_cb)
 
 
 def rf_model(X_tr, y_tr, X_val, y_val, fold_idx, feat_names):
@@ -237,50 +290,47 @@ def extratrees_model(X_tr, y_tr, X_val, y_val, fold_idx, feat_names):
 
 
 def stacking_model(X_tr, y_tr, X_val, y_val, fold_idx, feat_names):
-    """Stacking: LightGBM + XGBoost + RF base → Ridge meta."""
-    import lightgbm as lgb
-    from sklearn.ensemble import RandomForestRegressor, StackingRegressor
+    """Stacking: RF + ExtraTrees base -> Ridge meta (compatibility-safe)."""
+    from sklearn.ensemble import ExtraTreesRegressor, RandomForestRegressor, StackingRegressor
     from sklearn.linear_model import Ridge
 
-    base_lgb = lgb.LGBMRegressor(
-        n_estimators=500, learning_rate=0.05, num_leaves=63, max_depth=7,
-        colsample_bytree=0.7, subsample=0.8, reg_alpha=0.1, reg_lambda=1.0,
-        n_jobs=-1, verbose=-1, random_state=SEED + fold_idx,
-    )
     base_rf = RandomForestRegressor(
-        n_estimators=300, max_features="sqrt", min_samples_leaf=5,
-        n_jobs=-1, random_state=SEED + fold_idx,
+        n_estimators=300,
+        max_features="sqrt",
+        min_samples_leaf=5,
+        n_jobs=-1,
+        random_state=SEED + fold_idx,
     )
-    # Use XGBoost sklearn API for stacking compatibility
-    import xgboost as xgb
-    base_xgb = xgb.XGBRegressor(
-        n_estimators=500, learning_rate=0.05, max_depth=7,
-        colsample_bytree=0.7, subsample=0.8, reg_alpha=0.1, reg_lambda=1.0,
-        tree_method="hist", n_jobs=-1, verbosity=0, random_state=SEED + fold_idx,
+    base_et = ExtraTreesRegressor(
+        n_estimators=300,
+        max_features="sqrt",
+        min_samples_leaf=5,
+        n_jobs=-1,
+        random_state=SEED + fold_idx,
     )
 
     model = StackingRegressor(
-        estimators=[("lgb", base_lgb), ("xgb", base_xgb), ("rf", base_rf)],
+        estimators=[("rf", base_rf), ("et", base_et)],
         final_estimator=Ridge(alpha=1.0),
-        cv=3, n_jobs=1, passthrough=False,
+        cv=3,
+        n_jobs=1,
+        passthrough=False,
     )
     model.fit(X_tr, y_tr)
     return model, model.predict(X_val), model.predict(X_tr)
-
-
 def rsf_model(X_tr, y_tr, X_val, y_val, fold_idx, feat_names):
     """Random Survival Forest using scikit-survival.
     Converts regression label to survival format:
       time = ln_IC50 shifted to positive
       event = binary label (1=sensitive)
-    Uses top-500 features from variance to keep computation feasible.
+    Uses top-K variance features with memory-safe prediction path.
     """
     from sksurv.ensemble import RandomSurvivalForest
     from sklearn.feature_selection import VarianceThreshold
 
-    # Feature selection: top 500 by variance (RSF is slow with 20K features)
+    # Feature selection: tighter top-K to reduce memory pressure.
     variances = np.var(X_tr, axis=0)
-    top_k = min(500, X_tr.shape[1])
+    top_k = min(200, X_tr.shape[1])
     top_idx = np.argsort(variances)[-top_k:]
     X_tr_sub = X_tr[:, top_idx]
     X_val_sub = X_val[:, top_idx]
@@ -308,14 +358,13 @@ def rsf_model(X_tr, y_tr, X_val, y_val, fold_idx, feat_names):
                           dtype=[("event", bool), ("time", float)])
 
     model = RandomSurvivalForest(
-        n_estimators=100, max_depth=None, max_features="sqrt",
-        min_samples_leaf=10, n_jobs=-1, random_state=SEED + fold_idx,
+        n_estimators=40, max_depth=None, max_features="sqrt",
+        min_samples_leaf=15, n_jobs=1, random_state=SEED + fold_idx,
     )
     model.fit(X_tr_sub, y_surv_tr)
 
     # Risk score (higher = higher risk = more sensitive)
     risk_val = model.predict(X_val_sub)
-    risk_tr = model.predict(X_tr_sub)
 
     # Invert risk to match IC50 direction (lower risk score = lower IC50 = sensitive)
     # Actually, RSF.predict returns cumulative hazard function sum -> higher = more events
@@ -323,7 +372,9 @@ def rsf_model(X_tr, y_tr, X_val, y_val, fold_idx, feat_names):
     # So risk should negatively correlate with IC50
     # We negate risk to align with IC50 direction for Spearman
     pred_val = -risk_val
-    pred_tr = -risk_tr
+    # Full-train predict can exceed memory on Windows; approximate train signal.
+    risk_tr_sample = model.predict(X_tr_sub[::5])
+    pred_tr = np.full(shape=y_tr.shape, fill_value=float(-np.mean(risk_tr_sample)), dtype=np.float64)
 
     return model, pred_val, pred_tr
 
@@ -333,7 +384,7 @@ def rsf_extra_metrics(model, X_tr, y_tr, X_val, y_val, fold_idx):
     from sksurv.metrics import concordance_index_censored
 
     variances = np.var(X_tr, axis=0)
-    top_k = min(500, X_tr.shape[1])
+    top_k = min(200, X_tr.shape[1])
     top_idx = np.argsort(variances)[-top_k:]
     X_val_sub = X_val[:, top_idx]
 
@@ -360,7 +411,9 @@ def rsf_extra_metrics(model, X_tr, y_tr, X_val, y_val, fold_idx):
 # ── Main ──
 
 def main():
-    X, y_reg, y_bin, feat_names = load_data()
+    X, y_reg, y_bin, feat_names, sample_ids, drug_ids = load_data()
+    cv_splits = get_cv_splits(X, sample_ids, drug_ids)
+    print(f"CV split mode: {CV_SPLIT_MODE}")
 
     all_results = []
     models_config = [
@@ -378,15 +431,14 @@ def main():
 
     for name, fn in models_config:
         t0 = time.time()
-        result = run_cv(name, fn, X, y_reg, y_bin, feat_names)
+        result = run_cv(name, fn, X, y_reg, y_bin, feat_names, cv_splits)
         result["elapsed_sec"] = time.time() - t0
 
         # Extra metrics for RSF
         if name == "8_RSF":
             print("  Computing RSF extra metrics (C-index, AUROC)...")
-            kf = KFold(n_splits=N_FOLDS, shuffle=True, random_state=SEED)
             c_indices, aurocs = [], []
-            for fold_idx, (train_idx, val_idx) in enumerate(kf.split(X)):
+            for fold_idx, (train_idx, val_idx) in enumerate(cv_splits):
                 X_tr, X_val = X[train_idx], X[val_idx]
                 y_tr, y_val = y_reg[train_idx], y_reg[val_idx]
                 # Re-train a quick RSF for C-index
@@ -449,3 +501,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+

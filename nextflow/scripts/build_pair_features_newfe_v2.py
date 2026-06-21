@@ -3,6 +3,8 @@ from __future__ import annotations
 import argparse
 import json
 import logging
+import subprocess
+import sys
 from pathlib import Path
 from typing import Any
 
@@ -41,6 +43,26 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--low-z-threshold", type=float, default=-1.0)
     p.add_argument("--morgan-radius", type=int, default=2)
     p.add_argument("--morgan-nbits", type=int, default=2048)
+    p.add_argument(
+        "--chem-feature-mode",
+        choices=["auto", "rdkit", "fallback"],
+        default="auto",
+        help=(
+            "Drug chemistry feature mode. "
+            "'auto' probes RDKit runtime and falls back if unavailable; "
+            "'rdkit' requires RDKit and fails otherwise; "
+            "'fallback' disables RDKit and uses deterministic zero/NaN chemistry features."
+        ),
+    )
+    p.add_argument(
+        "--min-morgan-bit-density",
+        type=float,
+        default=0.02,
+        help=(
+            "Minimum Morgan bit density for final usable SMILES in RDKit mode. "
+            "Example: 0.02 means at least 2%% non-zero bits."
+        ),
+    )
     p.add_argument("--reverse-topk-small", type=int, default=50)
     p.add_argument("--reverse-topk-large", type=int, default=100)
     p.add_argument("--log-level", default="INFO", choices=["DEBUG", "INFO", "WARNING", "ERROR"])
@@ -65,6 +87,55 @@ def _parse_gmt(path: str) -> dict[str, set[str]]:
             if genes:
                 gmt[pathway] = genes
     return gmt
+
+
+def _probe_rdkit_runtime(timeout_sec: int = 30) -> tuple[bool, str | None]:
+    probe_code = (
+        "from rdkit import Chem\n"
+        "from rdkit.Chem import AllChem, Descriptors\n"
+        "m=Chem.MolFromSmiles('CCO')\n"
+        "assert m is not None\n"
+        "fp=AllChem.GetMorganFingerprintAsBitVect(m, radius=2, nBits=256)\n"
+        "assert fp.GetNumOnBits() > 0\n"
+        "_=float(Descriptors.MolWt(m))\n"
+        "print('ok')\n"
+    )
+    try:
+        proc = subprocess.run(
+            [sys.executable, "-c", probe_code],
+            capture_output=True,
+            text=True,
+            timeout=timeout_sec,
+            check=False,
+        )
+    except Exception as e:
+        return False, f"rdkit_probe_exception:{type(e).__name__}:{e}"
+
+    if proc.returncode == 0:
+        return True, None
+
+    stderr = (proc.stderr or "").strip()
+    stdout = (proc.stdout or "").strip()
+    msg = stderr if stderr else stdout
+    msg = msg[:400] if msg else f"probe_exit_code:{proc.returncode}"
+    return False, msg
+
+
+def _resolve_chem_mode(mode: str) -> tuple[bool, str, str | None]:
+    mode = str(mode).strip().lower()
+    if mode == "fallback":
+        return False, "fallback", "chem_feature_mode=fallback"
+
+    ok, err = _probe_rdkit_runtime()
+    if ok:
+        return True, "rdkit", None
+
+    if mode == "rdkit":
+        raise RuntimeError(
+            "RDKit mode requested, but runtime probe failed. "
+            f"reason={err or 'unknown'}"
+        )
+    return False, "fallback", f"rdkit_probe_failed:{err or 'unknown'}"
 
 
 def build_sample_pathway_features(
@@ -114,12 +185,24 @@ def build_drug_chem_features(
     smiles_col: str,
     radius: int,
     nbits: int,
+    chem_feature_mode: str,
+    min_morgan_bit_density: float,
 ) -> tuple[pd.DataFrame, dict[str, Any]]:
-    try:
-        from rdkit import Chem, DataStructs
+    rdkit_enabled, chem_mode_applied, rdkit_error = _resolve_chem_mode(chem_feature_mode)
+    if rdkit_enabled:
+        from rdkit import Chem
+        from rdkit import DataStructs
         from rdkit.Chem import AllChem, Descriptors
-    except Exception as e:
-        raise RuntimeError("RDKit is required for chemistry features. Please install rdkit.") from e
+    else:
+        Chem = None  # type: ignore[assignment]
+        DataStructs = None  # type: ignore[assignment]
+        AllChem = None  # type: ignore[assignment]
+        Descriptors = None  # type: ignore[assignment]
+        LOGGER.warning(
+            "RDKit unavailable; using fallback drug chemistry features "
+            "(all Morgan bits = 0, descriptors = NaN). reason=%s",
+            rdkit_error,
+        )
 
     required = [drug_id_col, smiles_col]
     missing = [c for c in required if c not in drug_df.columns]
@@ -128,17 +211,35 @@ def build_drug_chem_features(
 
     rows: list[dict[str, Any]] = []
     invalid_smiles = 0
-    descriptor_names = {
-        "drug_desc_mol_wt": Descriptors.MolWt,
-        "drug_desc_logp": Descriptors.MolLogP,
-        "drug_desc_tpsa": Descriptors.TPSA,
-        "drug_desc_hbd": Descriptors.NumHDonors,
-        "drug_desc_hba": Descriptors.NumHAcceptors,
-        "drug_desc_rot_bonds": Descriptors.NumRotatableBonds,
-        "drug_desc_ring_count": Descriptors.RingCount,
-        "drug_desc_heavy_atoms": Descriptors.HeavyAtomCount,
-        "drug_desc_frac_csp3": Descriptors.FractionCSP3,
-    }
+    raw_smiles_count = 0
+    parse_success_count = 0
+    usable_smiles_count = 0
+    low_density_count = 0
+    bit_density_values: list[float] = []
+    if rdkit_enabled:
+        descriptor_names = {
+            "drug_desc_mol_wt": Descriptors.MolWt,
+            "drug_desc_logp": Descriptors.MolLogP,
+            "drug_desc_tpsa": Descriptors.TPSA,
+            "drug_desc_hbd": Descriptors.NumHDonors,
+            "drug_desc_hba": Descriptors.NumHAcceptors,
+            "drug_desc_rot_bonds": Descriptors.NumRotatableBonds,
+            "drug_desc_ring_count": Descriptors.RingCount,
+            "drug_desc_heavy_atoms": Descriptors.HeavyAtomCount,
+            "drug_desc_frac_csp3": Descriptors.FractionCSP3,
+        }
+    else:
+        descriptor_names = {
+            "drug_desc_mol_wt": None,
+            "drug_desc_logp": None,
+            "drug_desc_tpsa": None,
+            "drug_desc_hbd": None,
+            "drug_desc_hba": None,
+            "drug_desc_rot_bonds": None,
+            "drug_desc_ring_count": None,
+            "drug_desc_heavy_atoms": None,
+            "drug_desc_frac_csp3": None,
+        }
 
     seen = set()
     for _, row in drug_df[[drug_id_col, smiles_col]].drop_duplicates(subset=[drug_id_col]).iterrows():
@@ -147,8 +248,23 @@ def build_drug_chem_features(
             continue
         seen.add(did)
         smi = "" if pd.isna(row[smiles_col]) else str(row[smiles_col]).strip()
-        mol = Chem.MolFromSmiles(smi) if smi else None
-        rec: dict[str, Any] = {drug_id_col: did, "drug_has_valid_smiles": 1 if mol else 0}
+        has_smiles = bool(smi)
+        if has_smiles:
+            raw_smiles_count += 1
+
+        mol = Chem.MolFromSmiles(smi) if (rdkit_enabled and smi) else None
+        parse_success = bool(mol is not None)
+        if parse_success:
+            parse_success_count += 1
+
+        morgan_bit_density = np.nan
+        morgan_is_low_density = np.nan
+        is_usable_smiles = False
+
+        rec: dict[str, Any] = {
+            drug_id_col: did,
+            "drug_has_smiles_input": 1 if has_smiles else 0,
+        }
 
         if mol is None:
             invalid_smiles += 1
@@ -160,17 +276,66 @@ def build_drug_chem_features(
             fp = AllChem.GetMorganFingerprintAsBitVect(mol, radius=radius, nBits=nbits)
             arr = np.zeros((nbits,), dtype=np.int8)
             DataStructs.ConvertToNumpyArray(fp, arr)
+            on_bits = int(arr.sum())
+            morgan_bit_density = float(on_bits / max(nbits, 1))
+            bit_density_values.append(morgan_bit_density)
+            morgan_is_low_density = 1.0 if morgan_bit_density < min_morgan_bit_density else 0.0
+            if morgan_is_low_density == 1.0:
+                low_density_count += 1
+            else:
+                is_usable_smiles = True
+
             for i in range(nbits):
                 rec[f"drug_morgan_{i:04d}"] = int(arr[i])
             for dn, fn in descriptor_names.items():
                 rec[dn] = float(fn(mol))
+
+        if not rdkit_enabled:
+            # Keep backward-compatible behavior when chemistry fallback is used.
+            is_usable_smiles = has_smiles
+
+        if is_usable_smiles:
+            usable_smiles_count += 1
+
+        rec["drug_smiles_parse_success"] = float(parse_success) if rdkit_enabled else np.nan
+        rec["drug_morgan_bit_density"] = morgan_bit_density
+        rec["drug_morgan_is_low_density"] = morgan_is_low_density
+        rec["drug_has_valid_smiles"] = 1 if is_usable_smiles else 0
         rows.append(rec)
 
     out = pd.DataFrame(rows)
+    bit_density_summary = None
+    if bit_density_values:
+        s = pd.Series(bit_density_values, dtype=np.float64)
+        bit_density_summary = {k: float(v) for k, v in s.describe().to_dict().items()}
+
     qc = {
         "drug_rows": int(out.shape[0]),
+        "raw_smiles_count": int(raw_smiles_count),
+        "raw_smiles_rate": float(raw_smiles_count / max(len(rows), 1)),
+        "smiles_parse_success_count": int(parse_success_count) if rdkit_enabled else None,
+        "smiles_parse_success_rate": (
+            float(parse_success_count / max(raw_smiles_count, 1)) if rdkit_enabled else None
+        ),
+        "final_usable_smiles_count": int(usable_smiles_count),
+        "final_usable_smiles_rate": float(usable_smiles_count / max(len(rows), 1)),
         "invalid_smiles_count": int(invalid_smiles),
         "invalid_smiles_ratio": float(invalid_smiles / max(len(rows), 1)),
+        "morgan_bit_density_min_threshold": float(min_morgan_bit_density),
+        "morgan_low_density_count": int(low_density_count) if rdkit_enabled else None,
+        "morgan_low_density_rate": (
+            float(low_density_count / max(parse_success_count, 1)) if rdkit_enabled else None
+        ),
+        "morgan_bit_density_summary": bit_density_summary,
+        "rdkit_enabled": bool(rdkit_enabled),
+        "chem_feature_mode_requested": chem_feature_mode,
+        "chem_feature_mode_applied": chem_mode_applied,
+        "rdkit_error": rdkit_error if not rdkit_enabled else None,
+        "chem_fallback_mode": (
+            "all_zero_morgan_and_nan_descriptors_then_final_numeric_fillna_zero"
+            if not rdkit_enabled
+            else None
+        ),
     }
     return out, qc
 
@@ -386,6 +551,56 @@ def _summary(df: pd.DataFrame, cols: list[str]) -> dict[str, Any]:
     return out
 
 
+def filter_inputs_by_pairs(
+    pairs_df: pd.DataFrame,
+    sample_expr_df: pd.DataFrame,
+    drug_df: pd.DataFrame,
+    lincs_drug_df: pd.DataFrame,
+    drug_target_df: pd.DataFrame,
+    *,
+    sample_id_col: str,
+    drug_id_col: str,
+) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame, dict[str, Any]]:
+    pairs = pairs_df[[sample_id_col, drug_id_col]].drop_duplicates().copy()
+    pairs[sample_id_col] = pairs[sample_id_col].astype(str).str.strip()
+    pairs[drug_id_col] = pairs[drug_id_col].astype(str).str.strip()
+
+    sample_ids = set(pairs[sample_id_col].tolist())
+    drug_ids = set(pairs[drug_id_col].tolist())
+
+    sample_before = int(sample_expr_df.shape[0])
+    drug_before = int(drug_df.shape[0])
+    lincs_before = int(lincs_drug_df.shape[0])
+    target_before = int(drug_target_df.shape[0])
+
+    sample_expr_df = sample_expr_df[sample_expr_df[sample_id_col].astype(str).str.strip().isin(sample_ids)].copy()
+    drug_df = drug_df[drug_df[drug_id_col].astype(str).str.strip().isin(drug_ids)].copy()
+    lincs_drug_df = lincs_drug_df[lincs_drug_df[drug_id_col].astype(str).str.strip().isin(drug_ids)].copy()
+    drug_target_df = drug_target_df[drug_target_df[drug_id_col].astype(str).str.strip().isin(drug_ids)].copy()
+
+    sample_after = int(sample_expr_df.shape[0])
+    drug_after = int(drug_df.shape[0])
+    lincs_after = int(lincs_drug_df.shape[0])
+    target_after = int(drug_target_df.shape[0])
+
+    qc = {
+        "enabled": True,
+        "rule": "subset auxiliary tables by pair keys (sample_id, canonical_drug_id)",
+        "pair_rows": int(pairs.shape[0]),
+        "pair_unique_samples": int(len(sample_ids)),
+        "pair_unique_drugs": int(len(drug_ids)),
+        "sample_rows_before": sample_before,
+        "sample_rows_after": sample_after,
+        "drug_rows_before": drug_before,
+        "drug_rows_after": drug_after,
+        "lincs_rows_before": lincs_before,
+        "lincs_rows_after": lincs_after,
+        "target_rows_before": target_before,
+        "target_rows_after": target_after,
+    }
+    return pairs, sample_expr_df, drug_df, lincs_drug_df, drug_target_df, qc
+
+
 def build_pair_features_newfe_v2_from_frames(
     pairs_df: pd.DataFrame,
     sample_expr_df: pd.DataFrame,
@@ -402,6 +617,8 @@ def build_pair_features_newfe_v2_from_frames(
     low_z_threshold: float = -1.0,
     morgan_radius: int = 2,
     morgan_nbits: int = 2048,
+    chem_feature_mode: str = "auto",
+    min_morgan_bit_density: float = 0.02,
     reverse_topk_small: int = 50,
     reverse_topk_large: int = 100,
     include_pair_lincs: bool = True,
@@ -424,6 +641,23 @@ def build_pair_features_newfe_v2_from_frames(
     drug_target_df = drug_target_df.copy()
     drug_target_df[drug_id_col] = drug_target_df[drug_id_col].astype(str).str.strip()
 
+    (
+        pairs_df,
+        sample_expr_df,
+        drug_df,
+        lincs_drug_df,
+        drug_target_df,
+        split_qc,
+    ) = filter_inputs_by_pairs(
+        pairs_df=pairs_df,
+        sample_expr_df=sample_expr_df,
+        drug_df=drug_df,
+        lincs_drug_df=lincs_drug_df,
+        drug_target_df=drug_target_df,
+        sample_id_col=sample_id_col,
+        drug_id_col=drug_id_col,
+    )
+
     gmt_map = _parse_gmt(pathway_gmt)
     sample_pathway_df, pathway_member_df = build_sample_pathway_features(
         sample_expr_df=sample_expr_df,
@@ -437,6 +671,8 @@ def build_pair_features_newfe_v2_from_frames(
         smiles_col=smiles_col,
         radius=morgan_radius,
         nbits=morgan_nbits,
+        chem_feature_mode=chem_feature_mode,
+        min_morgan_bit_density=min_morgan_bit_density,
     )
 
     if include_pair_lincs:
@@ -494,6 +730,7 @@ def build_pair_features_newfe_v2_from_frames(
         "pair_features_newfe_v2": pair_features_newfe_v2,
         "chem_qc": chem_qc,
         "target_qc": target_qc,
+        "split_qc": split_qc,
     }
 
 
@@ -540,6 +777,8 @@ def main() -> None:
         low_z_threshold=args.low_z_threshold,
         morgan_radius=args.morgan_radius,
         morgan_nbits=args.morgan_nbits,
+        chem_feature_mode=args.chem_feature_mode,
+        min_morgan_bit_density=args.min_morgan_bit_density,
         reverse_topk_small=args.reverse_topk_small,
         reverse_topk_large=args.reverse_topk_large,
     )
@@ -553,6 +792,7 @@ def main() -> None:
     pair_features_newfe_v2 = built["pair_features_newfe_v2"]
     chem_qc = built["chem_qc"]
     target_qc = built["target_qc"]
+    split_qc = built["split_qc"]
 
     out_sample_pathway = out_dir / "sample_pathway_features.parquet"
     out_drug_chem = out_dir / "drug_chem_features.parquet"
@@ -583,7 +823,16 @@ def main() -> None:
                 "enabled": True,
                 "morgan_radius": args.morgan_radius,
                 "morgan_nbits": args.morgan_nbits,
-                "invalid_smiles_policy": "all-zero fingerprint + NaN descriptors then numeric fillna(0.0) at final merge",
+                "chem_feature_mode_requested": args.chem_feature_mode,
+                "chem_feature_mode_applied": chem_qc.get("chem_feature_mode_applied"),
+                "morgan_bit_density_min_threshold": args.min_morgan_bit_density,
+                "invalid_smiles_policy": (
+                    "rdkit-parse-fail -> all-zero fingerprint + NaN descriptors; "
+                    "numeric fillna(0.0) at final merge"
+                    if chem_qc.get("rdkit_enabled")
+                    else "rdkit-unavailable fallback -> all-zero fingerprint + NaN descriptors; "
+                    "numeric fillna(0.0) at final merge"
+                ),
                 "invalid_smiles_qc": chem_qc,
             },
             "pair_lincs": {
@@ -624,6 +873,7 @@ def main() -> None:
             "pair_features_newfe_rows": int(pair_features_newfe.shape[0]),
             "pair_features_newfe_v2_rows": int(pair_features_newfe_v2.shape[0]),
         },
+        "input_split_qc": split_qc,
         "outputs": {
             "sample_pathway_features": str(out_sample_pathway),
             "drug_chem_features": str(out_drug_chem),

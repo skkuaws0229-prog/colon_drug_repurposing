@@ -1,0 +1,44 @@
+disease: PAAD
+display_name: Pancreatic Ductal Adenocarcinoma
+run_id: PDAC_RELEASE_V1
+s3_parent_prefix: s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/PDAC/
+s3_release_prefix: TODO_UNCONFIRMED
+status: pending_s3fs_profile
+input_files:
+  candidate_unique: results/20260427_pdac_step4_v1_no_holdout/top30_pdac_with_vt.csv
+  candidate_tiered: TODO_UNCONFIRMED
+  model_performance_summary: TODO_UNCONFIRMED
+  model_performance_detailed: TODO_UNCONFIRMED
+  ensemble_validation_summary: TODO_UNCONFIRMED
+  ensemble_source_manifest: TODO_UNCONFIRMED
+  copied_source_manifest: TODO_UNCONFIRMED
+  reproducibility_manifest: TODO_UNCONFIRMED
+  external_validation_top30: TODO_UNCONFIRMED
+  external_validation_top15: base_data/20260421_paad/external_validation/paad/groupcv4_drug/top15_validated.csv
+  external_validation_method_a: base_data/20260421_paad/external_validation/paad/groupcv4_drug/top50_external_validation.csv
+  external_validation_method_b: TODO_UNCONFIRMED
+  admet_top30: TODO_UNCONFIRMED
+  final_after_admet: results/20260427_pdac_step4_v1_no_holdout/step7_top15_pdac_admet_with_vt.csv
+  admet_matches: TODO_UNCONFIRMED
+  admet_summary: admet/20260427_pdac_step4_v1_no_holdout/admet_summary_independent.json
+biology:
+  disease_aliases:
+    - pancreatic cancer
+    - pancreatic ductal adenocarcinoma
+    - PDAC
+    - PAAD
+  marker_genes:
+    - KRAS
+    - TP53
+    - CDKN2A
+    - SMAD4
+  subtypes:
+    - basal_like
+    - Classical
+kg:
+  disease_node_name: PAAD
+  disease_display_name: Pancreatic Ductal Adenocarcinoma
+notes:
+  - PAAD is the TCGA-style disease code, while PDAC is retained as a disease alias.
+  - KRAS, TP53, CDKN2A, and SMAD4 define the project-specific PAAD driver axis.
+  - Mapping confidence is medium; candidate/final/admet/external signals are clear but spread across sibling directories, so s3_release_prefix remains TODO_UNCONFIRMED.

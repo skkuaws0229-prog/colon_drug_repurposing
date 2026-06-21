@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>약물 재창출 파이프라인 대시보드</title>
+<title>?쎈Ъ ?ъ갹異??뚯씠?꾨씪????쒕낫??/title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
@@ -46,46 +46,46 @@
 </head>
 <body>
 <div class="header">
-  <h1>약물 재창출 파이프라인 - 팀 4 (biso)</h1>
-  <p>프로토콜 실행 대시보드 | 시작일: 2026-04-08</p>
+  <h1>?쎈Ъ ?ъ갹異??뚯씠?꾨씪??- ? 4 (biso)</h1>
+  <p>?꾨줈?좎퐳 ?ㅽ뻾 ??쒕낫??| ?쒖옉?? 2026-04-08</p>
 </div>
 <div class="container">
   <div class="progress-bar">
     <div class="progress-label">
-      <span>전체 진행률</span>
-      <span id="progress-pct">7 / 7 단계</span>
+      <span>?꾩껜 吏꾪뻾瑜?/span>
+      <span id="progress-pct">7 / 7 ?④퀎</span>
     </div>
     <div class="bar-bg"><div class="bar-fill" id="bar-fill" style="width:100%"></div></div>
   </div>
   <div class="steps">
     <div class="step completed" id="step-1">
-      <div class="step-header"><div class="step-num">1</div><div class="step-title">환경 설정</div></div>
+      <div class="step-header"><div class="step-num">1</div><div class="step-title">?섍꼍 ?ㅼ젙</div></div>
       <div class="metrics" id="metrics-1">
         <div class="metric"><span class="label">Python:</span><span class="value">3.10.20</span></div>
         <div class="metric"><span class="label">conda:</span><span class="value">drug4</span></div>
         <div class="metric"><span class="label">AWS:</span><span class="value">OK (say2-4team)</span></div>
-        <div class="metric"><span class="label">Git:</span><span class="value">복제됨</span></div>
+        <div class="metric"><span class="label">Git:</span><span class="value">蹂듭젣??/span></div>
         <div class="metric"><span class="label">LightGBM:</span><span class="value">4.6.0</span></div>
         <div class="metric"><span class="label">XGBoost:</span><span class="value">3.2.0</span></div>
         <div class="metric"><span class="label">CatBoost:</span><span class="value">1.2.10</span></div>
         <div class="metric"><span class="label">PyTorch:</span><span class="value">2.11.0</span></div>
         <div class="metric"><span class="label">PyG:</span><span class="value">2.7.0</span></div>
       </div>
-      <div class="timestamp" id="ts-1">완료: 2026-04-08</div>
+      <div class="timestamp" id="ts-1">?꾨즺: 2026-04-08</div>
     </div>
     <div class="step completed" id="step-2">
-      <div class="step-header"><div class="step-num">2</div><div class="step-title">데이터 준비</div></div>
+      <div class="step-header"><div class="step-num">2</div><div class="step-title">?곗씠??以鍮?/div></div>
       <div class="metrics" id="metrics-2">
-        <div class="metric"><span class="label">총 파일 수:</span><span class="value">159 (curated 157 + generated 2)</span></div>
+        <div class="metric"><span class="label">珥??뚯씪 ??</span><span class="value">159 (curated 157 + generated 2)</span></div>
         <div class="metric"><span class="label">S3:</span><span class="value">s3://say2-4team/20260408_new_pre_project_biso/.../data/</span></div>
-        <div class="metric"><span class="label">이진화 규칙:</span><span class="value">ln_IC50 &lt;= quantile(0.3) = sensitive</span></div>
-        <div class="metric"><span class="label">설정:</span><span class="value">data_paths.yaml</span></div>
+        <div class="metric"><span class="label">?댁쭊??洹쒖튃:</span><span class="value">ln_IC50 &lt;= quantile(0.3) = sensitive</span></div>
+        <div class="metric"><span class="label">?ㅼ젙:</span><span class="value">data_paths.yaml</span></div>
       </div>
-      <!-- ── 전체 데이터셋 목록 ── -->
-      <div class="inv-header">데이터셋 목록 (11개 폴더 + 루트)</div>
+      <!-- ?? ?꾩껜 ?곗씠?곗뀑 紐⑸줉 ?? -->
+      <div class="inv-header">?곗씠?곗뀑 紐⑸줉 (11媛??대뜑 + 猷⑦듃)</div>
       <table class="data-inventory">
         <thead>
-          <tr><th>폴더</th><th style="text-align:center">파일 수</th><th>주요 데이터셋</th><th>출처</th></tr>
+          <tr><th>?대뜑</th><th style="text-align:center">?뚯씪 ??/th><th>二쇱슂 ?곗씠?곗뀑</th><th>異쒖쿂</th></tr>
         </thead>
         <tbody>
           <!-- ADMET -->
@@ -93,8 +93,8 @@
             <td class="folder">admet/</td>
             <td class="cnt">48</td>
             <td class="desc">
-              ADMET 22개 분석 (train_val + test 분할) &mdash; Ames, BBB, Caco-2, CYP2C9/2D6/3A4, DILI, hERG, HIA 등
-              <div class="files-detail">admet_task_inventory, 각 분석별 train_val_basic_clean + test_basic_clean (22개 &times; 2 = 44), QC json/md 4건</div>
+              ADMET 22媛?遺꾩꽍 (train_val + test 遺꾪븷) &mdash; Ames, BBB, Caco-2, CYP2C9/2D6/3A4, DILI, hERG, HIA ??
+              <div class="files-detail">admet_task_inventory, 媛?遺꾩꽍蹂?train_val_basic_clean + test_basic_clean (22媛?&times; 2 = 44), QC json/md 4嫄?/div>
             </td>
             <td class="src">curated_date/admet/</td>
           </tr>
@@ -103,8 +103,8 @@
             <td class="folder">chembl/</td>
             <td class="cnt">9</td>
             <td class="desc">
-              ChEMBL 화합물/타겟/활성/분석/기전 &mdash; 약물-타겟 매핑, SMILES
-              <div class="files-detail">compound_master (280만 화합물), target_master, activity, assay, drug_mechanism, uniprot_target_mapping, QC 3건</div>
+              ChEMBL ?뷀빀臾??寃??쒖꽦/遺꾩꽍/湲곗쟾 &mdash; ?쎈Ъ-?寃?留ㅽ븨, SMILES
+              <div class="files-detail">compound_master (280留??뷀빀臾?, target_master, activity, assay, drug_mechanism, uniprot_target_mapping, QC 3嫄?/div>
             </td>
             <td class="src">curated_date/chembl/</td>
           </tr>
@@ -113,8 +113,8 @@
             <td class="folder">depmap/</td>
             <td class="cnt">24</td>
             <td class="desc">
-              DepMap CRISPR 유전자 의존성/효과 행렬, 세포주 모델 메타데이터, 재창출 스크린
-              <div class="files-detail">crispr_gene_dependency + matrix (1,150 &times; 18,444), crispr_gene_effect + matrix, model_basic_clean, model_condition, model_identity, repurposing 6건, QC 4건</div>
+              DepMap CRISPR ?좎쟾???섏〈???④낵 ?됰젹, ?명룷二?紐⑤뜽 硫뷀??곗씠?? ?ъ갹異??ㅽ겕由?
+              <div class="files-detail">crispr_gene_dependency + matrix (1,150 &times; 18,444), crispr_gene_effect + matrix, model_basic_clean, model_condition, model_identity, repurposing 6嫄? QC 4嫄?/div>
             </td>
             <td class="src">curated_date/depmap/</td>
           </tr>
@@ -123,8 +123,8 @@
             <td class="folder">drugbank/</td>
             <td class="cnt">8</td>
             <td class="desc">
-              DrugBank 약물 마스터 (19,842개 약물), 타겟/동의어/그룹/외부ID 테이블
-              <div class="files-detail">drug_master (SMILES, InChI), target_table, synonym_table, group_table, external_identifier_table, QC 3건</div>
+              DrugBank ?쎈Ъ 留덉뒪??(19,842媛??쎈Ъ), ?寃??숈쓽??洹몃９/?몃?ID ?뚯씠釉?
+              <div class="files-detail">drug_master (SMILES, InChI), target_table, synonym_table, group_table, external_identifier_table, QC 3嫄?/div>
             </td>
             <td class="src">curated_date/drugbank/</td>
           </tr>
@@ -133,8 +133,8 @@
             <td class="folder">gsdc/</td>
             <td class="cnt">19</td>
             <td class="desc">
-              GDSC2 약물 반응 &mdash; basic_clean, 어노테이션 (약물/세포주), 레이블 테이블, 값 매핑
-              <div class="files-detail">gdsc2_basic_clean (IC50), annotation_normalized, drug_annotation_master/table, cellline_annotation, label_table, pathway/target 값 매핑, QC 5건</div>
+              GDSC2 ?쎈Ъ 諛섏쓳 &mdash; basic_clean, ?대끂?뚯씠??(?쎈Ъ/?명룷二?, ?덉씠釉??뚯씠釉? 媛?留ㅽ븨
+              <div class="files-detail">gdsc2_basic_clean (IC50), annotation_normalized, drug_annotation_master/table, cellline_annotation, label_table, pathway/target 媛?留ㅽ븨, QC 5嫄?/div>
             </td>
             <td class="src">curated_date/gsdc/</td>
           </tr>
@@ -143,8 +143,8 @@
             <td class="folder">lincs/</td>
             <td class="cnt">11</td>
             <td class="desc">
-              LINCS L1000 메타데이터 &mdash; sig_info, cell_info, gene_info, pert_info, inst_info, metrics
-              <div class="files-detail">sig_info (47.3만 시그니처), cell_info, gene_info (12,328 유전자), pert_info, pert_metrics, inst_info, sig_metrics, special_file_inventory, QC 3건</div>
+              LINCS L1000 硫뷀??곗씠??&mdash; sig_info, cell_info, gene_info, pert_info, inst_info, metrics
+              <div class="files-detail">sig_info (47.3留??쒓렇?덉쿂), cell_info, gene_info (12,328 ?좎쟾??, pert_info, pert_metrics, inst_info, sig_metrics, special_file_inventory, QC 3嫄?/div>
             </td>
             <td class="src">curated_date/lincs/</td>
           </tr>
@@ -153,8 +153,8 @@
             <td class="folder">metabric/</td>
             <td class="cnt">6</td>
             <td class="desc">
-              METABRIC BRCA 발현 + 임상 (환자/샘플) &mdash; 외부 검증용
-              <div class="files-detail">expression_basic_clean, clinical_patient_basic_clean, clinical_sample_basic_clean, QC 3건</div>
+              METABRIC BRCA 諛쒗쁽 + ?꾩긽 (?섏옄/?섑뵆) &mdash; ?몃? 寃利앹슜
+              <div class="files-detail">expression_basic_clean, clinical_patient_basic_clean, clinical_sample_basic_clean, QC 3嫄?/div>
             </td>
             <td class="src">curated_date/metabric/</td>
           </tr>
@@ -163,8 +163,8 @@
             <td class="folder">msigdb/</td>
             <td class="cnt">5</td>
             <td class="desc">
-              MSigDB 유전자 세트 (Hallmark 등) &mdash; 경로 특성용
-              <div class="files-detail">gene_set_master, gene_set_membership, QC 3건</div>
+              MSigDB ?좎쟾???명듃 (Hallmark ?? &mdash; 寃쎈줈 ?뱀꽦??
+              <div class="files-detail">gene_set_master, gene_set_membership, QC 3嫄?/div>
             </td>
             <td class="src">curated_date/msigdb/</td>
           </tr>
@@ -173,8 +173,8 @@
             <td class="folder">opentargets/</td>
             <td class="cnt">7</td>
             <td class="desc">
-              Open Targets 질병-타겟 연관성 (직접/간접), 질병/타겟 마스터
-              <div class="files-detail">association_overall_direct, association_by_overall_indirect, disease_basic, target_basic, QC 3건</div>
+              Open Targets 吏덈퀝-?寃??곌???(吏곸젒/媛꾩젒), 吏덈퀝/?寃?留덉뒪??
+              <div class="files-detail">association_overall_direct, association_by_overall_indirect, disease_basic, target_basic, QC 3嫄?/div>
             </td>
             <td class="src">curated_date/opentargets/</td>
           </tr>
@@ -183,8 +183,8 @@
             <td class="folder">string/</td>
             <td class="cnt">6</td>
             <td class="desc">
-              STRING PPI 네트워크 &mdash; 단백질 상호작용, 별칭, 정보
-              <div class="files-detail">links_basic (PPI 엣지), protein_aliases, protein_info, QC 3건</div>
+              STRING PPI ?ㅽ듃?뚰겕 &mdash; ?⑤갚吏??곹샇?묒슜, 蹂꾩묶, ?뺣낫
+              <div class="files-detail">links_basic (PPI ?ｌ?), protein_aliases, protein_info, QC 3嫄?/div>
             </td>
             <td class="src">curated_date/string/</td>
           </tr>
@@ -193,94 +193,94 @@
             <td class="folder">tcga/</td>
             <td class="cnt">14</td>
             <td class="desc">
-              TCGA BRCA 생체시료 (aliquot/analyte/portion/sample/slide) + 임상 + RNA 파일 목록
-              <div class="files-detail">clinical_clinical, clinical_exposure, clinical_family_history, clinical_follow_up, clinical_pathology_detail, biospecimen 5건, rna_file_inventory, QC 3건</div>
+              TCGA BRCA ?앹껜?쒕즺 (aliquot/analyte/portion/sample/slide) + ?꾩긽 + RNA ?뚯씪 紐⑸줉
+              <div class="files-detail">clinical_clinical, clinical_exposure, clinical_family_history, clinical_follow_up, clinical_pathology_detail, biospecimen 5嫄? rna_file_inventory, QC 3嫄?/div>
             </td>
             <td class="src">curated_date/tcga/</td>
           </tr>
           <!-- Root generated -->
           <tr style="background:rgba(251,191,36,0.06)">
-            <td class="folder">루트 (생성됨)</td>
+            <td class="folder">猷⑦듃 (?앹꽦??</td>
             <td class="cnt">2</td>
             <td class="desc">
-              <b>gdsc_ic50.parquet</b> &mdash; GDSC2만, BRCA 필터링 (13,388행, 52 세포주, 295 약물)<br>
-              <b>lincs_mcf7.parquet</b> &mdash; MCF7 Level5 z-score 행렬 (63,367 시그니처 &times; 12,328 유전자, 4.63GB)
+              <b>gdsc_ic50.parquet</b> &mdash; GDSC2留? BRCA ?꾪꽣留?(13,388?? 52 ?명룷二? 295 ?쎈Ъ)<br>
+              <b>lincs_mcf7.parquet</b> &mdash; MCF7 Level5 z-score ?됰젹 (63,367 ?쒓렇?덉쿂 &times; 12,328 ?좎쟾?? 4.63GB)
             </td>
             <td class="src-gen">
-              gdsc: curated gsdc/gdsc2_basic_clean 기반 생성<br>
-              lincs: curated lincs/sig_info + oringinal_raw Level5 GCTx 기반 생성
+              gdsc: curated gsdc/gdsc2_basic_clean 湲곕컲 ?앹꽦<br>
+              lincs: curated lincs/sig_info + oringinal_raw Level5 GCTx 湲곕컲 ?앹꽦
             </td>
           </tr>
         </tbody>
       </table>
       <div class="timestamp" style="font-size:0.65rem; color:#f59e0b; margin-top:8px;">
-        정책: gdsc_ic50 = GDSC2만 사용 (295 약물). 사유: GDSC2가 GDSC1 대비 품질 우수, ADMET 필터링으로 후보군 축소되므로 품질 우선 결정.<br>
-        lincs_mcf7 = curated_date/lincs/ sig_info+cell_info MCF7 필터 &rarr; oringinal_raw Level5 GCTx에서 extract.<br>
-        glue/ 폴더 접근 금지. curated_date/ 원본 읽기 전용.
+        ?뺤콉: gdsc_ic50 = GDSC2留??ъ슜 (295 ?쎈Ъ). ?ъ쑀: GDSC2媛 GDSC1 ?鍮??덉쭏 ?곗닔, ADMET ?꾪꽣留곸쑝濡??꾨낫援?異뺤냼?섎?濡??덉쭏 ?곗꽑 寃곗젙.<br>
+        lincs_mcf7 = curated_date/lincs/ sig_info+cell_info MCF7 ?꾪꽣 &rarr; oringinal_raw Level5 GCTx?먯꽌 extract.<br>
+        glue/ ?대뜑 ?묎렐 湲덉?. curated_date/ ?먮낯 ?쎄린 ?꾩슜.
       </div>
-      <div class="timestamp" id="ts-2">업데이트: 2026-04-08 (전체 데이터셋 목록, GDSC2만, LINCS MCF7 재추출)</div>
+      <div class="timestamp" id="ts-2">?낅뜲?댄듃: 2026-04-08 (?꾩껜 ?곗씠?곗뀑 紐⑸줉, GDSC2留? LINCS MCF7 ?ъ텛異?</div>
     </div>
     <div class="step completed" id="step-3">
-      <div class="step-header"><div class="step-num">3</div><div class="step-title">특성 공학</div></div>
+      <div class="step-header"><div class="step-num">3</div><div class="step-title">?뱀꽦 怨듯븰</div></div>
       <div class="metrics" id="metrics-3">
-        <div class="metric"><span class="label">파이프라인:</span><span class="value">Nextflow on AWS Batch (4개 프로세스, 5분 31초)</span></div>
-        <div class="metric"><span class="label">특성 행렬:</span><span class="value">7,730 쌍 x 18,316 특성</span></div>
-        <div class="metric"><span class="label">레이블:</span><span class="value">7,730 쌍 (회귀 ln_IC50 + 이진)</span></div>
-        <div class="metric"><span class="label">Drug SMILES:</span><span class="value">243/295 (82.4%) | 52 전체 0</span></div>
-        <div class="metric"><span class="label">LINCS:</span><span class="value">101 약물 매칭 (cosine/pearson/spearman/reverse)</span></div>
-        <div class="metric"><span class="label">약물-타겟:</span><span class="value">295 약물, 235 타겟 (GDSC PUTATIVE_TARGET)</span></div>
-        <div class="metric"><span class="label">쌍 특성 v2:</span><span class="value">pathway + Morgan/descriptor + LINCS + target</span></div>
-        <div class="metric"><span class="label">결측치 처리:</span><span class="value">중앙값 (CRISPR) | 0 채움 (약물 fingerprints)</span></div>
-        <div class="metric"><span class="label">S3 출력:</span><span class="value">fe_output/20260408_fe_v1/ (features/ + pair_features/)</span></div>
+        <div class="metric"><span class="label">?뚯씠?꾨씪??</span><span class="value">Nextflow on AWS Batch (4媛??꾨줈?몄뒪, 5遺?31珥?</span></div>
+        <div class="metric"><span class="label">?뱀꽦 ?됰젹:</span><span class="value">7,730 ??x 18,316 ?뱀꽦</span></div>
+        <div class="metric"><span class="label">?덉씠釉?</span><span class="value">7,730 ??(?뚭? ln_IC50 + ?댁쭊)</span></div>
+        <div class="metric"><span class="label">Drug SMILES:</span><span class="value">243/295 (82.4%) | 52 ?꾩껜 0</span></div>
+        <div class="metric"><span class="label">LINCS:</span><span class="value">101 ?쎈Ъ 留ㅼ묶 (cosine/pearson/spearman/reverse)</span></div>
+        <div class="metric"><span class="label">?쎈Ъ-?寃?</span><span class="value">295 ?쎈Ъ, 235 ?寃?(GDSC PUTATIVE_TARGET)</span></div>
+        <div class="metric"><span class="label">???뱀꽦 v2:</span><span class="value">pathway + Morgan/descriptor + LINCS + target</span></div>
+        <div class="metric"><span class="label">寃곗륫移?泥섎━:</span><span class="value">以묒븰媛?(CRISPR) | 0 梨꾩? (?쎈Ъ fingerprints)</span></div>
+        <div class="metric"><span class="label">S3 異쒕젰:</span><span class="value">fe_output/20260408_fe_v1/ (features/ + pair_features/)</span></div>
       </div>
-      <div class="timestamp" id="ts-3">완료: 2026-04-08 15:36 KST</div>
+      <div class="timestamp" id="ts-3">?꾨즺: 2026-04-08 15:36 KST</div>
     </div>
     <div class="step completed" id="step-4">
-      <div class="step-header"><div class="step-num">4</div><div class="step-title">모델 학습 (15개 모델)</div></div>
+      <div class="step-header"><div class="step-num">4</div><div class="step-title">紐⑤뜽 ?숈뒿 (15媛?紐⑤뜽)</div></div>
       <div class="metrics" id="metrics-4">
-        <div class="metric"><span class="label">ML (8):</span><span class="value" style="color:#4ade80">완료 | 최고: CatBoost(0.801), LightGBM(0.791), XGBoost(0.790)</span></div>
-        <div class="metric"><span class="label">DL (5):</span><span class="value" style="color:#4ade80">완료 | 최고: FlatMLP(0.794), ResidualMLP(0.786), Cross-Attn(0.785)</span></div>
-        <div class="metric"><span class="label">그래프 (2):</span><span class="value" style="color:#f87171">GraphSAGE(P@20=0.94, METABRIC), GAT(실패)</span></div>
-        <div class="metric"><span class="label">앙상블 통과:</span><span class="value" style="color:#4ade80">6/15 모델 (CatBoost, FlatMLP, LightGBM, XGBoost, ResidualMLP, Cross-Attn)</span></div>
+        <div class="metric"><span class="label">ML (8):</span><span class="value" style="color:#4ade80">?꾨즺 | 理쒓퀬: CatBoost(0.801), LightGBM(0.791), XGBoost(0.790)</span></div>
+        <div class="metric"><span class="label">DL (5):</span><span class="value" style="color:#4ade80">?꾨즺 | 理쒓퀬: FlatMLP(0.794), ResidualMLP(0.786), Cross-Attn(0.785)</span></div>
+        <div class="metric"><span class="label">洹몃옒??(2):</span><span class="value" style="color:#f87171">GraphSAGE(P@20=0.94, METABRIC), GAT(?ㅽ뙣)</span></div>
+        <div class="metric"><span class="label">?숈긽釉??듦낵:</span><span class="value" style="color:#4ade80">6/15 紐⑤뜽 (CatBoost, FlatMLP, LightGBM, XGBoost, ResidualMLP, Cross-Attn)</span></div>
       </div>
-      <a href="step4_detail.html" target="_blank" style="display:inline-block;margin-top:10px;padding:6px 16px;background:#22c55e;color:#fff;border-radius:6px;text-decoration:none;font-size:0.8rem;font-weight:600;">상세 결과 보기 &rarr;</a>
-      <div class="timestamp" id="ts-4">완료: 2026-04-08</div>
+      <a href="step4_detail.html" target="_blank" style="display:inline-block;margin-top:10px;padding:6px 16px;background:#22c55e;color:#fff;border-radius:6px;text-decoration:none;font-size:0.8rem;font-weight:600;">?곸꽭 寃곌낵 蹂닿린 &rarr;</a>
+      <div class="timestamp" id="ts-4">?꾨즺: 2026-04-08</div>
     </div>
     <div class="step completed" id="step-5">
-      <div class="step-header"><div class="step-num">5</div><div class="step-title">앙상블 Track2 (Spearman 가중 평균)</div></div>
+      <div class="step-header"><div class="step-num">5</div><div class="step-title">?숈긽釉?Track2 (Spearman 媛以??됯퇏)</div></div>
       <div class="metrics" id="metrics-5">
-        <div class="metric"><span class="label">방법:</span><span class="value">Spearman 가중 평균 (6개 모델)</span></div>
-        <div class="metric"><span class="label">검증 Spearman:</span><span class="value" style="color:#4ade80">0.8055 &plusmn; 0.0101 (통과)</span></div>
-        <div class="metric"><span class="label">RMSE:</span><span class="value" style="color:#4ade80">1.3008 &plusmn; 0.0227 (통과)</span></div>
-        <div class="metric"><span class="label">Gap(Sp):</span><span class="value" style="color:#fbbf24">0.0004 (과적합 없음)</span></div>
-        <div class="metric"><span class="label">최상위 약물:</span><span class="value">Bortezomib (IC50=-4.84)</span></div>
+        <div class="metric"><span class="label">諛⑸쾿:</span><span class="value">Spearman 媛以??됯퇏 (6媛?紐⑤뜽)</span></div>
+        <div class="metric"><span class="label">寃利?Spearman:</span><span class="value" style="color:#4ade80">0.8055 &plusmn; 0.0101 (?듦낵)</span></div>
+        <div class="metric"><span class="label">RMSE:</span><span class="value" style="color:#4ade80">1.3008 &plusmn; 0.0227 (?듦낵)</span></div>
+        <div class="metric"><span class="label">Gap(Sp):</span><span class="value" style="color:#fbbf24">0.0004 (怨쇱쟻???놁쓬)</span></div>
+        <div class="metric"><span class="label">理쒖긽???쎈Ъ:</span><span class="value">Bortezomib (IC50=-4.84)</span></div>
       </div>
-      <a href="step5_detail.html" target="_blank" style="display:inline-block;margin-top:10px;padding:6px 16px;background:#22c55e;color:#fff;border-radius:6px;text-decoration:none;font-size:0.8rem;font-weight:600;">상세 결과 보기 &rarr;</a>
-      <div class="timestamp" id="ts-5">완료: 2026-04-08</div>
+      <a href="step5_detail.html" target="_blank" style="display:inline-block;margin-top:10px;padding:6px 16px;background:#22c55e;color:#fff;border-radius:6px;text-decoration:none;font-size:0.8rem;font-weight:600;">?곸꽭 寃곌낵 蹂닿린 &rarr;</a>
+      <div class="timestamp" id="ts-5">?꾨즺: 2026-04-08</div>
     </div>
     <div class="step completed" id="step-6">
-      <div class="step-header"><div class="step-num">6</div><div class="step-title">METABRIC 외부 검증 (A+B+C)</div></div>
+      <div class="step-header"><div class="step-num">6</div><div class="step-title">METABRIC ?몃? 寃利?(A+B+C)</div></div>
       <div class="metrics" id="metrics-6">
-        <div class="metric"><span class="label">방법 A:</span><span class="value" style="color:#4ade80">29/30 BRCA 발현 타겟, 22/30 BRCA 관련 경로</span></div>
-        <div class="metric"><span class="label">방법 B:</span><span class="value" style="color:#4ade80">28/30 생존 유의 | RSF C-idx=0.821</span></div>
-        <div class="metric"><span class="label">방법 C:</span><span class="value" style="color:#4ade80">P@15=93.3% | GraphSAGE P@20=0.94</span></div>
-        <div class="metric"><span class="label">선별:</span><span class="value">상위 30 &rarr; 상위 15 고유 약물 (중복 제거 + 차순위 재선별)</span></div>
+        <div class="metric"><span class="label">諛⑸쾿 A:</span><span class="value" style="color:#4ade80">29/30 BRCA 諛쒗쁽 ?寃? 22/30 BRCA 愿??寃쎈줈</span></div>
+        <div class="metric"><span class="label">諛⑸쾿 B:</span><span class="value" style="color:#4ade80">28/30 ?앹〈 ?좎쓽 | RSF C-idx=0.821</span></div>
+        <div class="metric"><span class="label">諛⑸쾿 C:</span><span class="value" style="color:#4ade80">P@15=93.3% | GraphSAGE P@20=0.94</span></div>
+        <div class="metric"><span class="label">?좊퀎:</span><span class="value">?곸쐞 30 &rarr; ?곸쐞 15 怨좎쑀 ?쎈Ъ (以묐났 ?쒓굅 + 李⑥닚???ъ꽑蹂?</span></div>
       </div>
-      <a href="step6_detail.html" target="_blank" style="display:inline-block;margin-top:10px;padding:6px 16px;background:#22c55e;color:#fff;border-radius:6px;text-decoration:none;font-size:0.8rem;font-weight:600;">상세 결과 보기 &rarr;</a>
-      <div class="timestamp" id="ts-6">완료: 2026-04-08</div>
+      <a href="step6_detail.html" target="_blank" style="display:inline-block;margin-top:10px;padding:6px 16px;background:#22c55e;color:#fff;border-radius:6px;text-decoration:none;font-size:0.8rem;font-weight:600;">?곸꽭 寃곌낵 蹂닿린 &rarr;</a>
+      <div class="timestamp" id="ts-6">?꾨즺: 2026-04-08</div>
     </div>
     <div class="step completed" id="step-7">
-      <div class="step-header"><div class="step-num">7</div><div class="step-title">ADMET 게이트 - 최종 약물 선정</div></div>
+      <div class="step-header"><div class="step-num">7</div><div class="step-title">ADMET 寃뚯씠??- 理쒖쥌 ?쎈Ъ ?좎젙</div></div>
       <div class="metrics" id="metrics-7">
-        <div class="metric"><span class="label">분석 항목:</span><span class="value">22개 ADMET 필터 (TDC 벤치마크)</span></div>
-        <div class="metric"><span class="label">결과:</span><span class="value" style="color:#4ade80">유방암 현재 사용: 5 | 적응증 확장/연구 중: 6 | 유방암 미사용(신약 후보): 4</span></div>
-        <div class="metric"><span class="label">상위 3개:</span><span class="value">Romidepsin (HDAC), Sepantronium bromide (BIRC5), Dactinomycin</span></div>
-        <div class="metric"><span class="label">산출물:</span><span class="value">ADMET 프로파일 + 유방암 적응증 분류 적용 15개 고유 최종 후보 (동일 약물 중복 제거 + 차순위 재선별)</span></div>
+        <div class="metric"><span class="label">遺꾩꽍 ??ぉ:</span><span class="value">22媛?ADMET ?꾪꽣 (TDC 踰ㅼ튂留덊겕)</span></div>
+        <div class="metric"><span class="label">寃곌낵:</span><span class="value" style="color:#4ade80">?좊갑???꾩옱 ?ъ슜: 5 | ?곸쓳利??뺤옣/?곌뎄 以? 6 | ?좊갑??誘몄궗???좎빟 ?꾨낫): 4</span></div>
+        <div class="metric"><span class="label">?곸쐞 3媛?</span><span class="value">Romidepsin (HDAC), Sepantronium bromide (BIRC5), Dactinomycin</span></div>
+        <div class="metric"><span class="label">?곗텧臾?</span><span class="value">ADMET ?꾨줈?뚯씪 + ?좊갑???곸쓳利?遺꾨쪟 ?곸슜 15媛?怨좎쑀 理쒖쥌 ?꾨낫 (?숈씪 ?쎈Ъ 以묐났 ?쒓굅 + 李⑥닚???ъ꽑蹂?</span></div>
       </div>
-      <a href="step7_detail.html" target="_blank" style="display:inline-block;margin-top:10px;padding:6px 16px;background:#22c55e;color:#fff;border-radius:6px;text-decoration:none;font-size:0.8rem;font-weight:600;">상세 결과 보기 &rarr;</a>
-      <a href="repurposing_candidates.html" target="_blank" style="display:inline-block;margin-top:10px;margin-left:8px;padding:6px 16px;background:#a855f7;color:#fff;border-radius:6px;text-decoration:none;font-size:0.8rem;font-weight:600;">재창출 후보 10건 상세 &rarr;</a>
-      <a href="chat_app.html" target="_blank" style="display:inline-block;margin-top:10px;margin-left:8px;padding:6px 16px;background:#3b82f6;color:#fff;border-radius:6px;text-decoration:none;font-size:0.8rem;font-weight:600;">&#x1F4AC; 채팅 어시스턴트 &rarr;</a>
-      <div class="timestamp" id="ts-7">완료: 2026-04-08</div>
+      <a href="step7_detail.html" target="_blank" style="display:inline-block;margin-top:10px;padding:6px 16px;background:#22c55e;color:#fff;border-radius:6px;text-decoration:none;font-size:0.8rem;font-weight:600;">?곸꽭 寃곌낵 蹂닿린 &rarr;</a>
+      <a href="repurposing_candidates.html" target="_blank" style="display:inline-block;margin-top:10px;margin-left:8px;padding:6px 16px;background:#a855f7;color:#fff;border-radius:6px;text-decoration:none;font-size:0.8rem;font-weight:600;">?ъ갹異??꾨낫 10嫄??곸꽭 &rarr;</a>
+      <a href="chat_app.html" style="display:inline-block;margin-top:10px;margin-left:8px;padding:6px 16px;background:#3b82f6;color:#fff;border-radius:6px;text-decoration:none;font-size:0.8rem;font-weight:600;">&#x1F4AC; 梨꾪똿 ?댁떆?ㅽ꽩??&rarr;</a>
+      <div class="timestamp" id="ts-7">?꾨즺: 2026-04-08</div>
     </div>
   </div>
 </div>
@@ -290,7 +290,7 @@ function updateStep(completedSteps, activeStep, metrics) {
     const el = document.getElementById('step-' + i);
     el.className = 'step ' + (i <= completedSteps ? 'completed' : i === activeStep ? 'active' : 'pending');
   }
-  document.getElementById('progress-pct').textContent = completedSteps + ' / 7 단계';
+  document.getElementById('progress-pct').textContent = completedSteps + ' / 7 ?④퀎';
   document.getElementById('bar-fill').style.width = (completedSteps / 7 * 100).toFixed(1) + '%';
   if (metrics && activeStep) {
     const target = completedSteps;
@@ -301,14 +301,15 @@ function updateStep(completedSteps, activeStep, metrics) {
         mc.innerHTML += '<div class="metric"><span class="label">' + k + ':</span><span class="value">' + v + '</span></div>';
       }
     }
-    document.getElementById('ts-' + target).textContent = '완료: ' + new Date().toLocaleString();
+    document.getElementById('ts-' + target).textContent = '?꾨즺: ' + new Date().toLocaleString();
   }
   localStorage.setItem('pipeline_state', JSON.stringify({completedSteps, activeStep, ts: new Date().toISOString()}));
 }
 try {
   const s = JSON.parse(localStorage.getItem('pipeline_state'));
-  if (s) { for (let i = 1; i <= 7; i++) { const el = document.getElementById('step-'+i); el.className = 'step '+(i<=s.completedSteps?'completed':i===s.activeStep?'active':'pending'); } document.getElementById('progress-pct').textContent = s.completedSteps+' / 7 단계'; document.getElementById('bar-fill').style.width = (s.completedSteps/7*100).toFixed(1)+'%'; }
+  if (s) { for (let i = 1; i <= 7; i++) { const el = document.getElementById('step-'+i); el.className = 'step '+(i<=s.completedSteps?'completed':i===s.activeStep?'active':'pending'); } document.getElementById('progress-pct').textContent = s.completedSteps+' / 7 ?④퀎'; document.getElementById('bar-fill').style.width = (s.completedSteps/7*100).toFixed(1)+'%'; }
 } catch(e) {}
 </script>
 </body>
 </html>
+

@@ -1,0 +1,45 @@
+disease: LIHC
+display_name: Liver Hepatocellular Carcinoma
+run_id: LIVER_RELEASE_V1
+s3_parent_prefix: s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Liver/
+s3_release_prefix: TODO_UNCONFIRMED
+status: pending_s3fs_profile
+input_files:
+  candidate_unique: generated/results/20260428_liver_step4_v2/lihc_top30_directive_ensemble_with_names.csv
+  candidate_tiered: generated/results/20260428_liver_step4_v2/lihc_v2_top30_dedup_tiered.csv
+  model_performance_summary: TODO_UNCONFIRMED
+  model_performance_detailed: generated/results/lihc_step4_v2_metrics_full_by_phase.csv
+  ensemble_validation_summary: TODO_UNCONFIRMED
+  ensemble_source_manifest: generated/results/lihc_v1_manifest.json
+  copied_source_manifest: TODO_UNCONFIRMED
+  reproducibility_manifest: generated/repro_20260428_liver_step4_v2_20260429/REPRO_MANIFEST.json
+  external_validation_top30: generated/external_validation/20260428_liver_step4_cv5_gc_sc/top30_external_validation_lihc_cptac_excluded.csv
+  external_validation_top15: TODO_UNCONFIRMED
+  external_validation_method_a: TODO_UNCONFIRMED
+  external_validation_method_b: TODO_UNCONFIRMED
+  admet_top30: TODO_UNCONFIRMED
+  final_after_admet: TODO_UNCONFIRMED
+  admet_matches: TODO_UNCONFIRMED
+  admet_summary: TODO_UNCONFIRMED
+biology:
+  disease_aliases:
+    - liver cancer
+    - hepatocellular carcinoma
+    - HCC
+    - LIHC
+  marker_genes:
+    - TP53
+    - CTNNB1
+    - AXIN1
+    - ARID1A
+  subtypes:
+    - iCluster1
+    - iCluster2
+    - iCluster3
+kg:
+  disease_node_name: LIHC
+  disease_display_name: Liver Hepatocellular Carcinoma
+notes:
+  - TERT is intentionally excluded because the current project data does not contain TERT.
+  - iCluster labels are molecular subtype labels, not clinical stage labels.
+  - Mapping confidence is medium; candidate/model/external/manifest signals exist but are split across generated subtrees, so unresolved roles stay TODO_UNCONFIRMED.

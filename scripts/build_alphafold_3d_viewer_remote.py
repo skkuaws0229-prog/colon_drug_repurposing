@@ -90,7 +90,7 @@ def build_html(entries: list[dict[str, Any]]) -> str:
       color: #1f2937;
     }
     .wrap {
-      max-width: 1200px;
+      max-width: 1320px;
       margin: 0 auto;
       padding: 12px;
     }
@@ -100,27 +100,41 @@ def build_html(entries: list[dict[str, Any]]) -> str:
       border-radius: 12px;
       box-shadow: 0 8px 26px rgba(25,35,60,0.08);
     }
+    .layout {
+      display: grid;
+      grid-template-columns: 360px minmax(0, 1fr);
+      gap: 12px;
+      align-items: start;
+    }
+    .panel {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: sticky;
+      top: 12px;
+      z-index: 20;
+    }
     .toolbar {
       display: grid;
-      grid-template-columns: 1fr 1fr auto;
+      grid-template-columns: 1fr;
       gap: 8px;
       padding: 10px;
-      margin-bottom: 10px;
     }
     .viewer {
-      height: 58vh;
-      min-height: 340px;
+      height: calc(100vh - 24px);
+      min-height: 520px;
       border: 1px solid #d6e1ed;
       background: #0b1220;
       border-radius: 12px;
       overflow: hidden;
+      position: relative;
+      z-index: 0;
     }
     .meta {
-      margin-top: 10px;
       padding: 10px;
       font-size: 14px;
       line-height: 1.45;
-      max-height: 32vh;
+      max-height: calc(100vh - 220px);
       overflow: auto;
     }
     .status {
@@ -136,27 +150,42 @@ def build_html(entries: list[dict[str, Any]]) -> str:
       background: #fff;
       font-size: 14px;
     }
-    @media (max-width: 900px) {
-      .toolbar { grid-template-columns: 1fr; }
-      .viewer { height: 52vh; min-height: 300px; }
+    @media (max-width: 980px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+      .panel {
+        position: static;
+      }
+      .viewer {
+        height: 56vh;
+        min-height: 320px;
+      }
+      .meta {
+        max-height: 36vh;
+      }
     }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="card toolbar">
-      <select id="entrySelect"></select>
-      <select id="styleSelect">
-        <option value="cartoon_plddt">Cartoon (pLDDT Color)</option>
-        <option value="cartoon_chain">Cartoon (Chain Color)</option>
-        <option value="stick">Stick</option>
-        <option value="sphere">Sphere</option>
-      </select>
-      <button id="spinBtn">Spin: Off</button>
+    <div class="layout">
+      <div class="panel">
+        <div class="card toolbar">
+          <select id="entrySelect"></select>
+          <select id="styleSelect">
+            <option value="cartoon_plddt">Cartoon (pLDDT Color)</option>
+            <option value="cartoon_chain">Cartoon (Chain Color)</option>
+            <option value="stick">Stick</option>
+            <option value="sphere">Sphere</option>
+          </select>
+          <button id="spinBtn">Spin: Off</button>
+        </div>
+        <div class="card meta" id="meta"></div>
+        <div class="status" id="status"></div>
+      </div>
+      <div id="viewer" class="card viewer"></div>
     </div>
-    <div id="viewer" class="card viewer"></div>
-    <div class="card meta" id="meta"></div>
-    <div class="status" id="status"></div>
   </div>
   <script>
     const entries = __PAYLOAD__;

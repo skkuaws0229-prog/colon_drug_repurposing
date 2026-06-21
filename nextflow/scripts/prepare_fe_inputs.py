@@ -53,6 +53,36 @@ def parse_args() -> argparse.Namespace:
         default="",
         help="Optional cohort key in cohort-yaml (e.g., colon, rectal).",
     )
+    p.add_argument(
+        "--sample-fallback-mode",
+        choices=["none", "global_median"],
+        default="none",
+        help=(
+            "How to handle label sample_id values that do not exist in sample_features. "
+            "'none' keeps current behavior. 'global_median' adds synthetic sample rows "
+            "using per-feature global medians."
+        ),
+    )
+    p.add_argument(
+        "--sample-match-mode",
+        choices=["exact", "alnum_norm"],
+        default="exact",
+        help=(
+            "How to match sample.cell_line_name against label.cell_line_name in Stage1 filter. "
+            "'exact' keeps strict string match; "
+            "'alnum_norm' removes non-alphanumeric chars and uppercases before matching."
+        ),
+    )
+    p.add_argument(
+        "--sample-id-harmonize-mode",
+        choices=["none", "label_norm_prefer"],
+        default="none",
+        help=(
+            "How to harmonize sample_features.sample_id to labels.sample_id before join QC. "
+            "'none' keeps original IDs. "
+            "'label_norm_prefer' maps by alnum-normalized key and rewrites sample IDs to label IDs when unique."
+        ),
+    )
     return p.parse_args()
 
 
@@ -84,6 +114,14 @@ def _join_path(prefix: str, name: str) -> str:
 
 def _clean_opt_str(value: str | None) -> str:
     return str(value or "").strip()
+
+
+def _alnum_norm_text(v: str) -> str:
+    return re.sub(r"[^A-Za-z0-9]+", "", str(v).upper())
+
+
+def _alnum_norm_series(s: pd.Series) -> pd.Series:
+    return s.astype(str).str.strip().map(_alnum_norm_text)
 
 
 def _value_match_mask(series: pd.Series, values: list[str], match: str) -> pd.Series:
@@ -340,29 +378,53 @@ def _collapse_lookup(df: pd.DataFrame, key_col: str) -> pd.DataFrame:
     return out
 
 
-def filter_sample_by_labels(sample_df: pd.DataFrame, label_df: pd.DataFrame) -> tuple[pd.DataFrame, dict[str, Any]]:
+def filter_sample_by_labels(
+    sample_df: pd.DataFrame,
+    label_df: pd.DataFrame,
+    match_mode: str = "exact",
+) -> tuple[pd.DataFrame, dict[str, Any]]:
     if "cell_line_name" not in sample_df.columns:
         raise ValueError("sample source missing required column: cell_line_name")
     if "cell_line_name" not in label_df.columns:
         raise ValueError("label source missing required column: cell_line_name")
 
     before_rows = int(sample_df.shape[0])
-    before_unique = int(sample_df["cell_line_name"].astype(str).str.strip().nunique())
-
+    sample_cells = sample_df["cell_line_name"].astype(str).str.strip()
+    before_unique = int(sample_cells.nunique())
     keep = set(label_df["cell_line_name"].astype(str).str.strip().tolist())
-    filtered = sample_df[sample_df["cell_line_name"].astype(str).str.strip().isin(keep)].copy()
+
+    if match_mode == "exact":
+        mask = sample_cells.isin(keep)
+        matched_exact_cells = set(v for v in keep if v in set(sample_cells.tolist()))
+        matched_final_cells = matched_exact_cells
+    else:
+        keep_norm = set(_alnum_norm_text(v) for v in keep if _alnum_norm_text(v))
+        sample_norm = _alnum_norm_series(sample_cells)
+        mask = sample_norm.isin(keep_norm)
+        sample_norm_set = set(sample_norm.tolist())
+        matched_exact_cells = set(v for v in keep if v in set(sample_cells.tolist()))
+        matched_final_cells = set(v for v in keep if _alnum_norm_text(v) in sample_norm_set)
+
+    filtered = sample_df[mask].copy()
 
     after_rows = int(filtered.shape[0])
     after_unique = int(filtered["cell_line_name"].astype(str).str.strip().nunique())
+    recovered = sorted(list(matched_final_cells - matched_exact_cells))
 
     qc = {
         "enabled": True,
-        "rule": "sample.cell_line_name in filtered_label.cell_line_name",
+        "rule": "sample.cell_line_name matched to filtered_label.cell_line_name",
+        "match_mode": match_mode,
         "rows_before": before_rows,
         "rows_after": after_rows,
         "unique_cell_lines_before": before_unique,
         "unique_cell_lines_after": after_unique,
         "retention_rate_rows": float(after_rows / max(before_rows, 1)),
+        "label_cells_input": int(len(keep)),
+        "label_cells_matched_exact": int(len(matched_exact_cells)),
+        "label_cells_matched_final": int(len(matched_final_cells)),
+        "recovered_by_normalization_count": int(len(recovered)),
+        "recovered_by_normalization_preview": recovered[:50],
     }
     return filtered, qc
 
@@ -389,6 +451,97 @@ def build_sample_features(sample_df: pd.DataFrame) -> tuple[pd.DataFrame, dict[s
         "sample_features_cols": int(wide.shape[1]),
     }
     return wide, qc
+
+
+def harmonize_sample_ids(
+    sample_features: pd.DataFrame,
+    labels: pd.DataFrame,
+    mode: str,
+) -> tuple[pd.DataFrame, dict[str, Any]]:
+    out = sample_features.copy()
+    qc: dict[str, Any] = {
+        "mode": mode,
+        "rewritten_rows": 0,
+        "rewritten_unique_ids": 0,
+        "ambiguous_norm_keys_count": 0,
+        "ambiguous_norm_keys_preview": [],
+        "preview": [],
+    }
+    if mode != "label_norm_prefer":
+        return out, qc
+
+    label_ids = labels["sample_id"].astype(str).str.strip().tolist()
+    label_by_norm: dict[str, set[str]] = {}
+    for lid in label_ids:
+        k = _alnum_norm_text(lid)
+        if not k:
+            continue
+        label_by_norm.setdefault(k, set()).add(lid)
+
+    ambiguous = sorted([k for k, v in label_by_norm.items() if len(v) > 1])
+    qc["ambiguous_norm_keys_count"] = int(len(ambiguous))
+    qc["ambiguous_norm_keys_preview"] = ambiguous[:50]
+
+    sample_ids = out["sample_id"].astype(str).str.strip()
+    sample_norm = _alnum_norm_series(sample_ids)
+    rewritten: list[str] = []
+    new_ids = []
+    for sid, k in zip(sample_ids.tolist(), sample_norm.tolist()):
+        cands = label_by_norm.get(k, set())
+        if len(cands) == 1:
+            target = next(iter(cands))
+            new_ids.append(target)
+            if target != sid:
+                rewritten.append(sid)
+        else:
+            new_ids.append(sid)
+
+    out["sample_id"] = pd.Series(new_ids, index=out.index)
+    qc["rewritten_rows"] = int(len(rewritten))
+    qc["rewritten_unique_ids"] = int(len(set(rewritten)))
+    if rewritten:
+        qc["preview"] = sorted(list(set(rewritten)))[:50]
+    return out, qc
+
+
+def apply_sample_fallback(
+    sample_features: pd.DataFrame,
+    labels: pd.DataFrame,
+    mode: str,
+) -> tuple[pd.DataFrame, dict[str, Any]]:
+    label_ids = set(labels["sample_id"].astype(str).str.strip().tolist())
+    sample_ids = set(sample_features["sample_id"].astype(str).str.strip().tolist())
+    missing_ids = sorted([sid for sid in label_ids if sid not in sample_ids])
+
+    qc: dict[str, Any] = {
+        "mode": mode,
+        "missing_sample_ids_count": len(missing_ids),
+        "missing_sample_ids_preview": missing_ids[:50],
+        "applied_rows": 0,
+    }
+    if mode != "global_median" or not missing_ids:
+        return sample_features, qc
+
+    out = sample_features.copy()
+    numeric_cols = [
+        c for c in out.columns
+        if c != "sample_id" and pd.api.types.is_numeric_dtype(out[c])
+    ]
+    if not numeric_cols:
+        return out, qc
+
+    med = out[numeric_cols].median(numeric_only=True)
+    rows: list[dict[str, Any]] = []
+    for sid in missing_ids:
+        rec: dict[str, Any] = {"sample_id": sid}
+        for c in numeric_cols:
+            rec[c] = float(med[c]) if pd.notna(med[c]) else 0.0
+        rows.append(rec)
+
+    if rows:
+        out = pd.concat([out, pd.DataFrame(rows)], ignore_index=True)
+        qc["applied_rows"] = len(rows)
+    return out, qc
 
 
 def build_drug_features(drug_df: pd.DataFrame, label_df: pd.DataFrame) -> tuple[pd.DataFrame, dict[str, Any]]:
@@ -519,8 +672,22 @@ def main() -> None:
     )
 
     labels, mapping_table, labels_qc = build_labels(filtered_label_src, args.binary_quantile)
-    filtered_sample_src, sample_filter_qc = filter_sample_by_labels(sample_src, filtered_label_src)
+    filtered_sample_src, sample_filter_qc = filter_sample_by_labels(
+        sample_src,
+        filtered_label_src,
+        match_mode=args.sample_match_mode,
+    )
     sample_features, sample_qc = build_sample_features(filtered_sample_src)
+    sample_features, sample_harmonize_qc = harmonize_sample_ids(
+        sample_features=sample_features,
+        labels=labels,
+        mode=args.sample_id_harmonize_mode,
+    )
+    sample_features, sample_fallback_qc = apply_sample_fallback(
+        sample_features=sample_features,
+        labels=labels,
+        mode=args.sample_fallback_mode,
+    )
     drug_features, drug_qc = build_drug_features(drug_src, filtered_label_src)
 
     labels_key = labels[["sample_id", "canonical_drug_id"]].drop_duplicates()
@@ -565,6 +732,8 @@ def main() -> None:
         },
         "labels_qc": labels_qc,
         "sample_qc": sample_qc,
+        "sample_harmonize_qc": sample_harmonize_qc,
+        "sample_fallback_qc": sample_fallback_qc,
         "drug_qc": drug_qc,
     }
     _write_json(qc_report, out_qc)
@@ -583,6 +752,9 @@ def main() -> None:
             "labels_mapping": "cell_line_name->sample_id, DRUG_ID->canonical_drug_id, ln_IC50->ic50",
             "smiles_policy": "smiles is included; has_smiles indicates availability for downstream ADMET/descriptor steps",
             "cohort_filtering": "optional; set --cohort-yaml + --cohort-name to split cohorts",
+            "sample_match_mode": args.sample_match_mode,
+            "sample_id_harmonize_mode": args.sample_id_harmonize_mode,
+            "sample_fallback_mode": args.sample_fallback_mode,
         },
     }
     _write_json(manifest, out_manifest)

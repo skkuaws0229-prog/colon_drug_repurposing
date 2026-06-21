@@ -11,7 +11,7 @@ from urllib.request import Request, urlopen
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Check BRCA FastAPI endpoints")
-    parser.add_argument("--base-url", default="http://127.0.0.1:8000")
+    parser.add_argument("--base-url", default="http://127.0.0.1:8200")
     parser.add_argument("--timeout", type=int, default=20)
     return parser.parse_args()
 

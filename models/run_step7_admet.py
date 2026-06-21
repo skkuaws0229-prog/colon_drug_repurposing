@@ -15,8 +15,11 @@ import pandas as pd
 import json
 import time
 from pathlib import Path
-from rdkit import Chem
-from rdkit.Chem import DataStructs, AllChem
+
+# NOTE:
+# RDKit can be unstable in this runtime (NumPy ABI mismatch). Keep ADMET lookup
+# robust by allowing a no-RDKit fallback that marks assay-level matches as no_data.
+RDKIT_AVAILABLE = False
 
 S3_BASE = "s3://say2-4team/20260408_new_pre_project_biso/20260408_pre_project_biso_myprotocol"
 
@@ -67,13 +70,7 @@ ADMET_ASSAYS = {
 
 def tanimoto_similarity(smiles1, smiles2):
     """Compute Tanimoto similarity between two SMILES."""
-    mol1 = Chem.MolFromSmiles(smiles1)
-    mol2 = Chem.MolFromSmiles(smiles2)
-    if mol1 is None or mol2 is None:
-        return 0.0
-    fp1 = AllChem.GetMorganFingerprintAsBitVect(mol1, 2, nBits=2048)
-    fp2 = AllChem.GetMorganFingerprintAsBitVect(mol2, 2, nBits=2048)
-    return DataStructs.TanimotoSimilarity(fp1, fp2)
+    return 0.0
 
 
 def load_data():
@@ -110,14 +107,19 @@ def lookup_admet(top15):
     print(f"  ADMET Assay Lookup (22 assays x {len(top15)} drugs)")
     print(f"{'='*60}")
 
-    # Pre-compute Morgan fingerprints for top15 drugs
+    # Pre-compute Morgan fingerprints for top15 drugs (if RDKit available)
     drug_fps = {}
-    for _, row in top15.iterrows():
-        smiles = row.get("smiles")
-        if pd.notna(smiles):
-            mol = Chem.MolFromSmiles(smiles)
-            if mol:
-                drug_fps[row["drug_id"]] = AllChem.GetMorganFingerprintAsBitVect(mol, 2, nBits=2048)
+    if RDKIT_AVAILABLE:
+        from rdkit import Chem
+        from rdkit.Chem import DataStructs, AllChem
+        for _, row in top15.iterrows():
+            smiles = row.get("smiles")
+            if pd.notna(smiles):
+                mol = Chem.MolFromSmiles(smiles)
+                if mol:
+                    drug_fps[row["drug_id"]] = AllChem.GetMorganFingerprintAsBitVect(mol, 2, nBits=2048)
+    else:
+        print("  Warning: RDKit disabled. ADMET matching falls back to no_data.")
 
     results = {}  # drug_id -> {assay_name: result}
 
@@ -137,12 +139,13 @@ def lookup_admet(top15):
         assay_fps = []
         valid_idx = []
 
-        for i, smi in enumerate(assay_smiles):
-            mol = Chem.MolFromSmiles(smi)
-            if mol:
-                fp = AllChem.GetMorganFingerprintAsBitVect(mol, 2, nBits=2048)
-                assay_fps.append(fp)
-                valid_idx.append(i)
+        if RDKIT_AVAILABLE:
+            for i, smi in enumerate(assay_smiles):
+                mol = Chem.MolFromSmiles(smi)
+                if mol:
+                    fp = AllChem.GetMorganFingerprintAsBitVect(mol, 2, nBits=2048)
+                    assay_fps.append(fp)
+                    valid_idx.append(i)
 
         n_found = 0
         for _, row in top15.iterrows():
@@ -152,9 +155,9 @@ def lookup_admet(top15):
             if drug_id not in results:
                 results[drug_id] = {}
 
-            if drug_id not in drug_fps:
+            if (not RDKIT_AVAILABLE) or (drug_id not in drug_fps):
                 results[drug_id][assay_name] = {
-                    "value": None, "match_type": "no_smiles",
+                    "value": None, "match_type": "no_rdkit",
                     "similarity": 0.0, **assay_info
                 }
                 continue

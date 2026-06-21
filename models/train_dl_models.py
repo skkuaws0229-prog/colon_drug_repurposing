@@ -18,7 +18,7 @@ from pathlib import Path
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader, TensorDataset
-from sklearn.model_selection import KFold
+from sklearn.model_selection import GroupKFold, KFold
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import mean_squared_error, r2_score
 from scipy.stats import spearmanr, pearsonr
@@ -31,6 +31,8 @@ SEED = 42
 N_FOLDS = 5
 BENCH_SP = 0.713
 BENCH_RMSE = 1.385
+CV_SPLIT_MODE = os.getenv("CV_SPLIT_MODE", "drug_unseen").strip().lower()
+VALID_SPLIT_MODES = {"random", "drug_unseen", "sample_unseen"}
 OUTPUT_DIR = Path(__file__).parent / "dl_results"
 OUTPUT_DIR.mkdir(exist_ok=True)
 
@@ -50,17 +52,32 @@ print(f"Using device: {DEVICE}")
 def load_data():
     print("Loading data from S3...")
     t0 = time.time()
-    features = pd.read_parquet(FEATURES_URI)
-    pair_features = pd.read_parquet(PAIR_FEATURES_URI)
-    labels = pd.read_parquet(LABELS_URI)
-    merged = features.merge(pair_features, on=["sample_id", "canonical_drug_id"], how="inner")
-    labels = labels.set_index(["sample_id", "canonical_drug_id"])
-    merged = merged.set_index(["sample_id", "canonical_drug_id"])
-    labels = labels.loc[merged.index]
-    X = merged.select_dtypes(include=[np.number]).fillna(0.0).values.astype(np.float32)
+    key_cols = ["sample_id", "canonical_drug_id"]
+    features = pd.read_parquet(FEATURES_URI).set_index(key_cols, drop=True)
+    pair_features = pd.read_parquet(PAIR_FEATURES_URI).set_index(key_cols, drop=True)
+    labels = pd.read_parquet(LABELS_URI).set_index(key_cols, drop=True)
+    merged = features.join(pair_features, how="inner", rsuffix="_pair")
+    labels = labels.reindex(merged.index)
+    X = merged.select_dtypes(include=[np.number]).fillna(0.0).to_numpy(dtype=np.float32, copy=False)
     y = labels["label_regression"].values.astype(np.float32)
+    sample_ids = merged.index.get_level_values("sample_id").astype(str).to_numpy()
+    drug_ids = merged.index.get_level_values("canonical_drug_id").astype(str).to_numpy()
     print(f"  Loaded: {X.shape[0]} x {X.shape[1]} features ({time.time()-t0:.1f}s)")
-    return X, y
+    return X, y, sample_ids, drug_ids
+
+
+def get_cv_splits(X, sample_ids, drug_ids, split_mode=CV_SPLIT_MODE):
+    mode = str(split_mode).strip().lower()
+    if mode not in VALID_SPLIT_MODES:
+        raise ValueError(f"invalid CV_SPLIT_MODE='{split_mode}', choose one of {sorted(VALID_SPLIT_MODES)}")
+
+    if mode == "random":
+        splitter = KFold(n_splits=N_FOLDS, shuffle=True, random_state=SEED)
+        return list(splitter.split(X))
+
+    groups = np.asarray(drug_ids if mode == "drug_unseen" else sample_ids, dtype=str)
+    splitter = GroupKFold(n_splits=N_FOLDS)
+    return list(splitter.split(X, groups=groups))
 
 
 # ── Model Definitions ──
@@ -259,16 +276,15 @@ def compute_metrics(y_true, y_pred, y_tr_true=None, y_tr_pred=None):
     return m
 
 
-def run_dl_cv(name, model_cls, model_kwargs, X, y, epochs=100, lr=1e-3, batch_size=256):
+def run_dl_cv(name, model_cls, model_kwargs, X, y, cv_splits, epochs=100, lr=1e-3, batch_size=256):
     print(f"\n{'─'*60}")
-    print(f"  [{name}] Training with 5-fold CV...")
+    print(f"  [{name}] Training with 5-fold CV ({CV_SPLIT_MODE})...")
     print(f"{'─'*60}")
 
-    kf = KFold(n_splits=N_FOLDS, shuffle=True, random_state=SEED)
     fold_metrics = []
     total_t0 = time.time()
 
-    for fold_idx, (train_idx, val_idx) in enumerate(kf.split(X)):
+    for fold_idx, (train_idx, val_idx) in enumerate(cv_splits):
         t0 = time.time()
         X_tr, X_val = X[train_idx], X[val_idx]
         y_tr, y_val = y[train_idx], y[val_idx]
@@ -328,7 +344,9 @@ def main():
     # Parse which models to run (default: all)
     run_only = sys.argv[1] if len(sys.argv) > 1 else "all"
 
-    X, y = load_data()
+    X, y, sample_ids, drug_ids = load_data()
+    cv_splits = get_cv_splits(X, sample_ids, drug_ids)
+    print(f"CV split mode: {CV_SPLIT_MODE}")
     in_dim = X.shape[1]
     sample_dim = 18311  # numeric sample features count
 
@@ -353,7 +371,7 @@ def main():
 
     all_results = []
     for name, cls, kwargs, train_kwargs in models_config:
-        result = run_dl_cv(name, cls, kwargs, X, y, **train_kwargs)
+        result = run_dl_cv(name, cls, kwargs, X, y, cv_splits, **train_kwargs)
         all_results.append(result)
 
     # Summary table

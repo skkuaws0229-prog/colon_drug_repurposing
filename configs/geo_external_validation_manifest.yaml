@@ -1,0 +1,24 @@
+dataset_name: geo_external_validation_crc
+platform_priority:
+  - GPL570
+accessions:
+  - accession: GSE39582
+    disease_label: colon
+  - accession: GSE17536
+    disease_label: colon
+  - accession: GSE17537
+    disease_label: colon
+  - accession: GSE37892
+    disease_label: colon
+  - accession: GSE35452
+    disease_label: rectal
+  - accession: GSE45404
+    disease_label: rectal
+  - accession: GSE68204
+    disease_label: rectal
+  - accession: GSE87211
+    disease_label: rectal
+  - accession: GSE38832
+    disease_label: crc_mixed
+  - accession: GSE14333
+    disease_label: crc_mixed

@@ -1,0 +1,113 @@
+targets:
+  - disease:
+      code: BRCA
+      aliases:
+        - breast cancer
+        - mammary carcinoma
+        - BRCA
+    driver_genes:
+      - TP53
+      - PIK3CA
+      - BRCA1
+      - BRCA2
+    drugs:
+      - name: Metformin
+      - name: Trametinib
+
+  - disease:
+      code: COAD
+      aliases:
+        - colon cancer
+        - colorectal cancer
+        - CRC
+        - COAD
+    driver_genes:
+      - APC
+      - KRAS
+      - TP53
+      - BRAF
+    drugs:
+      - name: Aspirin
+      - name: Regorafenib
+
+  - disease:
+      code: LUAD
+      aliases:
+        - lung adenocarcinoma
+        - non small cell lung cancer
+        - NSCLC
+        - LUAD
+    driver_genes:
+      - EGFR
+      - KRAS
+      - ALK
+      - STK11
+      - KEAP1
+      - TP53
+    drugs:
+      - name: Erlotinib
+      - name: Gefitinib
+
+  - disease:
+      code: LIHC
+      aliases:
+        - hepatocellular carcinoma
+        - liver cancer
+        - HCC
+        - LIHC
+    driver_genes:
+      - TP53
+      - CTNNB1
+      - AXIN1
+      - ARID1A
+    drugs:
+      - name: Sorafenib
+      - name: Lenvatinib
+
+  - disease:
+      code: STAD
+      aliases:
+        - stomach adenocarcinoma
+        - gastric cancer
+        - STAD
+    driver_genes:
+      - TP53
+      - CDH1
+      - ARID1A
+      - PIK3CA
+      - ERBB2
+    drugs:
+      - name: Trastuzumab
+      - name: Ramucirumab
+
+  - disease:
+      code: PAAD
+      aliases:
+        - pancreatic adenocarcinoma
+        - pancreatic cancer
+        - PDAC
+        - PAAD
+    driver_genes:
+      - KRAS
+      - TP53
+      - CDKN2A
+      - SMAD4
+    drugs:
+      - name: Gemcitabine
+      - name: Erlotinib
+
+  - disease:
+      code: HNSC
+      aliases:
+        - head and neck squamous cell carcinoma
+        - head and neck cancer
+        - HNSCC
+        - HNSC
+    driver_genes:
+      - TP53
+      - CDKN2A
+      - PIK3CA
+      - NOTCH1
+    drugs:
+      - name: Cetuximab
+      - name: Cisplatin

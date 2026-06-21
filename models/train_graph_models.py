@@ -54,18 +54,17 @@ def load_data():
     """Load and prepare data, returning features + identifiers."""
     print("Loading data from S3...")
     t0 = time.time()
-    features = pd.read_parquet(FEATURES_URI)
-    pair_features = pd.read_parquet(PAIR_FEATURES_URI)
-    labels = pd.read_parquet(LABELS_URI)
+    key_cols = ["sample_id", "canonical_drug_id"]
+    features = pd.read_parquet(FEATURES_URI).set_index(key_cols, drop=True)
+    pair_features = pd.read_parquet(PAIR_FEATURES_URI).set_index(key_cols, drop=True)
+    labels = pd.read_parquet(LABELS_URI).set_index(key_cols, drop=True)
 
-    merged = features.merge(pair_features, on=["sample_id", "canonical_drug_id"], how="inner")
-    labels = labels.set_index(["sample_id", "canonical_drug_id"])
-    merged = merged.set_index(["sample_id", "canonical_drug_id"])
-    labels = labels.loc[merged.index]
+    merged = features.join(pair_features, how="inner", rsuffix="_pair")
+    labels = labels.reindex(merged.index)
 
     sample_ids = merged.index.get_level_values("sample_id").values
     drug_ids = merged.index.get_level_values("canonical_drug_id").values
-    X = merged.select_dtypes(include=[np.number]).fillna(0.0).values.astype(np.float32)
+    X = merged.select_dtypes(include=[np.number]).fillna(0.0).to_numpy(dtype=np.float32, copy=False)
     y = labels["label_regression"].values.astype(np.float32)
     y_bin = labels["label_binary"].values.astype(np.float32) if "label_binary" in labels.columns else (y < np.median(y)).astype(np.float32)
 

@@ -1,0 +1,49 @@
+disease: LUNG
+display_name: Lung Cancer
+run_id: LUNG_RELEASE_V1
+s3_parent_prefix: s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/LUNG/
+s3_release_prefix: TODO_UNCONFIRMED
+status: pending_s3fs_profile
+input_files:
+  candidate_unique: project_root/results/lung_top30_unified_2b_and_2c_with_names.csv
+  candidate_tiered: workspace_reports/lung_step6_package/lung_step6_top30_tiered_candidates.csv
+  model_performance_summary: project_root/results/lung_32_metrics_checklist.csv
+  model_performance_detailed: project_root/results/lung_all_metrics_raw.csv
+  ensemble_validation_summary: TODO_UNCONFIRMED
+  ensemble_source_manifest: TODO_UNCONFIRMED
+  copied_source_manifest: TODO_UNCONFIRMED
+  reproducibility_manifest: workspace_reports/lung_reproducibility/lung_s3_upload_manifest_20260429.md
+  external_validation_top30: TODO_UNCONFIRMED
+  external_validation_top15: TODO_UNCONFIRMED
+  external_validation_method_a: workspace_reports/lung_step6_current_package/lung_prism_validation_results.json
+  external_validation_method_b: workspace_reports/lung_step6_current_package/lung_cptac_validation_results.json
+  admet_top30: TODO_UNCONFIRMED
+  final_after_admet: project_root/results/lung_all_admet_pass.csv
+  admet_matches: TODO_UNCONFIRMED
+  admet_summary: project_root/results/lung_admet_summary.json
+biology:
+  disease_aliases:
+    - lung cancer
+    - LUNG
+    - LUAD
+    - lung adenocarcinoma
+    - NSCLC
+  marker_genes:
+    - EGFR
+    - KRAS
+    - ALK
+    - STK11
+    - KEAP1
+    - TP53
+  subtypes:
+    - TRU
+    - PP
+    - PI
+kg:
+  disease_node_name: LUNG
+  disease_display_name: Lung Cancer
+notes:
+  - Project code remains LUNG for compatibility with existing S3 folders and configs.
+  - TRU, PP, and PI are LUAD-oriented molecular subtype labels, but they are intentionally retained under LUNG in this project.
+  - ALK may represent rearrangement or fusion evidence rather than only point mutation evidence.
+  - Mapping confidence is medium; no single dated release subtree was detected, so s3_release_prefix remains TODO_UNCONFIRMED pending manual package boundary review.

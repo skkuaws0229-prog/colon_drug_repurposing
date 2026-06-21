@@ -1,0 +1,49 @@
+{
+  "generated_at": "2026-06-21T09:16:33",
+  "read_only": true,
+  "db_write": false,
+  "s3_write": false,
+  "checks": [
+    {
+      "name": "manifests\\artifact_manifest.csv",
+      "ok": true,
+      "detail": "exists"
+    },
+    {
+      "name": "reports\\repo_artifact_audit.csv",
+      "ok": true,
+      "detail": "exists"
+    },
+    {
+      "name": "manifests\\checksums.sha256",
+      "ok": true,
+      "detail": "exists"
+    },
+    {
+      "name": "manifest_rows",
+      "ok": true,
+      "detail": 37847
+    },
+    {
+      "name": "public_demo_rows",
+      "ok": true,
+      "detail": 3744
+    },
+    {
+      "name": "secret_findings_recorded_without_values",
+      "ok": true,
+      "detail": 160
+    },
+    {
+      "name": "unresolved_uri_rows",
+      "ok": true,
+      "detail": 3213
+    },
+    {
+      "name": "sample_public_files_readable",
+      "ok": true,
+      "detail": 25
+    }
+  ],
+  "ok": true
+}

@@ -1,0 +1,51 @@
+﻿disease: COAD
+display_name: Colon Adenocarcinoma / Colorectal Cancer
+run_id: COLON_RELEASE_V1
+s3_parent_prefix: s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/
+s3_release_prefix: s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/
+status: pending_s3fs_profile
+input_files:
+  candidate_unique: TODO_UNCONFIRMED
+  candidate_tiered: 20260428_colon_v2/20260428_colon_v2_step6_top30_drug_recommendations_tier1_tier2_tier3_tier4.csv
+  model_performance_summary: 20260428_colon_v2/20260428_colon_v2_step4_2abc_15models_5cv_groupcv_scaffoldcv_overfit_table.csv
+  model_performance_detailed: 20260428_colon_v2/20260428_colon_v2_step4_model_metrics_full_table.csv
+  ensemble_validation_summary: TODO_UNCONFIRMED
+  ensemble_source_manifest: 20260428_colon_v2/20260428_colon_v2_step6_external_validation_asset_manifest.json
+  copied_source_manifest: TODO_UNCONFIRMED
+  reproducibility_manifest: 20260428_colon_v2/S3_REPRODUCTION_MANIFEST.md
+  external_validation_top30: 20260428_colon_v2/20260428_colon_v2_step6_run/results/colon_top30_drugs_ensemble.csv
+  external_validation_top15: TODO_UNCONFIRMED
+  external_validation_method_a: TODO_UNCONFIRMED
+  external_validation_method_b: TODO_UNCONFIRMED
+  admet_top30: 20260428_colon_v2/admet/20260428_colon_v2_step7/20260428_colon_v2_step7_admet_22assay_choi_protocol_tanimoto_top30_scored.csv
+  final_after_admet: 20260428_colon_v2/20260428_colon_v2_step7_top15_crc_tier1234_admet22assay_choi_protocol.csv
+  admet_matches: TODO_UNCONFIRMED
+  admet_summary: 20260428_colon_v2/admet/20260428_colon_v2_step7/20260428_colon_v2_step7_admet_22assay_choi_protocol_summary.json
+biology:
+  disease_aliases:
+    - colon cancer
+    - colorectal cancer
+    - CRC
+    - COAD
+    - READ
+  marker_genes:
+    - APC
+    - TP53
+    - KRAS
+    - BRAF
+    - PIK3CA
+  subtypes:
+    - CMS1
+    - CMS2
+    - CMS3
+    - CMS4
+    - MSI
+kg:
+  disease_node_name: COAD
+  disease_display_name: Colon Adenocarcinoma / Colorectal Cancer
+notes:
+  - MSI is intentionally stored as a subtype or molecular phenotype, not as a marker gene.
+  - COAD and READ aliases are retained for colorectal cancer compatibility.
+  - candidate_unique mapping is intentionally held: sampled columns are model/generalization summary metrics (model, cv5_mean, group_mean, scaffold_mean, generalization_drop, ensemble_score) and do not include drug candidate identifiers such as drug_id, drug_name, or rank.
+  - candidate_tiered and final_after_admet are the current primary COAD drug candidate sources for pilot loading until a correct unique-candidate file is identified.
+

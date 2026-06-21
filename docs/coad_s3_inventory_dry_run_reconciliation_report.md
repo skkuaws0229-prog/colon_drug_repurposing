@@ -1,0 +1,201 @@
+# COAD S3 Inventory Dry-Run Reconciliation Report
+
+- generated_at: 2026-05-10T20:49:02.523854+00:00
+- disease: COAD
+- dry_run: true
+- project_root: C:\work\drug-project
+- resolved_config_path: C:\work\drug-project\configs\diseases\coad.yaml
+- resolved_s3_prefix: s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/
+- resolved_local_cache: C:\work\drug-project\data_cache\final_data\COAD
+- inventory_status: PASS
+- scanned_object_count: 437
+- scanned_total_bytes: 5971291251
+- classified_object_count: 437
+- unclassified_object_count: 0
+- classification_coverage_ok: true
+- decision_counts_sum: 437
+- coverage_gap_count: 0
+
+## Decision Counts
+- LOAD_CANDIDATE: 5
+- NEEDS_REVIEW: 35
+- DO_NOT_LOAD_EXCLUDED: 373
+- BLOCKED: 2
+- MISSING: 0
+- LOCAL_SYNC_NEEDED: 0
+- NOT_COMPACT_RESULT: 22
+- UNCLASSIFIED_REVIEW: 0
+
+- image_modal_excluded_count: 0
+- no_admet_guardrail_violation_count: 2
+- compact_result_candidate_count_before_role_filter: 42
+- role_matched_candidate_count: 6
+
+## Top Reason Counts
+- raw_curated_glue_excluded_current_stage: 373
+- compact_result_role_uncertain: 35
+- not_compact_result_extension_or_directory: 22
+- compact_result_role_confident: 5
+- no_admet_guardrail_violation: 2
+
+## Scanned Paths (first 20)
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/0.Image_modal_COAD/_raw_downloads/cbio_coadread_driver_mmr_mutations_20260507.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/0.Image_modal_COAD/_raw_downloads/cbio_coadread_patient_clinical_long_20260507.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/0.Image_modal_COAD/_raw_downloads/cbio_coadread_sample_clinical_long_20260507.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/0.Image_modal_COAD/coad_image_modal_downstream_summary.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/0.Image_modal_COAD/step_im1_step4_reranking/feature_importance_20260430_v1.csv
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/0.Image_modal_COAD/step_im1_step4_reranking/feature_importance_summary_20260430_v1.csv
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/0.Image_modal_COAD/step_im1_step4_reranking/reranked_top30_baseline_plus_image_20260430_v1.csv
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/0.Image_modal_COAD/step_im1_step4_reranking/reranking_comparison_20260430_v1.csv
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/0.Image_modal_COAD/step_im1_step4_reranking/reranking_cv5_baseline_20260430_v1.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/0.Image_modal_COAD/step_im1_step4_reranking/reranking_cv5_baseline_plus_image_20260430_v1.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/0.Image_modal_COAD/step_im1_step4_reranking/reranking_groupcv_baseline_20260430_v1.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/0.Image_modal_COAD/step_im1_step4_reranking/reranking_groupcv_baseline_plus_image_20260430_v1.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/0.Image_modal_COAD/step_im1_step4_reranking/reranking_holdout_baseline_20260430_v1.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/0.Image_modal_COAD/step_im1_step4_reranking/reranking_holdout_baseline_plus_image_20260430_v1.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/0.Image_modal_COAD/step_im1_step4_reranking/reranking_model_20260430_v1.pkl
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/0.Image_modal_COAD/step_im1_step4_reranking/reranking_scaffoldcv_baseline_20260430_v1.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/0.Image_modal_COAD/step_im1_step4_reranking/reranking_scaffoldcv_baseline_plus_image_20260430_v1.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/0.Image_modal_COAD/step_im1_step4_reranking/step4_run_manifest_20260430_v1.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/0.Image_modal_COAD/step_im2/all_slide_embeddings_coad_merged.npy
+
+## Unclassified Paths (first 100)
+
+## Non-Excluded Paths (first 100)
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_reproduction_protocol.md
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step4_2abc_15models_5cv_groupcv_scaffoldcv_overfit_table.csv
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step4_2abc_15models_metrics_preview.md
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step5_ensemble_candidate_scoring_table.csv
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step5_step6_ensemble_execution_and_tiering_summary.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_all_drugs_weighted_ensemble_ranking.csv
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_execution_gate_decision.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_execution_gate_decision.md
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_execution_gate_decision_rerun_after_geo_clinicaltrials_fix.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_execution_gate_decision_rerun_after_geo_clinicaltrials_fix.md
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_external_validation_asset_manifest.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_external_validation_clinicaltrials_api_snapshot.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_external_validation_existing_results/20260428_colon_v2_colon_clinical_trials_validation_results.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_external_validation_existing_results/20260428_colon_v2_colon_comprehensive_drug_scores.csv
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_external_validation_existing_results/20260428_colon_v2_colon_comprehensive_validation_results.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_external_validation_existing_results/20260428_colon_v2_colon_cosmic_validation_results.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_external_validation_existing_results/20260428_colon_v2_colon_cptac_validation_results.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_external_validation_existing_results/20260428_colon_v2_colon_geo_validation_results.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_external_validation_existing_results/20260428_colon_v2_colon_prism_validation_results.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_external_validation_existing_results/20260428_colon_v2_colon_top30_drugs_ensemble.csv
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_external_validation_existing_results/20260428_colon_v2_colon_top50_drugs_ensemble.csv
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_external_validation_gap_report.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_external_validation_path_mapping.md
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_external_validation_surrogate_compound_matching_protocol.md
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_prism_compound_name_lookup_report.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_readiness_gate_report.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_readiness_gate_report.md
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/results/colon_clinical_trials_matched_drugs.csv
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/results/colon_clinical_trials_validation_results.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/results/colon_comprehensive_drug_scores.csv
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/results/colon_comprehensive_validation_results.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/results/colon_cosmic_matched_drugs.csv
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/results/colon_cosmic_validation_results.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/results/colon_cptac_matched_drugs.csv
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/results/colon_cptac_validation_results.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/results/colon_geo_matched_drugs.csv
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/results/colon_geo_validation_results.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/results/colon_prism_matched_drugs.csv
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/results/colon_prism_validation_results.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/results/colon_top30_drugs_ensemble.csv
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/scripts/colon_validation_drug_aliases.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/scripts/colon_validation_matching_utils.py
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/scripts/step6_2_prism_validation.py
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/scripts/step6_3_clinical_trials_validation.py
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/scripts/step6_4_cosmic_validation.py
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/scripts/step6_5_cptac_validation.py
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/scripts/step6_6_comprehensive_scoring.py
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/scripts/step6_geo_validation.py
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/scripts/step6_prepare_top_drugs.py
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_top30_drug_recommendations_tier1_tier2_tier3_tier4.csv
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step7_summary_admet22assay_choi_protocol.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step7_summary_no_admet_tier_sort_only.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step7_top15_crc_tier1234_admet22assay_choi_protocol.csv
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step7_top15_crc_tier1234_no_admet_tier_sort_only.csv
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/README.md
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/S3_REPRODUCTION_MANIFEST.md
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/admet/20260428_colon_v2_step7/20260428_colon_v2_step7_admet_22assay_choi_protocol_summary.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/admet/20260428_colon_v2_step7/20260428_colon_v2_step7_admet_22assay_choi_protocol_tanimoto_top30_scored.csv
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/config/20260428_colon_v2_step7_crc_clinical_tier_seed.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/reports/20260428_colon_v2_pipeline_report_step6_step7.md
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/scripts/20260428_colon_v2_step7_1_admet_22assay_gate.py
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/scripts/20260428_colon_v2_step7_run.sh
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/scripts/20260428_colon_v2_step7_select_top15_crc_clinical_tiers.py
+
+## Non-Guardrail-Excluded Paths (first 100)
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_reproduction_protocol.md
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step4_2abc_15models_5cv_groupcv_scaffoldcv_overfit_table.csv
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step4_2abc_15models_metrics_preview.md
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step5_ensemble_candidate_scoring_table.csv
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step5_step6_ensemble_execution_and_tiering_summary.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_all_drugs_weighted_ensemble_ranking.csv
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_execution_gate_decision.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_execution_gate_decision.md
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_execution_gate_decision_rerun_after_geo_clinicaltrials_fix.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_execution_gate_decision_rerun_after_geo_clinicaltrials_fix.md
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_external_validation_asset_manifest.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_external_validation_clinicaltrials_api_snapshot.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_external_validation_existing_results/20260428_colon_v2_colon_clinical_trials_validation_results.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_external_validation_existing_results/20260428_colon_v2_colon_comprehensive_drug_scores.csv
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_external_validation_existing_results/20260428_colon_v2_colon_comprehensive_validation_results.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_external_validation_existing_results/20260428_colon_v2_colon_cosmic_validation_results.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_external_validation_existing_results/20260428_colon_v2_colon_cptac_validation_results.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_external_validation_existing_results/20260428_colon_v2_colon_geo_validation_results.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_external_validation_existing_results/20260428_colon_v2_colon_prism_validation_results.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_external_validation_existing_results/20260428_colon_v2_colon_top30_drugs_ensemble.csv
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_external_validation_existing_results/20260428_colon_v2_colon_top50_drugs_ensemble.csv
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_external_validation_gap_report.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_external_validation_path_mapping.md
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_external_validation_surrogate_compound_matching_protocol.md
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_prism_compound_name_lookup_report.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_readiness_gate_report.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_readiness_gate_report.md
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/results/colon_clinical_trials_matched_drugs.csv
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/results/colon_clinical_trials_validation_results.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/results/colon_comprehensive_drug_scores.csv
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/results/colon_comprehensive_validation_results.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/results/colon_cosmic_matched_drugs.csv
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/results/colon_cosmic_validation_results.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/results/colon_cptac_matched_drugs.csv
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/results/colon_cptac_validation_results.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/results/colon_geo_matched_drugs.csv
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/results/colon_geo_validation_results.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/results/colon_prism_matched_drugs.csv
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/results/colon_prism_validation_results.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/results/colon_top30_drugs_ensemble.csv
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/scripts/colon_validation_drug_aliases.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/scripts/colon_validation_matching_utils.py
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/scripts/step6_2_prism_validation.py
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/scripts/step6_3_clinical_trials_validation.py
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/scripts/step6_4_cosmic_validation.py
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/scripts/step6_5_cptac_validation.py
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/scripts/step6_6_comprehensive_scoring.py
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/scripts/step6_geo_validation.py
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_run/scripts/step6_prepare_top_drugs.py
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step6_top30_drug_recommendations_tier1_tier2_tier3_tier4.csv
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step7_summary_admet22assay_choi_protocol.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step7_summary_no_admet_tier_sort_only.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step7_top15_crc_tier1234_admet22assay_choi_protocol.csv
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/20260428_colon_v2_step7_top15_crc_tier1234_no_admet_tier_sort_only.csv
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/README.md
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/S3_REPRODUCTION_MANIFEST.md
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/admet/20260428_colon_v2_step7/20260428_colon_v2_step7_admet_22assay_choi_protocol_summary.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/admet/20260428_colon_v2_step7/20260428_colon_v2_step7_admet_22assay_choi_protocol_tanimoto_top30_scored.csv
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/config/20260428_colon_v2_step7_crc_clinical_tier_seed.json
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/reports/20260428_colon_v2_pipeline_report_step6_step7.md
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/scripts/20260428_colon_v2_step7_1_admet_22assay_gate.py
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/scripts/20260428_colon_v2_step7_run.sh
+- s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/Colon/20260428_colon_v2/scripts/20260428_colon_v2_step7_select_top15_crc_clinical_tiers.py
+
+## Image Modal Excluded Examples (first 20)
+
+## Failures
+
+## Warnings

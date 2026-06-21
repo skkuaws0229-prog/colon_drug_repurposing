@@ -1,0 +1,114 @@
+disease:
+  code: HNSC
+  name: Head and Neck Squamous Cell Carcinoma
+  aliases:
+    - HNSC
+    - hnsc
+    - head and neck cancer
+biology:
+  driver_genes:
+    - TP53
+    - CDKN2A
+    - PIK3CA
+    - NOTCH1
+  molecular_subtypes:
+    - Atypical
+    - Basal
+    - Classical
+    - Mesenchymal
+paths:
+  s3_prefix: s3://say2-4team/20260408_new_pre_project_biso/202604_Final_data/HNSC/
+  local_cache: C:\work\drug-project\data_cache\final_data\HNSC
+load_policy:
+  exclude_folders:
+    - raw
+    - curated
+    - curated_data
+    - curated_date
+    - glue
+    - reference
+    - shared_inputs
+    - image_modal
+    - image
+    - tmp
+    - debug
+    - log
+    - logs
+    - external_validation_raw_inputs
+    - temp
+    - intermediate
+    - full
+  blocked_decisions:
+    - NEEDS_REVIEW
+    - DO_NOT_LOAD_EXCLUDED
+    - BLOCKED
+    - MISSING
+    - LOCAL_SYNC_NEEDED
+no_admet_guardrail:
+  blocked_target_tables:
+    - admet_result
+    - final_candidate_result
+    - run_manifest
+artifact_roles:
+  - role: candidate_tiered
+    target_table: drug_candidate_tier
+    include_keywords: [top30, tier]
+  - role: final_after_admet
+    target_table: final_candidate_result
+    include_keywords: [final, admet]
+    exclude_keywords: [no_admet]
+  - role: external_validation_top30
+    target_table: external_validation_result
+    include_keywords: [validation, top30]
+  - role: admet_top30
+    target_table: admet_result
+    include_keywords: [admet, top30]
+    exclude_keywords: [no_admet]
+postgres:
+  target_tables:
+    - final_candidate_result
+    - drug_candidate_result
+    - drug_candidate_tier
+    - admet_result
+    - external_validation_result
+    - model_metric
+    - model_metric_detailed
+    - ensemble_metric
+    - source_artifact
+    - load_audit
+    - run_manifest
+neo4j:
+  initial_roles:
+    - candidate_tiered
+    - final_after_admet
+    - external_validation_top30
+    - admet_top30
+  enrichment_nodes:
+    - Disease
+    - DrugCandidate
+    - CandidateScore
+    - TierEvidence
+    - FinalCandidateEvidence
+    - AdmetEvidence
+    - ExternalValidationEvidence
+    - ModelEvidence
+    - ModelDetailEvidence
+    - EnsembleEvidence
+    - SourceArtifact
+    - LoadAuditEvidence
+    - Run
+  enrichment_relationships:
+    - CANDIDATE_FOR
+    - HAS_CANDIDATE_SCORE
+    - HAS_TIER
+    - SELECTED_AS_FINAL
+    - HAS_ADMET_PROFILE
+    - VALIDATED_BY_EXTERNAL_DATA
+    - HAS_EXTERNAL_VALIDATION
+    - SUPPORTED_BY_MODEL
+    - HAS_DETAILED_MODEL_METRIC
+    - SUPPORTED_BY_ENSEMBLE
+    - DERIVED_FROM_SOURCE
+    - PRODUCED_EVIDENCE
+    - AUDITS_LOAD_FOR
+disease_code_legacy: HNSC

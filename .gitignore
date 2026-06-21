@@ -21,11 +21,14 @@ pip-wheel-metadata/
 *.env
 .env.*
 !.env.example
+.env.drug-4team
 *.secret
 *.password
 *credentials*
 .aws/
 .aws_credentials*
+secrets/
+*.pem
 
 # =========================================================
 # OS / IDE
@@ -147,3 +150,22 @@ data_cache/
 # OneDrive/local accidental artifacts
 # =========================================================
 OneDrive/
+
+# =========================================================
+# Public reproducibility allowlist
+# Keep generated audit metadata in Git while excluding raw artifacts.
+# =========================================================
+!reports/
+!reports/repo_artifact_audit.csv
+!reports/repo_artifact_audit.md
+!reports/smoke_test_report.md
+!reports/smoke_test_report.json
+!manifests/
+!manifests/artifact_manifest.csv
+!manifests/checksums.sha256
+!manifests/excluded_artifacts.csv
+
+# Local/private execution scripts
+scripts/run_standard_pipeline.ps1
+scripts/run_superset_with_docker_recovery.ps1
+scripts/db/run_brca_postgres_load.ps1

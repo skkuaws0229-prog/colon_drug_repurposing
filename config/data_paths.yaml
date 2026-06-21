@@ -72,4 +72,4 @@ tcga_brca_rna:  s3://say2-4team/20260408_new_pre_project_biso/20260408_pre_proje
 binary_quantile: 0.3  # IC50 <= quantile(0.3) => sensitive (1)
 
 # FE output
-output_dir: s3://say2-4team/20260408_new_pre_project_biso/20260408_pre_project_biso_myprotocol/fe_output/
+output_dir: s3://say2-4team/Colon_result/

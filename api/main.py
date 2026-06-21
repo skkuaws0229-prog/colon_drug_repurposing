@@ -1,37 +1,48 @@
 from __future__ import annotations
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
-from api.db import SQLAlchemyError, ping as pg_ping
-from api.neo4j_client import Neo4jError, ServiceUnavailable, ping as neo4j_ping
-from api.routers.brca import DISEASE, RUN_ID, router as brca_router
-from api.schemas.brca import HealthResponse
+from api.core.config import get_settings
+from api.routers.assistant import router as assistant_router
+from backend.routes.alphafold import router as alphafold_router
+from backend.routes.docking import router as docking_router
+from api.routers.diseases import router as diseases_router
+from api.routers.graph import router as graph_router
+from api.routers.health import router as health_router
+from api.routers.image_modal import router as image_modal_router
 
 
-app = FastAPI(title="BRCA Evidence API", version="0.1.0")
-app.include_router(brca_router, prefix="/api/brca", tags=["brca"])
+settings = get_settings()
+
+app = FastAPI(title="Multi-Cancer Evidence API", version="0.4.0")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.cors_origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.include_router(health_router)
+app.include_router(diseases_router)
+app.include_router(graph_router)
+app.include_router(image_modal_router)
+app.include_router(docking_router)
+app.include_router(alphafold_router)
+app.include_router(assistant_router)
 
 
-@app.get("/api/health", response_model=HealthResponse)
-def health() -> HealthResponse:
-    postgres_ok = False
-    neo4j_ok = False
-
-    try:
-        postgres_ok = pg_ping()
-    except SQLAlchemyError:
-        postgres_ok = False
-
-    try:
-        neo4j_ok = neo4j_ping()
-    except (ServiceUnavailable, Neo4jError):
-        neo4j_ok = False
-
-    status = "ok" if postgres_ok and neo4j_ok else "degraded"
-    return HealthResponse(
-        status=status,
-        disease=DISEASE,
-        run_id=RUN_ID,
-        postgres_ok=postgres_ok,
-        neo4j_ok=neo4j_ok,
-    )
+@app.get("/")
+def root() -> dict[str, object]:
+    return {
+        "status": "ok",
+        "service": "drug-project-api",
+        "docs": "/docs",
+        "health": "/api/health",
+        "db_health": "/api/db/health",
+        "diseases": "/api/diseases",
+        "candidate_example": "/api/diseases/LUAD/candidates",
+        "graph_example": "/api/graph/LUAD",
+        "graph_summary_example": "/api/graph/LUAD/summary",
+    }

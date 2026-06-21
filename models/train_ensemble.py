@@ -11,18 +11,19 @@ import numpy as np
 import pandas as pd
 import json
 import time
+import os
 from pathlib import Path
 
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader, TensorDataset
-from sklearn.model_selection import KFold
+from sklearn.model_selection import GroupKFold, KFold
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import mean_squared_error, r2_score
 from scipy.stats import spearmanr, pearsonr
 import lightgbm as lgb
 import xgboost as xgb
-from catboost import CatBoostRegressor
+from catboost import CatBoostError, CatBoostRegressor
 
 S3_BASE = "s3://say2-4team/20260408_new_pre_project_biso/20260408_pre_project_biso_myprotocol"
 FEATURES_URI = f"{S3_BASE}/fe_output/20260408_fe_v1/features/features.parquet"
@@ -32,6 +33,8 @@ SEED = 42
 N_FOLDS = 5
 BENCH_SP = 0.713
 BENCH_RMSE = 1.385
+CV_SPLIT_MODE = os.getenv("CV_SPLIT_MODE", "drug_unseen").strip().lower()
+VALID_SPLIT_MODES = {"random", "drug_unseen", "sample_unseen"}
 OUTPUT_DIR = Path(__file__).parent / "ensemble_results"
 OUTPUT_DIR.mkdir(exist_ok=True)
 
@@ -53,19 +56,42 @@ def load_data():
     t0 = time.time()
     features = pd.read_parquet(FEATURES_URI)
     pair_features = pd.read_parquet(PAIR_FEATURES_URI)
-    labels = pd.read_parquet(LABELS_URI)
+    labels = pd.read_parquet(LABELS_URI)[["sample_id", "canonical_drug_id", "label_regression"]]
 
-    merged = features.merge(pair_features, on=["sample_id", "canonical_drug_id"], how="inner")
-    labels = labels.set_index(["sample_id", "canonical_drug_id"])
-    merged = merged.set_index(["sample_id", "canonical_drug_id"])
-    labels = labels.loc[merged.index]
+    # Memory-safe join path: avoid large set_index() copies on wide matrices.
+    merged = features.merge(
+        pair_features, on=["sample_id", "canonical_drug_id"], how="inner", copy=False
+    )
+    merged = merged.merge(
+        labels, on=["sample_id", "canonical_drug_id"], how="inner", copy=False
+    )
 
-    sample_ids = merged.index.get_level_values("sample_id").values
-    drug_ids = merged.index.get_level_values("canonical_drug_id").values
-    X = merged.select_dtypes(include=[np.number]).fillna(0.0).values.astype(np.float32)
-    y = labels["label_regression"].values.astype(np.float32)
+    sample_ids = merged["sample_id"].astype(str).values
+    drug_ids = merged["canonical_drug_id"].values
+
+    num_cols = merged.select_dtypes(include=[np.number]).columns.tolist()
+    for c in ["canonical_drug_id", "label_regression"]:
+        if c in num_cols:
+            num_cols.remove(c)
+
+    X = merged[num_cols].fillna(0.0).to_numpy(dtype=np.float32, copy=False)
+    y = pd.to_numeric(merged["label_regression"], errors="coerce").fillna(0.0).to_numpy(dtype=np.float32, copy=False)
     print(f"  Loaded: {X.shape[0]} x {X.shape[1]} features ({time.time()-t0:.1f}s)")
     return X, y, sample_ids, drug_ids
+
+
+def get_cv_splits(X, sample_ids, drug_ids, split_mode=CV_SPLIT_MODE):
+    mode = str(split_mode).strip().lower()
+    if mode not in VALID_SPLIT_MODES:
+        raise ValueError(f"invalid CV_SPLIT_MODE='{split_mode}', choose one of {sorted(VALID_SPLIT_MODES)}")
+
+    if mode == "random":
+        splitter = KFold(n_splits=N_FOLDS, shuffle=True, random_state=SEED)
+        return list(splitter.split(X))
+
+    groups = np.asarray(drug_ids if mode == "drug_unseen" else sample_ids, dtype=str)
+    splitter = GroupKFold(n_splits=N_FOLDS)
+    return list(splitter.split(X, groups=groups))
 
 
 # ── DL Model Definitions (same as train_dl_models.py) ──
@@ -182,12 +208,33 @@ def train_dl_model(model, X_tr, y_tr, X_val, y_val, epochs=100, lr=1e-3, batch_s
 # ── ML Model Trainers ──
 
 def train_catboost(X_tr, y_tr, X_val, y_val):
-    model = CatBoostRegressor(
+    params_primary = dict(
         iterations=2000, learning_rate=0.05, depth=8, l2_leaf_reg=3,
         random_seed=SEED, verbose=0, task_type="CPU",
-        early_stopping_rounds=50,
+        used_ram_limit="6gb", thread_count=4, early_stopping_rounds=50,
     )
-    model.fit(X_tr, y_tr, eval_set=(X_val, y_val), verbose=0)
+    params_retry = dict(
+        iterations=900, learning_rate=0.05, depth=6, l2_leaf_reg=5,
+        random_seed=SEED, verbose=0, task_type="CPU",
+        used_ram_limit="4gb", thread_count=2, early_stopping_rounds=50,
+    )
+
+    try:
+        model = CatBoostRegressor(**params_primary)
+        model.fit(X_tr, y_tr, eval_set=(X_val, y_val), verbose=0)
+    except CatBoostError as e:
+        if "bad allocation" not in str(e).lower():
+            raise
+        print("    [warn] CatBoost OOM on primary params; retrying with low-memory params.")
+        try:
+            model = CatBoostRegressor(**params_retry)
+            model.fit(X_tr, y_tr, eval_set=(X_val, y_val), verbose=0)
+        except CatBoostError as e2:
+            if "bad allocation" not in str(e2).lower():
+                raise
+            print("    [warn] CatBoost OOM on retry params; skip CatBoost for this run.")
+            raise
+
     return model.predict(X_val).astype(np.float32), model.predict(X_tr).astype(np.float32)
 
 
@@ -223,6 +270,8 @@ def train_xgboost(X_tr, y_tr, X_val, y_val):
 
 def main():
     X, y, sample_ids, drug_ids = load_data()
+    cv_splits = get_cv_splits(X, sample_ids, drug_ids)
+    print(f"CV split mode: {CV_SPLIT_MODE}")
     in_dim = X.shape[1]
     sample_dim = 18311
 
@@ -247,11 +296,9 @@ def main():
     }
 
     # 5-fold CV: collect OOF predictions for each model
-    kf = KFold(n_splits=N_FOLDS, shuffle=True, random_state=SEED)
     n_samples = len(y)
 
-    oof_preds = {name: np.zeros(n_samples, dtype=np.float32) for name, _, _ in model_configs}
-    oof_train_preds = {name: np.zeros(n_samples, dtype=np.float32) for name, _, _ in model_configs}
+    oof_preds = {}
     model_spearman = {}
 
     print(f"\n{'='*60}")
@@ -264,40 +311,60 @@ def main():
         print(f"\n  Training {name}...")
         t0 = time.time()
         fold_sp = []
+        oof_model = np.zeros(n_samples, dtype=np.float32)
+        model_failed = False
 
-        for fold_idx, (train_idx, val_idx) in enumerate(kf.split(X)):
+        for fold_idx, (train_idx, val_idx) in enumerate(cv_splits):
             X_tr, X_val = X[train_idx], X[val_idx]
             y_tr, y_val = y[train_idx], y[val_idx]
 
-            if mtype == "ml":
-                pred_val, pred_tr = trainer(X_tr, y_tr, X_val, y_val)
-            else:
-                # DL model
-                scaler = StandardScaler()
-                X_tr_s = scaler.fit_transform(X_tr).astype(np.float32)
-                X_val_s = scaler.transform(X_val).astype(np.float32)
+            try:
+                if mtype == "ml":
+                    pred_val, pred_tr = trainer(X_tr, y_tr, X_val, y_val)
+                else:
+                    # DL model
+                    scaler = StandardScaler()
+                    X_tr_s = scaler.fit_transform(X_tr).astype(np.float32)
+                    X_val_s = scaler.transform(X_val).astype(np.float32)
 
-                torch.manual_seed(SEED + fold_idx)
-                if DEVICE.type == "mps":
-                    torch.mps.empty_cache()
+                    torch.manual_seed(SEED + fold_idx)
+                    if DEVICE.type == "mps":
+                        torch.mps.empty_cache()
 
-                model_kw, train_kw = dl_kwargs[name]
-                model = trainer(**model_kw)
-                pred_val, pred_tr = train_dl_model(model, X_tr_s, y_tr, X_val_s, y_val, **train_kw)
+                    model_kw, train_kw = dl_kwargs[name]
+                    model = trainer(**model_kw)
+                    pred_val, pred_tr = train_dl_model(model, X_tr_s, y_tr, X_val_s, y_val, **train_kw)
 
-                del model
-                if DEVICE.type == "mps":
-                    torch.mps.empty_cache()
+                    del model
+                    if DEVICE.type == "mps":
+                        torch.mps.empty_cache()
+            except CatBoostError as e:
+                if name == "CatBoost" and "bad allocation" in str(e).lower():
+                    model_failed = True
+                    print("    [warn] CatBoost skipped due to repeated OOM.")
+                    break
+                raise
 
-            oof_preds[name][val_idx] = pred_val
-            # For train predictions, average across folds where this sample was in training
+            oof_model[val_idx] = pred_val
             sp, _ = spearmanr(y_val, pred_val)
-            fold_sp.append(sp)
+            if np.isnan(sp):
+                sp = 0.0
+            fold_sp.append(float(sp))
 
-        mean_sp = np.mean(fold_sp)
+        if model_failed:
+            continue
+        if not fold_sp:
+            print(f"    [warn] {name} produced no valid folds; skipping.")
+            continue
+
+        mean_sp = float(np.mean(fold_sp))
         model_spearman[name] = mean_sp
+        oof_preds[name] = oof_model
         dt = time.time() - t0
         print(f"    {name}: Mean Sp={mean_sp:.4f} ({dt/60:.1f} min)")
+
+    if not model_spearman:
+        raise RuntimeError("No base model finished successfully; ensemble cannot proceed.")
 
     # ── Spearman-weighted ensemble ──
     print(f"\n{'─'*60}")
@@ -305,8 +372,13 @@ def main():
     print(f"{'─'*60}")
 
     # Weights proportional to Spearman
-    total_sp = sum(model_spearman.values())
-    weights = {name: sp / total_sp for name, sp in model_spearman.items()}
+    pos_sp = {name: max(0.0, float(sp)) for name, sp in model_spearman.items()}
+    total_sp = sum(pos_sp.values())
+    if total_sp > 0:
+        weights = {name: sp / total_sp for name, sp in pos_sp.items()}
+    else:
+        eq = 1.0 / len(model_spearman)
+        weights = {name: eq for name in model_spearman}
 
     print("\n  Model weights (Spearman-proportional):")
     for name, w in sorted(weights.items(), key=lambda x: -x[1]):
@@ -325,7 +397,7 @@ def main():
 
     # Per-fold ensemble metrics for std calculation
     fold_metrics = []
-    for fold_idx, (train_idx, val_idx) in enumerate(kf.split(X)):
+    for fold_idx, (train_idx, val_idx) in enumerate(cv_splits):
         y_val = y[val_idx]
         ens_val = ensemble_pred[val_idx]
         sp_f, _ = spearmanr(y_val, ens_val)
@@ -334,6 +406,8 @@ def main():
         # Train ensemble prediction
         ens_tr = ensemble_pred[train_idx]
         sp_tr, _ = spearmanr(y[train_idx], ens_tr)
+        if np.isnan(sp_tr):
+            sp_tr = 0.0
 
         fold_metrics.append({
             "fold": fold_idx, "spearman": sp_f, "rmse": rmse_f,
@@ -363,6 +437,8 @@ def main():
     print(f"  {'-'*46}")
     for name in sorted(model_spearman, key=lambda x: -model_spearman[x]):
         sp, _ = spearmanr(y, oof_preds[name])
+        if np.isnan(sp):
+            sp = 0.0
         rmse = np.sqrt(mean_squared_error(y, oof_preds[name]))
         print(f"  {name:<20} {sp:>14.4f} {rmse:>10.4f}")
     print(f"  {'─'*46}")
@@ -443,7 +519,7 @@ def main():
 
     results = {
         "ensemble_method": "spearman_weighted_average",
-        "n_models": 6,
+        "n_models": len(model_spearman),
         "weights": {k: float(v) for k, v in weights.items()},
         "ensemble_metrics": {
             "spearman_mean": float(fm_df["spearman"].mean()),
